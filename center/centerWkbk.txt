@@ -1,0 +1,93 @@
+## this is to muck around with Doug's scripts and 
+## see if we can use the outputs from his pipeline
+## to get centeredness
+
+## first, some work environment issues - can we do a 
+## tmux/matlab/vim thing? or too much to ask from that 
+## poor little propietary software package?
+
+/Applications/MATLAB_R2017b.app/bin/matlab -nodesktop
+
+t = 'Hello world!'
+
+## works!
+
+## lots of weird command names...
+
+whos ## all vars in the workspace
+
+clear ## just like shell
+
+## "structure", something like a dictionary or js object:
+
+aa.mass = 10.1
+
+## instantiates an object and gives it the mass property.
+
+
+aa.mass = 10.1; ## semicolon suppresses output
+
+## or use struct()
+
+bb = struct('weight', 3, 'velocity', [1, 0, 0], 'type', 'Cannonball')
+
+## looks like single quotes work, the above didn't work with double.
+## something to keep in mind with octave, which handles both. 
+
+## okay, pretty simple stuff. Getting back to Doug's pipeline, can 
+## we push a single flower through, then look at it here?
+
+## trip to matlab desktop, use doug's script on flowers. 
+
+## let's use:
+
+## P442F1.JPG:
+
+## look at it:
+
+
+load('P442F1_petals.mat')
+
+## this has a "left", "right", and "middle" field
+
+## god, why are they using the term "field" to talk about
+## methods/attributes/data-memeber
+
+## as if this wasn't confusing enough. This isn't a damn spreadsheet. 
+
+## I miss python. 
+
+## Buck up. 
+
+## let's rename these. These are upper-left, upper-right, and lower, respectively:
+
+petals.upperLeft = Petals.left 
+petals.upperRight = Petals.mid 
+petals.bottom = Petals.right
+
+class(petals.upperLeft.data)
+
+head(petals.upperLeft.data)
+
+which head
+
+clc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+size(petals.upperLeft.data) %% 138213 x 4
+head(tall((petals.upperLeft.data)))
+tail(tall((petals.upperLeft.data)))
+
+size(petals.upperRight.data) %% 138213 x 4
+head(tall((petals.upperRight.data)))
+tail(tall((petals.upperRight.data)))
+
+size(petals.bottom.data) %% 138213 x 4
+head(tall((petals.bottom.data)))
+tail(tall((petals.bottom.data)))
+
+##################################################
+
+## okay, now what?
+
+## can we 

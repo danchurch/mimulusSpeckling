@@ -1,0 +1,34 @@
+
+(1) The three PNG files show the average tape (or background), average yellow, and average red value of the "good" clusterings.
+
+(2)  CenterDataGoodGraphs.mat  is a Matlab data file containing the locations of the 123 "good" clusterings (of the 180 photos) from raw_data.  These can be used to plot the locations in the plane (from the LAB coloring, these are the a and b values of the centers).
+
+(3)  cluster_by_hand.m  This is the file for the "proof of concept" for manually clustering the data.  This file does not require any auxillary files, but you do need to know the name of the photo that you want to cluster.
+
+(4)  get_red_info.m  The CORRECTED version of the red pixel info.  Will go through raw_data folder and open each corresponding mat file to collate the red pixel information.
+
+(5)  GraphOK.mat  This is a vector (named "info") with zeros and ones, and has 180 elements.  The value is 1 if the clustering was OK, and zero if not, so this vector was manually created by going through each of the clusterings from the raw_data file.
+
+(6)  plot_centers.m  This was the code that used GraphOK.mat to create the data for the good clusterings- CenterDataGoodGraphs and will also plot the results.  This code was used to compute the global centers for background, yellow and red clusters (and that's all it is used for).
+
+(7)  plot_clusters.m  This is a FUNCTION for which you must supply the name of the photo that you want to see clustered using the three different algorithms.  I'm using a driver script, plotSampleClusters.m instead of calling this function directly, but you could call this directly as well. 
+
+(8)  plotSampleClusters.m  This is a driver function for plot_clusters.  This script exists to show the different type of results from different clustering algorithms and different situations we find in different photos.
+
+(9)  process_init.m  This is the main driver from the initial code.  This just calls the single_process or single_process_fixed_centers function (for the initial two clustering algorithms).  Note that, in this folder, I finished by calling the second clustering algorithm.
+
+(10) single_process.m  This is the main clustering program for a single file.  It uses kmeans to find the cluster centers.
+(11) single_process_fixed_centers.m  This was an adjustment so that the clustering used fixed centers, and not kmeans.
+
+(12) split_all_petals.m  This is a driver for the split_single_petal algorithm.
+
+(13) split_all_petals_with_input.m  This was a modification of split_all_petals to get user feedback on whether the clustering was good or bad.  This was used to create the GraphOK.mat file (the vector of zeros and ones).
+
+(14)  split_single_petal.m  This is the main program to analyze a single photo and split it into three photos.  We
+also analyze the split graphically.
+
+(15)  splitPetals.m  I think this is obsolete (since split_single_petal does what this does and more!)
+
+
+
+

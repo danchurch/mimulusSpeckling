@@ -18,9 +18,9 @@ for i = 1:length(pic_files)
     load(pic);   %This should produce the "Petals" data structure/
    
   % Extract the relevant information:
-    reddata(i,1) = Petals.left.prop_red;
-    reddata(i,2) = Petals.right.prop_red;
-    reddata(i,3) = Petals.mid.prop_red;
+    reddata(i,1) = Petals.left.percents(2)/100;
+    reddata(i,2) = Petals.right.percents(2)/100;
+    reddata(i,3) = Petals.mid.percents(2)/100;
 
 end
 

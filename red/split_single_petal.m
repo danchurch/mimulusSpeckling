@@ -72,20 +72,22 @@ for j=1:m
     end
 end
 
+
+clim=[0,3];
 subplot(3,2,1)
-imagesc(A.left);
+imagesc(A.left,clim);
 axis equal; axis off;
 subplot(3,2,3)
-imagesc(A.mid); axis equal; axis off;
+imagesc(A.right,clim); axis equal; axis off;
 subplot(3,2,5)
-imagesc(A.right); axis equal; axis off;
+imagesc(A.mid,clim); axis equal; axis off;
 
 subplot(3,2,2)
 imagesc(uint8(B.left)); axis equal; axis off;
 subplot(3,2,4)
-imagesc(uint8(B.mid)); axis equal; axis off;
-subplot(3,2,6)
 imagesc(uint8(B.right)); axis equal; axis off;
+subplot(3,2,6)
+imagesc(uint8(B.mid)); axis equal; axis off;
 
 % NOTE:  To view these, need to convert to uint8, like: image(uint8(A.left))
 

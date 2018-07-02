@@ -40,6 +40,9 @@ function Petals = single_process(pic)
     % We assume the background color index can be pulled off the first pixel:
     background = pixel_labels(1);
 
+    % Store the cluster information in Petals structure:
+    Petals.color_centers=cluster_center;
+    
     %% Separate the petals clustering in position space
 
     temp=(pixel_labels~=background); % temp is a logical array that can be plotted
@@ -78,93 +81,37 @@ function Petals = single_process(pic)
     Petals.right.data = right_petal;
     Petals.mid.data = mid_petal;
 
-    Petals.left.prop_red=propred(left_petal(:,4));
-    Petals.right.prop_red=propred(right_petal(:,4));
-    Petals.mid.prop_red=propred(mid_petal(:,4));
-
-    %% Clumpiness
-
-    z_left=sqrt(((left_petal(:,1)-pos_cluster_center(left,2)).^2 + (left_petal(:,2)-pos_cluster_center(left,1))).^2);
-    circleidx_left=linspace(min(z_left),max(z_left),200);
-    colorz_left=[left_petal(:,4),z_left];
-    
-    for r=1:200
-
-        circle_left=(colorz_left(z_left<=circleidx_left(r),:));
-        prpr_left = propred(circle_left(:,1));
-        circlereds_left(r) = prpr_left;
-        rs_left(r)= r;
-        
+ % Red and yellow pixel counts:   
+    tbl=tabulate(left_petal(:,4));
+    [nrow,~]=size(tbl);
+    if nrow==2
+        fprintf('Flag %s, left\n',pic);
+        tbl(3,:)=[3,0,0];
     end
+    Petals.left.counts=tbl(2:3,2)';
+    Petals.left.percents=tbl(2:3,3)';
     
-    z_mid=sqrt(((mid_petal(:,1)-pos_cluster_center(mid,2)).^2 + (mid_petal(:,2)-pos_cluster_center(mid,1))).^2);
-    circleidx_mid=linspace(min(z_mid),max(z_mid),200);
-    colorz_mid=[mid_petal(:,4),z_mid];
-    
-    for r=1:200
-
-        circle_mid=(colorz_mid(z_mid<=circleidx_mid(r),:));
-        prpr_mid = propred(circle_mid(:,1));
-        circlereds_mid(r) = prpr_mid;
-        rs_mid(r)= r;
-
+    tbl=tabulate(right_petal(:,4));
+    [nrow,~]=size(tbl);
+    if nrow==2
+         fprintf('Flag %s, right\n',pic);
+        tbl(3,:)=[3,0,0];
     end
+    Petals.right.counts=tbl(2:3,2)';
+    Petals.right.percents=tbl(2:3,3)';
     
-    z_right=sqrt(((right_petal(:,1)-pos_cluster_center(right,2)).^2 + (right_petal(:,2)-pos_cluster_center(right,1))).^2);
-    circleidx_right=linspace(min(z_right),max(z_right),200);
-    colorz_right=[right_petal(:,4),z_right];
-
-    for r=1:200
-
-        circle_right=(colorz_right(z_right<=circleidx_right(r),:));
-        prpr_right = propred(circle_right(:,1));
-        circlereds_right(r) = prpr_right;
-        rs_right(r)= r;
-
+    tbl=tabulate(mid_petal(:,4));
+    [nrow,~]=size(tbl);
+    if nrow==2
+         fprintf('Flag %s mid\n',pic);
+        tbl(3,:)=[3,0,0];
     end
-    
-    % Adding this info to the Petals structure
-    Petals.right.pr_rad = [rs_right', circlereds_right'];
-    Petals.left.pr_rad = [rs_left', circlereds_left'];
-    Petals.mid.pr_rad = [rs_mid', circlereds_mid'];
-    
-%% Circle detection
-
-    [centers, radii] = imfindcircles(pixel_labels, [10, 30],'ObjectPolarity','bright','Sensitivity',.95);
-    Petals.centers = centers;
-    Petals.radii = radii;
-    pixel_labels(pixel_labels==background) = 0;
-    pixel_labels(pixel_labels==2) = 0;
-    Petals.clustered = pixel_labels;
-    
+    Petals.mid.counts=tbl(2:3,2)';
+    Petals.mid.percents=tbl(2:3,3)';
+ 
 end
 
 
-    
-%% Subroutines (This is a new feature of Matlab- We were not allowed to do this in older versions!)
-
-    function prpr = propred(list)
-        tbl = tabulate(list);
-
-        % Corrected for the array below - tbl isn't a structure
-        nums = tbl(:,2);
-        nums(nums==0)=[];  % This removes any values with the number "0".
-
-        if length(nums)==1
-            prpr=1;
-            return;
-        end
-
-        if length(nums)>2
-            fprintf('Possible error in number of colors\n');
-        end
-
-        if nums(1)>nums(2)
-            prpr = nums(2)/nums(1);
-
-        else
-            prpr = nums(1)/nums(2);
-        end
-    end
+   
 
     

@@ -47,7 +47,8 @@
                   )
         )
         (theText)             ;a declaration for the text
-;        (theBuffer)           ;create a new layer for the image
+        (theBuffer)
+;create a new layer for the image
         (theLayer
                   (car
                       (gimp-layer-new
@@ -64,34 +65,32 @@
       ) ;end of our local variables
       (gimp-image-add-layer theImage theLayer 0)
 
-;; just to check:
-(gimp-display-new theImage)
 
-;      (gimp-context-set-background '(255 255 255) )
-;      (gimp-context-set-foreground inTextColor)
-;      (gimp-drawable-fill theLayer BACKGROUND-FILL)
-;      (set! theText
-;                    (car
-;                          (gimp-text-fontname
-;                          theImage theLayer
-;                          0 0
-;                          inText
-;                          0
-;                          TRUE
-;                          inFontSize PIXELS
-;                          "Sans")
-;                      )
-;        )
-;      (set! theImageWidth   (car (gimp-drawable-width  theText) ) )
-;      (set! theImageHeight  (car (gimp-drawable-height theText) ) )
-;      (set! theBuffer (* theImageHeight (/ inBufferAmount 100) ) )
-;      (set! theImageHeight (+ theImageHeight theBuffer theBuffer) )
-;      (set! theImageWidth  (+ theImageWidth  theBuffer theBuffer) )
-;      (gimp-image-resize theImage theImageWidth theImageHeight 0 0)
-;      (gimp-layer-resize theLayer theImageWidth theImageHeight 0 0)
-;      (gimp-layer-set-offsets theText theBuffer theBuffer)
-;      (gimp-display-new theImage)
-;      (list theImage theLayer theText)
-;    )
-;  )
+      (gimp-context-set-background '(255 255 255) )
+      (gimp-context-set-foreground inTextColor)
+      (gimp-drawable-fill theLayer BACKGROUND-FILL)
+      (set! theText
+                    (car
+                          (gimp-text-fontname
+                          theImage theLayer
+                          0 0
+                          inText
+                          0
+                          TRUE
+                          inFontSize PIXELS
+                          "Sans")
+                      )
+        )
+      (set! theImageWidth   (car (gimp-drawable-width  theText) ) )
+      (set! theImageHeight  (car (gimp-drawable-height theText) ) )
+      (set! theBuffer (* theImageHeight (/ inBufferAmount 100) ) )
+      (set! theImageHeight (+ theImageHeight theBuffer theBuffer) )
+      (set! theImageWidth  (+ theImageWidth  theBuffer theBuffer) )
+      (gimp-image-resize theImage theImageWidth theImageHeight 0 0)
+      (gimp-layer-resize theLayer theImageWidth theImageHeight 0 0)
+      (gimp-layer-set-offsets theText theBuffer theBuffer)
+      (gimp-display-new theImage)
+      (list theImage theLayer theText)
+    )
+  )
       

@@ -1,0 +1,75 @@
+## let's try our vim script out
+
+## symlink where gimp can find it:
+
+ls /Users/danthomas/Documents/speckling/center/scriptfu/make_spot_polygons.scm 
+
+ln -s /Users/danthomas/Documents/speckling/center/scriptfu/make_spot_polygons.scm "/Users/danthomas/Library/Application Support/GIMP/2.8/scripts/make_spot_polygons.scm" 
+
+$gimp -i --verbose -b '(make_spot_polygons "/Users/danthomas/Documents/speckling/demo/test_spots3.png" "mooptest")' -b '(gimp-quit 0)'
+
+## new install not working, missing "gdb". What is this? 
+
+brew search gdb
+
+brew info gdb
+
+## then had to do a bunch of certificate stuff, info here: <https://sourceware.org/gdb/wiki/BuildingOnDarwin>
+
+## to find out where gdb lives:
+
+type -a gdb ## its in /usr/local/bin
+
+## but 
+
+ls -l /usr/local/bin/gdb
+
+## its a soft link to our homebrew cellar:
+
+ls -l /usr/local/Cellar/gdb/8.1/bin/gdb
+
+## not writable. I want to keep it that way. So mac wants sudo or gui password input
+
+codesign -s gdb-cert /usr/local/Cellar/gdb/8.1/bin/gdb
+
+## okay, did this help?
+
+$gimp -i --verbose -b '(make_spot_polygons "/Users/danthomas/Documents/speckling/demo/test_spots3.png" "mooptest")' -b '(gimp-quit 0)'
+
+## and then a mountain of errors from gdb, about shared library incompatibilites. 
+
+## meh. fuck all that. The command line will not work for my setup. It's not worth the time
+## to now debug gdb for my setup. Too deep for me. 
+
+## let's try just using the console while gimp is running. Then maybe we can make a macro 
+## instead of a script. 
+
+## example file: "/Users/danthomas/Documents/speckling/demo/test_spots3.png"
+
+    (let* (
+            ;; load files, set vars
+            (image (car (gimp-file-load 
+                                0 
+                                "/Users/danthomas/Documents/speckling/demo/test_spots3.png" 
+                                "/Users/danthomas/Documents/speckling/demo/test_spots3.png") ) )
+            (drawable (car (gimp-image-get-active-layer image)))
+          )
+            ;; do stuff
+
+            ;;1 select black/solid regions:
+            (gimp-image-select-color 
+                image
+                CHANNEL-OP-REPLACE
+                drawable
+                '(0 0 0)
+            )
+ 
+            ;;2 Convert selection to path
+            ;;3 save path to file
+
+            ;; save
+            ;(gimp-file-save 0 image drawable 
+            ;                "/Users/danthomas/Documents/speckling/center/scriptfu/test.xcf" 
+            ;                "/Users/danthomas/Documents/speckling/center/scriptfu/test.xcf")
+)
+

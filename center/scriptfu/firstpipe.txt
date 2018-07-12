@@ -55,21 +55,30 @@ $gimp -i --verbose -b '(make_spot_polygons "/Users/danthomas/Documents/speckling
             (drawable (car (gimp-image-get-active-layer image)))
           )
             ;; do stuff
-
             ;;1 select black/solid regions:
             (gimp-image-select-color 
                 image
                 CHANNEL-OP-REPLACE
                 drawable
-                '(0 0 0)
+                '(0 0 0) ;; black
             )
- 
             ;;2 Convert selection to path
+            (plug-in-sel2path
+                RUN-NONINTERACTIVE
+                image
+                drawable
+            ) 
             ;;3 save path to file
-
-            ;; save
-            ;(gimp-file-save 0 image drawable 
-            ;                "/Users/danthomas/Documents/speckling/center/scriptfu/test.xcf" 
-            ;                "/Users/danthomas/Documents/speckling/center/scriptfu/test.xcf")
+        (gimp-vectors-export-to-file
+            image
+            "/Users/danthomas/Documents/speckling/demo/spots_script_test.svg"
+            0 ;; all vectors
+        )
 )
+
+## so that works for copying and pasting to the console in GIMP.
+
+## we need to either write a macro for running in the GUI that can handle lots of images or 
+## try again with the command line. 
+
 

@@ -71,7 +71,7 @@ $gimp -i --verbose -b '(make_spot_polygons "/Users/danthomas/Documents/speckling
             ;;3 save path to file
         (gimp-vectors-export-to-file
             image
-            "/Users/danthomas/Documents/speckling/demo/spots_script_test.svg"
+            "/Users/danthomas/Documents/speckling/make_polygons/spots_script_test.svg"
             0 ;; all vectors
         )
 )
@@ -80,5 +80,30 @@ $gimp -i --verbose -b '(make_spot_polygons "/Users/danthomas/Documents/speckling
 
 ## we need to either write a macro for running in the GUI that can handle lots of images or 
 ## try again with the command line. 
+
+
+## I personally like the idea of the latter. But I still have no idea 
+## how to run gimp command line from the terminal
+
+## can we run the above from the terminal?
+
+
+## we need to put a copy (symlink) where git wants it:
+
+ln -s /Users/danthomas/Documents/speckling/make_polygons/make_spot_polygons.scm \
+"/Users/danthomas/Library/Application Support/GIMP/2.10/scripts/make_spot_polygons.scm"
+
+ls -l "/Users/danthomas/Library/Application Support/GIMP/2.10/scripts/"
+
+
+ls /Applications/Gimp-2.10.app/Contents/MacOS/gimp-console-2.10
+
+/Applications/Gimp-2.10.app/Contents/MacOS/gimp-console-2.10
+
+## theoretically, we should be able to run this like so:
+~/GIMP.app/Contents/MacOS/gimp-2.8 -i
+
+## none of the above works. As before. I think the best strategy here is to try this on my
+## linux machine, see if the same bugs pop up. 
 
 

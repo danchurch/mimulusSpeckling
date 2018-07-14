@@ -61,7 +61,7 @@ $gimp -i --verbose -b '(make_spot_polygons "/Users/danthomas/Documents/speckling
                 CHANNEL-OP-REPLACE
                 drawable
                 '(0 0 0) ;; black
-            )
+            ) ;'
             ;;2 Convert selection to path
             (plug-in-sel2path
                 RUN-NONINTERACTIVE
@@ -105,5 +105,22 @@ ls /Applications/Gimp-2.10.app/Contents/MacOS/gimp-console-2.10
 
 ## none of the above works. As before. I think the best strategy here is to try this on my
 ## linux machine, see if the same bugs pop up. 
+cd /home/daniel/mimulusSpeckling/make_polygons
 
 
+## all the above was for the lab mac. 
+
+## try again with my linux laptop
+
+## where to put gimp scripts on my laptop?
+
+## here I think:
+cd ~/.gimp-2.8/scripts
+
+ln -s /home/daniel/mimulusSpeckling/make_polygons/make_spot_polygons.scm ~/.gimp-2.8/scripts/make_spot_polygons.scm 
+
+## can we run it?
+
+gimp -i -b '(simple-unsharp-mask "foo.png" 5.0 0.5 0)' -b '(gimp-quit 0)'
+
+gimp -i -b '(make_spot_polygons.scm)' -b '(gimp-quit 0)'

@@ -1,9 +1,13 @@
+(define(makePetalPoly filename)
     (let* (
             ;; load files, set vars
             (image (car (gimp-file-load 
                                 0 
-                                "/Users/danthomas/Documents/speckling/demo/test_spots3.png" 
-                                "/Users/danthomas/Documents/speckling/demo/test_spots3.png") ) )
+                                filename 
+                                filename
+                        ) 
+                    ) 
+            )
             (drawable (car (gimp-image-get-active-layer image)))
           )
             ;; do stuff
@@ -23,8 +27,11 @@
             ;;3 save path to file
         (gimp-vectors-export-to-file
             image
-            "/Users/danthomas/Documents/speckling/make_polygons/spots_script_test.svg"
+            ;"/Users/danthomas/Documents/speckling/make_polygons/spots_script_test.svg"
+            "/home/daniel/mimulusSpeckling/make_polygons/spots_script_test.svg" 
             0 ;; all vectors
         )
+        (gimp-image-delete image)
+        (set! filelist (cdr filelist))
+    )
 )
-

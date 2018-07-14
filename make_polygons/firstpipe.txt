@@ -165,5 +165,8 @@ gimp -i -b '(makePetalPoly "test_spots3.png")' -b '(gimp-quit 0)'
 ## 1 edit script to export other filenames that are related to the entered file
 ## 2 find a way to handle multiple files - either with bash or in scriptfu
 
+## 1 should be simple?
+
+## okay, works. 
 
 

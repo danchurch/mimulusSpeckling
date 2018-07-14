@@ -117,10 +117,53 @@ cd /home/daniel/mimulusSpeckling/make_polygons
 ## here I think:
 cd ~/.gimp-2.8/scripts
 
+ls -al ~/.gimp-2.8/scripts
+
 ln -s /home/daniel/mimulusSpeckling/make_polygons/make_spot_polygons.scm ~/.gimp-2.8/scripts/make_spot_polygons.scm 
 
 ## can we run it?
 
-gimp -i -b '(simple-unsharp-mask "foo.png" 5.0 0.5 0)' -b '(gimp-quit 0)'
 
-gimp -i -b '(make_spot_polygons.scm)' -b '(gimp-quit 0)'
+gimp -i -b '(makePetalPoly "test_spots3.png")' -b '(gimp-quit 0)'
+
+gimp -i -b '(makePetalPoly "test_spots3.png")' -b '(gimp-quit 0)'
+
+## let's do a test with a script from online:
+
+gimp -i -b '(test-script "foo.png" 5.0 0.5 0)' -b '(gimp-quit 0)'
+
+## okay works...why not ours?
+
+## why is the the script name parsed as an undeclared variable?
+
+cd ../demo
+gimp -i -b '(makePetalPoly "test_spots3.png")' -b '(gimp-quit 0)'
+## nope
+
+## is it because it is a symlink?
+
+cp /home/daniel/mimulusSpeckling/make_polygons/makePetalPoly.scm /home/daniel/.gimp-2.8/scripts/
+
+gimp -i -b '(makePetalPoly "test_spots3.png")' -b '(gimp-quit 0)'
+
+## ah, that worked!
+## is this a permission issue?
+
+chmod 777 /home/daniel/mimulusSpeckling/make_polygons/makePetalPoly.scm
+
+## try again
+
+ln -s /home/daniel/mimulusSpeckling/make_polygons/makePetalPoly.scm ~/.gimp-2.8/scripts/makePetalPoly.scm 
+
+gimp -i -b '(makePetalPoly "test_spots3.png")' -b '(gimp-quit 0)'
+
+## yep. I feel pretty stupid. But good to know that symlink permissions 
+## don't really mean anything
+
+## sweet, so:
+
+## 1 edit script to export other filenames that are related to the entered file
+## 2 find a way to handle multiple files - either with bash or in scriptfu
+
+
+

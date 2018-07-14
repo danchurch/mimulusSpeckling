@@ -32,6 +32,6 @@
             0 ;; all vectors
         )
         (gimp-image-delete image)
-        (set! filelist (cdr filelist))
+        ;(set! filelist (cdr filelist))
     )
 )

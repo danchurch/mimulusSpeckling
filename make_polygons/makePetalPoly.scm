@@ -9,6 +9,7 @@
                     ) 
             )
             (drawable (car (gimp-image-get-active-layer image)))
+            (outPut (string-append filename "_path.svg"))
           )
             ;; do stuff
             ;;1 select black/solid regions:
@@ -28,7 +29,7 @@
         (gimp-vectors-export-to-file
             image
             ;"/Users/danthomas/Documents/speckling/make_polygons/spots_script_test.svg"
-            "/home/daniel/mimulusSpeckling/make_polygons/spots_script_test.svg" 
+            outPut
             0 ;; all vectors
         )
         (gimp-image-delete image)

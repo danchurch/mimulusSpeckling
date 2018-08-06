@@ -169,4 +169,65 @@ gimp -i -b '(makePetalPoly "test_spots3.png")' -b '(gimp-quit 0)'
 
 ## okay, works. 
 
+#######################################
 
+## back up. We need to use Doug's structures to generate binary pngs 
+## that gimp will like. 
+
+## since matlab sucks, as in not-free and license issues are complex
+## even when paid for, we'll try octave here
+
+## I'm waiting on the math department to talk to me about the desktop
+## license at the lab.`
+
+octave-cli
+
+## get one of Doug's data structures:
+
+load("/home/daniel/Documents/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P431F1.mat")
+
+Petals
+
+fieldnames(Petals)
+
+Petals.left
+
+fieldnames(Petals.left)
+
+Petals.left.data
+
+## can we turn this into an image?
+
+fieldnames(Petals.right)
+
+fieldnames(Petals.Clusters)
+
+Petals.Clusters.left
+
+imshow(Petals.Clusters.left) %% doesn't work
+
+image(Petals.Clusters.left) %% works. Don't know why
+
+image(Petals.Clusters.right); colorbar
+
+%% get the image package 
+pkg load image
+
+aa = mat2gray(Petals.Clusters.right);
+
+imshow(aa) %% that works. 
+
+unique(aa) %% all values transformed to between 1 and 0. 
+%% 1 is white, 0 is black
+
+%% now we want a petal and a spot image. To do this:
+
+%% get the spot shapes as black, background as white:
+bb = aa < 1;
+imshow(bb); 
+
+%% petals black with white background
+cc = aa == 0;
+imshow(cc); 
+
+%% okay. These should be digestable for our GIMP scripts. 

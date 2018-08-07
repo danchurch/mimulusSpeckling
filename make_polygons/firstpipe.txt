@@ -294,14 +294,167 @@ cp P431F1_bottom_spots.png_path.svg test.svg
 
 ## for svg, to flatten the beziers,
 ## change all C's to L's
-
-sed '/^\s*C/ s/C\s/L /' test.svg | \
-sed '/^\s*L/ s// /' 
-
-
-## and get rid of the control points (the first two sets of coordinates)
+## and get rid of the control points (keep only the first set of coordinates)
 
 sed '/^\s*C/ s/C\s/L /' test.svg | \
 sed -e 's/\([0-9]*\.[0-9]*,[0-9]*\.[0-9]*\) \([0-9]*\.[0-9]*,[0-9]*\.[0-9]*\) \([0-9]*\.[0-9]*,[0-9]*\.[0-9]*\)/\1/g' > test2.svg
 
-## okay, that seems to work
+## okay, that seems to work...but the paths have been clipped somehow, which leaves 
+## unclosed polygons. This must have happened during the gimp export?
+
+## nope, the svg with the beziers is not broken, at least according to inkscape.
+## so we introduced this with our SED modification
+
+tail test.svg
+
+tail test2.svg
+
+## actually, it's ok. The svg lines do close up in both files, you just have to
+## expand the svg canvas to see a little. 
+
+## ok, relief. So...what do we need for matlab to understand that these are 
+## polygons?
+
+## gimp needs two vectors, x and y. 
+
+## how can we convert our svg to this? 
+
+## a couple of problems here.
+
+## 1) get rid of chaff - remove all the non-drawing directions
+## 2) break up the respective polygons
+## 3) convert each polygon to two vectors, x and y. 
+
+## this really needs some python. Sorry Doug. 
+
+## which probably means we should back up and use a 
+## single python script to fix our svgs in general
+## (so I just spent an hour on a SED regex I don't need).
+## good news is that the script should be fairly straight forward.
+
+## actually, why use svgs at all? If we're going to 
+## python, let's do it right and get our edge detection
+## done with that
+
+## hah. into the best rabbit hole I know...
+
+
+########################################################
+
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import data, io, filters, measure
+
+## bring in our petal image:
+
+bb = io.imread('P431F1_bottom_spots.png')
+io.imshow(bb)
+io.show()
+
+cc = io.imread('P431F1_bottom_petal.png')
+io.imshow(cc)
+io.show()
+
+edges = filters.sobel(bb)
+io.imshow(edges)
+io.show()
+
+## okay, can we turn this into a polygon?
+
+## meaning, can it be approximated into a 
+## series of vertices? 
+
+## what value are we chasing?
+
+np.unique(edges)
+
+## huh. 7 non-zero values...
+
+contours = measure.find_contours(edges, 0.5)
+
+type(contours)
+
+contours[0].shape
+
+for n, contour in enumerate(contours):
+    plt.plot(contour[:, 1], contour[:, 0], linewidth=2)
+
+
+## almost works, but we're losing information by the png 
+## conversion, methinks.
+
+## so... back to octave/matlab:
+
+####################################################
+
+octave-cli
+
+pkg load image
+
+## get one grayscale image:
+
+load("../dougRaster/Rotated_and_Cropped/P431F1.mat")
+aa = mat2gray(Petals.Clusters.right);
+
+Petals.Clusters.right
+
+spots = aa < 1;
+imshow(spots);
+
+petal = aa == 0;
+imshow(petal);
+
+## save them as csv's:
+
+csvwrite('P431F1petal.csv',petal)
+csvwrite('P431F1spots.csv',spots)
+
+%% and back to python...
+#########################
+
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import data, io, filters, measure
+
+petal = np.genfromtxt ('P431F1petal.csv', delimiter=",")
+spots = np.genfromtxt ('P431F1spots.csv', delimiter=",")
+
+np.unique(petal)
+
+np.unique(spots)
+
+## try spots
+
+## can contours handle these directly?
+contours = measure.find_contours(spots, 0)
+for n, contour in enumerate(contours):
+    plt.plot(contour[:, 1], contour[:, 0], linewidth=2)
+
+plt.show()
+
+## not bad, but still gaps...
+
+contours = measure.find_contours(spots, 0)
+for n, contour in enumerate(contours):
+    plt.plot(contour[:, 1], contour[:, 0], linewidth=2)
+
+## same. Try finding the edges first:
+
+
+edges = filters.sobel(spots)
+
+io.imshow(edges)
+io.show()
+
+np.unique(edges)
+
+contours = measure.find_contours(edges, 0.5)
+
+for n, contour in enumerate(contours):
+    plt.plot(contour[:, 1], contour[:, 0], linewidth=2)
+
+plt.show()
+
+## same problem. can we add a margin of white to our 
+## matrix?
+

@@ -231,3 +231,77 @@ cc = aa == 0;
 imshow(cc); 
 
 %% okay. These should be digestable for our GIMP scripts. 
+
+%% export:
+
+imwrite(bb, 'P431F1_bottom_spots.png') %% some quality warnings. 
+imwrite(cc, 'P431F1_bottom_petal.png')
+
+%% can we get these to gimp now, and get svgs for both?
+
+## shell/gimp
+
+## ugh, got to remember how to use Gimp from command line 
+## with our script...
+
+## we have our scriptfu for this, does this work?:
+
+gimp -i -b '(makePetalPoly "P431F1_bottom_spots.png")' -b '(gimp-quit 0)'
+
+## nope.  What changed? the old command that worked:
+
+gimp -i -b '(makePetalPoly "test_spots3.png")' -b '(gimp-quit 0)'
+
+## doesn't work now... did I change something accidentally?
+
+git log makePetalPoly.scm
+
+
+## not really. The file worked on the last day it was modified.
+
+## can we bring up the older versions, see if they work?
+
+git checkout 759701d0688c1c08e76ca876dc25d08e122b09c4 makePetalPoly.scm
+
+gimp -i -b '(makePetalPoly "test_spots3.png")' -b '(gimp-quit 0)'
+
+## nope. What changed?
+
+## looks like the link might be dead...
+
+ln -s /home/daniel/Documents/mimulusSpeckling/make_polygons/makePetalPoly.scm /home/daniel/.gimp-2.8/scripts/makePetalPoly.scm
+
+## work now?
+
+gimp -i -b '(makePetalPoly "P431F1_bottom_spots.png")' -b '(gimp-quit 0)'
+
+## yup, works. Note to self, watch those directory changes...remember they fuck with links 
+
+## now can we flatten the svg bezier curves?
+
+## ugh, all this would be so much more elegant with python. 
+## http://scikit-image.org/docs/dev/api/skimage.draw.html
+
+## anyway..
+
+## so with svg bezier curves, we want to be rid of the control points 
+## leave just the terminal points
+
+## first get the svg to work,
+## then figure out how to clean it all out so matlab can read it.
+
+cp P431F1_bottom_spots.png_path.svg test.svg
+
+## for svg, to flatten the beziers,
+## change all C's to L's
+
+sed '/^\s*C/ s/C\s/L /' test.svg | \
+sed '/^\s*L/ s// /' 
+
+
+## and get rid of the control points (the first two sets of coordinates)
+
+sed '/^\s*C/ s/C\s/L /' test.svg | \
+sed -e 's/\([0-9]*\.[0-9]*,[0-9]*\.[0-9]*\) \([0-9]*\.[0-9]*,[0-9]*\.[0-9]*\) \([0-9]*\.[0-9]*,[0-9]*\.[0-9]*\)/\1/g' > test2.svg
+
+## okay, that seems to work

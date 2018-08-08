@@ -458,3 +458,52 @@ plt.show()
 ## same problem. can we add a margin of white to our 
 ## matrix?
 
+## jog my memory, how to work with numpy again...
+
+a = np.array([[1, 1], [2, 2], [3, 3]])
+np.insert(a, 0, 5, 1)
+
+a = np.array([[1, 1], [2, 2], [3, 3]])
+np.insert(a, 0, 5, 0)
+
+## rows are axis zero, columns axis one
+
+a = np.array([[1, 1], [2, 2], [3, 3]])
+np.insert(a, 0, [6,6,6], 1)
+
+a = np.array([[1, 1], [2, 2], [3, 3]])
+b = np.insert(a, 2, [6,6,6], 1) ## might be a more elegant way...
+
+## can we add more than one column at a time?
+
+a = np.array([[1, 1], [2, 2], [3, 3]])
+b = np.insert(a, 2, [[5,5,5],[6,6,6]], 1)
+
+## works, but probably better to build another matrix 
+## and concatenate it 
+
+## for our images, our polygons are black, = 0's
+
+## so we want to add white space, or 1's. 
+
+## seems pretty simple. try it with one of our images:
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import data, io, filters, measure
+
+petal = np.genfromtxt ('P431F1petal.csv', delimiter=",")
+spots = np.genfromtxt ('P431F1spots.csv', delimiter=",")
+
+petal.shape
+## (561, 439)
+
+## looks like the rows/columns are transposed 
+## automatically by the scikit-image?
+
+## anyway, I think to add one pixel of white to all edges:
+
+b = np.insert(a, 2, [[5,5,5],[6,6,6]], 1)
+
+

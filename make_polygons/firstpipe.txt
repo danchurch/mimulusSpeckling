@@ -461,7 +461,10 @@ plt.show()
 ## jog my memory, how to work with numpy again...
 
 a = np.array([[1, 1], [2, 2], [3, 3]])
-np.insert(a, 0, 5, 1)
+
+a
+a = np.insert(a, 0, 5, 1)
+a
 
 a = np.array([[1, 1], [2, 2], [3, 3]])
 np.insert(a, 0, 5, 0)
@@ -469,7 +472,10 @@ np.insert(a, 0, 5, 0)
 ## rows are axis zero, columns axis one
 
 a = np.array([[1, 1], [2, 2], [3, 3]])
+
+a.shape
 np.insert(a, 0, [6,6,6], 1)
+np.insert(a, 2, [6,6,6], 1)
 
 a = np.array([[1, 1], [2, 2], [3, 3]])
 b = np.insert(a, 2, [6,6,6], 1) ## might be a more elegant way...
@@ -490,6 +496,7 @@ b = np.insert(a, 2, [[5,5,5],[6,6,6]], 1)
 
 
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from skimage import data, io, filters, measure
 
@@ -499,11 +506,159 @@ spots = np.genfromtxt ('P431F1spots.csv', delimiter=",")
 petal.shape
 ## (561, 439)
 
+spots.shape
+## same
+
 ## looks like the rows/columns are transposed 
 ## automatically by the scikit-image?
 
-## anyway, I think to add one pixel of white to all edges:
+## to add one pixel of white to columns:
+spots_marg = np.insert(spots, 439, 1, 1) 
+spots_marg = np.insert(spots_marg, 0, 1, 1) 
+## and rows:
+spots_marg = np.insert(spots_marg, 561, 1, 0) 
+spots_marg = np.insert(spots_marg, 0, 1, 0) 
 
-b = np.insert(a, 2, [[5,5,5],[6,6,6]], 1)
+spots.shape
+spots_marg.shape
+
+
+## does this help the detection of the polygons?
+
+contours = measure.find_contours(spots_marg, 0)
+
+for n, contour in enumerate(contours):
+    plt.plot(contour[:, 1], contour[:, 0], linewidth=2)
+
+
+plt.show()
+
+
+## to keep the relative positions accurate, we have to do the
+## the same with the petal outline:
+
+petal_marg = np.insert(petal, 439, 1, 1) 
+petal_marg = np.insert(petal_marg, 0, 1, 1) 
+## and rows:
+petal_marg = np.insert(petal_marg, 561, 1, 0) 
+petal_marg = np.insert(petal_marg, 0, 1, 0) 
+
+Pcontours = measure.find_contours(petal_marg, 0)
+
+## how does it look?:
+
+for n, contour in enumerate(contours):
+    plt.plot(contour[:, 1], contour[:, 0], linewidth=2)
+
+plt.plot(Pcontours[0][:,1], Pcontours[0][:,0], linewidth=1)
+
+plt.show()
+
+## looks good. 
+
+## 1) Can we give these to Matlab?
+
+## and if so, 
+
+## 2) we need a script to generalize this. 
+
+## 3) and a bash script that will work for anyone to repeat. 
+
+## update notebook, then do these things. 
+
+## okay, can we export one of these so that octave can read it?
+
+## CSV is a little problematic, because we need a new for each 
+## polygon.
+
+## but building a json of nested arrays that python will make and 
+## matlab will parse, sounds more tricky than I want to take on. 
+
+np.savetxt("P431F1petal_polys.csv", contours) ## doesn't work
+
+contours[0]
+
+contours[0].astype(int)
+
+## loop through the various polygons, save them individually?
+
+photoname = 'P431F1'
+partname  = 'spots'
+petalname = 'bottom'
+
+for n, contour in enumerate(contours):
+    polyname = photoname + petalname + partname + str(n) + "_poly.csv"
+    print(polyname)
+    np.savetxt(fname=polyname, X=contour.astype(int), delimiter=',') 
+
+## looks good. 
+
+## so now the challenge is, given a single image, make a function 
+## that exports the petal outline and all the respective 
+
+## we start with..? a csv from matlab, which is the grayscale matrix
+## of a single petal image:
+
+## remember that as we have it here, we get a petal and a spots
+## csv from matlab/octave. 
+
+## but it is the same process for both. Make this agnostic: 
+
+
+## get_pols.py
+#################################3
+#!/usr/bin/env python3
+
+import argparse
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from skimage import data, io, filters, measure
+
+## instantiate the argparser
+parser = argparse.ArgumentParser()
+
+## argument:
+parser.add_argument('file', 
+            help="Name of the .csv file from matlab that contains grayscale information about a petal.")
+
+args = parser.parse_args()
+
+## get our image in...
+aa  = np.genfromtxt(args.file, delimiter = ",")
+
+aR = aa.shape[0] ## number of rows
+aC = aa.shape[1] ## number of cols
+
+## add one pixel of white to rows:
+aa_marg = np.insert(aa, aR, 1, 0)
+aa_marg = np.insert(aa_marg, 0, 1, 0)
+## and columns:
+aa_marg = np.insert(aa_marg, aC, 1, 1)
+aa_marg = np.insert(aa_marg, 0, 1, 1)
+
+## find the contours:
+contours = measure.find_contours(aa_marg, 0)
+
+## save them out:
+
+imageName = args.file[:-4] ## no file extension
+
+for n, contour in enumerate(contours):
+    polyname = imageName + "_poly" + str(n) + ".csv"
+    np.savetxt(fname=polyname, X=contour.astype(int), delimiter=',')
+
+#####################################
+
+## try this out on one of our CSvs from matlab:
+
+./get_pols.py P431F1spots.csv
+
+## seems to work, but we'll need to check this
+## out on matlab tomorrow. 
+
+## how can we make this cleaner? We want to output
+## to a folder...
+
 
 

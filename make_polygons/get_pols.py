@@ -1,22 +1,33 @@
 #!/usr/bin/env python3
 
-import argparse
+import argparse, os
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 from skimage import data, io, filters, measure
 
 ## instantiate the argparser
 parser = argparse.ArgumentParser()
-
-## argument:
+## deal with arguments:
 parser.add_argument('file', 
             help="Name of the .csv file from matlab that contains grayscale information about a petal.")
-
 args = parser.parse_args()
 
 ## get our image in...
 aa  = np.genfromtxt(args.file, delimiter = ",")
+
+## set up our directory for saving files
+
+## name of raster image (a petal or a spots grayscale matrix from matlab)
+imageName = args.file[:-4] ## no file extension
+#imageName = argsfile[:-4] ## no file extension
+
+## current directory
+cwd = os.getcwd()
+## name of folder, based on image
+fullFolderName = cwd + "/" + imageName
+## make a new directory for the CSVs
+## we will make at the end of all this:
+os.makedirs(fullFolderName, exist_ok=True)
 
 aR = aa.shape[0] ## number of rows
 aC = aa.shape[1] ## number of cols
@@ -33,9 +44,8 @@ contours = measure.find_contours(aa_marg, 0)
 
 ## save them out:
 
-imageName = args.file[:-4] ## no file extension
-
 for n, contour in enumerate(contours):
-    polyname = imageName + "_poly" + str(n) + ".csv"
+    polyname = fullFolderName + "/" + imageName + "_poly" + str(n) + ".csv"
     np.savetxt(fname=polyname, X=contour.astype(int), delimiter=',')
+
 

@@ -660,5 +660,15 @@ for n, contour in enumerate(contours):
 ## how can we make this cleaner? We want to output
 ## to a folder...
 
+## update notebook, fix tomorrow. 
+
+###############################
+
+## its tomorrow, again. 
+
+## okay, so we need to make our script export all products into 
+## a single folder. 
+
+## let's work in the file itself...
 
 

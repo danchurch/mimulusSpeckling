@@ -671,4 +671,12 @@ for n, contour in enumerate(contours):
 
 ## let's work in the file itself...
 
+./get_pols.py P431F1spots.csv
 
+## 13 of them. is this the same as before?
+
+## looks okay, I think. 
+
+## works for our petal outline? 
+
+./get_pols.py P431F1petal.csv

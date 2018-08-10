@@ -45,7 +45,7 @@ contours = measure.find_contours(aa_marg, 0)
 ## save them out:
 
 for n, contour in enumerate(contours):
-    polyname = imageName + "_poly" + str(n) + ".csv"
+    polyname = fullFolderName + "/" + os.path.basename(imageName) + "_poly" + str(n) + ".csv"
     np.savetxt(fname=polyname, X=contour.astype(int), delimiter=',')
 
 

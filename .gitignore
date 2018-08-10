@@ -3,4 +3,4 @@
 *.sw*
 .ipynb_checkpoints/
 octave-workspace
-tryScript/
+make_polygons/tryScript/

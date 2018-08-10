@@ -1018,6 +1018,11 @@ find ./ -name "P*csv" -type f  | wc -l
 ## sicking our script on these could be catastrophic... getting github uptodate...
 
 
-find ./ -name "P*csv" -type f  -exec ./get_pols.py {} \;
+find ../polygons/ -name "P*csv" -type f  -exec ./get_pols.py {} \;
+
+## no errors reporting .. how do we check if we did a good job? 
+
+## be sure to update get_pol.py  script on notebook when next we go there..
+
 
 

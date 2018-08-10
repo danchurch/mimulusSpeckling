@@ -3,3 +3,4 @@
 *.sw*
 .ipynb_checkpoints/
 octave-workspace
+tryScript/

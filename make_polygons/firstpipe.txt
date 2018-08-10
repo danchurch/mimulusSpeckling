@@ -957,15 +957,65 @@ end;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% how to get a list of the files of interest?
+## think that worked...
 
-dougRasterDir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
+## how do we check?
 
-cd(dougRasterDir)
-files = dir('*.mat');
-for file = files';
-    im = file.name;
-end;
+## back to python...
+
+python
+
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import data, io, filters, measure
+
+## some rando files to compare:
+
+aa = '/Users/danthomas/Documents/speckling/make_polygons/polygons/P247F1/right/P247F1_right_spots.csv'
+bb = '/Users/danthomas/Documents/speckling/make_polygons/polygons/P399F1/right/P399F1_right_spots.csv'
+cc = '/Users/danthomas/Documents/speckling/make_polygons/polygons/P399F1/left/P399F1_left_spots.csv'
+dd = '/Users/danthomas/Documents/speckling/make_polygons/polygons/P393F2/mid/P393F2_mid_spots.csv'
+ee = '/Users/danthomas/Documents/speckling/make_polygons/polygons/P257F2/left/P257F2_left_petal.csv'
+
+## look at em
+
+image = ee
+sv = np.genfromtxt (image, delimiter=",")
+contours = measure.find_contours(sv, 0)
+for n, contour in enumerate(contours):
+    plt.plot(contour[:, 1], contour[:, 0], linewidth=2)
+
+plt.show()
+
+## add a petal for cc
+image = '/Users/danthomas/Documents/speckling/make_polygons/polygons/P399F1/left/P399F1_left_petal.csv'
+svp = np.genfromtxt (image, delimiter=",")
+contoursp = measure.find_contours(svp, 0)
+for n, contourp in enumerate(contoursp):
+    plt.plot(contourp[:, 1], contourp[:, 0], linewidth=2)
+
+## all looks good. 
+
+## move on, digitize with python script... 
+
+## okay, this script goes to home of each file, and builds directories right there, in place.
+
+## so this will go to each of our blacknwhite matrices and build another folder in place with 
+## a bunch of polygons 
+
+## is this going to be hard to work with later?
+
+## Probably. First let's just see if it works.
+
+## How do we apply it all of our files? They are all buried in the nested folders...
+
+## seems like a good use of find:
+
+find ./ -name "P*csv" -type f  | wc -l
+## hehzus, there 1080 of these. Is that right? 
+## = 180 photos x 6, yup.
+
+## sicking our script on these could be catastrophic... getting github uptodate...
 
 
 

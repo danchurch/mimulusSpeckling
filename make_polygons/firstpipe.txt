@@ -865,48 +865,6 @@ plot(Ppoly)
 
 %%%%%%%%%%%%%%%
 
-%% one image, petals and spots separated and in the 
-%% same folder:
-
-wd = '/Users/danthomas/Documents/speckling/make_polygons';
-cd(wd);
-
-%% assign directory with data
-
-dougRasterDir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
-
-im = "P431F1.mat";
-imName = regexprep(im,'\.mat', ''); %% name of photo without file extensions
-
-%% dip into Doug's data directory, get our structures of interest:
-cd(dougRasterDir);
-rast=load(im);
-cd(wd)
-
-%% work on the "right" (bottom) petal
-%% from here we'll need to loop
-
-rastGray = mat2gray(rast.Petals.Clusters.right);
-
-%% make spots solid black, everything else white:
-spots = rastGray  < 1;
-%% make the petal outline:
-petal = rastGray == 0;
-
-mkdir('bottom')
-cd('bottom')
-
-csvwrite('P431F1petal.csv',petal)
-csvwrite('P431F1spots.csv',spots)
-
-cd(wd)
-
-%% okay, make it so this does this three times. 
-
-%% this is a mess. 
-%% and did I say I hate Matlab?
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% go to working directory
@@ -951,30 +909,64 @@ cd(wd);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-teststruct = struct('a',3,'b',5,'c',9);
 
-fields = fieldnames(teststruct)
 
-for i = 1:numel(fields);
-  teststruct.(fields{i})
+%% generalize to catch all of dougs rasters
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% a script to put all of Doug's rasters into a form we can use:
+
+%% go to working directory
+wd = '/Users/danthomas/Documents/speckling/make_polygons/polygons/';
+cd(wd);
+
+dougRasterDir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
+
+cd(dougRasterDir)
+
+files = dir('P*.mat');
+for file = files';
+    im = file.name;
+    imName = regexprep(im,'\.mat', ''); 
+    %% go get our file, come back
+    cd(dougRasterDir);
+    rast=load(im);
+    cd(wd);
+    %% make a spot for our image, go to it:
+    mkdir(imName);
+    cd (imName);
+    %% get our petal names (left, right mid)
+    petNames = fieldnames(rast.Petals.Clusters);
+    %% split images into petal and spot, export, for each of the three petals:
+    for i = 1:length(petNames);
+        pet = rast.Petals.Clusters.(petNames{i}); %petal at hand
+        rastGray = mat2gray(pet); 
+        spots = rastGray  < 1; 
+        petal = rastGray == 0;
+        mkdir(petNames{i});
+        cd(petNames{i});
+        fileNamePetal = imName + "_" +  petNames(i) + "_" + 'petal.csv';
+        csvwrite(fileNamePetal,petal);
+        fileNameSpots = imName + "_" +  petNames(i) + "_" + 'spots.csv';
+        csvwrite(fileNameSpots,spots);
+        cd ..;
+    end;
+    cd(wd);
 end;
 
-rast.Petals.Clusters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-rast.Petals.Clusters{1}
+%% how to get a list of the files of interest?
 
-%% it's incredibly awkward to iterate through fields:
+dougRasterDir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
 
-counter =  1;
-petNames = fieldnames(rast.Petals.Clusters);
-for i = 1:length(petNames);
-    disp(counter)
-    disp(petNames{i})
-    counter = counter + 1;
+cd(dougRasterDir)
+files = dir('*.mat');
+for file = files';
+    im = file.name;
 end;
 
-rast.Petals.Clusters.(petNames{2})
 
-rast.Petals.Clusters.(petNames(2))
 
-mkdir(petNames(1)) 
+

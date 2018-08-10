@@ -21,10 +21,10 @@ aa  = np.genfromtxt(args.file, delimiter = ",")
 imageName = args.file[:-4] ## no file extension
 #imageName = argsfile[:-4] ## no file extension
 
-## current directory
-cwd = os.getcwd()
+
 ## name of folder, based on image
-fullFolderName = cwd + "/" + imageName
+cwd = os.getcwd()
+fullFolderName = cwd + "/" + os.path.basename(imageName)
 ## make a new directory for the CSVs
 ## we will make at the end of all this:
 os.makedirs(fullFolderName, exist_ok=True)
@@ -45,7 +45,7 @@ contours = measure.find_contours(aa_marg, 0)
 ## save them out:
 
 for n, contour in enumerate(contours):
-    polyname = fullFolderName + "/" + imageName + "_poly" + str(n) + ".csv"
+    polyname = imageName + "_poly" + str(n) + ".csv"
     np.savetxt(fname=polyname, X=contour.astype(int), delimiter=',')
 
 

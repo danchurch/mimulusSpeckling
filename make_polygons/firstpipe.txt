@@ -1018,5 +1018,6 @@ find ./ -name "P*csv" -type f  | wc -l
 ## sicking our script on these could be catastrophic... getting github uptodate...
 
 
+find ./ -name "P*csv" -type f  -exec ./get_pols.py
 
 

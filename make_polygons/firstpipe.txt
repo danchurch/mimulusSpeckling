@@ -1024,5 +1024,30 @@ find ../polygons/ -name "P*csv" -type f  -exec ./get_pols.py {} \;
 
 ## be sure to update get_pol.py  script on notebook when next we go there..
 
+## let's let that run tonight...
+
+## maybe we can do the commit/push remotely...
+
+#######################################
+
+##  update notebook
+
+
+## branch
+
+## then check these with matlab, and meld with doug's matlab structures
+
+## how to do this, in matlab?...
+
+## for each image:
+
+%% 1) load doug matlab structure of image
+%% 2) load all associated polygons and petal outlines csvs as matlab polyshapes 
+%% 3) add these to doug's matlab stuctures
+
+
+
+
+
 
 

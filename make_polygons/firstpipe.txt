@@ -1047,7 +1047,217 @@ find ../polygons/ -name "P*csv" -type f  -exec ./get_pols.py {} \;
 
 
 
+%% try just one:
+
+wd = '/Users/danthomas/Documents/speckling/make_polygons/'
+cd(wd)
+
+dougdir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
+
+im = "P369F1";
+pos='mid';
+%typPol='spots';
+typPol='petal';
+imStructF = dougdir + im + ".mat";
 
 
+
+%% how do we get a list of matlab structures of interest (images as structures)?
+
+cd(dougdir)
+files = dir('P*.mat');
+for file = files';
+    im = regexprep(file.name,'\.mat', ''); 
+    disp(file.name + " " + im)
+end;
+%% works
+
+load(imStructF)
+
+wd + "tryscript/" + im + '_' + pos + '_' + typPol
+
+%%"mid" (actually "right") petal:
+
+aa = mat2gray(Petals.Clusters.mid);
+imshow(aa)
+
+%% there's a hole in this spot, I wonder how our python script
+%% dealt with that. We'll see in a minute...
+
+%% what are our accompanying python-defined csv?
+
+%% two directories we need are:
+
+"tryScript/P369F1_mid_petal"
+"tryScript/P369F1_mid_spots"
+
+%% could be restated as:
+
+wd + "tryscript/" + im + '_' + pos + '_' + typPol
+
+ls(wd + "tryscript/" + im + '_' + pos + '_' + typPol) %% seems to work
+
+%% seems like it would be simplest to construct a structure that contains
+%% all of our spot and petal polygons, then add this to the existing 
+%% doug matlab structure for that image. 
+
+%% 1) get image name from list of mat files in dougdir
+%% 2) load and convert all the pertinent csvs to polyshapes
+%% 3) save together in a structure
+%% 4) add this to dougs existing structure
+
+%% for 2, how do we find all the pertinent files?
+
+%% im is scrounged off the file name, then...
+
+dougdir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
+wd = '/Users/danthomas/Documents/speckling/make_polygons/'
+petNames = ["left", "mid", "right"];
+typPols = ["petal", "spots"];
+
+im = "P369F1";
+
+cd(wd)
+Polys = struct;
+for i = petNames;
+    for j = typPols;
+        imdir = "tryScript/" + im + "_" + i + "_" + j;
+        cd(imdir);
+        files = dir('P*.csv');
+        counter = 1;
+        for file = files';
+            disp(file.name)
+            disp(counter)
+            coords=csvread(file.name);
+            if length(coords(:,1)) > 3; %% if there are enough points
+                Polys.(i).(j)(counter) = polyshape(coords); %% convert to polyshape
+                counter=counter+1;
+            end;
+        end;
+    cd(wd)
+    end;
+end;
+
+%% that seems to work. how would we add it?
+
+%% one of Doug's structures looks like:
+
+
+load ('/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/P431F2.mat')
+
+aa = load ('/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/P431F2.mat')
+
+save
+
+bb = 'loop';
+cc = 'poop';
+
+save('test.mat', 'bb', 'cc')
+
+clear(bb, cc)
+
+load('test.mat')
+
+%% just load the mat file of interest, and add the above as a field.
+
+im = "P369F1";
+aa = load(dougdir + im + ".mat");
+
+%% add our polyshapes to it:
+
+aa.Petals
+
+aa.Petals.polys = Polys;
+
+aa.Petals.polys
+
+%% then save it back out. Does our naming the structure accidentally add a layer to our structure?
+save("aatest.mat", "aa")
+clear(aa)
+load("aatest.mat")
+%% yup. 
+
+%% seems like maybe we just deal with files one at time here.
+
+load(dougdir + im + ".mat");
+Petals.Polys = Polys;
+save(imFile,"Petals")
+
+
+%% where shall we save these?
+
+
+imFile = wd + "matObjW_pol/" + im + ".mat";
+
+save(imFile,"Petals")
+
+clear Petals
+
+load(imFile)
+
+%% works. Can we loop it?
+
+
+dougdir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
+wd = '/Users/danthomas/Documents/speckling/make_polygons/';
+petNames = ["left", "mid", "right"];
+typPols = ["petal", "spots"];
+
+cd(dougdir)
+hs = dir('P*.mat');
+for h = hs';
+    im = regexprep(h.name,'\.mat', ''); 
+    cd(wd)
+    Polys = struct;
+    for i = petNames;
+        for j = typPols;
+            imdir = "tryScript/" + im + "_" + i + "_" + j;
+            cd(imdir);
+            files = dir('P*.csv');
+            counter = 1;
+            for file = files';
+                disp(file.name)
+                disp(counter)
+                coords=csvread(file.name);
+                if length(coords(:,1)) > 3; %% if there are enough points
+                    Polys.(i).(j)(counter) = polyshape(coords); %% convert to polyshape
+                    counter=counter+1;
+                end;
+            end;
+        cd(wd)
+        end;
+    end;
+    load(dougdir + im + ".mat"); %% get doug's matlab structure
+    Petals.Polys = Polys; %% add our new Polys structure inside it
+    imFile = wd + "matObjW_pol/" + im + ".mat"; %% save the modified structure 
+    save(imFile,"Petals");
+end;
+
+%% did that work?
+
+%% how to check a few of these?
+
+%% import the 
+
+im = "P369F1";
+aa = load(dougdir + im + ".mat");
+
+load("/Users/danthomas/Documents/speckling/make_polygons/matObjW_pol/P440F1.mat")
+
+%% iterate through our petal outline and spots 
+
+for i = Petals.Polys.left.petal
+    if ~isempty(i)
+        plot(i)
+        hold on %% keep the plot open
+    end;
+end;
+
+for i = Petals.Polys.left.spots
+    if ~isempty(i)
+        plot(i)
+        hold on %% keep the plot open
+    end;
+end;
 
 

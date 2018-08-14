@@ -1311,74 +1311,87 @@ b(1)
 %% so double quotes save the entire word as a unite (=string),
 %% and single quotes save the word as a string of letters (=letter)
 
+wd="/Users/danthomas/Documents/speckling/make_polygons/matObjW_pol"
+cd(wd)
 
-load('P434F1.mat')
+%load('P434F1.mat')
+
+load('P248F2.mat')
+
 dougdir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
 [a,b,c] = fileparts(Petals.fullName);
 jpegName = char(dougdir + b + c); %% gotta be a character object
 jpegN = imread(jpegName) ;
+
 imshow(jpegN)
 
-figure;
-%%%%%%%%% first row %%%%%%%%%%%%%%%
-subplot(3,3,[1,3]);
+[a,b,c] = fileparts(Petals.fullName);
+jpegName = char(dougdir + b + c); %% gotta be a character object?
+jpegN = imread(jpegName);
+    %% plot a page:
+    figure;
+    %%%%%%%%% first row %%%%%%%%%%%%%%%
+    subplot(3,3,[1,3]);
     imshow(jpegN);
-title(b)
-%%%%%%%%% second row %%%%%%%%%%%%%
-subplot(3,3,4);
-aa = mat2gray(Petals.Clusters.left);
-imshow(aa) 
-subplot(3,3,5);
-aa = mat2gray(Petals.Clusters.mid);
-imshow(aa) 
-subplot(3,3,6);
-aa = mat2gray(Petals.Clusters.right);
-imshow(aa) 
-%%%%%%%%%% third row %%%%%%%%%%%%%%
-subplot(3,3,7);
-    for i = Petals.Polys.left.petal;
-        if ~isempty(i);
-            plot(i);
-            hold on %% keep the plot open;
-        end;
-    end;
-    for i = Petals.Polys.left.spots;
-        if ~isempty(i);
-            plot(i);
-            hold on %% keep the plot open;
-        end;
-    end;
-    daspect([1 1 1])
-subplot(3,3,8);
-    for i = Petals.Polys.mid.petal;
-        if ~isempty(i);
-            plot(i);
-            hold on %% keep the plot open;
-        end;
-    end;
-    for i = Petals.Polys.left.spots;
-        if ~isempty(i);
-            plot(i);
-            hold on %% keep the plot open;
-        end;
-    end;
-    daspect([1 1 1])
-subplot(3,3,9);
-    for i = Petals.Polys.right.petal;
-        if ~isempty(i);
-            plot(i);
-            hold on %% keep the plot open;
-        end;
-    end;
-    for i = Petals.Polys.left.spots;
-        if ~isempty(i);
-            plot(i);
-            hold on %% keep the plot open;
-        end;
-    end;
-    daspect([1 1 1])
-%%%%%%%%%%%%%%
-suptitle('testing')
+    title(b) %% this is our plot title
+    %%%%%%%%% second row %%%%%%%%%%%%%
+    subplot(3,3,4);
+    aa = mat2gray(Petals.Clusters.left);
+    imshow(aa) 
+    subplot(3,3,5);
+    aa = mat2gray(Petals.Clusters.mid);
+    imshow(aa) 
+    subplot(3,3,6);
+    aa = mat2gray(Petals.Clusters.right);
+    imshow(aa) 
+    %%%%%%%%%% third row %%%%%%%%%%%%%%
+    subplot(3,3,7);
+        if isfield(Petals.Polys.left,'petal');
+        for i = Petals.Polys.left.petal;
+            if ~isempty(i);
+                plot(i);
+                hold on %% keep the plot open;
+            end;
+        end; end;
+        if isfield(Petals.Polys.left,'spots');
+        for i = Petals.Polys.left.spots;
+            if ~isempty(i);
+                plot(i);
+                hold on %% keep the plot open;
+            end;
+        end; end;
+        daspect([1 1 1])
+    subplot(3,3,8);
+        if isfield(Petals.Polys.mid,'petal');
+        for i = Petals.Polys.mid.petal;
+            if ~isempty(i);
+                plot(i);
+                hold on %% keep the plot open;
+            end;
+        end; end;
+        if isfield(Petals.Polys.mid,'spots');
+        for i = Petals.Polys.mid.spots;
+            if ~isempty(i);
+                plot(i);
+                hold on %% keep the plot open;
+            end;
+        end; end;
+        daspect([1 1 1])
+    subplot(3,3,9);
+        if isfield(Petals.Polys.right,'petal');
+        for i = Petals.Polys.right.petal;
+            if ~isempty(i);
+                plot(i);
+                hold on %% keep the plot open;
+            end;
+        end; end;
+        if isfield(Petals.Polys.right,'spots');
+        for i = Petals.Polys.right.spots;
+            if ~isempty(i);
+                plot(i);
+                hold on %% keep the plot open;
+        daspect([1 1 1])
+    %%%%%%%%%%%%%%
 
 %% can we export to pdf?
 
@@ -1417,50 +1430,65 @@ for file = files';
         imshow(aa) 
         %%%%%%%%%% third row %%%%%%%%%%%%%%
         subplot(3,3,7);
+            if isfield(Petals.Polys.left,'petal');
             for i = Petals.Polys.left.petal;
                 if ~isempty(i);
                     plot(i);
                     hold on %% keep the plot open;
                 end;
-            end;
+            end; end;
+            if isfield(Petals.Polys.left,'spots');
             for i = Petals.Polys.left.spots;
                 if ~isempty(i);
                     plot(i);
                     hold on %% keep the plot open;
                 end;
-            end;
+            end; end;
             daspect([1 1 1])
         subplot(3,3,8);
+            if isfield(Petals.Polys.mid,'petal');
             for i = Petals.Polys.mid.petal;
                 if ~isempty(i);
                     plot(i);
                     hold on %% keep the plot open;
                 end;
-            end;
-            for i = Petals.Polys.left.spots;
+            end; end;
+            if isfield(Petals.Polys.mid,'spots');
+            for i = Petals.Polys.mid.spots;
                 if ~isempty(i);
                     plot(i);
                     hold on %% keep the plot open;
                 end;
-            end;
+            end; end;
             daspect([1 1 1])
         subplot(3,3,9);
+            if isfield(Petals.Polys.right,'petal');
             for i = Petals.Polys.right.petal;
                 if ~isempty(i);
                     plot(i);
                     hold on %% keep the plot open;
                 end;
-            end;
-            for i = Petals.Polys.left.spots;
+            end; end;
+            if isfield(Petals.Polys.right,'spots');
+            for i = Petals.Polys.right.spots;
                 if ~isempty(i);
                     plot(i);
                     hold on %% keep the plot open;
                 end;
-            end;
+            end; end;
             daspect([1 1 1])
         %%%%%%%%%%%%%%
     %% print as a pdf page
     print(pdfName,'-dpdf', '-fillpage')
+    close %% added after running, not sure if this works
 end;
+
+
+%% horribly inefficient, but it worked. 
+
+
+## to join these, try the built in script that comes with mac OS for this:
+
+/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py -o PolyPipeline_140818.pdf ./bigPDF/*
 
 

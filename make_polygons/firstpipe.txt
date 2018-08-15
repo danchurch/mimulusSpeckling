@@ -1491,4 +1491,105 @@ end;
 
 /System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py -o PolyPipeline_140818.pdf ./bigPDF/*
 
+## so now what? 
 
+## the polygons are flawed, but it would be nice to have something to show about centering, etc
+
+## what is a good one to look at? Which ones made it through the pipeline without issues?
+
+%% back into matlab
+
+%% P416F1 looks simple and well-digitized:
+
+wd="/Users/danthomas/Documents/speckling/make_polygons/matObjW_pol/"  %% right now our structures live here
+dougdir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/"; %% but original images here
+pdfDir = "/Users/danthomas/Documents/speckling/make_polygons/bigPDF/"; %% we'll put pdfs here
+cd(wd)
+file = wd + "P416F1.mat";
+load(file);
+
+%% how to mark the centroid of the petal?
+
+pet = Petals.Polys.right.petal(1);
+spotz = Petals.Polys.right.spots;
+%% put all the spots into an array
+allSpots = union(spotz);
+%% Centroids
+[x,y] = centroid(pet);
+[v,w] = centroid(allSpots);
+X=[x v];
+Y=[y w];
+
+%% plot polys
+ppet = plot(pet);
+ppet.FaceColor = [1 1 0];
+ppet.FaceAlpha = 0.4;
+hold on;
+pg = plot(allSpots);
+pg.FaceColor = 'red';
+p3.FaceAlpha = 1;
+hold on;
+
+hold off;
+
+%% plot centroids
+
+%% make the line
+plot(X, Y,...
+    'LineWidth',2,...
+    'Color','black');
+hold on;
+%% petal centroid
+plot(x,y, 'o', 'MarkerSize', 15,...
+    'MarkerEdgeColor','black',...
+    'MarkerFaceColor','yellow')
+    hold on 
+%% polygon centroid
+plot(x,y, '+', 'MarkerSize', 15,...
+    'MarkerEdgeColor','black')
+    hold on 
+plot(v,w, 'o', 'MarkerSize', 15,...
+    'MarkerEdgeColor','black',...
+    'MarkerFaceColor','red')
+    hold on
+plot(v,w, '+', 'MarkerSize', 15,...
+    'MarkerEdgeColor','black')
+    hold off
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+pdist(X, Y)
+
+
+
+
+[x,y] = centroid(pet);
+
+
+
+
+
+%% one idea for a quick spot centroid - union(polys) -- centroid()
+
+pg = plot(allSpots);
+pg.FaceColor = 'red';
+pg.FaceAlpha = 1;
+hold on;
+
+ppet=plot(pet(1));
+ppet.FaceColor = 'blue';
+hold on;
+
+plot(x,y, '-s', 'MarkerSize', 10,...
+    'MarkerEdgeColor','black',...
+    'MarkerFaceColor','black');
+hold off
+
+
+
+
+
+%% side note, what do the petal polygons look like in the flowers where spots look like they 
+%% interfered with the petal outline

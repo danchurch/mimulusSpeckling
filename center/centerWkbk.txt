@@ -173,3 +173,275 @@ plot(csX, csY, '+', 'MarkerSize', 15, 'Color', 'red');
 hold off;
 
 
+%% okay, but our metric is average distance, not distance 
+%% of the center of mass of the aggregate spots. 
+
+%% the problem with the aggregate center of mass of the spots
+%% is that symmetry of spots starts to cancel out distances:
+%% a ring of pretty distant spots cancel each other out and 
+%% the aggregate centroid ends up pretty close to the center.
+
+%% replot the above without aggregating the polygons:
+
+
+
+petal = P378F2.Petals.Polys.right.petal;
+spot = P378F2.Petals.Polys.right.spots(3);
+spots = P378F2.Petals.Polys.right.spots; %% not union
+
+%% petal graphic:
+plot(petal, "FaceColor","yellow", "FaceAlpha",0.5)
+hold on;
+plot(spots, "FaceColor","red","FaceAlpha",0.7)
+plot(spot, "FaceColor","white","FaceAlpha",0, "EdgeColor",'green','Linewidth',3)
+
+hold off;
+
+[CX, CY] = centroid(petal);
+[cX, cY] = centroid(spot);
+[csX, csY] = centroid(spots);
+
+plot(P378F2.Petals.Polys.right.petal)
+
+hold on;
+
+plot(CX, CY, 'o', 'MarkerSize', 15, 'Color', 'blue');
+plot(CX, CY, '+', 'MarkerSize', 15, 'Color', 'blue');
+plot(csX, csY, 'o', 'MarkerSize', 15, 'Color', 'black');
+plot(csX, csY, '+', 'MarkerSize', 15, 'Color', 'black');
+plot(cX, cY, 'o', 'MarkerSize', 15, 'Color', 'green');
+plot(cX, cY, '+', 'MarkerSize', 15, 'Color', 'green');
+
+hold off;
+
+%% how can we get an average distance from the center for all of these?
+
+%%%%%%%% edge polygon %%%%%%%%%%%%%%
+
+%% let's make a polygon that follows the edge of the petals, and comes in for 
+%% some distance. 
+
+polyin = polyshape({[0 0 1 3],[0.5 1.5 1.5 0.5]},{[0 3 3 0],[0.5 0.5 1.5 1.5]});
+plot(polyin)
+polyout1 = polybuffer(polyin,0.1);
+hold on
+plot(polyout1)
+hold off
+
+%% so for our petals:
+
+petal = P378F2.Petals.Polys.right.petal;
+
+plot(petal)
+
+hold on
+
+aa = polybuffer(petal,-100 );
+
+plot(aa)
+
+plot(aa, "FaceColor","yellow", "FaceAlpha",0.5)
+hold on
+
+plot(petal, "FaceAlpha",1)
+
+hold off
+
+%% how can we build a margin that is a function of the area 
+%% of the polygons
+
+
+petal = P378F2.Petals.Polys.right.petal;
+
+bb = area(petal);
+
+sc = 1/sqrt(bb);
+
+cc = scale(aa, sc);
+
+[cenX,cenY] = centroid(cc);
+tPetal = translate(cc, -cenX, -cenY);
+plot(tPetal)
+area(tPetal)
+
+
+
+%% flower
+fname = "P378F2";
+%% working directory
+wd="/Users/danthomas/Documents/speckling/center";
+%% our petal structures with polygons are here, right now:
+objDir="/Users/danthomas/Documents/speckling/make_polygons/matObjW_pol/";
+%% they'll migrate to dougdir eventually...
+%% jpegs are here
+dougDir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
+cd(wd);
+load(objDir + fname + ".mat") %% get the matlab struct for this flower
+[a,b,c] = fileparts(Petals.fullName);
+jpegName = char(dougDir + b + c); 
+
+imshow(jpegName)
+
+aa = Petals.Polys.right.petal(1);
+bb = area(aa);
+sc = 1/sqrt(bb);
+cc = scale(aa, sc);
+[cenX,cenY] = centroid(cc);
+tPetal = translate(cc, -cenX, -cenY);
+plot(tPetal)
+area(tPetal)
+
+%% that works. What was the difference?
+
+
+
+%% getting lost. start over:
+
+clear
+
+
+
+%% working directory
+wd="/Users/danthomas/Documents/speckling/center";
+%% our petal structures with polygons are here, right now:
+objDir="/Users/danthomas/Documents/speckling/make_polygons/matObjW_pol/";
+%% they'll migrate to dougdir eventually...
+%% jpegs are here
+dougDir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
+
+P378F2 = (objDir + "P378F2" + ".mat");
+P378F2 = load(P378F2);
+[a,b,c] = fileparts(P378F2.Petals.fullName);
+jpegName = char(dougDir + b + c);
+imshow(jpegName);
+
+petal = P378F2.Petals.Polys.right.petal;
+spot = P378F2.Petals.Polys.right.spots(3);
+spots = P378F2.Petals.Polys.right.spots;
+
+
+%% try our standardization protocol:
+
+area(petal)
+
+bb = area(petal);
+sc = 1/sqrt(bb);
+cc = scale(petal, sc);
+[cenX,cenY] = centroid(cc);
+tPetal = translate(cc, -cenX, -cenY);
+%% spots
+counter = 1;
+for i = spots;
+    cc = scale(i, sc);
+    tSpots(counter) = translate(cc, -cenX, -cenY);
+    counter = counter + 1;
+end;
+
+tSpot = tSpots(3);
+
+%plot(tSpot)
+
+%% standardized petal graphic:
+
+hold off;
+
+plot(tPetal, "FaceColor","yellow", "FaceAlpha",0.2)
+hold on;
+plot(edgePoly, "FaceColor","blue","FaceAlpha",0.3)
+plot(tSpots, "FaceColor","red","FaceAlpha",0.7)
+plot(tSpot, "FaceColor","white","FaceAlpha",0, "EdgeColor",'green','Linewidth',3)
+[CX, CY] = centroid(tPetal);
+[cX, cY] = centroid(tSpot);
+[csX, csY] = centroid(tSpots);
+plot(CX, CY, 'o', 'MarkerSize', 15, 'Color', 'blue');
+plot(CX, CY, '+', 'MarkerSize', 15, 'Color', 'blue');
+plot(csX, csY, 'o', 'MarkerSize', 15, 'Color', 'black');
+plot(csX, csY, '+', 'MarkerSize', 15, 'Color', 'black');
+plot(cX, cY, 'o', 'MarkerSize', 15, 'Color', 'green');
+plot(cX, cY, '+', 'MarkerSize', 15, 'Color', 'green');
+
+%% add margin:
+
+%middlePoly = polybuffer(tPetal,-0.1);
+%edgePoly = subtract(tPetal, middlePoly);
+
+hold off;
+plot(tPetal)
+hold on;
+plot(edgePoly, "FaceAlpha",0.3)
+
+%% how do we make the margin a constant % of the mass?
+
+area(edgePoly)
+
+area(tPetal)
+
+t = 0
+perc = 0
+while perc < .25;
+    disp("t = " + t)
+    t = t - 0.001
+    middlePoly = polybuffer(tPetal,t);
+    edgePoly = subtract(tPetal, middlePoly);
+    perc = area(edgePoly) / area(tPetal)
+end;
+t=t+0.001 %% back up 
+middlePoly = polybuffer(tPetal,t);
+edgePoly = subtract(tPetal, middlePoly);
+
+hold off;
+plot(tPetal)
+hold on;
+plot(edgePoly, "FaceAlpha",0.3)
+
+%% can we exlude a polygon based on its overlap with this?
+
+
+inEdge = intersect(tSpot, edgePoly)
+area(inEdge) / area(tSpot) %% 
+
+area(inEdge) 
+area(tSpot) 
+%% seems right
+
+Can we look at our spots as an array?
+
+inEdge = intersect(tSpots, edgePoly)
+
+ area(tSpots) %% 
+
+hold off;
+
+counter = 1;
+for i = tSpots;
+    w = waitforbuttonpress;
+    disp ("spot #" + counter)
+    hold on;
+    plot(i)
+    hold off;
+    counter = 1 + counter;
+end;
+
+plot(edgePoly)
+
+%% polygon #1 is a good one to look at...
+%% should be mostly in the edge poly:
+
+inEdge = intersect(tSpots(1), edgePoly)
+
+plot(inEdge)
+hold on;
+plot(edgePoly)
+plot(tSpots(1))
+hold off;
+
+
+
+area(inEdge) / area(tSpots(1)) %% 
+
+
+
+
+
+
+

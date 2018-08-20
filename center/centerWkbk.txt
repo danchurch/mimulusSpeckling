@@ -1,93 +1,175 @@
-## this is to muck around with Doug's scripts and 
-## see if we can use the outputs from his pipeline
-## to get centeredness
+## let's try to find a way to quantify "centeredness". 
 
-## first, some work environment issues - can we do a 
-## tmux/matlab/vim thing? or too much to ask from that 
-## poor little propietary software package?
+%% in matlab
 
-/Applications/MATLAB_R2017b.app/bin/matlab -nodesktop
+%% flower
+fname = "P416F1";
+%% working directory
+wd="/Users/danthomas/Documents/speckling/center";
+%% our petal structures with polygons are here, right now:
+objDir="/Users/danthomas/Documents/speckling/make_polygons/matObjW_pol/";
+%% they'll migrate to dougdir eventually...
+%% jpegs are here
+dougDir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
 
-t = 'Hello world!'
+%% load the matlab structure for this flower:
 
-## works!
+cd(wd);
+load(objDir + fname + ".mat")
+[a,b,c] = fileparts(Petals.fullName);
+jpegName = char(dougDir + b + c);
 
-## lots of weird command names...
+imshow(jpegName);
 
-whos ## all vars in the workspace
+%% look the polygons. We'll use the center petal, "right" image:
 
-clear ## just like shell
+%% for some reason, other petal outlines appeared, blips. Just checking, what do they 
+%% look like?
 
-## "structure", something like a dictionary or js object:
+plot(Petals.Polys.right.petal)
+plot(Petals.Polys.right.petal(2))
+%% they're trash. Need to exclude these when making polygons...
+%% deal with that later
 
-aa.mass = 10.1
-
-## instantiates an object and gives it the mass property.
-
-
-aa.mass = 10.1; ## semicolon suppresses output
-
-## or use struct()
-
-bb = struct('weight', 3, 'velocity', [1, 0, 0], 'type', 'Cannonball')
-
-## looks like single quotes work, the above didn't work with double.
-## something to keep in mind with octave, which handles both. 
-
-## okay, pretty simple stuff. Getting back to Doug's pipeline, can 
-## we push a single flower through, then look at it here?
-
-## trip to matlab desktop, use doug's script on flowers. 
-
-## let's use:
-
-## P442F1.JPG:
-
-## look at it:
+plot(Petals.Polys.right.petal(1))
 
 
-load('P442F1_petals.mat')
+%% can we scale and recenter the petal outline?
 
-## this has a "left", "right", and "middle" field
+aa = Petals.Polys.right.petal(1);
+bb = area(aa);
+sc = sqrt(1/bb)
+cc = scale(aa, sc);
+[cenX,cenY] = centroid(cc);
+tPetal = translate(cc, -cenX, -cenY)
 
-## god, why are they using the term "field" to talk about
-## methods/attributes/data-memeber
+plot(tPetal);
+area(tPetal)
 
-## as if this wasn't confusing enough. This isn't a damn spreadsheet. 
+%% looks okay
 
-## I miss python. 
+%% okay, so now the spots:
 
-## Buck up. 
+Petals.Polys.right.spots
 
-## let's rename these. These are upper-left, upper-right, and lower, respectively:
+counter = 1
+for i =  Petals.Polys.right.spots;
+    disp(i)
+    cc = scale(i, sc);
+    tSpot(counter) = translate(cc, -cenX, -cenY)
+    counter = counter + 1
+end;
 
-petals.upperLeft = Petals.left 
-petals.upperRight = Petals.mid 
-petals.bottom = Petals.right
+plot(tPetal);
+hold on;
+plot(tSpot)
+hold off;
 
-class(petals.upperLeft.data)
+Petals.Polys.right.spots
 
-head(petals.upperLeft.data)
+%% okay, works. 
 
-which head
+P371F2 = (objDir + "P371F2" + ".mat");
+P371F2 = load(P371F2)
+[a,b,c] = fileparts(P371F2.Petals.fullName);
+jpegName = char(dougDir + b + c);
+imshow(jpegName);
 
-clc
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-size(petals.upperLeft.data) %% 138213 x 4
-head(tall((petals.upperLeft.data)))
-tail(tall((petals.upperLeft.data)))
+hold off;
 
-size(petals.upperRight.data) %% 138213 x 4
-head(tall((petals.upperRight.data)))
-tail(tall((petals.upperRight.data)))
+plot(P371F2.Petals.Polys.right.petal)
 
-size(petals.bottom.data) %% 138213 x 4
-head(tall((petals.bottom.data)))
-tail(tall((petals.bottom.data)))
+counter = 1;
+for i = P371F2.Petals.Polys.right.spots;
+    w = waitforbuttonpress;
+    disp ("spot #" + counter)
+    %plot(P371F2.Petals.Polys.right.petal)
+    hold on;
+    plot(i)
+    hold off;
+    counter = 1 + counter;
+end;
 
-##################################################
+%% we want spot #1:
 
-## okay, now what?
+P371F2 = (objDir + "P371F2" + ".mat");
+P371F2 = load(P371F2)
+[a,b,c] = fileparts(P371F2.Petals.fullName);
+jpegName = char(dougDir + b + c);
+imshow(jpegName);
 
-## can we 
+petal = P371F2.Petals.Polys.right.petal;
+spot = P371F2.Petals.Polys.right.spots(1);
+[cX, cY] = centroid(spot)
+[CX, CY] = centroid(petal)
+
+plot(petal, 'FaceColor','white')
+hold on;
+plot(spot, 'FaceColor','red')
+
+
+%plot(petal, 'FaceColor','white')
+hold on
+plot(spot, 'FaceColor','red');
+plot(cX, cY, '+', 'MarkerSize', 15, 'Color', 'red');
+plot(CX, CY, '+', 'MarkerSize', 15, 'Color', 'blue');
+hold off
+
+
+hold off;
+
+hold on;
+
+%%%%%%%% 
+
+P378F2 = (objDir + "P378F2" + ".mat");
+P378F2 = load(P378F2);
+[a,b,c] = fileparts(P378F2.Petals.fullName);
+jpegName = char(dougDir + b + c);
+imshow(jpegName);
+
+%% 
+
+plot(P378F2.Petals.Polys.right.petal)
+
+counter = 1;
+for i = P378F2.Petals.Polys.right.spots;
+    w = waitforbuttonpress;
+    disp ("spot #" + counter)
+    %plot(P378F2.Petals.Polys.right.petal)
+    hold on;
+    plot(i)
+    hold off;
+    counter = 1 + counter;
+end;
+
+%% we want spot#3
+
+
+plot(P378F2.Petals.Polys.right.petal)
+hold on;
+plot(P378F2.Petals.Polys.right.spots(3))
+hold off;
+
+petal = P378F2.Petals.Polys.right.petal;
+spot = P378F2.Petals.Polys.right.spots(3);
+spots = union(P378F2.Petals.Polys.right.spots);
+
+[CX, CY] = centroid(petal);
+[cX, cY] = centroid(spot);
+[csX, csY] = centroid(spots);
+
+plot(P378F2.Petals.Polys.right.petal)
+hold on;
+plot(spots, "FaceColor","red")
+plot(P378F2.Petals.Polys.right.spots(3), "FaceColor","green")
+plot(cX, cY, 'o', 'MarkerSize', 15, 'Color', 'green');
+plot(cX, cY, '+', 'MarkerSize', 15, 'Color', 'green');
+plot(CX, CY, 'o', 'MarkerSize', 15, 'Color', 'blue');
+plot(CX, CY, '+', 'MarkerSize', 15, 'Color', 'blue');
+plot(csX, csY, 'o', 'MarkerSize', 15, 'Color', 'red');
+plot(csX, csY, '+', 'MarkerSize', 15, 'Color', 'red');
+hold off;
+
+

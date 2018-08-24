@@ -750,3 +750,12 @@ end;
 
 
     phN = '/Users/danthomas/Documents/speckling/center/mkPDF/' + string(b) + '.pdf';
+
+
+%%% edited +/- debugged version in "makeMarginSweep.m"
+
+%% let's combine these new pdfs:
+
+cd /Users/danthomas/Documents/speckling/center
+
+/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py -o CenteredPipeline_220818.pdf /Users/danthomas/Documents/speckling/center/mkPDF/*

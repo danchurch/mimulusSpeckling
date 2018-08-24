@@ -1593,3 +1593,157 @@ hold off
 
 %% side note, what do the petal polygons look like in the flowers where spots look like they 
 %% interfered with the petal outline
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+#################################################
+
+## lets delve back into our python digitization process.
+
+## while we are making our polygons, can we add hand digitizing and 
+## corner detection?
+
+## and maybe while we're in here, we see how digitizing from the jpegs works out for us.
+## it may be better than Doug's color simplification outputs. 
+## doubt it, but it's worth a look
+
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import data, io, filters, measure, feature
+from pprint import pprint 
+
+petal = np.genfromtxt ('P431F1petal.csv', delimiter=",")
+
+petal.shape
+
+petal_marg = np.insert(petal, 439, 1, 1)
+petal_marg = np.insert(petal_marg, 0, 1, 1)
+petal_marg = np.insert(petal_marg, 561, 1, 0)
+petal_marg = np.insert(petal_marg, 0, 1, 0)
+
+Pcontours = measure.find_contours(petal_marg, 0)
+
+## works as before. Now do we use this or the original 
+## for corner detection?
+
+## first let's try it on the doug petal outline:
+
+petal_marg = np.transpose(petal_marg)
+
+coords = feature.corner_peaks(
+    feature.corner_harris(petal_marg),
+    min_distance = 2
+)
+
+
+fig, ax = plt.subplots()
+ax.imshow(petal_marg)
+plt.show()
+ax.plot(coords[:, 1], coords[:, 0], '.b', markersize=5)
+
+## can we smooth/simplify the image a bit?
+## or perhaps works better with the contours?
+
+hand = np.array([[1.64516129, 1.16145833],
+                 [1.64516129, 1.59375],
+                 [1.35080645, 1.921875],
+                 [1.375, 2.18229167],
+                 [1.68548387, 1.9375],
+                 [1.60887097, 2.55208333],
+                 [1.68548387, 2.69791667],
+                 [1.76209677, 2.56770833],
+                 [1.83064516, 1.97395833],
+                 [1.89516129, 2.75],
+                 [1.9516129, 2.84895833],
+                 [2.01209677, 2.76041667],
+                 [1.99193548, 1.99479167],
+                 [2.11290323, 2.63020833],
+                 [2.2016129, 2.734375],
+                 [2.25403226, 2.60416667],
+                 [2.14919355, 1.953125],
+                 [2.30645161, 2.36979167],
+                 [2.39112903, 2.36979167],
+                 [2.41532258, 2.1875],
+                 [2.1733871, 1.703125],
+                 [2.07782258, 1.16666667]])
+
+
+
+new_hand = hand.copy()
+
+new_hand = measure.subdivide_polygon(new_hand, degree=2, preserve_ends=True)
+
+for _ in range(3):
+    new_hand = measure.subdivide_polygon(new_hand, degree=2, preserve_ends=True)
+
+fig, (ax1, ax2) = plt.subplots(ncols=2)
+
+ax1.plot(hand[:, 0],hand[:, 1])
+ax1.plot(new_hand[:, 0],new_hand[:, 1])
+
+## interesting. awesome smoothing algorithm
+
+## can we do something like this with our petal outline?
+
+plt.ion()
+
+Pcontours = measure.find_contours(petal_marg, 0)
+
+new_contours = measure.subdivide_polygon(Pcontours[0], degree=2, preserve_ends=True) 
+
+for _ in range(5):
+    new_contours = measure.subdivide_polygon(Pcontours[0], degree=2, preserve_ends=True) 
+
+fig, (ax1, ax2) = plt.subplots(ncols=2)
+ax1.plot(Pcontours[0][:,0], Pcontours[0][:,1])
+ax2.plot(new_contours[:,0], new_contours[:,1])
+
+## doesn't really work, we need sort of the opposite here. Can we put hard corners on our
+## petal outline?
+
+aa = measure.approximate_polygon(Pcontours[0], tolerance=9)
+fig, (ax1, ax2) = plt.subplots(ncols=2)
+ax1.plot(Pcontours[0][:,0], Pcontours[0][:,1])
+ax2.plot(aa[:,0], aa[:,1])
+
+plt.show()
+
+## now we're in business. Can we use this to find our corners?
+
+coords = feature.corner_peaks(
+    feature.corner_harris(aa),
+    min_distance = 2
+)
+
+
+fig, (ax1, ax2, ax3) = plt.subplots(ncols=3)
+ax1.plot(Pcontours[0][:,0], Pcontours[0][:,1])
+ax2.plot(aa[:,0], aa[:,1])
+ax3.plot(aa[:,0], aa[:,1])
+
+## anyway, can we use aa to detect our bottom vertices?
+
+aa[:,1]
+
+aa[:,0]
+
+aa[:,1], aa[:,0]
+
+aa[
+
+np.hstack((aa[:,1], aa[:,0]))
+
+np.concatenate(aa[:,1], aa[:,0], axis = 1)
+
+np.concatenate( [ np.array( [ [1,2], [2,3] ] ), np.array( [ [3],[4] ] ) ] , axis = 1)
+
+
+bb = np.concatenate([aa[:,1],aa[:,0]], axis = 1)
+
+fig, ax1 = plt.subplots()
+ax1.plot(bb[:,0],bb[:,1])
+
+
+np.array([[1,2],[3,4],[5,6]])

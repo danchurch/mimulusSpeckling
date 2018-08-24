@@ -1747,3 +1747,35 @@ ax1.plot(bb[:,0],bb[:,1])
 
 
 np.array([[1,2],[3,4],[5,6]])
+
+
+
+
+
+
+
+#####################
+
+## we gotta come back to that... 
+## right now we need to rerun our scripts using 
+## Melia's improved images 
+
+## there are three big scripts/functions to run:
+
+## 1) Get the matlab structures that contain the color-simplified rasters,
+##    export to csv for python. 
+
+## 2) Draw polgyons using python script
+
+## 3) translate back to matlab, with polgyon structures inserted
+
+#################
+
+## 1 - reuse prepDougRasters.m . What will need to change?
+
+## we'll need to sub in Melia's matlab structures into the dougRaster directory
+## and clear out the old csvs
+
+## otherwise, seems like it should work. Let's try. 
+
+

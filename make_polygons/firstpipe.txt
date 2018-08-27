@@ -2123,3 +2123,57 @@ for i in spotz:
     ax1.fill(xs, ys, "r")
   
 
+###########
+
+## python
+import numpy as np
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+import shapely.affinity as sa
+from skimage import data, io, filters, measure
+
+def digitizePols(file):
+    ## pad margins of image and get the contour of the petal shape
+    petal = np.genfromtxt (file, delimiter=",")
+    petal_marg = np.insert(petal, petal.shape[1], 1, 1)
+    petal_marg = np.insert(petal_marg, 0, 1, 1)
+    petal_marg = np.insert(petal_marg, petal.shape[0], 1, 0)
+    petal_marg = np.insert(petal_marg, 0, 1, 0)
+    Pcontours = measure.find_contours(petal_marg, 0)
+    ## gotta ditch <3 points, they are lines
+    polys = [ i for i in Pcontours if len(i) > 3 ]
+    return(polys)
+
+def getPetGeoInfo(pet):
+    aa = sg.asPolygon(pet)
+    area = aa.area
+    scalar = area**(-1/2)
+    center = aa.centroid.wkt
+    centerCoor = (center[0], center[1])
+    return(scalar, centerCoor)
+
+def getPetGeoInfo(pet):
+    aa = sg.asPolygon(pet)
+    area = aa.area
+    scalar = area**(-1/2)
+    center = aa.centroid
+    centerCoor = (center.x, center.y)
+    return(scalar, centerCoor)
+
+def stand(pol, scale, cent):
+    aa = sg.asPolygon(pol)
+    trans = sa.translate(aa, (-1*cent[0]), (-1*cent[1]))
+    scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
+    return(scaled)
+
+## we have an example "right" or lower petal example in our wd:
+petalFile=('P431F1petal.csv')
+spotsFile=('P431F1spots.csv')
+
+## 1 make our raw, unscaled, untranslated polygons:
+testP = digitizePols(petalFile)[0] ## for petals, take first polygon, always seems to work?
+testS = digitizePols(spotsFile)
+
+## 2 get information about centroid and scaling factor:
+scale, cent = getPetGeoInfo(testP)
+

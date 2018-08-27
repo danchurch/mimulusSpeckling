@@ -1748,34 +1748,378 @@ ax1.plot(bb[:,0],bb[:,1])
 
 np.array([[1,2],[3,4],[5,6]])
 
+## back on this, where were we?
+
+## oh yeah, can we modify our python digitization script to include finding the bottom corners 
+## of our petals?
+
+##############################
+
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import data, io, filters, measure, feature
+from pprint import pprint 
+
+#plt.ion()
+
+petalFile=('P431F1petal.csv')
+
+petal = np.genfromtxt (petalFile, delimiter=",")
+
+
+petal.shape[0]
+petal.shape[1]
+
+petal_marg = np.insert(petal, petal.shape[1], 1, 1)
+petal_marg = np.insert(petal_marg, 0, 1, 1)
+petal_marg = np.insert(petal_marg, petal.shape[0], 1, 0)
+petal_marg = np.insert(petal_marg, 0, 1, 0)
+
+Pcontours = measure.find_contours(petal_marg, 0)
+aa = measure.approximate_polygon(Pcontours[0], tolerance=9)
+
+## get corners.. how?
+## in these inverted images, these should be the highest points:
+bb = aa.copy()
+bb = bb[bb[:,1].argsort()[::-1]]
+cc = bb[0:2,:]
+
+fig, (ax1, ax2, ax3) = plt.subplots(ncols=3)
+ax1.plot(Pcontours[0][:,0], Pcontours[0][:,1])
+ax2.plot(aa[:,0], aa[:,1])
+ax3.plot(aa[:,0], aa[:,1])
+ax3.plot(aa[:,0], aa[:,1], 'ro') ## show vertices
+ax3.plot(cc[:,0], cc[:,1], 'yo', fillstyle='none',markersize=10, linewidth=3) ## show vertices
+
+
+## does this work with other petals? how about our side petals?
+
+################### write a function #######
+#!/usr/bin/env python3
+
+## petal is single binary petal outline
+## petal matrix ouputted from 
+## doug's color simplification pipeline
+## as a CSV
+
+import numpy as np
+import matplotlib.pyplot as plt
+import shapely as sh
+from skimage import data, io, filters, measure, feature
+
+def digitizePols(petalFile):
+    ## pad margins of image and get the contour of the petal shape
+    petal = np.genfromtxt (petalFile, delimiter=",")
+    petal_marg = np.insert(petal, petal.shape[1], 1, 1)
+    petal_marg = np.insert(petal_marg, 0, 1, 1)
+    petal_marg = np.insert(petal_marg, petal.shape[0], 1, 0)
+    petal_marg = np.insert(petal_marg, 0, 1, 0)
+    Pcontours = measure.find_contours(petal_marg, 0)
+    simplePoly = measure.approximate_polygon(Pcontours[0], tolerance=9)
+    ## get corners
+    ## in these inverted images, these should be the highest points:
+    bb = simplePoly.copy()
+    bb = bb[bb[:,1].argsort()[::-1]]
+    corners = bb[0:2,:]
+    return(Pcontours[0],simplePoly,corners) 
+
+##############
+
+## does it work?
+
+petalFile=('P431F1petal.csv')
+Pcontours, simplePoly, corners = digitizePols(petalFile)
+
+def plotCor(Pcontours,simplePoly,corners):
+    fig, (ax1, ax2, ax3, ax4) = plt.subplots(ncols=4)
+    ax1.plot(Pcontours[:,0], Pcontours[:,1])
+    ax2.plot(simplePoly[:,0], simplePoly[:,1])
+    ax3.plot(simplePoly[:,0], simplePoly[:,1])
+    ax3.plot(simplePoly[:,0], simplePoly[:,1], 'ro') ## show vertices
+    ax3.plot(corners[:,0], corners[:,1], 'yo', fillstyle='none',markersize=10, linewidth=3) ## show vertices
+    ax4.plot(Pcontours[:,0], Pcontours[:,1])
+    ax4.plot(corners[:,0], corners[:,1], 'ro', fillstyle='none',markersize=10, linewidth=3) ## show vertices
+
+## try side petals:
+
+petalFile=('/Users/danthomas/Documents/speckling/make_polygons/polygons/P431F1/mid/P431F1_mid_petal.csv')
+Pcontours, simplePoly, corners = digitizePols(petalFile)
+plotCor(Pcontours,simplePoly,corners)
+
+petalFile=('/Users/danthomas/Documents/speckling/make_polygons/polygons/P431F1/left/P431F1_left_petal.csv')
+Pcontours, simplePoly, corners = digitizePols(petalFile)
+plotCor(Pcontours,simplePoly,corners)
+
+plt.savefig('P431F1_left_corners.png')
+## doesn't capture our upper petal corners...
+
+## how about some other bottom petals:
+
+
+petalFile=('/Users/danthomas/Documents/speckling/make_polygons/polygons/P375F2/left/P375F2_left_petal.csv')
+Pcontours, simplePoly, corners = digitizePols(petalFile)
+plotCor(Pcontours,simplePoly,corners)
+
+## oops, that was an upper petal, but it worked!
+
+plt.savefig('P375F2_left_corners.png')
+
+## anyway other lower petals:
+
+petalFile=('/Users/danthomas/Documents/speckling/make_polygons/polygons/P375F2/right/P375F2_right_petal.csv')
+Pcontours, simplePoly, corners = digitizePols(petalFile)
+
+petalFile=('/Users/danthomas/Documents/speckling/make_polygons/polygons/P401F2/right/P401F2_right_petal.csv')
+Pcontours, simplePoly, corners = digitizePols(petalFile)
+plotCor(Pcontours,simplePoly,corners)
+
+plt.savefig('P401F2_right_corners.png')
+
+####################################
+
+
+## works pretty well. 
+
+## can we get our polygons into shapely objects?
+
+## the goal is have the zones demarcated as part of the digitization 
+## process. 
+
+## to get our outline as a shapely polygon:
+
+import shapely.geometry as sg
+import shapely.affinity as sa
+
+testP = sg.asPolygon(Pcontours)
+
+xs, ys = testP.exterior.xy
+
+fig, ax1 = plt.subplots()
+ax1.fill(xs, ys)
+
+## works. can we simplify?
+
+s = testP.simplify(5, preserve_topology=False)
+
+xsimp, ysimp = s.exterior.xy
+fig, (ax1,ax2) = plt.subplots(ncols=2)
+ax1.fill(xs, ys)
+ax2.fill(xsimp, ysimp)
+
+## let's make a plot function:
+
+def plpo(pol, cl='blue'):
+    xs, ys = pol.exterior.xy
+    fig, ax1 = plt.subplots()
+    ax1.fill(xs, ys)
+    ax2.fill(xsimp, ysimp)
+
+plpo(testP)
+
+## okay, can we get the inside polygon?
+
+## wait, first, let's scale and center
+
+## how to do this in python?
+
+petalFile=('P431F1petal.csv')
+Pcontours, simplePoly, corners = digitizePols(petalFile)
+
+testP = sg.asPolygon(Pcontours)
+xs, ys = testP.exterior.xy
+fig, ax1 = plt.subplots()
+ax1.fill(xs, ys)
+
+## how can we scale this? just multiply by square root?
+
+## find the scalar 
+bb = testP.area
+#sc = bb**(1/2)
+sc = bb**(-1/2)
+
+## scale
+dd = sa.scale(testP, xfact=sc, yfact=sc) 
+
+
+## recenter (translate to origin)
+
+## get center
+
+cent = dd.centroid
+
+cX, cY = cent.xy
+
+(-1*cX[0])
+
+ee = sa.translate(dd, (-1*cX[0]), (-1*cY[0]))
+
+plpo(ee)
+
+ee.area
+
+##so a function for this, accepts a numpy array of points.
+## so we can accept the array from skimage:
+
+def standPet(pet):
+    import shapely.geometry as sg
+    import shapely.affinity as sa
+    aa = sg.asPolygon(pet)
+    bb = aa.area
+    sc = bb**(-1/2)
+    dd = sa.scale(aa, xfact=sc, yfact=sc) 
+    ee = dd.centroid
+    cX, cY = ee.xy
+    ff = sa.translate(dd, (-1*cX[0]), (-1*cY[0]))
+    return(ff)
+
+## for spots?
+
+def digitizePols(petalFile):
+    ## pad margins of image and get the contour of the petal shape
+    petal = np.genfromtxt (petalFile, delimiter=",")
+    petal_marg = np.insert(petal, petal.shape[1], 1, 1)
+    petal_marg = np.insert(petal_marg, 0, 1, 1)
+    petal_marg = np.insert(petal_marg, petal.shape[0], 1, 0)
+    petal_marg = np.insert(petal_marg, 0, 1, 0)
+    Pcontours = measure.find_contours(petal_marg, 0)
+    simplePoly = measure.approximate_polygon(Pcontours[0], tolerance=9)
+    ## get corners
+    ## in these inverted images, these should be the highest points:
+    bb = simplePoly.copy()
+    bb = bb[bb[:,1].argsort()[::-1]]
+    corners = bb[0:2,:]
+    return(Pcontours[0],simplePoly,corners) 
+
+spotsFile=('P431F1spots.csv')
+
+testS = digitizePols('P431F1spots.csv')
+
+def standFlower(pet, spots=None):
+    import shapely.geometry as sg
+    import shapely.affinity as sa
+    ## get petal outline standardized, get center and scale
+    aa = sg.asPolygon(pet)
+    bb = aa.area
+    sc = bb**(-1/2)
+    dd = sa.scale(aa, xfact=sc, yfact=sc) 
+    ee = dd.centroid
+    cX, cY = ee.xy
+    ff = sa.translate(dd, (-1*cX[0]), (-1*cY[0]))
+    ## try spots
+    if spots is not None: 
+
+
+can this be a list comprehension?
+
+def standFlower(pet, spots=None):
+    import shapely.geometry as sg
+    import shapely.affinity as sa
+
+def getinfo(pet):
+    aa = sg.asPolygon(pet)
+    area = aa.area
+    scalar = area**(-1/2)
+    center = aa.centroid
+    return(scalar, center)
+
+getinfo(
+
+    def stand(pol):
+        ispot = sg.asPolygon(i)
+        iscaled = sa.scale(ispot, xfact=sc, yfact=sc)
+        itrans = sa.translate(iscaled, (-1*cX[0]), (-1*cY[0]))
+        return(itrans)
+
+
+    iStand = [ stand(i) for i in spots ]
+
+pols=(ff, 
+    return(pols)
+
+## try it out:
+
+petalFile=('P431F1petal.csv')
+Pcontours, simplePoly, corners = digitizePols(petalFile)
+testP = standPet(Pcontours)
+
+plpo(testP)
+
+testP.area
+
+## order would be:
+
+## doug's stuff --> sckimage contours --> shapely polygon processing
+
+## so
+
+
+######## head is spinning. start over from a csv from doug's color simplifications
+
+
+petalFile=('P431F1petal.csv')
+spotsFile=('P431F1spots.csv')
+
+
+## 1 get our polygons from our petals and spots:
+
+def digitizePols(file):
+    import numpy as np
+    from skimage import measure
+    ## pad margins of image and get the contour of the petal shape
+    petal = np.genfromtxt (file, delimiter=",")
+    petal_marg = np.insert(petal, petal.shape[1], 1, 1)
+    petal_marg = np.insert(petal_marg, 0, 1, 1)
+    petal_marg = np.insert(petal_marg, petal.shape[0], 1, 0)
+    petal_marg = np.insert(petal_marg, 0, 1, 0)
+    Pcontours = measure.find_contours(petal_marg, 0)
+    ## gotta ditch <3 points, they are lines
+    polys = [ i for i in Pcontours if len(i) > 3 ]
+    return(polys)
+
+
+testP = digitizePols(petalFile)[0] ## for petals, take first polygon, always seems to work?
+testS = digitizePols(spotsFile)
+
+## 2 get information about centroid and scaling factor:
+
+def getPetGeoInfo(pet):
+    aa = sg.asPolygon(pet)
+    area = aa.area
+    scalar = area**(-1/2)
+    center = aa.centroid.wkt
+    centerCoor = (cX[0], cY[0])
+    return(scalar, centerCoor)
+
+scale, cent = getPetGeoInfo(testP)
+
+## 3 standardize petals
+
+def stand(pol, scale, cent):
+    aa = sg.asPolygon(pol)
+    trans = sa.translate(aa, (-1*cent[0]), (-1*cent[1]))
+    scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
+    return(scaled)
+
+standPet = stand(testP, scale, cent)
+
+## 4 standardize spots
+
+spotz = [ stand(i, scale, cent) for i in testS ]
+
+## can we take a look at this?
+
+## 5 get the corners:
 
 
 
 
-
-
-#####################
-
-## we gotta come back to that... 
-## right now we need to rerun our scripts using 
-## Melia's improved images 
-
-## there are three big scripts/functions to run:
-
-## 1) Get the matlab structures that contain the color-simplified rasters,
-##    export to csv for python. 
-
-## 2) Draw polgyons using python script
-
-## 3) translate back to matlab, with polgyon structures inserted
-
-#################
-
-## 1 - reuse prepDougRasters.m . What will need to change?
-
-## we'll need to sub in Melia's matlab structures into the dougRaster directory
-## and clear out the old csvs
-
-## otherwise, seems like it should work. Let's try. 
-
+fig, ax1 = plt.subplots()
+xs, ys = standPet.exterior.xy
+#xs, ys = trans.exterior.xy
+#xs, ys = scaled.exterior.xy
+ax1.fill(xs, ys, "y")
+for i in spotz:
+    xs, ys = i.exterior.xy
+    ax1.fill(xs, ys, "r")
+  
 

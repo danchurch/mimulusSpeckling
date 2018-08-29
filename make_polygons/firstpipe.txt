@@ -2177,3 +2177,265 @@ testS = digitizePols(spotsFile)
 ## 2 get information about centroid and scaling factor:
 scale, cent = getPetGeoInfo(testP)
 
+## okay so we have a pipeline in python that gets us to 
+
+## 3-4 standard petal and spots:
+
+standPet = stand(testP, scale, cent)
+
+spotz = [ stand(i, scale, cent) for i in testS ]
+
+## plot
+fig, ax1 = plt.subplots()
+xs, ys = standPet.exterior.xy
+#xs, ys = trans.exterior.xy
+#xs, ys = scaled.exterior.xy
+ax1.fill(xs, ys, "y")
+for i in spotz:
+    xs, ys = i.exterior.xy
+    ax1.fill(xs, ys, "r")
+    
+## check area. = 1?
+standPet.area
+
+## looks good. Now can we make a margin that incorporates 
+## 50% of the petal polygon?
+
+
+hole = standPet
+rad = 0
+while hole.area > 0.5:
+    hole = standPet.buffer(rad)
+    rad -= .001
+
+holeR = sg.polygon.asLinearRing(hole)
+## now make a polygon with this as a hole
+marg = sg.polygon.Polygon(
+    standPet.exterior, 
+    holes = [hole.exterior.coords])
+
+
+
+def shaPl(pol):
+    fig, ax1 = plt.subplots()
+    xo, yo = pol.exterior.xy
+    if pol.interiors:
+        xi, yi = pol.interiors[0].xy
+    ax1.fill(xo, yo, "y")
+    if pol.interiors:
+        ax1.fill(xi, yi, "w")
+
+shaPl(marg)
+
+shaPl(standPet)
+
+#################
+
+## find corners, define tongue:
+
+## we need to find our corners. 
+
+## simplify:
+
+aa = marg.simplify(0.5)
+
+aa = marg.simplify(0.1)
+shaPl(aa)
+
+## the super hard simplification 
+## may be handy for the side petals..
+
+## but here, with P431F1petal we need 
+## more like:
+
+aa = marg.simplify(0.05)
+
+shaPl(aa)
+
+## how do we find our throat? Should be the top four points:
+
+ax, ay = aa.exterior.xy
+
+max(ay)
+
+## when done - cycle through all the images, show how the
+##  throat finding algorithm works
+
+
+cc = np.array(aa.interiors[0].xy).transpose()
+
+## how to get the highest two points?
+
+
+## unlike R, you can just refer to rows of an 
+## array
+
+aa = marg.simplify(0.05)
+bb = np.array(aa.exterior.xy).transpose()
+bb[:,0].argsort()
+## gives us an array of ranks of the values, 
+## use this to sort:
+zz = bb[bb[:,1].argsort()[::-1]]
+## for our corners, take the top two:
+yy = zz[0:2]
+
+shaPl(standPet)
+plt.plot(yy[:,0], yy[:,1], 'ro', fillstyle='none',markersize=10, linewidth=3)
+
+## works - do the same for the interior?
+
+#aa = marg.simplify(0.05)
+bb = np.array(aa.interiors[0].xy).transpose()
+bb[:,0].argsort()
+## gives us an array of ranks of the values, 
+## use this to sort:
+zz = bb[bb[:,1].argsort()[::-1]]
+## for our corners, take the top two:
+xx = zz[0:2,]
+xx = np.flipud(xx) ## reverse the order for making polys
+
+shaPl(standPet)
+plt.plot(yy[:,0], yy[:,1], 'ro', fillstyle='none',markersize=10, linewidth=3)
+plt.plot(xx[:,0], xx[:,1], 'ro', fillstyle='none',markersize=10, linewidth=3)
+
+## can we make a polygon out of these?
+
+## combine them:
+
+tt = np.concatenate((yy,xx))
+
+plt.plot(tt[:,0],tt[:,1])
+
+throat = sg.polygon.Polygon(tt)
+
+
+## plot
+
+fig, (ax1,ax2) = plt.subplots(ncols=2)
+xs, ys = standPet.exterior.xy
+ax1.fill(xs, ys, "y")
+for i in spotz:
+    xs, ys = i.exterior.xy
+    ax1.fill(xs, ys, "r")
+
+xs, ys = standPet.exterior.xy
+ax2.fill(xs, ys, "y")
+for i in spotz:
+    xs, ys = i.exterior.xy
+    ax2.fill(xs, ys, "r")
+xo, yo = marg.exterior.xy
+ax2.plot(xo, yo, "b")
+xo, yo = marg.interiors[0].xy
+ax2.plot(xo, yo, "b")
+xo, yo = throat.exterior.xy
+ax2.plot(xo, yo, "b")
+
+
+
+
+
+#shaPl(marg)
+
+xo, yo = marg.exterior.xy
+plt.plot(xo, yo, "b")
+
+xo, yo = marg.interiors[0].xy
+plt.plot(xo, yo, "b")
+
+xo, yo = throat.exterior.xy
+plt.plot(xo, yo, "b")
+
+fig, ax1 = plt.subplots()
+
+xo, yo = pol.exterior.xy
+xi, yi = pol.interiors[0].xy
+ax1.fill(xo, yo, "y")
+ax1.fill(xi, yi, "w")
+
+xo, yo = pol.exterior.xy
+xi, yi = pol.interiors[0].xy
+ax1.fill(xo, yo, "y")
+ax1.fill(xi, yi, "w")
+
+fig, ax1 = plt.subplots()
+xs, ys = standPet.exterior.xy
+#xs, ys = trans.exterior.xy
+#xs, ys = scaled.exterior.xy
+ax1.fill(xs, ys, "y")
+for i in spotz:
+    xs, ys = i.exterior.xy
+    ax1.fill(xs, ys, "r")
+
+## seems to work. make a function for defining zones? 
+
+## takes a standardized petal polygon:
+
+def findZones(standPol, percent):
+    hole = standPol
+    rad = 0
+    ## iterate down till we get our percent margin:
+    while hole.area > percent:
+        hole = standPol.buffer(rad)
+        rad -= .001
+    holeR = sg.polygon.asLinearRing(hole)
+    ## now make a polygon with this as a hole
+    marg = sg.polygon.Polygon(
+            standPet.exterior, 
+            holes = [hole.exterior.coords])
+    ## make throat.
+    ## exterior corners:
+    aa = marg.simplify(0.05)
+    bb = np.array(aa.exterior.xy).transpose()
+    bb[:,0].argsort()
+    ## gives us an array of ranks of the values, 
+    ## use this to sort:
+    zz = bb[bb[:,1].argsort()[::-1]]
+    ## for our corners, take the top two:
+    yy = zz[0:2]
+    ## interior corners:
+    bb = np.array(aa.interiors[0].xy).transpose()
+    bb[:,0].argsort()
+    ## gives us an array of ranks of the values, 
+    ## use this to sort:
+    zz = bb[bb[:,1].argsort()[::-1]]
+    ## for our corners, take the top two:
+    xx = zz[0:2,]
+    xx = np.flipud(xx) 
+    ##combine corners, make throat:
+    tt = np.concatenate((yy,xx))
+    throat = sg.polygon.Polygon(tt)
+    return(marg, throat)
+
+## does this work?
+
+marg,throat = findZones(standPet, 0.5)
+
+#################
+#################
+
+## todo today
+
+## define flower class
+## zones 
+
+
+
+fig, (ax1,ax2) = plt.subplots(ncols=2)
+xs, ys = standPet.exterior.xy
+ax1.fill(xs, ys, "y")
+for i in spotz:
+    xs, ys = i.exterior.xy
+    ax1.fill(xs, ys, "r")
+
+xs, ys = standPet.exterior.xy
+ax2.fill(xs, ys, "y")
+for i in spotz:
+    xs, ys = i.exterior.xy
+    ax2.fill(xs, ys, "r")
+
+xo, yo = marg.exterior.xy
+ax2.plot(xo, yo, "b")
+xo, yo = marg.interiors[0].xy
+ax2.plot(xo, yo, "b")
+xo, yo = throat.exterior.xy
+ax2.plot(xo, yo, "b")

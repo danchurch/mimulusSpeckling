@@ -2439,3 +2439,329 @@ xo, yo = marg.interiors[0].xy
 ax2.plot(xo, yo, "b")
 xo, yo = throat.exterior.xy
 ax2.plot(xo, yo, "b")
+
+
+##############
+
+## Aug 29
+
+## today:
+
+## throat polygon - make it match the margin outline where they intersect. Then leave, you fucking perfectionist. 
+
+## define flower class
+
+## streamline code. 
+
+################
+
+## python
+import numpy as np
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+import shapely.affinity as sa
+from skimage import measure
+from descartes import PolygonPatch
+
+## Let's redo the throat.
+
+## our four functions so far for creating polygons:
+
+def digitizePols(file):
+    ## pad margins of image and get the contour of the petal shape
+    petal = np.genfromtxt (file, delimiter=",")
+    petal_marg = np.insert(petal, petal.shape[1], 1, 1)
+    petal_marg = np.insert(petal_marg, 0, 1, 1)
+    petal_marg = np.insert(petal_marg, petal.shape[0], 1, 0)
+    petal_marg = np.insert(petal_marg, 0, 1, 0)
+    Pcontours = measure.find_contours(petal_marg, 0)
+    ## gotta ditch <3 points, they are lines
+    polys = [ i for i in Pcontours if len(i) > 3 ]
+    return(polys)
+
+def getPetGeoInfo(pet):
+    aa = sg.asPolygon(pet)
+    area = aa.area
+    scalar = area**(-1/2)
+    center = aa.centroid
+    centerCoor = (center.x, center.y)
+    return(scalar, centerCoor)
+
+def stand(pol, scale, cent):
+    aa = sg.asPolygon(pol)
+    trans = sa.translate(aa, (-1*cent[0]), (-1*cent[1]))
+    scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
+    return(scaled)
+
+
+def findZones(standPol, percent):
+    hole = standPol
+    rad = 0
+    ## iterate down till we get our percent margin:
+    while hole.area > percent:
+        hole = standPol.buffer(rad)
+        rad -= .001
+    ## now make a polygon with this as a hole
+    marg = sg.polygon.Polygon(
+            standPet.exterior,
+            holes = [hole.exterior.coords])
+    ## make throat.
+    ## exterior corners:
+    aa = marg.simplify(0.05)
+    bb = np.array(aa.exterior.xy).transpose()
+    bb[:,0].argsort()
+    ## gives us an array of ranks of the values,
+    ## use this to sort:
+    zz = bb[bb[:,1].argsort()[::-1]]
+    ## for our corners, take the top two:
+    yy = zz[0:2]
+    ## interior corners
+    bb = np.array(aa.interiors[0].xy).transpose()
+    bb[:,0].argsort()
+    ## gives us an array of ranks of the values,
+    ## use this to sort
+    zz = bb[bb[:,1].argsort()[::-1]]
+    xx = zz[0:2,]
+    xx = np.flipud(xx)
+    ## combine corners, make throat:
+    tt = np.concatenate((yy,xx))
+    throat = sg.polygon.Polygon(tt)
+    return(marg, throat)
+
+## rerun our samples:
+
+## we have an example "right" or lower petal example in our wd:
+petalFile=('P431F1petal.csv')
+spotsFile=('P431F1spots.csv')
+## 1 make our raw, unscaled, untranslated polygons:
+testP = digitizePols(petalFile)[0] ## for petals, take first polygon, always seems to work?
+testS = digitizePols(spotsFile)
+## 2 get information about centroid and scaling factor:
+scale, cent = getPetGeoInfo(testP)
+## 3 standardize petals
+standPet = stand(testP, scale, cent)
+## 4 standardize spots
+spotz = [ stand(i, scale, cent) for i in testS ]
+## 5 define zones, at 50%:
+marg,throat = findZones(standPet, 0.5)
+
+## plot it:
+
+fig, (ax1,ax2) = plt.subplots(ncols=2)
+xs, ys = standPet.exterior.xy
+ax1.fill(xs, ys, "y")
+for i in spotz:
+    xs, ys = i.exterior.xy
+    ax1.fill(xs, ys, "r")
+
+xs, ys = standPet.exterior.xy
+ax2.fill(xs, ys, "y")
+for i in spotz:
+    xs, ys = i.exterior.xy
+    ax2.fill(xs, ys, "r")
+
+xo, yo = marg.exterior.xy
+ax2.plot(xo, yo, "b")
+xo, yo = marg.interiors[0].xy
+ax2.plot(xo, yo, "b")
+xo, yo = throat.exterior.xy
+ax2.plot(xo, yo, "b") 
+
+## okay, how do we get a nicer throat polygon:
+
+fig, ax1 = plt.subplots()
+xo, yo = marg.exterior.xy
+ax1.plot(xo, yo, "r")
+xo, yo = marg.interiors[0].xy
+ax1.plot(xo, yo, "r")
+xo, yo = throat.exterior.xy
+ax1.plot(xo, yo, "b") 
+ 
+## can we cut out the throat?
+
+aa = throat.intersection(marg)
+
+bb = marg.difference(throat)
+
+cc = throat.difference(marg)
+
+fig, ax1 = plt.subplots(ncols=1)
+for i in bb:
+    xo, yo = i.exterior.xy
+    ax1.plot(xo, yo, "b")
+
+## okay, how do we grab those little bits of margin 
+## close to our first throat polygon 
+## tking the rest of the margin?
+
+## grow the throat polygon outward:
+
+tb = throat.buffer(0.1)
+
+fig, ax1 = plt.subplots(ncols=1)
+xo, yo = tb.exterior.xy
+ax1.fill(xo, yo, 
+         facecolor="#FF9933",
+         alpha=0.3)
+for i in bb:
+    xo, yo = i.exterior.xy
+    ax1.plot(xo, yo, "b")
+
+## how can we get just the polys inside our big throat buffer?
+## it's a multpolygon, so we can sort treat it like a list
+## polygons:
+
+cc = [ i.within(tb) for i in bb ]
+
+## how do we make a new polygon out of this?
+
+cc = [ i for i in bb if i.within(tb) ]
+
+## can we turn this back into a multipolygon?
+
+dd = sg.multipolygon.MultiPolygon(cc)
+
+## look at it:
+
+
+fig, ax1 = plt.subplots(ncols=1)
+xo, yo = tb.exterior.xy
+ax1.fill(xo, yo, 
+         facecolor="#FF9933",
+         alpha=0.3)
+for i in dd:
+    xo, yo = i.exterior.xy
+    ax1.plot(xo, yo, "b")
+
+
+## promising - merge it with our throat/margin intersection 
+## from above?
+
+## our real throat polygon:
+ee = aa.union(dd)
+
+fig, ax1 = plt.subplots(ncols=1)
+xo, yo = ee.exterior.xy
+ax1.plot(xo, yo)
+xo, yo = aa.exterior.xy
+ax1.fill(xo, yo, 
+         facecolor="#FF66B2",
+         alpha=0.3)
+
+## our center?
+
+## let's revise our function to include this
+
+
+## looks good. Can we break up our petal clean?
+## into three polygons this way?
+
+def findZones(standPol, percent):
+    center = standPol
+    rad = 0
+    while center.area > percent:
+        center = standPol.buffer(rad)
+        rad -= .001
+    marg = sg.polygon.Polygon(
+            standPet.exterior,
+            holes = [center.exterior.coords])
+    simPol = marg.simplify(0.05)
+    simPolA = np.array(simPol.exterior.xy).transpose()
+    simPolA[:,0].argsort()
+    simPolAsorted = simPolA[simPolA[:,1].argsort()[::-1]]
+    outCorners = simPolAsorted[0:2]
+    simPolB = np.array(simPol.interiors[0].xy).transpose()
+    simPolB[:,0].argsort()
+    simPolBsorted = simPolB[simPolB[:,1].argsort()[::-1]]
+    inCorners = simPolBsorted[0:2,]
+    inCorners = np.flipud(inCorners)
+    tRap = np.concatenate((outCorners,inCorners))
+    tRapPoly = sg.polygon.Polygon(tRap)
+    tBuff = tRapPoly.buffer(0.1)
+    noTrap = marg.difference(tRapPoly)
+    notInTrap = [ i for i in noTrap if i.within(tBuff) ]
+    mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
+    throat = tRapPoly.union(mpNotInTrap )
+    return(center, marg, throat)
+
+## okay, we want to make this spit out non-overlapping zones, that cover 
+## all surface of the original petal polygon.
+
+percent = 0.5
+center = standPol = standPet
+
+def findZones(standPol, percent):
+    center = standPol
+    rad = 0
+    while center.area > percent:
+        center = standPol.buffer(rad)
+        rad -= .001
+    marg = sg.polygon.Polygon(
+            standPet.exterior,
+            holes = [center.exterior.coords])
+    simPol = marg.simplify(0.05)
+    simPolA = np.array(simPol.exterior.xy).transpose()
+    simPolA[:,0].argsort()
+    simPolAsorted = simPolA[simPolA[:,1].argsort()[::-1]]
+    outCorners = simPolAsorted[0:2]
+    simPolB = np.array(simPol.interiors[0].xy).transpose()
+    simPolB[:,0].argsort()
+    simPolBsorted = simPolB[simPolB[:,1].argsort()[::-1]]
+    inCorners = simPolBsorted[0:2,]
+    inCorners = np.flipud(inCorners)
+    tRap = np.concatenate((outCorners,inCorners))
+    tRapPoly = sg.polygon.Polygon(tRap)
+    tBuff = tRapPoly.buffer(0.1)
+    noTrap = marg.difference(tRapPoly)
+    notInTrap = [ i for i in noTrap if i.within(tBuff) ]
+    mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
+    margInTrap = tRapPoly.intersection(marg)
+    throat = margInTrap.union(mpNotInTrap )
+    edge = marg.difference(throat)
+    return(center, edge, throat)
+
+center, edge, throat = findZones(standPet, 0.5)
+
+
+## let's try this patches:
+
+fig, ax1 = plt.subplots(ncols=1)
+ax1.set_xlim(-0.8,0.8)
+ax1.set_ylim(-0.8,0.8)
+
+ax1.add_patch(PolygonPatch(edge, fc='blue', ec='blue', alpha=0.5))
+
+ax1.add_patch(PolygonPatch(tRapPoly, fc='blue', ec='blue', alpha=0.5))
+
+ax1.add_patch(PolygonPatch(margInTrap, fc='blue', ec='blue', alpha=0.5))
+
+ax1.add_patch(PolygonPatch(noTrap, fc='blue', ec='blue', alpha=0.5))
+
+for i in notInTrap:
+    ax1.add_patch(PolygonPatch(i, fc='blue', ec='blue', alpha=0.5))
+
+ax1.add_patch(PolygonPatch(mpNotInTrap, fc='blue', ec='blue', alpha=0.5))
+
+ax1.add_patch(PolygonPatch(tBuff, fc='blue', ec='blue', alpha=0.5))
+
+ax1.add_patch(PolygonPatch(center, fc='blue', ec='blue', alpha=0.5))
+
+ax1.add_patch(PolygonPatch(edge, fc='red', ec='blue', alpha=0.5))
+
+ax1.add_patch(PolygonPatch(throat, fc='yellow', ec='blue', alpha=1.0))
+
+ax1.add_patch(PolygonPatch(standPet, fc='yellow', ec='blue', alpha=1.0))
+
+## looks good. 
+
+## so, lots to do from here:
+
+## check out Melias new outputs.
+
+## turn the above into a script that you can run on all of them. 
+
+## run it on all of them. 
+
+## improve corner detection for side petals
+
+## get stats - edge spots, center spots, centeredness, throat spots, 

@@ -2765,3 +2765,35 @@ ax1.add_patch(PolygonPatch(standPet, fc='yellow', ec='blue', alpha=1.0))
 ## improve corner detection for side petals
 
 ## get stats - edge spots, center spots, centeredness, throat spots, 
+
+
+############ task #1 - check on side petals:
+
+## how well does our algorithm perfom on the upper pettals? Their corners are not so pronounced as the lower:
+
+## here is an upper petal that belongs to the same flower as our example:
+
+petDir = ("/Users/danthomas/Documents/speckling"
+          "/make_polygons/polygons/P431F1/left/")
+
+petalFName=('P431F1_left_petal.csv')
+spotsFName=('P431F1_left_spots.csv')
+petalFile=(petDir + petalFName)
+spotsFile=(petDir + spotsFName)
+
+## run this through our pipeline:
+
+testP = digitizePols(petalFile)[0] 
+testS = digitizePols(spotsFile)
+scale, cent = getPetGeoInfo(testP)
+standPet = stand(testP, scale, cent)
+spotz = [ stand(i, scale, cent) for i in testS ]
+center, edge, throat = findZones(standPet, 0.5)
+
+
+## can we make a plotting function:
+
+
+## need to harden our polygons a bit more to get side petals to work...
+
+## looks good

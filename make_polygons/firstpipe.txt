@@ -2797,3 +2797,180 @@ center, edge, throat = findZones(standPet, 0.5)
 ## need to harden our polygons a bit more to get side petals to work...
 
 ## looks good
+
+############### rerun Melia's data #########
+
+## we need to get melia's new clusters into our python 
+## pipeline. Everything should be the same, if Melia's
+## side went smoothly. 
+
+## so just plug in her new files into the right place:
+
+## (doug's raster folder), then rerun the script "prepDougRasters.m"
+
+## now we need a script for running our digitization all 
+## the function
+
+## then a script for showing them
+
+## the script for digitizing a directory of a petal 
+## we called this "get_pols.py", let's revise that 
+## script to do what we need.
+
+
+
+
+
+## draft script is used like this:
+
+cd /Users/danthomas/Documents/speckling/make_polygons
+
+ff="/Users/danthomas/Documents/speckling/make_polygons/polygons/P431F1/mid"
+dd="/Users/danthomas/Desktop/tryScript"
+./get_pols.py $ff 0.5 $dd
+
+cd $dd
+
+## did it work?
+
+python3
+
+import argparse, os, pickle
+
+import numpy as np
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+import shapely.affinity as sa
+from skimage import measure
+from descartes import PolygonPatch
+
+zoop = "this is a piece of text"
+pickle.dump(zoop, open("zoop.p", "wb"))
+pickle.dump(zoop, open("zoop.p", "w")) ## doesn't work, 
+pickle.dump(zoop, open("zoop.p", "wt")) ## doesn't work, 
+del(zoop)
+test = pickle.load(open("zoop.p", "rb"))
+
+aa = pickle.load(open("P431F1_mid_polys.p", "r"))
+
+aa = pickle.load(open("P431F1_mid_polys.p", "rb"))
+
+
+
+## ugh, not working. 
+
+
+## these are not working. 
+
+## let's try a toy polygon?
+
+squ = sg.Polygon([(0, 0), (0,1), (1, 1), (1, 0)])
+tri = sg.Polygon([(0, 0), (1, 1), (1, 0)])
+
+polys = {
+    'squ': squ,
+    'tri': tri,
+            }
+
+
+pickle.dump(polys, open("zoop.p", "wb"))
+
+del(polys, squ, tri)
+
+
+aa =  pickle.load(open("zoop.p", "rb"))
+
+fig, ax1 = plt.subplots(ncols=2)
+## just petal and spots
+xs, ys = aa['tri'].exterior.xy
+ax1.fill(xs, ys, "y")
+
+aa =  pickle.load(open("P431F1_mid_polys.p", "rb"))
+
+
+cd /Users/danthomas/Documents/speckling/make_polygons
+
+python3 
+
+import argparse, os, pickle
+import numpy as np
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+import shapely.affinity as sa
+from skimage import measure
+from descartes import PolygonPatch
+from get_pols import *
+
+#import get_pols 
+
+
+## here is the __main__ script, minus imports, args etc
+
+folder="/Users/danthomas/Documents/speckling/make_polygons/polygons/P431F1/mid"
+destination="/Users/danthomas/Desktop/tryScript"
+centerSize=0.5
+
+#######
+
+os.chdir(folder)
+aa = os.listdir()
+
+for i in aa:
+    if "petal" in i:
+        petPol = digitizePols(i)[0]
+    elif "spots" in i:
+        spotPol = digitizePols(i)
+
+scale, cent = getPetGeoInfo(petPol)
+standPet = stand(petPol, scale, cent)
+standSpot = [ stand(i, scale, cent) for i in spotPol ]
+
+center, edge, throat = findZones(standPet, centerSize, 0.07)
+
+polys = {
+    'standPet': standPet,
+    'standSpot': standSpot,
+    'center': center,
+    'edge': edge,
+    'throat': throat
+            }
+
+
+here = os.getcwd()
+petalName = os.path.basename(here)
+flowerName = os.path.basename(os.path.dirname(here))
+outFileName = ( destination + "/"
+                + flowerName + "_"
+                + petalName
+                #+ "_polys.p")
+                + "_polys.json")
+
+
+## not working
+with open(outFileName, "wb") as output:
+     pickle.dump( polys, output )
+
+## can we output as a geojson?
+
+import json
+gj = json.dumps(sg.mapping(standPet))
+
+aa = json.loads(gj)
+
+pprint.pprint(gj)
+
+pprint.pprint(aa)
+
+s = pprint.pformat(aa)
+
+
+
+with open(outFileName, "w") as output:
+    output.write(s)
+
+#######
+
+
+## did this work? how can we check?
+
+

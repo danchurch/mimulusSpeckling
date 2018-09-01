@@ -116,8 +116,7 @@ if __name__ == "__main__":
 
     output = open(outFileName, "wb")
 
-    with open(outFileName, "wb") as output:
-        pickle.dump( polys, output )
+
 
 #####################
 

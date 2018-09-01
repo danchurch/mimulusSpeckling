@@ -2859,35 +2859,6 @@ aa = pickle.load(open("P431F1_mid_polys.p", "rb"))
 
 ## ugh, not working. 
 
-
-## these are not working. 
-
-## let's try a toy polygon?
-
-squ = sg.Polygon([(0, 0), (0,1), (1, 1), (1, 0)])
-tri = sg.Polygon([(0, 0), (1, 1), (1, 0)])
-
-polys = {
-    'squ': squ,
-    'tri': tri,
-            }
-
-
-pickle.dump(polys, open("zoop.p", "wb"))
-
-del(polys, squ, tri)
-
-
-aa =  pickle.load(open("zoop.p", "rb"))
-
-fig, ax1 = plt.subplots(ncols=2)
-## just petal and spots
-xs, ys = aa['tri'].exterior.xy
-ax1.fill(xs, ys, "y")
-
-aa =  pickle.load(open("P431F1_mid_polys.p", "rb"))
-
-
 cd /Users/danthomas/Documents/speckling/make_polygons
 
 python3 
@@ -2906,7 +2877,7 @@ from get_pols import *
 
 ## here is the __main__ script, minus imports, args etc
 
-folder="/Users/danthomas/Documents/speckling/make_polygons/polygons/P431F1/mid"
+folder="/Users/danthomas/Documents/speckling/make_polygons/polygons/P431F1/right"
 destination="/Users/danthomas/Desktop/tryScript"
 centerSize=0.5
 
@@ -2923,7 +2894,7 @@ for i in aa:
 
 scale, cent = getPetGeoInfo(petPol)
 standPet = stand(petPol, scale, cent)
-standSpot = [ stand(i, scale, cent) for i in spotPol ]
+standSpot = sg.multipolygon.MultiPolygon([ stand(i, scale, cent) for i in spotPol ])
 
 center, edge, throat = findZones(standPet, centerSize, 0.07)
 
@@ -2934,6 +2905,15 @@ polys = {
     'edge': edge,
     'throat': throat
             }
+
+sg.multipolygon.MultiPolygon
+
+mply = sg.multipolygon.MultiPolygon([standPet, center, edge, throat])
+
+mply = sg.multipolygon.MultiPolygon([standPet, center, edge, throat])
+
+mply = sg.multipolygon.MultiPolygon([standPet, standSpot, center, edge, throat])
+
 
 
 here = os.getcwd()
@@ -2955,22 +2935,57 @@ with open(outFileName, "wb") as output:
 import json
 gj = json.dumps(sg.mapping(standPet))
 
-aa = json.loads(gj)
-
-pprint.pprint(gj)
-
-pprint.pprint(aa)
-
-s = pprint.pformat(aa)
+## can it handle multiple objects?
 
 
 
 with open(outFileName, "w") as output:
-    output.write(s)
+    output.write(gj)
+
+## works. can we do a multipolygon? like if the throat gets weird?
+
+os.chdir("/Users/danthomas")
+
+gj_throat = json.dumps(sg.mapping(throat))
+
+with open("throat.geojson", "w") as output:
+    output.write(gj_throat)
 
 #######
 
 
-## did this work? how can we check?
 
+def cleanCollections(geo):
+    if type(geo) is not sg.polygon.Polygon:
+        if type(geo) is sg.collection.GeometryCollection:
+            onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]
+        else:
+            onlyPolys = geo
+        areas = [ i.area for i in onlyPolys ]
+        biggestPoly = [ i for i in onlyPolys if i.area == max(areas) ][0]
+        return(biggestPoly)
+    elif type(geo) is sg.polygon.Polygon:
+        return(geo)
+    
+## try this out:
+
+aa = cleanCollections(throat)
+
+os.chdir("/Users/danthomas/Desktop")
+
+gj_throat = json.dumps(sg.mapping(aa))
+
+with open("throat2.geojson", "w") as output:
+    output.write(gj_throat)
+
+##### write out iterations ######### 
+
+os.mkdir("") ## make home for geojsons
+os.chdir("") ## go there
+
+for i in [center, edge, throat, standPet, standSpot]:
+    filename = "" ## make name from iteration
+    gj = json.dumps(sg.mapping(aa))
+    with open(filename, "w") as output:
+        output.write(gj)
 

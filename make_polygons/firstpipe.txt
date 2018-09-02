@@ -3048,8 +3048,113 @@ with open('jsonDumpResult.json', 'w') as fp:
 with open('jsonDumpResult.geojson') as gjf:
     aa = json.load(gjf)
 
-ren(aa['features'])
+
 len(aa['features'])
 
 
 bb = sg.shape(aa)
+
+for i in range(5):
+    aa['features'][i].keys()
+
+bb = sg.shape(aa['features'][0]['geometry']) ## works, but we need to retain names
+
+
+aa['features'][0]['properties']['id']
+
+
+## so get a list of geometries:
+
+listP = (aa['features'])
+
+## find the one that has petal outline:
+
+bb = [ i for i in listP if i['properties']['id'] == 'Petal' ]
+
+cc = bb[0]['geometry']
+
+dd = sg.shape(cc)
+
+## did this work?
+
+fig, ax1 = plt.subplots()
+x, y = dd.exterior.xy
+ax1.fill(x, y, 'b')
+
+## yup. so a general function for parsing this geojson:
+
+
+with open('jsonDumpResult.geojson') as gjf:
+    aa = json.load(gjf)
+
+listP = (aa['features'])
+
+## find the one that has petal outline:
+
+bb = [ i for i in listP if i['properties']['id'] == 'Petal' ]
+
+cc = bb[0]['geometry']
+
+dd = sg.shape(cc)
+
+## did this work?
+
+
+## yup. so a general function for parsing this geojson:
+
+
+with open('jsonDumpResult.geojson') as gjf:
+    aa = json.load(gjf)
+
+listP = (aa['features'])
+
+petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry'] 
+petalPoly = sg.shape(petalGJ)
+
+
+spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry'] 
+spotsPoly = sg.shape(spotsGJ)
+
+centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry'] 
+centerPoly = sg.shape(centerGJ)
+
+edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry'] 
+edgePoly = sg.shape(edgeGJ)
+
+partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
+
+## check
+fig, ax1 = plt.subplots()
+x, y = petalPoly.exterior.xy
+ax1.fill(x, y, 'y')
+for i in spotsPoly:
+    x, y = i.exterior.xy
+    ax1.fill(x, y, 'r')
+
+x, y = centerPoly.exterior.xy
+ax1.fill(x, y, 'w', alpha = 0.3)
+
+x, y = edgePoly.exterior.xy
+
+fig, ax1 = plt.subplots()
+
+for i in edgePoly:
+    i.area
+
+    x, y = i.exterior.xy
+    ax1.fill(x, y, 'r')
+
+## oops. looks like we need to clean up the edges, too..
+
+## okay, debugging pile too big. Cleanup.
+
+## modify the module so that it should spit out 
+## geojsons. 
+
+## try it, check results as above, see if more 
+## debugging is needed.
+
+## then add parsing to notebook
+
+
+

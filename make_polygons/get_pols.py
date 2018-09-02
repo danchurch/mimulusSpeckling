@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
-import argparse, os, pickle
+import argparse, os, json
 import numpy as np
 import matplotlib.pyplot as plt
 import shapely.geometry as sg
 import shapely.affinity as sa
 from skimage import measure
 
+## for the actual conversion of raster to polygon:
 def digitizePols(file):
     ## pad margins of image and get the contour of the petal shape
     petal = np.genfromtxt (file, delimiter=",")
@@ -19,6 +20,7 @@ def digitizePols(file):
     polys = [ i for i in Pcontours if len(i) > 3 ]
     return(polys)
 
+## get centroid and scaling factor needed to standardize petals and spots
 def getPetGeoInfo(pet):
     aa = sg.asPolygon(pet)
     area = aa.area
@@ -27,26 +29,28 @@ def getPetGeoInfo(pet):
     centerCoor = (center.x, center.y)
     return(scalar, centerCoor)
 
+## standardize a polygon
 def stand(pol, scale, cent):
     aa = sg.asPolygon(pol)
     trans = sa.translate(aa, (-1*cent[0]), (-1*cent[1]))
     scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
     return(scaled)
 
+## clean up small polygons and points
+def cleanCollections(geo):
+    if type(geo) is not sg.polygon.Polygon:
+        if type(geo) is sg.collection.GeometryCollection:
+            onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]
+        else:
+            onlyPolys = geo
+        areas = [ i.area for i in onlyPolys ]
+        biggestPoly = [ i for i in onlyPolys if i.area == max(areas) ][0]
+        return(biggestPoly)
+    elif type(geo) is sg.polygon.Polygon:
+        return(geo)
+
+## define our zones
 def findZones(standPol, percent, simp=0.05):
-
-    def cleanCollections(geo):
-        if type(geo) is not sg.polygon.Polygon:
-            if type(geo) is sg.collection.GeometryCollection:
-                onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]
-            else:
-                onlyPolys = geo
-            areas = [ i.area for i in onlyPolys ]
-            biggestPoly = [ i for i in onlyPolys if i.area == max(areas) ][0]
-            return(biggestPoly)
-        elif type(geo) is sg.polygon.Polygon:
-            return(geo)
-
     
     center = standPol
     rad = 0
@@ -76,13 +80,13 @@ def findZones(standPol, percent, simp=0.05):
     margInTrap = tRapPoly.intersection(marg)
     throatRaw = margInTrap.union(mpNotInTrap )
     throat = cleanCollections(throatRaw)
-    edge = marg.difference(throat)
+    edgeRaw = marg.difference(throat)
+    edge = cleanCollections(edgeRaw)
     return(center, edge, throat)
 
 
 
 if __name__ == "__main__":
-
 
     ## deal with arguments
     parser = argparse.ArgumentParser()
@@ -97,11 +101,9 @@ if __name__ == "__main__":
                 type=float)
     parser.add_argument('destination', 
                 help=("Folder where you would like this file."))
-
-
     args = parser.parse_args()
 
-
+    ## run through digitizing, standardizing, zone calling pipeline
     os.chdir(args.folder)
     aa = os.listdir()
     for i in aa:
@@ -113,25 +115,40 @@ if __name__ == "__main__":
     standPet = stand(petPol, scale, cent)
     standSpot = [ stand(i, scale, cent) for i in spotPol ]
     center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-    
-    polys = {
-        'standPet': standPet,
-        'standSpot': standSpot,
-        'center': center,
-        'edge': edge,
-        'throat': throat
-                }
    
+    ## organize name
     here = os.getcwd()
     petalName = os.path.basename(here)
-    flowerName = os.path.basename(os.path.dirname(here)) 
-    outFileName = ( args.destination + "/" 
-                    + flowerName + "_" 
-                    + petalName 
-                    + "_polys.p")
+    flowerName = os.path.basename(os.path.dirname(here))
+    gjName = (flowerName + "_"
+              + petalName
+              + "_polys")
+    outFileName = ( destination + "/"
+                    + flowerName + "_"
+                    + petalName
+                    + "_polys.geojson")
 
-    output = open(outFileName, "wb")
+    ## outputs 
 
+    ## define get a dictionary that resembles a geojson feature collection:
+    featC = {
+            "type" : "FeatureCollection",
+            "features" : [],
+            }
+
+    ## fill it with features
+    partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
+    ## each geometry needs a feature wrapper
+    for i,part in enumerate([standPet, standSpot, center, edge, throat]):
+        gj_i = sg.mapping(part)
+        feature_i = {"type": "Feature",
+              "geometry": gj_i,
+              "properties": {"id":(partNames[i])}}
+        featC['features'].append(feature_i)
+
+    ## write it out
+    with open(outFileName, 'w') as fp:
+        json.dump(featC, fp)
 
 
 #####################

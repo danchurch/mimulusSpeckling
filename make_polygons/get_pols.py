@@ -34,6 +34,20 @@ def stand(pol, scale, cent):
     return(scaled)
 
 def findZones(standPol, percent, simp=0.05):
+
+    def cleanCollections(geo):
+        if type(geo) is not sg.polygon.Polygon:
+            if type(geo) is sg.collection.GeometryCollection:
+                onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]
+            else:
+                onlyPolys = geo
+            areas = [ i.area for i in onlyPolys ]
+            biggestPoly = [ i for i in onlyPolys if i.area == max(areas) ][0]
+            return(biggestPoly)
+        elif type(geo) is sg.polygon.Polygon:
+            return(geo)
+
+    
     center = standPol
     rad = 0
     while center.area > percent:
@@ -60,9 +74,11 @@ def findZones(standPol, percent, simp=0.05):
     notInTrap = [ i for i in noTrap if i.within(tBuff) ]
     mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
     margInTrap = tRapPoly.intersection(marg)
-    throat = margInTrap.union(mpNotInTrap )
+    throatRaw = margInTrap.union(mpNotInTrap )
+    throat = cleanCollections(throatRaw)
     edge = marg.difference(throat)
     return(center, edge, throat)
+
 
 
 if __name__ == "__main__":

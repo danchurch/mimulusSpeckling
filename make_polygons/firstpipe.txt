@@ -2859,11 +2859,43 @@ aa = pickle.load(open("P431F1_mid_polys.p", "rb"))
 
 ## ugh, not working. 
 
+#####
+
+def pZones(standPet, spotz, center, edge, throat):
+    fig, (ax1,ax2) = plt.subplots(ncols=2)
+    xs, ys = standPet.exterior.xy
+    ax1.fill(xs, ys, "y")
+    for i in spotz:
+        xs, ys = i.exterior.xy
+        ax1.fill(xs, ys, "r")
+     
+    ax2.set_xlim(ax1.get_xlim())
+    ax2.set_ylim(ax1.get_ylim())
+    xs, ys = standPet.exterior.xy
+    ax2.fill(xs, ys, "y")
+    for i in spotz:
+        xs, ys = i.exterior.xy
+        ax2.fill(xs, ys, "r")
+
+    alp=0.5
+    l=5
+    ax2.add_patch(PolygonPatch(center,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+    ax2.add_patch(PolygonPatch(throat,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+    ax2.add_patch(PolygonPatch(edge,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+
+####
+
 cd /Users/danthomas/Documents/speckling/make_polygons
 
 python3 
 
-import argparse, os, pickle
+import argparse, os, pickle, json, pprint
 import numpy as np
 import matplotlib.pyplot as plt
 import shapely.geometry as sg
@@ -2872,14 +2904,18 @@ from skimage import measure
 from descartes import PolygonPatch
 from get_pols import *
 
+
 #import get_pols 
 
 
 ## here is the __main__ script, minus imports, args etc
 
-folder="/Users/danthomas/Documents/speckling/make_polygons/polygons/P431F1/right"
-destination="/Users/danthomas/Desktop/tryScript"
+#folder="/Users/danthomas/Documents/speckling/make_polygons/polygons/P431F1/right"
+folder="/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/P431F1/right"
+#destination="/Users/danthomas/Desktop/tryScript"
+destination="/home/daniel/Desktop/tryScript"
 centerSize=0.5
+
 
 #######
 
@@ -2893,6 +2929,7 @@ for i in aa:
         spotPol = digitizePols(i)
 
 scale, cent = getPetGeoInfo(petPol)
+
 standPet = stand(petPol, scale, cent)
 standSpot = sg.multipolygon.MultiPolygon([ stand(i, scale, cent) for i in spotPol ])
 
@@ -2919,20 +2956,16 @@ mply = sg.multipolygon.MultiPolygon([standPet, standSpot, center, edge, throat])
 here = os.getcwd()
 petalName = os.path.basename(here)
 flowerName = os.path.basename(os.path.dirname(here))
+gjName = (flowerName + "_" 
+          + petalName 
+          + "_polys")
 outFileName = ( destination + "/"
                 + flowerName + "_"
                 + petalName
-                #+ "_polys.p")
-                + "_polys.json")
+                + "_polys.geojson")
 
-
-## not working
-with open(outFileName, "wb") as output:
-     pickle.dump( polys, output )
 
 ## can we output as a geojson?
-
-import json
 gj = json.dumps(sg.mapping(standPet))
 
 ## can it handle multiple objects?
@@ -2953,23 +2986,7 @@ with open("throat.geojson", "w") as output:
 
 #######
 
-
-
-def cleanCollections(geo):
-    if type(geo) is not sg.polygon.Polygon:
-        if type(geo) is sg.collection.GeometryCollection:
-            onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]
-        else:
-            onlyPolys = geo
-        areas = [ i.area for i in onlyPolys ]
-        biggestPoly = [ i for i in onlyPolys if i.area == max(areas) ][0]
-        return(biggestPoly)
-    elif type(geo) is sg.polygon.Polygon:
-        return(geo)
     
-## try this out:
-
-aa = cleanCollections(throat)
 
 os.chdir("/Users/danthomas/Desktop")
 
@@ -2978,14 +2995,61 @@ gj_throat = json.dumps(sg.mapping(aa))
 with open("throat2.geojson", "w") as output:
     output.write(gj_throat)
 
+### check plot
+
+pZones(standPet, standSpot, center, edge, throat)
+
 ##### write out iterations ######### 
 
 os.mkdir("") ## make home for geojsons
 os.chdir("") ## go there
 
-for i in [center, edge, throat, standPet, standSpot]:
-    filename = "" ## make name from iteration
-    gj = json.dumps(sg.mapping(aa))
-    with open(filename, "w") as output:
-        output.write(gj)
 
+
+## seems to work
+
+## can we collect all this into a geo collection, export 
+## as geo json?
+
+
+## nah. Let's reduce the nesting for the moment.
+
+
+
+os.chdir("/home/daniel/Desktop")
+
+
+
+## construct feature collection geojson
+
+
+featC = {
+        "type" : "FeatureCollection",
+        "features" : [],
+        } 
+
+partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
+
+for i,part in enumerate([standPet, standSpot, center, edge, throat]):
+    gj_i = sg.mapping(part)
+    feature_i = {"type": "Feature",
+          "geometry": gj_i,
+          "properties": {"id":(partNames[i])}}
+    featC['features'].append(feature_i)
+
+
+with open('jsonDumpResult.json', 'w') as fp:
+    json.dump(featC, fp)
+
+
+
+## does this parse well back into shapely?
+
+with open('jsonDumpResult.geojson') as gjf:
+    aa = json.load(gjf)
+
+ren(aa['features'])
+len(aa['features'])
+
+
+bb = sg.shape(aa)

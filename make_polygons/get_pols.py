@@ -52,16 +52,18 @@ def cleanCollections(geo):
 
 ## define our zones
 def findZones(standPol, percent, simp=0.05):
-    
+
+    ## generate margin/center
     center = standPol
     rad = 0
     while center.area > percent:
         center = standPol.buffer(rad)
         rad -= .001
-
     marg = sg.polygon.Polygon(
             standPol.exterior,
             holes = [center.exterior.coords])
+
+    ## break up margin into edge and throat:
     simPol = marg.simplify(simp)
     simPolA = np.array(simPol.exterior.xy).transpose()
     simPolAsorted = simPolA[simPolA[:,1].argsort()[::-1]]
@@ -72,16 +74,28 @@ def findZones(standPol, percent, simp=0.05):
     inCorners = np.flipud(inCorners)
     tRap = np.concatenate((outCorners,inCorners))
     tRapPoly = sg.polygon.Polygon(tRap)
-    tBuff = tRapPoly.buffer(0.1)
-    noTrap = marg.difference(tRapPoly)
-    notInTrap = [ i for i in noTrap if i.within(tBuff) ]
-    mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
-    margInTrap = tRapPoly.intersection(marg)
-    throatRaw = margInTrap.union(mpNotInTrap )
-    throat = cleanCollections(throatRaw)
-    edgeRaw = marg.difference(throat)
-    edge = cleanCollections(edgeRaw)
-    return(center, edge, throat)
+    ## polygon calculations start here, risky:
+    try:
+        tBuff = tRapPoly.buffer(0.1)
+        noTrap = marg.difference(tRapPoly)
+        notInTrap = [ i for i in noTrap if i.within(tBuff) ]
+        mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
+        margInTrap = tRapPoly.intersection(marg)
+        throatRaw = margInTrap.union(mpNotInTrap )
+        throat = cleanCollections(throatRaw)
+        edgeRaw = marg.difference(throat)
+        edge = cleanCollections(edgeRaw)
+    except:
+        ## if they don't work..
+        ## use the margin for edge
+        edge = marg
+        ## throat will be empty
+        throat = sg.polygon.Polygon()
+        print('Throat calculations failed. '
+              'Throat will be empty and Edge will '
+              'consist of entire margin.')
+    finally:
+        return(center, edge, throat)
 
 
 
@@ -102,28 +116,8 @@ if __name__ == "__main__":
                 help=("Folder where you would like this file."))
     args = parser.parse_args()
 
-    ## run through digitizing, standardizing, zone calling pipeline
-    os.chdir(args.folder)
-    aa = os.listdir()
-    for i in aa:
-        if "petal" in i:
-            petPol = digitizePols(i)[0] 
-        elif "spots" in i:
-            spotPol = digitizePols(i)
-    scale, cent = getPetGeoInfo(petPol)
-    standPet = stand(petPol, scale, cent)
-    standSpot = [ stand(i, scale, cent) for i in spotPol ]
-    standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
-
-    try:
-        center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-    except shapely.errors.TopologicalError as x:
-        print("zones won't be available")
-        center = edge = throat = sg.polygon.Polygon()
-
-
-   
     ## organize name
+    os.chdir(args.folder)
     here = os.getcwd()
     petalName = os.path.basename(here)
     flowerName = os.path.basename(os.path.dirname(here))
@@ -134,6 +128,20 @@ if __name__ == "__main__":
                     + flowerName + "_"
                     + petalName
                     + "_polys.geojson")
+
+    ## run through digitizing, standardizing, zone calling pipeline
+    print(gjName)
+    aa = os.listdir()
+    for i in aa:
+        if "petal" in i:
+            petPol = digitizePols(i)[0] 
+        elif "spots" in i:
+            spotPol = digitizePols(i)
+    scale, cent = getPetGeoInfo(petPol)
+    standPet = stand(petPol, scale, cent)
+    standSpot = [ stand(i, scale, cent) for i in spotPol ]
+    standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
+    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
 
     ## outputs 
 

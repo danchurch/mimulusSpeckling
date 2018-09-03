@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
-import argparse, os, json
+import argparse, os, json, shapely
 import numpy as np
 import matplotlib.pyplot as plt
 import shapely.geometry as sg
 import shapely.affinity as sa
+import shapely.errors
 from skimage import measure
 
 ## for the actual conversion of raster to polygon:
@@ -63,11 +64,9 @@ def findZones(standPol, percent, simp=0.05):
             holes = [center.exterior.coords])
     simPol = marg.simplify(simp)
     simPolA = np.array(simPol.exterior.xy).transpose()
-    simPolA[:,0].argsort()
     simPolAsorted = simPolA[simPolA[:,1].argsort()[::-1]]
     outCorners = simPolAsorted[0:2]
     simPolB = np.array(simPol.interiors[0].xy).transpose()
-    simPolB[:,0].argsort()
     simPolBsorted = simPolB[simPolB[:,1].argsort()[::-1]]
     inCorners = simPolBsorted[0:2,]
     inCorners = np.flipud(inCorners)
@@ -114,7 +113,15 @@ if __name__ == "__main__":
     scale, cent = getPetGeoInfo(petPol)
     standPet = stand(petPol, scale, cent)
     standSpot = [ stand(i, scale, cent) for i in spotPol ]
-    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
+    standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
+
+    try:
+        center, edge, throat = findZones(standPet, args.centerSize, 0.07)
+    except shapely.errors.TopologicalError as x:
+        print("zones won't be available")
+        center = edge = throat = sg.polygon.Polygon()
+
+
    
     ## organize name
     here = os.getcwd()
@@ -123,7 +130,7 @@ if __name__ == "__main__":
     gjName = (flowerName + "_"
               + petalName
               + "_polys")
-    outFileName = ( destination + "/"
+    outFileName = ( args.destination + "/"
                     + flowerName + "_"
                     + petalName
                     + "_polys.geojson")
@@ -139,12 +146,16 @@ if __name__ == "__main__":
     ## fill it with features
     partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
     ## each geometry needs a feature wrapper
-    for i,part in enumerate([standPet, standSpot, center, edge, throat]):
-        gj_i = sg.mapping(part)
-        feature_i = {"type": "Feature",
-              "geometry": gj_i,
-              "properties": {"id":(partNames[i])}}
-        featC['features'].append(feature_i)
+    for i,part in enumerate([standPet, standSpots, center, edge, throat]):
+        try:
+            gj_i = sg.mapping(part)
+        except AttributeError:
+            gj_i = {"type": "Polygon", "coordinates": []}
+        finally:
+            feature_i = {"type": "Feature",
+                  "geometry": gj_i,
+                  "properties": {"id":(partNames[i])}}
+            featC['features'].append(feature_i)
 
     ## write it out
     with open(outFileName, 'w') as fp:

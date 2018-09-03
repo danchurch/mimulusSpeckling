@@ -3100,49 +3100,40 @@ dd = sg.shape(cc)
 ## did this work?
 
 
-## yup. so a general function for parsing this geojson:
+########### geojson parse ###############3
 
+## yup. so build a general function for parsing this geojson:
 
-with open('jsonDumpResult.geojson') as gjf:
+file="P400F2_right_polys.geojson"
+
+with open(file) as gjf:
+    spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry'] 
+
+    spotsPoly = sg.shape(spotsGJ)
+
+#def parseGeoj(file):
+    #with open(file) as gjf:
+
+file="P400F2_right_polys.geojson"
+with open(file) as gjf:
     aa = json.load(gjf)
+    listP = (aa['features'])
+    petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry'] 
+    petalPoly = sg.shape(petalGJ)
+    spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry'] 
+    spotsPoly = sg.shape(spotsGJ)
+    print('made it here')
+    centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry'] 
+    centerPoly = sg.shape(centerGJ)
+    edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry'] 
+    edgePoly = sg.shape(edgeGJ)
+    throatGJ = [ i for i in listP if i['properties']['id'] == 'Throat' ][0]['geometry'] 
+    throatPoly = sg.shape(throatGJ)
 
-listP = (aa['features'])
-
-petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry'] 
-petalPoly = sg.shape(petalGJ)
+   return(petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly)
 
 
-spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry'] 
-spotsPoly = sg.shape(spotsGJ)
 
-centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry'] 
-centerPoly = sg.shape(centerGJ)
-
-edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry'] 
-edgePoly = sg.shape(edgeGJ)
-
-partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
-
-## check
-fig, ax1 = plt.subplots()
-x, y = petalPoly.exterior.xy
-ax1.fill(x, y, 'y')
-for i in spotsPoly:
-    x, y = i.exterior.xy
-    ax1.fill(x, y, 'r')
-
-x, y = centerPoly.exterior.xy
-ax1.fill(x, y, 'w', alpha = 0.3)
-
-x, y = edgePoly.exterior.xy
-
-fig, ax1 = plt.subplots()
-
-for i in edgePoly:
-    i.area
-
-    x, y = i.exterior.xy
-    ax1.fill(x, y, 'r')
 
 ## oops. looks like we need to clean up the edges, too..
 
@@ -3157,4 +3148,107 @@ for i in edgePoly:
 ## then add parsing to notebook
 
 
+## try out the new script:
 
+ff="/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/P400F2/right"
+dd="/home/daniel/Documents/mimulusSpeckling/make_polygons/tryscript"
+./get_pols.py $ff 0.5 $dd
+
+## failed...
+## shapely.errors.TopologicalError
+
+## start over....
+
+
+import argparse, os, pickle, json, pprint
+import numpy as np
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+import shapely.affinity as sa
+import shapely.errors
+from skimage import measure
+from descartes import PolygonPatch
+from get_pols import *
+
+## script minus the functions is:
+
+folder="/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/P400F2/right"
+centerSize=0.5
+destination="/home/daniel/Documents/mimulusSpeckling/make_polygons/tryscript" 
+
+## run through digitizing, standardizing, zone calling pipeline
+os.chdir(folder)
+aa = os.listdir()
+for i in aa:
+    if "petal" in i:
+        petPol = digitizePols(i)[0]
+    elif "spots" in i:
+        spotPol = digitizePols(i)
+
+
+scale, cent = getPetGeoInfo(petPol)
+standPet = stand(petPol, scale, cent)
+standSpot = [ stand(i, scale, cent) for i in spotPol ]
+
+
+try:
+    center, edge, throat = findZones(standPet, centerSize, 0.07)
+except shapely.errors.TopologicalError as x:
+    print("zones won't be available")
+    center = edge = throat = {"type": "Polygon", "coordinates": []}
+
+
+##########
+
+fig, ax1 = plt.subplots(ncols=1)
+x, y = standPet.exterior.xy
+ax1.fill(x, y, "y")
+x, y = standSpot[1].exterior.xy
+ax1.fill(x, y, "r")
+
+
+##########
+
+## organize name
+here = os.getcwd()
+petalName = os.path.basename(here)
+flowerName = os.path.basename(os.path.dirname(here))
+gjName = (flowerName + "_"
+          + petalName
+          + "_polys")
+outFileName = ( destination + "/"
+                + flowerName + "_"
+                + petalName
+                + "_polys.geojson")
+
+## outputs
+
+## define get a dictionary that resembles a geojson feature collection:
+featC = {
+        "type" : "FeatureCollection",
+        "features" : [],
+        }
+
+## fill it with features
+partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
+## each geometry needs a feature wrapper
+for i,part in enumerate([standPet, standSpot, center, edge, throat]):
+    gj_i = sg.mapping(part)
+    feature_i = {"type": "Feature",
+          "geometry": gj_i,
+          "properties": {"id":(partNames[i])}}
+    featC['features'].append(feature_i)
+
+aa = sg.mapping(standSpot)
+
+bb = shapely.geometry.multipolygon.MultiPolygon(standSpot)
+
+aa = sg.mapping(bb)
+
+## write it out
+with open(outFileName, 'w') as fp:
+    json.dump(featC, fp)
+
+Petal, Spots, Center, Edge, Throat = parseGeoj('P400F2_right_polys.geojson')
+
+parseGeoj('P400F2_right_polys.geojson')

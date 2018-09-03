@@ -149,7 +149,8 @@ if __name__ == "__main__":
     for i,part in enumerate([standPet, standSpots, center, edge, throat]):
         try:
             gj_i = sg.mapping(part)
-        except AttributeError:
+        #except AttributeError:
+        except:
             gj_i = {"type": "Polygon", "coordinates": []}
         finally:
             feature_i = {"type": "Feature",

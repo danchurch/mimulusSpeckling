@@ -3450,9 +3450,12 @@ ax1.fill(x, y, "b", alpha=0.3)
 ## graphing function in our notebook.
 
 ## think we need another script for this.
-
+import os, json 
+import numpy as np
+import shapely.geometry as sg
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+from descartes import PolygonPatch
 
 ## first, get matplot a jpeg to print. 
 
@@ -3473,33 +3476,122 @@ ax1.imshow(img)
 ## sorta works. second row is doug's rasters of the leaves
 ## these are in our polygon folders. How can we find this?
 
-cc = bb[0][0:-4]
+cc = bb[0][0:-4] ##flower name
 polDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons'
+
 os.chdir(polDir + "/" + cc)
 
 fp = os.listdir()
 
 for i in fp:
     os.chdir(i)
+
+    spotsCSV = [ i for i in os.listdir() if 'spots' in i ][0]
+    petalCSV = [ i for i in os.listdir() if 'petal' in i ][0]
     geoj = [ i for i in os.listdir() if 'geojson' in i ][0]
     petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly = parseGeoj(geoj)
     ## insert print page
     os.chdir(polDir + "/" + cc)
 
 
-## how do we plot this?
 
 
 
 ## we want a side=by-side of our rasters. can we read them  and plot them?
-## meh, better done in matlab. 
 
-## skip to polygons
+## how to read these in...
+
+petalCSV=('P402F1_left_petal.csv')
+spotsCSV=('P402F1_left_spots.csv')
+
+petalMat = np.genfromtxt(petalCSV, delimiter=',')
+plt.imshow(petalMat, cmap='gray')
+
+spotsMat = np.genfromtxt(spotsCSV, delimiter=',')
+plt.imshow(spotMat, cmap='gray')
+
+## pretty simple
+## maybe a row of six images, side-by-sides of all three petals
+
+##########################
+
+
+## polygons
 ## these we get from the geojsons, using our parsing function. 
 ## need one from each directory
 
 
+## plotting function? We want a row without zones:
+
+def plotNoZone(petalPoly, spotsPoly):
+    alp=1.0
+    l=2
+    ax1 = plt.subplot2grid((4, 3), (0, 0), colspan=1)
+    ax1.set_xlim(min(petalPoly.exterior.xy[0]), max(petalPoly.exterior.xy[0]))
+    ax1.set_ylim(min(petalPoly.exterior.xy[1]), max(petalPoly.exterior.xy[1]))
+    ax1.add_patch(PolygonPatch(petalPoly,
+                  fc='yellow', ec='black',
+                  linewidth=l, alpha=alp))
+    ax1.add_patch(PolygonPatch(spotsPoly,
+                  fc='red', ec='black',
+                  linewidth=l, alpha=alp))
+
+
+plotNozone(petalPoly, spotsPoly)
+
+## works
+
+##############
+
+
+## okay, with zones?
+
+def plotYesZone (petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly):
+    alp=0.3
+    l=2
+    ax1 = plt.subplot2grid((4, 3), (0, 0), colspan=1)
+    ax1.set_xlim(min(petalPoly.exterior.xy[0]), max(petalPoly.exterior.xy[0]))
+    ax1.set_ylim(min(petalPoly.exterior.xy[1]), max(petalPoly.exterior.xy[1]))
+    ax1.add_patch(PolygonPatch(petalPoly,
+                  fc='yellow', ec='black',
+                  linewidth=l, alpha=1.0))
+    ax1.add_patch(PolygonPatch(spotsPoly,
+                  fc='red', ec='black',
+                  linewidth=l, alpha=1.0))
+    ax1.add_patch(PolygonPatch(centerPoly,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+    ax1.add_patch(PolygonPatch(edgePoly,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+    ax1.add_patch(PolygonPatch(throatPoly,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+
+
+plotYesZone(petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly)
+
+
 #####################
+
+## okay, that's everything, right?
+
+## first row is jpg
+## second row is doug's rasters
+## third row is petal and spots
+## fourth row is zones
+
+
+## can we make a page with these?
+
+
+## our first row is a plot using one of these jpegs:
+ax1 = plt.subplot2grid((4,3), (0,0), colspan=3)
+img=mpimg.imread(bb[0])
+ax1.imshow(img)
+
+
+
 
 ax1 = plt.subplot2grid((3, 3), (0, 0), colspan=3)
 
@@ -3509,37 +3601,11 @@ ax3 = plt.subplot2grid((3, 3), (1, 2), rowspan=2)
 ax4 = plt.subplot2grid((3, 3), (2, 0))
 ax5 = plt.subplot2grid((3, 3), (2, 1))
 
-## how to 
-
-def printPage(standPet, spotz, center, edge, throat):
-    fig, (ax1,ax2) = plt.subplots(nrows=2)
-    ## just petal and spots
-    xs, ys = standPet.exterior.xy
-    ax1.fill(xs, ys, "y")
-    ax1.set_aspect('equal')
-    for i in spotz:
-        xs, ys = i.exterior.xy
-        ax1.fill(xs, ys, "r")
-    ## second image, with zones
-    ax2.set_xlim(ax1.get_xlim())
-    ax2.set_ylim(ax1.get_ylim())
-    xs, ys = standPet.exterior.xy
-    ax2.set_aspect('equal')
-    ax2.fill(xs, ys, "y")
-    for i in spotz:
-        xs, ys = i.exterior.xy
-        ax2.fill(xs, ys, "r")
-    alp=0.5
-    l=5
-    ax2.add_patch(PolygonPatch(center,
-                  fc='white', ec='black',
-                  linewidth=l, alpha=alp))
-    ax2.add_patch(PolygonPatch(throat,
-                  fc='white', ec='black',
-                  linewidth=l, alpha=alp))
-    ax2.add_patch(PolygonPatch(edge,
-                  fc='white', ec='black',
-                  linewidth=l, alpha=alp))
 
 
-pZones( petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly)
+
+
+
+
+
+

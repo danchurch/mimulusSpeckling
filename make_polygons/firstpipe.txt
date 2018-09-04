@@ -3192,10 +3192,50 @@ standSpot = [ stand(i, scale, cent) for i in spotPol ]
 
 
 try:
-    center, edge, throat = findZones(standPet, centerSize, 0.07)
+
+center, edge, throat = findZones(standPet, centerSize, 0.07)
+
 except shapely.errors.TopologicalError as x:
     print("zones won't be available")
     center = edge = throat = {"type": "Polygon", "coordinates": []}
+
+def findZones(standPol, percent, simp=0.05):
+
+standPol=standPet
+percent = 0.5
+simp=0.05
+
+center = standPol
+rad = 0
+while center.area > percent:
+    center = standPol.buffer(rad)
+    rad -= .001
+marg = sg.polygon.Polygon(
+        standPol.exterior,
+        holes = [center.exterior.coords])
+simPol = marg.simplify(simp)
+simPolA = np.array(simPol.exterior.xy).transpose()
+simPolAsorted = simPolA[simPolA[:,1].argsort()[::-1]]
+outCorners = simPolAsorted[0:2]
+simPolB = np.array(simPol.interiors[0].xy).transpose()
+simPolBsorted = simPolB[simPolB[:,1].argsort()[::-1]]
+inCorners = simPolBsorted[0:2,]
+inCorners = np.flipud(inCorners)
+tRap = np.concatenate((outCorners,inCorners))
+tRapPoly = sg.polygon.Polygon(tRap)
+tBuff = tRapPoly.buffer(0.1)
+
+noTrap = marg.difference(tRapPoly)
+
+
+notInTrap = [ i for i in noTrap if i.within(tBuff) ]
+mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
+margInTrap = tRapPoly.intersection(marg)
+throatRaw = margInTrap.union(mpNotInTrap )
+throat = cleanCollections(throatRaw)
+edgeRaw = marg.difference(throat)
+edge = cleanCollections(edgeRaw)
+#    return(center, edge, throat)
 
 
 ##########
@@ -3203,6 +3243,9 @@ except shapely.errors.TopologicalError as x:
 fig, ax1 = plt.subplots(ncols=1)
 x, y = standPet.exterior.xy
 ax1.fill(x, y, "y")
+x, y = tRapPoly.exterior.xy
+ax1.fill(x, y, "b")
+
 x, y = standSpot[1].exterior.xy
 ax1.fill(x, y, "r")
 
@@ -3249,6 +3292,254 @@ aa = sg.mapping(bb)
 with open(outFileName, 'w') as fp:
     json.dump(featC, fp)
 
+###############33
+
 Petal, Spots, Center, Edge, Throat = parseGeoj('P400F2_right_polys.geojson')
 
 parseGeoj('P400F2_right_polys.geojson')
+
+## so where were we? 
+
+## we need our geoj parser to work, so we can make our 
+## odf. 
+
+## and we need our base digitization script to 
+## work smoothly
+
+## can't get it perfect right now, lots of exception handles
+
+## cuz they probably don't want me spending another month 
+## on this... 
+
+
+## okay - can we run this script on all our folders?
+
+
+## where do we want these files? 
+
+## next step is a pdf that shows how they worked.
+
+## do we want to 
+
+
+## bash script - make our digitizations, for all polygons
+
+##########################################
+#!/usr/bin/env bash
+
+getpols='/home/daniel/Documents/mimulusSpeckling/make_polygons/get_pols.py'
+wd='/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons'
+
+cd $wd
+
+for i in *; do
+    echo $i 
+    cd $i 
+    for j in *; do
+        fullN=$PWD/$j
+        $getpols $fullN 0.5 $fullN
+    done
+    cd ../
+done
+
+##################################################
+
+## to run it
+bash runAllDigs.sh |& tee runAllDigsLog.txt
+
+ls -R /home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/P247F1
+
+cd /home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/P247F1/left
+
+## so that's running...
+
+## how do we check the results?
+
+## we probably want something like last time
+
+## let's try one in matplotlib:
+
+python3
+
+import argparse, os, json, pprint
+import numpy as np
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+import shapely.affinity as sa
+from skimage import measure
+from descartes import PolygonPatch
+
+## how do we plot a jpeg?
+
+## let's use our very first petal as an example:
+
+
+
+## we gotta fix our geojson parser:
+
+## may god and stackoverflow forgive me
+
+
+
+
+def parseGeoj(file):
+    with open(file) as gjf:
+        aa = json.load(gjf)
+        listP = (aa['features'])
+        try:
+            petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry'] 
+            petalPoly = sg.shape(petalGJ)
+        except:
+            petalPoly = sg.polygon.Polygon()
+        try:
+            spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry'] 
+            spotsPoly = sg.shape(spotsGJ)
+        except:
+            spotsPoly = sg.polygon.Polygon()
+        try:
+            centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry'] 
+            centerPoly = sg.shape(centerGJ)
+        except:
+            centerPoly = sg.polygon.Polygon()
+        try:
+            edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry'] 
+            edgePoly = sg.shape(edgeGJ)
+        except:
+            edgePoly = sg.polygon.Polygon()
+        try:
+            throatGJ = [ i for i in listP if i['properties']['id'] == 'Throat' ][0]['geometry'] 
+            throatPoly = sg.shape(throatGJ)
+        except:
+            throatPoly = sg.polygon.Polygon()
+    return(petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly)
+
+
+## our first flower:
+
+file="P247F1_left_polys.geojson"
+
+os.chdir('/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/P247F1/left')
+
+petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly = parseGeoj(file)
+
+## does this work?
+
+alp=0.5
+l=5
+
+
+
+
+fig, ax1 = plt.subplots()
+
+x, y = petalPoly.exterior.xy
+ax1.fill(x, y, "y", alpha=1.0)
+
+for i in spotsPoly:
+    x, y = i.exterior.xy
+    ax1.fill(x, y, "r")
+
+x, y = centerPoly.exterior.xy
+ax1.fill(x, y, "w", alpha=0.3)
+x, y = edgePoly.exterior.xy
+ax1.fill(x, y, "o", alpha=0.3)
+x, y = throatPoly.exterior.xy
+ax1.fill(x, y, "b", alpha=0.3)
+
+## looks okay, but I think we're better off with the 
+## graphing function in our notebook.
+
+## think we need another script for this.
+
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
+## first, get matplot a jpeg to print. 
+
+## gonna have to get this off doug's directory:
+
+dougDir='/home/daniel/Documents/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+
+os.chdir(dougDir)
+aa = os.listdir()
+bb = [ i for i in aa if 'JPG' in i]
+
+
+## our first row is a plot using one of these jpegs:
+ax1 = plt.subplot2grid((4,3), (0,0), colspan=3)
+img=mpimg.imread(bb[0])
+ax1.imshow(img)
+
+## sorta works. second row is doug's rasters of the leaves
+## these are in our polygon folders. How can we find this?
+
+cc = bb[0][0:-4]
+polDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons'
+os.chdir(polDir + "/" + cc)
+
+fp = os.listdir()
+
+for i in fp:
+    os.chdir(i)
+    geoj = [ i for i in os.listdir() if 'geojson' in i ][0]
+    petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly = parseGeoj(geoj)
+    ## insert print page
+    os.chdir(polDir + "/" + cc)
+
+
+## how do we plot this?
+
+
+
+## we want a side=by-side of our rasters. can we read them  and plot them?
+## meh, better done in matlab. 
+
+## skip to polygons
+## these we get from the geojsons, using our parsing function. 
+## need one from each directory
+
+
+#####################
+
+ax1 = plt.subplot2grid((3, 3), (0, 0), colspan=3)
+
+ax2 = plt.subplot2grid((3, 3), (1, 0), colspan=2)
+
+ax3 = plt.subplot2grid((3, 3), (1, 2), rowspan=2)
+ax4 = plt.subplot2grid((3, 3), (2, 0))
+ax5 = plt.subplot2grid((3, 3), (2, 1))
+
+## how to 
+
+def printPage(standPet, spotz, center, edge, throat):
+    fig, (ax1,ax2) = plt.subplots(nrows=2)
+    ## just petal and spots
+    xs, ys = standPet.exterior.xy
+    ax1.fill(xs, ys, "y")
+    ax1.set_aspect('equal')
+    for i in spotz:
+        xs, ys = i.exterior.xy
+        ax1.fill(xs, ys, "r")
+    ## second image, with zones
+    ax2.set_xlim(ax1.get_xlim())
+    ax2.set_ylim(ax1.get_ylim())
+    xs, ys = standPet.exterior.xy
+    ax2.set_aspect('equal')
+    ax2.fill(xs, ys, "y")
+    for i in spotz:
+        xs, ys = i.exterior.xy
+        ax2.fill(xs, ys, "r")
+    alp=0.5
+    l=5
+    ax2.add_patch(PolygonPatch(center,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+    ax2.add_patch(PolygonPatch(throat,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+    ax2.add_patch(PolygonPatch(edge,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+
+
+pZones( petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly)

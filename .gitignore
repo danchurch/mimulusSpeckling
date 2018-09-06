@@ -8,3 +8,4 @@ mkPDF/
 center/CenteredPipeline_220818.pdf
 *__pycache__*
 PolyPipeline_140818.pdf
+make_polygons/bigPDF

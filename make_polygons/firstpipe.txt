@@ -3666,9 +3666,11 @@ def plotYesZone (petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, x ,y):
                   fc='white', ec='black',
                   linewidth=l, alpha=alp))
 
+## make these into command line args?
 polDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons'
 dougDir='/home/daniel/Documents/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
 targetDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/bigPDF/testNew'
+
 os.chdir(dougDir)
 aa = os.listdir()
 bb = [ i for i in aa if 'JPG' in i]
@@ -3691,6 +3693,7 @@ for flowerJpg in bb:
     counter = 0 ## for keeping track of the 6 plots, second row
     for n,j in enumerate(['left', 'mid', 'right']):
         os.chdir(j)
+        print("We are on " + j)
         spotsCSV = [ i for i in os.listdir() if 'spots' in i ][0]
         petalCSV = [ i for i in os.listdir() if 'petal' in i ][0]
         ## get rasters as CSVs
@@ -3705,7 +3708,6 @@ for flowerJpg in bb:
         counter += 1
         ## get geojsons, turn them into polygons
         geoj = [ i for i in os.listdir() if 'geojson' in i ][0]
-        [ i for i in os.listdir() if 'geojson' in i ]
         print('current directory is:' + os.getcwd())
         petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly = parseGeoj(geoj)
         ## row 3 plot petal and spot geojsons
@@ -3715,7 +3717,6 @@ for flowerJpg in bb:
                 plotYesZone(petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, 3, n)
         except: 
             ax=plt.subplot2grid((4,3),(3,n)) ## blank
-        print("made it here")
         os.chdir(polDir + "/" + flowerName) ## go back to flower directory
     os.chdir(dougDir)
 
@@ -3734,3 +3735,76 @@ spotsPoly[0].is_empty
 centerPoly.is_empty
 edgePoly.is_empty
 throatPoly.is_empty
+
+##############
+
+## can we make a big pdf out of these?
+
+
+targetDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/bigPDF/testNew'
+
+cd $targetDir
+
+pdftk !(echo * | sort) cat output digitizeBigPDF.09.06.2018.pdf
+
+## okay, but text not searchable...
+
+
+
+import os, json 
+import numpy as np
+import shapely.geometry as sg
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+from descartes import PolygonPatch
+from makePDFs import parseGeoj
+
+
+
+## on the cases where there are no spots but all the petal 
+## plots as a spot, is this real? Is this what dougs rasters
+## say?
+
+## P439F1 left and mid did this. Check them out:
+
+wd='/home/daniel/Documents/mimulusSpeckling/make_polygons'
+polDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons'
+dougDir='/home/daniel/Documents/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+targetDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/bigPDF/testNew'
+flowerName='P439F1'
+
+os.chdir(dougDir)
+
+
+os.chdir(polDir + "/" + flowerName + "/" + 'left')
+
+#show doug's images:
+
+plt.ion()
+
+spotsCSV = [ i for i in os.listdir() if 'spots' in i ][0]
+petalCSV = [ i for i in os.listdir() if 'petal' in i ][0]
+petalMat = np.genfromtxt(petalCSV, delimiter=',')
+spotsMat = np.genfromtxt(spotsCSV, delimiter=',')
+
+fig = plt.figure()
+ax = plt.axes()
+ax.imshow(petalMat, cmap='gray')
+
+fig = plt.figure()
+ax = plt.axes()
+ax.imshow(spotsMat, cmap='gray')
+
+## looks real...
+
+## check one more:
+
+
+
+## lots to do -
+
+## get stats 
+## update nb
+## organize files - get geojsons where folks can use them
+
+

@@ -3834,6 +3834,38 @@ git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch make_polyg
 ## Melia asks that we then average flowers from
 ## the same plant together in all cases.
 
+## to plot geojson:
+def plotYesZone (petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly):
+    alp=0.3
+    l=2
+    fig = plt.figure()
+    ax1 = plt.axes()
+    ax1.set_xlim(min(petalPoly.exterior.xy[0]), max(petalPoly.exterior.xy[0]))
+    ax1.set_ylim(min(petalPoly.exterior.xy[1]), max(petalPoly.exterior.xy[1]))
+    ax1.set_aspect('equal')
+    ax1.add_patch(PolygonPatch(petalPoly,
+                  fc='yellow', ec='black',
+                  linewidth=l, alpha=1.0))
+    try:
+        ax1.add_patch(PolygonPatch(spotsPoly,
+                      fc='red', ec='black',
+                      linewidth=l, alpha=1.0))
+    except:
+        ax1.set_xlabel('No spots detected')
+    ax1.add_patch(PolygonPatch(centerPoly,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+    ax1.add_patch(PolygonPatch(edgePoly,
+                  fc='white', ec='black',
+                  linewidth=l, alpha=alp))
+    try:
+        ax1.add_patch(PolygonPatch(throatPoly,
+                      fc='white', ec='black',
+                      linewidth=l, alpha=alp))
+    except:
+        ax1.set_xlabel('throat and edges failed')
+
+
 ## our example petal:
 ## 297F2
 ## "right" lower petal
@@ -3841,6 +3873,7 @@ git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch make_polyg
 import os, json 
 import numpy as np
 import shapely.geometry as sg
+import shapely.ops as so
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from descartes import PolygonPatch
@@ -3854,19 +3887,216 @@ polyDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons'
 flowerName='P297F2'
 petalName='right'
 flpetDir= (polyDir + "/" + flowerName + "/" + petalName)
-
 gjName = [ i for i in os.listdir(flpetDir) if "geojson" in i ][0]
+petal, spots, center, edge, throat = parseGeoj(flpetDir + "/" + gjName)
 
-Petal, Spots, Center, Edge, Throat = parseGeoj(flpetDir + "/" + gjName)
+## just checking:
 
-## let's the first 3 together, very similar
+plt.ion()
 
-## 1 # spots entirely contained in center zone
-## 2 # spots touching center zone
-## 3 # spots mostly (>50%) in center zone
+plotYesZone(petal, spots, center, edge, throat)
+
+## let's play with edges:
 
 ## this would be a loop through the spots to see
 ## which spots are "within","intersecting", or have "more than 50% intersecting"
  
+## spots contained in center zone
+
+spots.intersects(edge)
+
+def plotOne(poly, l=2, a=1.0, col='yellow'):
+    fig = plt.figure()
+    ax1 = plt.axes()
+    ax1.set_xlim(min(poly.exterior.xy[0]), max(poly.exterior.xy[0]))
+    ax1.set_ylim(min(poly.exterior.xy[1]), max(poly.exterior.xy[1]))
+    ax1.set_aspect('equal')
+    ax1.add_patch(PolygonPatch(poly,
+                  fc=col, ec='black',
+                  linewidth=l, alpha=a))
+
+plotOne(edge)
+
+def addOne(poly, l=2, a=1.0, col='red'):
+    ax1 = plt.axes()
+    ax1.add_patch(PolygonPatch(poly,
+                  fc=col, ec='black',
+                  linewidth=l, alpha=a))
+
+plotOne(edge)
+addOne(spots, a=0.5)
+
+## edge isn't valid, why not?
+
+from shapely.validation import explain_validity
+
+explain_validity(edge)
+
+## self intersection. Can we buff it out?
+
+aa = edge.buffer(0.0) 
+aa.buffer(0.0).is_valid ## says its okay. 
+
+## check plot:
+
+edge = edge.buffer(0.0) 
+edge.is_valid
+
+plotOne(edge)
+
+## looks okay. Onward:
+
+for i,j in enumerate(spots):
+    print(i)
+    j.intersects(edge)
+
+## problem with second polygon:
+spots[1].is_valid ## nope
+
+plotOne(spots[1]) ## looks okay, what's wrong?
+
+explain_validity(spots[1]) ## another self intersect. Buff it?
+
+spots[1].buffer(0.0).is_valid ## looks okay
+
+spots[1] = spots[1].buffer(0.0) ## doesn't work. 
+
+## build new multipoly?
+
+aa = list(spots)
+aa[1] = aa[1].buffer(0.0)
+
+spots = sg.MultiPolygon(aa)
+
+
+[ i.intersects(edge) for i in spots ]
+
+sum([ i.intersects(edge) for i in spots ]) / len(spots)
+
+## that's cool, but wouldn't area be more informative?
+
+## in case artificial lumping of spots occurred?
+
+type(spots[0].intersection(edge))
+
+
+aa = spots[0].intersection(edge)
+
+
+aa.area
+ 
+## seems okay. To get all the intersections:
+
+spotsTouchEdge = [ i.intersection(edge) for i in spots ]
+
+## does this look right?
+spotsTouchEdge
+
+
+##  why all the weird objects in this?
+
+spotsTouchEdge[0].area
+
+plotOne(edge)
+
+addOne(spotsTouchEdge[0]) ## good
+addOne(spotsTouchEdge[1]) ## good
+
+addOne(spotsTouchEdge[2]) ## nope
+
+spotsTouchEdge[2].area
+
+spotsTouchEdge[2].is_empty
+
+
+[ i.is_empty for i in spotsTouchEdge ]
+
+[ type(i) for i in spotsTouchEdge ]
+
+## so whereever a collection happened, empty
+
+## and what about the multis?
+
+spotsTouchEdge[5]
+
+
+plotOne(edge)
+
+[ addOne(i, a=0.5, col='blue') for i in spotsTouchEdge[5] ]
+
+[ plotOne(i, a=0.5, col='blue') for i in spotsTouchEdge[5] ]
+
+plotOne(spotsTouchEdge[5][0])
+
+addOne(spotsTouchEdge[5][1])
+
+addOne(spots, a=0.2)
+
+## so they're legit. can we extract them, bring them to same
+## level of nestedness?
+
+list(spotsTouchEdge[5])
+
+## back to the beginning, add conditional to keep out the empties
+spotsTouchEdge = [ i.intersection(edge) for i in spots if i.intersects(edge) ]
+## make a list of lists, even of single polygons
+listz = [ list(i) if type(i) == sg.multipolygon.MultiPolygon else [i] for i in spotsTouchEdge ]
+unNest = sum(listz, []) ## seems to work... not sure why...
+## bring it back
+spotsTouchEdge =  sg.multipolygon.MultiPolygon(unNest)
+spotsTouchEdgeArea = sum([ i.area for i in spotsTouchEdge ])
+
+plotOne(edge)
+[ addOne(i, a=0.3) for i in spots ] 
+[ addOne(i, col='blue') for i in spotsTouchEdge ] 
+
+## okay, this can be used to find percent of edge covered by spots
+## and percent of spot area in the edge:
+
+## % edge covered by spots =
+
+spotsTouchEdge
+
+spotsTouchEdgeArea 
+
+edgeCoveredbySpots = spotsTouchEdgeArea / edge.area  ## in this case, 0.26
+
+## % spot area in the edge:
+
+propSpotsInEdge = spotsTouchEdgeArea / spots.area  ## in this case, 0.39
+
+## number of spots touching edge zone in some way
+
+nuSpotsTouchEdge = len(spotsTouchEdge)
+
+## how can tell how much of the actual edge has spot on it?
+
+## get the exterior of the petal as a linestring
+
+## make sure petal is valid:
+petal.is_valid ## nope
+## fix if possible:
+petal = petal.buffer(0.0)
+petal.is_valid ## yup
+
+def plotLine(lin):
+    ax1 = plt.axes()
+    ax1.plot(lin.xy[0],lin.xy[1])
+
+## so maybe:
+
+shared = spots[1].intersection(petal.exterior)
+
+
+## to get the edge that is covered by (all) spots:
+
+spotsTouchEdge
+
+plotOne(spotsTouchEdge[0])
+
+spotsTouchEdge[0]
+
+[ spots[i].intersection(petal.exterior).length for i in spotsTouchEdge ]
+
 
 

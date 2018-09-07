@@ -1,0 +1,35 @@
+Centeredness:
+
+1 # spots entirely contained in center zone
+2 # spots touching center zone
+3 # spots mostly in center zone
+4 avg distance to center of spots
+5 % center zone covered
+6 Spot on centroid
+
+
+Edgeness:
+
+7   Spots touching actual petal edge
+8   # spots touching edge zone
+9   # spots mostly in edge zone
+10  % edge zone covered
+11  % length of edge covered
+
+Throat:
+
+12 % throat zone covered
+13 # spots touching throat zone
+14 # spots mostly in throat zone
+15 # spots touching cut/base of throat zone
+
+General polygon:
+
+16  Biggest spot
+17  Smallest spot?
+18  Avg size
+19  Number of spots
+20  Spots in Distal end
+21  Spots in proximal end
+22  presence of distal center edge spot
+

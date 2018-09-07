@@ -3771,10 +3771,10 @@ wd='/home/daniel/Documents/mimulusSpeckling/make_polygons'
 polDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons'
 dougDir='/home/daniel/Documents/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
 targetDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/bigPDF/testNew'
-flowerName='P439F1'
+#flowerName='P439F1'
+flowerName='P430F1'
 
 os.chdir(dougDir)
-
 
 os.chdir(polDir + "/" + flowerName + "/" + 'left')
 
@@ -3806,5 +3806,67 @@ ax.imshow(spotsMat, cmap='gray')
 ## get stats 
 ## update nb
 ## organize files - get geojsons where folks can use them
+
+
+## ugh, gotta fix git. Some random large temp file is gumming
+## things up
+
+## not sure how this works, but here's a suggestion from stackoverflow
+git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch make_polygons/bigPDF/PolyPipeline_140818.pdf.part' HEAD
+
+
+## worked,  can we do the merge?
+
+
+##############################
+
+
+## polygons traits. 
+
+## we have a list of ~20 traits
+
+## the goal is code all of them for one petal. 
+
+## then automate to all three petals
+
+## then automate to all flowers. 
+
+## Melia asks that we then average flowers from
+## the same plant together in all cases.
+
+## our example petal:
+## 297F2
+## "right" lower petal
+
+import os, json 
+import numpy as np
+import shapely.geometry as sg
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+from descartes import PolygonPatch
+from makePDFs import parseGeoj
+
+
+## load the polygons:
+
+wd='/home/daniel/Documents/mimulusSpeckling/make_polygons'
+polyDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons'
+flowerName='P297F2'
+petalName='right'
+flpetDir= (polyDir + "/" + flowerName + "/" + petalName)
+
+gjName = [ i for i in os.listdir(flpetDir) if "geojson" in i ][0]
+
+Petal, Spots, Center, Edge, Throat = parseGeoj(flpetDir + "/" + gjName)
+
+## let's the first 3 together, very similar
+
+## 1 # spots entirely contained in center zone
+## 2 # spots touching center zone
+## 3 # spots mostly (>50%) in center zone
+
+## this would be a loop through the spots to see
+## which spots are "within","intersecting", or have "more than 50% intersecting"
+ 
 
 

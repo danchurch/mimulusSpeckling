@@ -7,29 +7,35 @@ Centeredness:
 5 % center zone covered
 6 Spot on centroid
 
-
 Edgeness:
 
-7   Spots touching actual petal edge
-8   # spots touching edge zone
-9   # spots mostly in edge zone
-10  % edge zone covered
-11  % length of edge covered
+7  # spots touching edge zone in some way = 'nuSpotsTouchEdge'
+8   % percent of total spot area in edge = 'propSpotsInEdge'
+9  # spots mostly in edge zone (>50%) = 'nuSpotsMostlyInEdge'
+10  % edge zone covered = 'edgeCoveredbySpots'
+11  % length of real petal edge (not zone) covered = 'realEdgeSpotted'
+12  avg dist of outline of spots to edge = 'avgDistSpotEdge2Edge'
+13  avg dist of centroid of spots to edge = 'avgDistSpotCentroid2Edge'
 
 Throat:
 
-12 % throat zone covered
-13 # spots touching throat zone
-14 # spots mostly in throat zone
-15 # spots touching cut/base of throat zone
+14 % throat zone covered
+15 # spots touching throat zone
+16 # spots mostly in throat zone
+17 # spots touching cut/base of throat zone
 
 General polygon:
 
-16  Biggest spot
-17  Smallest spot?
-18  Avg size
-19  Number of spots
-20  Spots in Distal end
-21  Spots in proximal end
-22  presence of distal center edge spot
+18  Biggest spot
+19  Smallest spot?
+20  Avg size
+21  Number of spots
+22  Spots in Distal end
+23  Spots in proximal end
+24  presence of distal center edge spot
+
+
+## figure them out
+## turn them into functions
+## make module that generates panda
 

@@ -3878,6 +3878,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from descartes import PolygonPatch
 from makePDFs import parseGeoj
+from statistics import mean
 
 
 ## load the polygons:
@@ -3987,87 +3988,87 @@ aa.area
  
 ## seems okay. To get all the intersections:
 
-spotsTouchEdge = [ i.intersection(edge) for i in spots ]
+partSpotsInEdge = [ i.intersection(edge) for i in spots ]
 
 ## does this look right?
-spotsTouchEdge
+partSpotsInEdge
 
 
 ##  why all the weird objects in this?
 
-spotsTouchEdge[0].area
+partSpotsInEdge[0].area
 
 plotOne(edge)
 
-addOne(spotsTouchEdge[0]) ## good
-addOne(spotsTouchEdge[1]) ## good
+addOne(partSpotsInEdge[0]) ## good
+addOne(partSpotsInEdge[1]) ## good
 
-addOne(spotsTouchEdge[2]) ## nope
+addOne(partSpotsInEdge[2]) ## nope
 
-spotsTouchEdge[2].area
+partSpotsInEdge[2].area
 
-spotsTouchEdge[2].is_empty
+partSpotsInEdge[2].is_empty
 
 
-[ i.is_empty for i in spotsTouchEdge ]
+[ i.is_empty for i in partSpotsInEdge ]
 
-[ type(i) for i in spotsTouchEdge ]
+[ type(i) for i in partSpotsInEdge ]
 
 ## so whereever a collection happened, empty
 
 ## and what about the multis?
 
-spotsTouchEdge[5]
+partSpotsInEdge[5]
 
 
 plotOne(edge)
 
-[ addOne(i, a=0.5, col='blue') for i in spotsTouchEdge[5] ]
+[ addOne(i, a=0.5, col='blue') for i in partSpotsInEdge[5] ]
 
-[ plotOne(i, a=0.5, col='blue') for i in spotsTouchEdge[5] ]
+[ plotOne(i, a=0.5, col='blue') for i in partSpotsInEdge[5] ]
 
-plotOne(spotsTouchEdge[5][0])
+plotOne(partSpotsInEdge[5][0])
 
-addOne(spotsTouchEdge[5][1])
+addOne(partSpotsInEdge[5][1])
 
 addOne(spots, a=0.2)
 
 ## so they're legit. can we extract them, bring them to same
 ## level of nestedness?
 
-list(spotsTouchEdge[5])
+list(partSpotsInEdge[5])
 
 ## back to the beginning, add conditional to keep out the empties
-spotsTouchEdge = [ i.intersection(edge) for i in spots if i.intersects(edge) ]
+partSpotsInEdge = [ i.intersection(edge) for i in spots if i.intersects(edge) ]
 ## make a list of lists, even of single polygons
-listz = [ list(i) if type(i) == sg.multipolygon.MultiPolygon else [i] for i in spotsTouchEdge ]
+listz = [ list(i) if type(i) == sg.multipolygon.MultiPolygon else [i] for i in partSpotsInEdge ]
 unNest = sum(listz, []) ## seems to work... not sure why...
 ## bring it back
-spotsTouchEdge =  sg.multipolygon.MultiPolygon(unNest)
-spotsTouchEdgeArea = sum([ i.area for i in spotsTouchEdge ])
+partSpotsInEdge =  sg.multipolygon.MultiPolygon(unNest)
+partSpotsInEdgeArea = sum([ i.area for i in partSpotsInEdge ])
 
 plotOne(edge)
 [ addOne(i, a=0.3) for i in spots ] 
-[ addOne(i, col='blue') for i in spotsTouchEdge ] 
+[ addOne(i, col='blue') for i in partSpotsInEdge ] 
 
 ## okay, this can be used to find percent of edge covered by spots
 ## and percent of spot area in the edge:
 
 ## % edge covered by spots =
 
-spotsTouchEdge
+partSpotsInEdge
 
-spotsTouchEdgeArea 
+partSpotsInEdgeArea 
 
-edgeCoveredbySpots = spotsTouchEdgeArea / edge.area  ## in this case, 0.26
+edgeCoveredbySpots = partSpotsInEdgeArea / edge.area  ## in this case, 0.26
 
 ## % spot area in the edge:
 
-propSpotsInEdge = spotsTouchEdgeArea / spots.area  ## in this case, 0.39
+propSpotsInEdge = partSpotsInEdgeArea / spots.area  ## in this case, 0.39
 
 ## number of spots touching edge zone in some way
 
-nuSpotsTouchEdge = len(spotsTouchEdge)
+nuSpotsTouchEdge = len(partSpotsInEdge)
 
 ## how can tell how much of the actual edge has spot on it?
 
@@ -4090,13 +4091,90 @@ shared = spots[1].intersection(petal.exterior)
 
 ## to get the edge that is covered by (all) spots:
 
-spotsTouchEdge
+partSpotsInEdge
 
-plotOne(spotsTouchEdge[0])
+plotOne(partSpotsInEdge[0])
 
-spotsTouchEdge[0]
+partSpotsInEdge[0]
 
-[ spots[i].intersection(petal.exterior).length for i in spotsTouchEdge ]
+spotEdges = sum([ i.intersection(petal.exterior).length for i in partSpotsInEdge ])
+
+realEdgeSpotted = spotEdges / petal.exterior.length ## 22% of petal edge is covered by spots
+
+[ i.intersection(petal.exterior).length for i in partSpotsInEdge ]
+
+#### how do get the distance from all spots to 
+
+## do we want edge to edge, or centroid to edge of the polygon. 
+
+## for one spot
+
+plotOne(petal)
+[ addOne(i) for i in spots ]
+
+plotOne(petal)
+[ addOne(i) for i in partSpotsInEdge ]
+
+## to get the distance from edge of spot to edge of petal?
+
+[ petal.exterior.distance(i) for i in spots if i.intersects(throat) ]
+
+petal.exterior.distance(spots[0])
+
+edge.exterior.distance(spots[0])
+
+plotOne(petal)
+[ addOne(i) for i in partSpotsInEdge ]
 
 
+[ i.intersects(edge) for i in spots ]
 
+## if throat worked, can we get a lower edge of the petal?
+flowerCut = throat.intersection(petal.exterior)
+notTube = [ i for i in spots if not i.intersects(flowerCut)] 
+## works but depends of throat, will need to try
+
+def plotLine(lin):
+    ax1 = plt.axes()
+    ax1.plot(lin.xy[0],lin.xy[1])
+
+plotOne(petal)
+addOne(throat)
+[ plotLine(i) for i in flowerCut ]
+
+## so how can we use this? 
+
+plotOne(petal)
+[ addOne(i) for i in notTube ]
+
+plotOne(petal)
+[ addOne(i) for i in spots ]
+
+## use this subset
+
+avgDistSpotEdgeEdge = mean([ petal.exterior.distance(i) for i in notTube ])
+
+avgDistSpotEdge2Edge 
+
+## can we do this with centroids?
+
+avgDistSpotCentroid2Edge = [ petal.exterior.distance(i.centroid) for i in notTube ]
+
+avgDistSpotCentroid2Edge
+
+
+## so, can we get just the spots that are mostly in the edge?
+
+
+len([ i for i in spots if i.intersects(edge) ])
+
+spotsMostlyInEdge = [ i for i in spots if (i.intersection(edge).area / i.area > 0.5) ]
+
+nuSpotsMostlyInEdge = len(spotsMostlyInEdge)
+
+plotOne(petal)
+[ addOne(i) for i in spotsMostlyInEdge ]
+
+nuSpotsMostlyInEdge
+
+## looks okay

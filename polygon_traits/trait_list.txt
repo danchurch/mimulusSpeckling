@@ -37,5 +37,7 @@ General polygon:
 
 ## figure them out
 ## turn them into functions
+## make a function that checks polys, tries to repair.
+## (should be in our digitization polies?)
 ## make module that generates panda
 

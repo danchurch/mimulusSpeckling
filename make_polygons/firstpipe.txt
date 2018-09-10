@@ -3879,6 +3879,7 @@ import matplotlib.image as mpimg
 from descartes import PolygonPatch
 from makePDFs import parseGeoj
 from statistics import mean
+from shapely.validation import explain_validity
 
 
 ## load the polygons:
@@ -3891,7 +3892,12 @@ flpetDir= (polyDir + "/" + flowerName + "/" + petalName)
 gjName = [ i for i in os.listdir(flpetDir) if "geojson" in i ][0]
 petal, spots, center, edge, throat = parseGeoj(flpetDir + "/" + gjName)
 
-## just checking:
+## cleanup polys
+
+edge = edge.buffer(0.0) 
+aa = list(spots)
+aa[1] = aa[1].buffer(0.0)
+spots = sg.MultiPolygon(aa)
 
 plt.ion()
 
@@ -3927,7 +3933,7 @@ def addOne(poly, l=2, a=1.0, col='red'):
 plotOne(edge)
 addOne(spots, a=0.5)
 
-## edge isn't valid, why not?
+## gotta check our polys, are they valid?
 
 from shapely.validation import explain_validity
 
@@ -3945,6 +3951,7 @@ edge.is_valid
 
 plotOne(edge)
 
+## do this for all polygons, make a function
 ## looks okay. Onward:
 
 for i,j in enumerate(spots):
@@ -3966,9 +3973,7 @@ spots[1] = spots[1].buffer(0.0) ## doesn't work.
 
 aa = list(spots)
 aa[1] = aa[1].buffer(0.0)
-
 spots = sg.MultiPolygon(aa)
-
 
 [ i.intersects(edge) for i in spots ]
 
@@ -4178,3 +4183,109 @@ plotOne(petal)
 nuSpotsMostlyInEdge
 
 ## looks okay
+
+## spots entirely in the edge:
+
+spotsContainedInEdge = sum([ i.within(edge) for i in spots ])
+
+[ i.within(edge) for i in spots ]
+
+edge.is_valid
+
+#################
+## centeredness 
+
+#### spotsContainedInCenter
+# spots entirely contained in center zone
+
+## if all polys are valid:
+
+## find all spots entirely in center using within()
+
+[ i.within(center) for i in spots ]
+
+plotOne(petal)
+addOne(center, col='orange')
+[ addOne(i,  a=0.3) for i in spots ]
+
+## none, this is a pretty strict measure and doesn't
+## give us much for error in spots that got 
+## merged in the image pipeline
+
+nuSpotsContainedInEdge = sum([ i.within(center) for i in spots ])
+
+##### nuSpotsTouchCenter
+
+## spots touching the centerzone:
+
+nuSpotsTouchCenter = sum([ i.intersects(center) for i in spots ])
+
+###### nuSpotsMostlyInCenter 
+
+## spots mostly in the centerzone:
+
+spotsMostlyInCenter = [ i for i in spots if (i.intersection(center).area / i.area > 0.5) ]
+
+nuSpotsMostlyInCenter = len(spotsMostlyInCenter)
+
+plotOne(petal)
+[ addOne(i, col='blue', a= 0.5) for i in spots ]
+[ addOne(i) for i in spotsMostlyInCenter ]
+addOne(center, col='orange', a=0.3)
+
+## looks okay.
+
+#### nuSpotCentroidsInCenter
+
+spotCentroidsInCenter = [ i for i in spots if (i.centroid.intersects(center)) ] 
+
+nuSpotCentroidsInCenter = sum([ i.centroid.intersects(center) for i in spots ] )
+
+plotOne(petal)
+[ addOne(i, col='blue', a= 0.5) for i in spots ]
+[ addOne(i) for i in spotCentroidsInCenter ]
+addOne(center, col='orange', a=0.3)
+ax1 = plt.gca()
+[ ax1.plot(i.centroid.x, i.centroid.y, "+", ms = 10) for i in spotCentroidsInCenter ]
+
+## looks okay. 
+
+#### avgDist2CenterAllSpots
+
+## we'll use centroids of spots, dist to petal centroid:
+
+[ i.centroid.distance(center.centroid) for i in spots ]
+
+avgDist2CenterAllSpots = mean([ i.centroid.distance(center.centroid) for i in spots ])
+
+
+#### avgDist2CenterCenterSpots
+
+spotsMostlyInCenter = [ i for i in spots if (i.intersection(center).area / i.area > 0.5) ]
+
+avgDist2CenterCenterSpots = mean([ i.centroid.distance(center.centroid) for i in spotsMostlyInCenter ])
+
+avgDist2CenterCenterSpots
+
+#### centerCoveredbySpots 
+
+partSpotsInCenter = [ i.intersection(center) for i in spots if i.intersects(center) ]
+## okay, but in case this divides up a spot and creates a multipolygon:
+## make a list of lists, even of single polygons
+listz = [ list(i) if type(i) == sg.multipolygon.MultiPolygon else [i] for i in partSpotsInCenter ]
+unNest = sum(listz, []) ## seems to work... not sure why...
+## bring it back
+partSpotsInCenter =  sg.multipolygon.MultiPolygon(unNest)
+
+partSpotsInCenterArea = sum([ i.area for i in partSpotsInCenter ])
+
+## and the money stat
+centerCoveredbySpots = partSpotsInCenterArea / center.area  ## in this case, 0.26
+
+plotOne(petal)
+[ addOne(i, col='blue', a= 0.5) for i in spots ]
+[ addOne(i) for i in partSpotsInCenter ]
+addOne(center, col='orange', a=0.3)
+## looks good...
+
+#### propSpotsInCenter

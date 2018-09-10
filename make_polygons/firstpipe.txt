@@ -4289,3 +4289,24 @@ addOne(center, col='orange', a=0.3)
 ## looks good...
 
 #### propSpotsInCenter
+
+## the above is how much of our center area is covered by 
+## spots.
+
+## but what percentage of our spotted area lies in the 
+## center?
+
+partSpotsInCenterArea
+
+propSpotsInCenter = partSpotsInCenterArea / spots.area  
+
+## seems to work.
+
+#### spotOnCentroid
+
+## is there a spot on the centroid of the petal? just true/false:
+
+spotOnCentroid = any([ i.intersects(petal.centroid) for i in spots ])
+
+
+

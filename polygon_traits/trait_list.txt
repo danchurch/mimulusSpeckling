@@ -1,38 +1,43 @@
 Centeredness:
 
-1 # spots entirely contained in center zone
-2 # spots touching center zone
-3 # spots mostly in center zone
-4 avg distance to center of spots
-5 % center zone covered
-6 Spot on centroid
+1 # spots entirely contained in center zone = 'spotsContainedInCenter'
+2 # spots touching center zone = 'nuSpotsTouchCenter'
+3 # spots mostly in center zone = 'nuSpotsMostlyInCenter'
+4 # spot centroids in center zone =  "nuSpotCentroidsInCenter'
+5 avg spot centroid distance to center of all spots = 'avgDist2CenterAllSpots'
+6 avg spot centroid distance to center of spots in center zone (excludes edge spots) = 'avgDist2CenterCenterSpots'
+7 % percent of total spot area in edge = 'propSpotsInCenter'
+8 % center zone covered by spots = 'centerCoveredbySpots'
+9 Spot on centroid = 'spotOnCentroid'
 
 Edgeness:
 
-7  # spots touching edge zone in some way = 'nuSpotsTouchEdge'
-8   % percent of total spot area in edge = 'propSpotsInEdge'
-9  # spots mostly in edge zone (>50%) = 'nuSpotsMostlyInEdge'
-10  % edge zone covered = 'edgeCoveredbySpots'
-11  % length of real petal edge (not zone) covered = 'realEdgeSpotted'
-12  avg dist of outline of spots to edge = 'avgDistSpotEdge2Edge'
-13  avg dist of centroid of spots to edge = 'avgDistSpotCentroid2Edge'
+10  # spots entirely contained in edge zone = 'nuSpotsContainedInEdge'
+11  # spots touching edge zone in some way = 'nuSpotsTouchEdge'
+12  % percent of total spot area in edge = 'propSpotsInEdge'
+13  # spots mostly in edge zone (>50%) = 'nuSpotsMostlyInEdge'
+14  % edge zone covered = 'edgeCoveredbySpots'
+15  % length of real petal edge (not zone) covered = 'realEdgeSpotted'
+16  avg dist of outline of spots to edge = 'avgDistSpotEdge2Edge'
+17  avg dist of centroid of spots to edge = 'avgDistSpotCentroid2Edge'
 
 Throat:
 
-14 % throat zone covered
-15 # spots touching throat zone
-16 # spots mostly in throat zone
-17 # spots touching cut/base of throat zone
+18 % throat zone covered
+19 % percent of total spot area in throat = 'propSpotsInthroat'
+20 # spots touching throat zone
+21 # spots mostly in throat zone
+22 # spots touching cut/base of throat zone
 
 General polygon:
 
-18  Biggest spot
-19  Smallest spot?
-20  Avg size
-21  Number of spots
-22  Spots in Distal end
-23  Spots in proximal end
-24  presence of distal center edge spot
+22  Biggest spot
+23  Smallest spot?
+24  Avg size
+25  Number of spots
+26  Spots in Distal end
+27  Spots in proximal end
+28  presence of distal center edge spot
 
 
 ## figure them out
@@ -40,4 +45,6 @@ General polygon:
 ## make a function that checks polys, tries to repair.
 ## (should be in our digitization polies?)
 ## make module that generates panda
+## convert to R for melia
+
 

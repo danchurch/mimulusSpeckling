@@ -4093,14 +4093,16 @@ def plotLine(lin):
 
 shared = spots[1].intersection(petal.exterior)
 
+#### nuSpotsTouchActualEdge
 
-## to get the edge that is covered by (all) spots:
+## to get the number of spots that contact the actual (not zone) edge:
 
-partSpotsInEdge
+nuSpotsTouchActualEdge = sum([ i.intersects(petal.exterior) for i in partSpotsInEdge ])
 
-plotOne(partSpotsInEdge[0])
 
-partSpotsInEdge[0]
+#### realEdgeSpotted
+
+## to get the actual (not zone) edge that is covered by spots:
 
 spotEdges = sum([ i.intersection(petal.exterior).length for i in partSpotsInEdge ])
 
@@ -4277,7 +4279,7 @@ unNest = sum(listz, []) ## seems to work... not sure why...
 ## bring it back
 partSpotsInCenter =  sg.multipolygon.MultiPolygon(unNest)
 
-partSpotsInCenterArea = sum([ i.area for i in partSpotsInCenter ])
+partSpotsInCenterArea = partSpotsInCenter.area
 
 ## and the money stat
 centerCoveredbySpots = partSpotsInCenterArea / center.area  ## in this case, 0.26
@@ -4307,6 +4309,109 @@ propSpotsInCenter = partSpotsInCenterArea / spots.area
 ## is there a spot on the centroid of the petal? just true/false:
 
 spotOnCentroid = any([ i.intersects(petal.centroid) for i in spots ])
+
+
+############# throat ############
+
+#### propSpotsInthroat
+
+partSpotsInThroat = [ i.intersection(throat) for i in spots if i.intersects(throat) ]
+## okay, but in case this divides up a spot and creates a multipolygon:
+## make a list of lists, even of single polygons
+listz = [ list(i) if type(i) == sg.multipolygon.MultiPolygon else [i] for i in partSpotsInThroat ]
+unNest = sum(listz, []) ## seems to work... not sure why...
+## bring it back
+partSpotsInThroat =  sg.multipolygon.MultiPolygon(unNest)
+
+propSpotsInThroat = partSpotsInThroat.area / spots.area  
+
+plotOne(petal)
+[ addOne(i, col='blue', a= 0.5) for i in spots ]
+[ addOne(i) for i in partSpotsInThroat ]
+addOne(throat, col='orange', a=0.3)
+
+#### throatCoveredbySpots
+
+throatCoveredbySpots = partSpotsInThroat.area / throat.area  
+
+throatCoveredbySpots 
+
+#### nuSpotsTouchThroat
+
+spotsTouchThroat = [ i.intersects(throat) for i in spots ]
+
+nuSpotsTouchThroat = sum(spotsTouchThroat)
+
+plotOne(petal)
+[ addOne(i, col='blue', a= 0.5) for i in spots ]
+[ addOne(i) for i in spots if i.intersects(throat) ]
+addOne(throat, col='orange', a=0.3)
+
+#### nuSpotsMostlyInThroat
+
+nuSpotsMostlyInThroat
+
+spotsMostlyInThroat = [ i for i in spots if (i.intersection(throat).area / i.area > 0.5) ]
+
+plotOne(petal)
+[ addOne(i, col='blue', a= 0.5) for i in spots ]
+[ addOne(i) for i in spotsMostlyInThroat ]
+addOne(throat, col='orange', a=0.3)
+
+## looks good. 
+
+#### nuSpotsTouchCut
+
+## how do we find the spots that acutally touch the base of the petal?
+
+spotsOnCut = [ i for i in partSpotsInThroat if i.intersects(petal.exterior) ]
+
+nuSpotsTouchCut = len(spotsOnCut)
+
+plotOne(petal)
+[ addOne(i, col='blue', a= 0.5) for i in spots ]
+[ addOne(i) for i in partSpotsInThroat ]
+[ addOne(i, col='green') for i in spotsOnCut ]
+addOne(throat, col='orange', a=0.3)
+
+############# general polygon stats #################
+
+#### biggestSpotArea
+
+## this is probably not gong to be useful till
+## we clean up the spot polygons.
+
+## how to find the largest spot...
+
+biggestSpotArea = max([ i.area for i in spots ])
+
+## don't need this but to ID the polygon:
+
+biggestSpot = [ i for i in spots if i.area == bigSpotArea ] 
+
+#### smallestSpotArea
+
+## not sure why to do this, but here we go:
+
+smallestSpotArea = min([ i.area for i in spots ])
+
+### avgSpotsize
+avgSpotsize = mean([ i.area for i in spots ])
+
+avgSpotsize
+
+### medSpotsize
+medSpotsize = np.median([ i.area for i in spots ])
+
+medSpotsize
+
+[ i.area for i in spots ]
+
+#### nuSpots
+
+nuSpots = len([ i.area for i in spots ])
+
+
 
 
 

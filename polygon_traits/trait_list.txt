@@ -12,7 +12,7 @@ Centeredness:
 6  # spots entirely contained in center zone = 'spotsContainedInCenter'
 7  # spots touching center zone = 'nuSpotsTouchCenter'
 8  # spots mostly in center zone = 'nuSpotsMostlyInCenter'
-9  # spot centroids in center zone =  "nuSpotCentroidsInCenter'
+9  # spot centroids in center zone =  'nuSpotCentroidsInCenter'
 10 avg spot centroid distance to center of all spots = 'avgDist2CenterAllSpots'
 11 avg spot centroid distance to center of spots in center zone (excludes edge spots) = 'avgDist2CenterCenterSpots'
 12 % percent of total spot area in center = 'propSpotsInCenter'
@@ -41,31 +41,29 @@ Throat:
 
 Regions of petal, by quadrant (as oriented in my pipeline)
 
-33 Spots with centroids in proximal half (quadrants I and II) = 'nuProxSpots'
-34 % of total spot area in proximal half (quadrants I and II) = 'propSpotsInProx'
-35 % proximal half covered by spots (quadrants I and II) = 'proxCoveredbySpots'
+29 Spots with centroids in proximal half (quadrants I and II) = 'nuProxSpots'
+30 % of total spot area in proximal half (quadrants I and II) = 'propSpotsInProx'
+31 % proximal half covered by spots (quadrants I and II) = 'proxCoveredbySpots'
 
-36 Spots with centroids in Distal half (quadrants III and IV) = 'nuDistSpots'
-37 % of total spot area in Distal half (quadrants III and IV) = 'propSpotsInDist'       
-38 % Distal half covered by spots (quadrants III and IV) = 'distCoveredbySpots'
+32 Spots with centroids in Distal half (quadrants III and IV) = 'nuDistSpots'
+33 % of total spot area in Distal half (quadrants III and IV) = 'propSpotsInDist'       
+34 % Distal half covered by spots (quadrants III and IV) = 'distCoveredbySpots'
 
-39 Spots with centroids in quadrant I = 'nuQuadISpots'
-40 % of total spot area in quadrant I = 'propSpotsInQuadI'
-41 % quadrant I covered by spots = 'quadICoveredbySpots'
+35 Spots with centroids in quadrant I = 'nuQuadISpots'
+36 % of total spot area in quadrant I = 'propSpotsInQuadI'
+37 % quadrant I covered by spots = 'quadICoveredbySpots'
 
-42 Spots with centroids in quadrant II = 'nuQuadIISpots'
-43 % of total spot area in quadrant II = 'propSpotsInQuadII'
-44 % quadrant II covered by spots = 'quadIICoveredbySpots'
+38 Spots with centroids in quadrant II = 'nuQuadIISpots'
+39 % of total spot area in quadrant II = 'propSpotsInQuadII'
+40 % quadrant II covered by spots = 'quadIICoveredbySpots'
 
+41 Spots with centroids in quadrant III = 'nuQuadIIISpots'
+42 % of total spot area in quadrant III = 'quadIIISpotsInQuadIII'
+43 % quadrant III covered by spots = 'quadIIICoveredbySpots'
 
-45 Spots with centroids in quadrant III = 'nuQuadIIISpots'
-46 % of total spot area in quadrant III = 'quadIIISpotsInQuadIII'
-47 % quadrant III covered by spots = 'quadIIICoveredbySpots'
-
-
-48 Spots with centroids in quadrant IV = 'nuQuadIVSpots'
-49 % of total spot area in quadrant IV = 'propSpotsInQuadIV'
-50 % quadrant IV covered by spots = 'quadIVCoveredbySpots'
+44 Spots with centroids in quadrant IV = 'nuQuadIVSpots'
+45 % of total spot area in quadrant IV = 'propSpotsInQuadIV'
+46 % quadrant IV covered by spots = 'quadIVCoveredbySpots'
 
 
 ## figure them out

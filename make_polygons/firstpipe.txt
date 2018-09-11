@@ -342,6 +342,8 @@ tail test2.svg
 ########################################################
 
 import numpy as np
+op')
+
 import matplotlib.pyplot as plt
 from skimage import data, io, filters, measure
 
@@ -3876,6 +3878,7 @@ import shapely.geometry as sg
 import shapely.ops as so
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import pandas as pd
 from descartes import PolygonPatch
 from makePDFs import parseGeoj
 from statistics import mean
@@ -4214,7 +4217,7 @@ addOne(center, col='orange')
 ## give us much for error in spots that got 
 ## merged in the image pipeline
 
-nuSpotsContainedInEdge = sum([ i.within(center) for i in spots ])
+nuSpotsContainedInCenter = sum([ i.within(center) for i in spots ])
 
 ##### nuSpotsTouchCenter
 
@@ -4395,15 +4398,15 @@ biggestSpot = [ i for i in spots if i.area == bigSpotArea ]
 
 smallestSpotArea = min([ i.area for i in spots ])
 
-### avgSpotsize
-avgSpotsize = mean([ i.area for i in spots ])
+### avgSpotSize
+avgSpotSize = mean([ i.area for i in spots ])
 
-avgSpotsize
+avgSpotSize
 
-### medSpotsize
-medSpotsize = np.median([ i.area for i in spots ])
+### medSpotSize
+medSpotSize = np.median([ i.area for i in spots ])
 
-medSpotsize
+medSpotSize
 
 [ i.area for i in spots ]
 
@@ -4551,7 +4554,195 @@ addOne(distBox, a=0.3, col='white')
 
 
 
+## can we make a single row dataframe?
 
-## okay, now to make a module out of this mess. 
+## seems like maybe a dictionary is the way to make a row. 
+
+## we have ~46 traits? oh jeez...
+
+
+
+
+
+## module
+
+## 0) import stuff
+
+## 1) function for each value, also function for
+## cleaning up polys
+
+## 2) create a class. Attributes will be made with 
+## the above functions
+
+## 3) script to deal with all files using these tools
+
+from shapely.validation import explain_validity
+
+buildDataFrame.py
+#################################################
+#!/user/bin/env python3
+
+import os, json 
+import numpy as np
+import shapely.geometry as sg
+import shapely.ops as so
+import matplotlib.pyplot as plt
+import pandas as pd
+from descartes import PolygonPatch
+from statistics import mean
+
+####################
+## functions here ##
+####################
+
+################
+## class here ##
+################
+
+
+class Flower():
+    def __init__(self):
+                self.flowerName = None
+                self.geojson = None
+                self.petal = None
+                self.spots = None
+                self.center = None
+                self.edge = None
+                self.throat = None
+
+                self.biggestSpotArea = None
+                self.smallestSpotArea = None
+                self.avgSpotSize = None
+                self.medSpotSize = None
+                self.nuSpots = None
+
+                self.nuSpotsContainedInCenter = None
+
+                self.nuSpotsTouchCenter = None
+                self.nuSpotsMostlyInCenter = None
+                self.nuSpotCentroidsInCenter = None
+                self.avgDist2CenterAllSpots = None
+                self.avgDist2CenterCenterSpots = None
+                self.propSpotsInCenter = None
+                self.centerCoveredbySpots = None
+                self.spotOnCentroid = None
+
+                self.nuSpotsContainedInEdge = None
+                self.nuSpotsTouchEdge = None
+                self.propSpotsInEdge = None
+                self.nuSpotsMostlyInEdge = None
+                self.edgeCoveredbySpots = None
+                self.nuSpotsTouchActualEdge = None
+                self.realEdgeSpotted = None
+                self.avgDistSpotEdge2Edge = None
+                self.avgDistSpotCentroid2Edge = None
+
+                self.throatCoveredbySpots = None
+                self.propSpotsInthroat = None
+                self.nuSpotsTouchThroat = None
+                self.nuSpotsMostlyInThroat = None
+                self.nuSpotsTouchCut = None
+
+                self.nuProxSpots = None
+                self.propSpotsInProx = None
+                self.proxCoveredbySpots = None
+
+                self.nuDistSpots = None
+                self.propSpotsInDist = None
+                self.distCoveredbySpots = None
+
+                self.nuQuadISpots = None
+                self.propSpotsInQuadI = None
+                self.quadICoveredbySpots = None
+
+                self.nuQuadIISpots = None
+                self.propSpotsInQuadII = None
+                self.quadIICoveredbySpots = None
+
+                self.nuQuadIIISpots = None
+                self.quadIIISpotsInQuadIII = None
+                self.quadIIICoveredbySpots = None
+
+                self.nuQuadIVSpots = None
+                self.propSpotsInQuadIV = None
+                self.quadIVCoveredbySpots = None
+
+    def parseGeoJson(self, geoj):
+        with open(geoj) as gjf:
+            aa = json.load(gjf)
+            listP = (aa['features'])
+            try:
+                petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry']
+                self.petal = sg.shape(petalGJ)
+            except:
+                self.petal = sg.polygon.Polygon()
+            try:
+                spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry']
+                self.spots= sg.shape(spotsGJ)
+            except:
+                self.spots = sg.polygon.Polygon()
+            try:
+                centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry']
+                self.center = sg.shape(centerGJ)
+            except:
+                self.center = sg.polygon.Polygon()
+            try:
+                edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry']
+                self.edge = sg.shape(edgeGJ)
+            except:
+                self.edge = sg.polygon.Polygon()
+            try:
+                throatGJ = [ i for i in listP if i['properties']['id'] == 'Throat' ][0]['geometry']
+                self.throat = sg.shape(throatGJ)
+            except:
+                self.throat = sg.polygon.Polygon()
+    ## function to clean (multi)polygons if self-intersecting 
+    def cleanPolys(self, poly):
+        if poly.is_valid:
+            print('Polygon is ok! Returning it as is.')
+            return(poly)
+        elif not poly.is_valid:
+            polyBuff = poly.buffer(0.0)
+            print('Polygon is not valid...buffering...')
+        if not polyBuff.is_valid:
+            print('Unable to clean ' + flowerName + ' Still invalid. Returning empty polygon.')
+            return(sg.polygon.Polygon())
+        if polyBuff.is_valid:
+            print('Returning shiny new (multi)polygon.')
+            return(polyBuff)
+
+if __name__ == '__main__':
+
+
+## this should accept the geojson object, parse it, 
+## produce all available statistics, and export these
+## in a form that can be used as a row in a dataframe
+## also plotting functions. 
+
+## so how to do this...
+
+## write all functions for parsing, cleaning, 
+## stats, and plotting. Place above. 
+
+## can one of the flower methods be filling out its out attributes?
+
+## where is our geojson for the sample flower?
+
+aa = Flower()
+aa.geojson="/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/P297F2/right/P297F2_right_polys.geojson"
+aa.parseGeoJson(aa.geojson)
+
+aa.petal
+
+aa.spots.is_valid
+
+aa.spots = aa.cleanPolys(aa.spots)
+
+aa.spots
+
+
+plotOne(aa.petal)
+[ addOne(i) for i in aa.spots ]
+
 
 

@@ -1,51 +1,71 @@
-Centeredness:
-
-1 # spots entirely contained in center zone = 'spotsContainedInCenter'
-2 # spots touching center zone = 'nuSpotsTouchCenter'
-3 # spots mostly in center zone = 'nuSpotsMostlyInCenter'
-4 # spot centroids in center zone =  "nuSpotCentroidsInCenter'
-5 avg spot centroid distance to center of all spots = 'avgDist2CenterAllSpots'
-6 avg spot centroid distance to center of spots in center zone (excludes edge spots) = 'avgDist2CenterCenterSpots'
-7 % percent of total spot area in center = 'propSpotsInCenter'
-8 % center zone covered by spots = 'centerCoveredbySpots'
-9 Spot on centroid = 'spotOnCentroid'
-
-Edgeness:
-
-10  # spots entirely contained in edge zone = 'nuSpotsContainedInEdge'
-11  # spots touching edge zone in some way = 'nuSpotsTouchEdge'
-12  % percent of total spot area in edge = 'propSpotsInEdge'
-13  # spots mostly in edge zone (>50%) = 'nuSpotsMostlyInEdge'
-14  % edge zone covered = 'edgeCoveredbySpots'
-15  # spots touching actual edge (not zone)  = 'nuSpotsTouchActualEdge'
-16  % length of real petal edge (not zone) covered = 'realEdgeSpotted'
-17  avg dist of outline of spots to edge = 'avgDistSpotEdge2Edge'
-18  avg dist of centroid of spots to edge = 'avgDistSpotCentroid2Edge'
-
-Throat:
-
-19 % throat zone covered = 'throatCoveredbySpots'
-20 % percent of total spot area in throat = 'propSpotsInthroat'
-21 # spots touching throat zone = 'nuSpotsTouchThroat'
-22 # spots mostly in throat zone = 'nuSpotsMostlyInThroat'
-23 # spots touching actual cut/base = 'nuSpotsTouchCut'
 
 General polygon:
 
-24  Biggest spot = 'biggestSpotArea'
-25  Smallest spot (is this useful at all?) = 'smallestSpotArea'
-26  Avg size = 'avgSpotsize'
-26  Median size = 'medSpotsize'
-27  Number of spots = 'nuSpots'
+1  Biggest spot = 'biggestSpotArea'
+2  Smallest spot (is this useful at all?) = 'smallestSpotArea'
+3  Avg size = 'avgSpotsize'
+4  Median size = 'medSpotsize'
+5  Number of spots = 'nuSpots'
+
+Centeredness:
+
+6  # spots entirely contained in center zone = 'spotsContainedInCenter'
+7  # spots touching center zone = 'nuSpotsTouchCenter'
+8  # spots mostly in center zone = 'nuSpotsMostlyInCenter'
+9  # spot centroids in center zone =  "nuSpotCentroidsInCenter'
+10 avg spot centroid distance to center of all spots = 'avgDist2CenterAllSpots'
+11 avg spot centroid distance to center of spots in center zone (excludes edge spots) = 'avgDist2CenterCenterSpots'
+12 % percent of total spot area in center = 'propSpotsInCenter'
+13 % center zone covered by spots = 'centerCoveredbySpots'
+14 Spot on centroid = 'spotOnCentroid'
+
+Edgeness:
+
+15 # spots entirely contained in edge zone = 'nuSpotsContainedInEdge'
+16 # spots touching edge zone in some way = 'nuSpotsTouchEdge'
+17 % percent of total spot area in edge = 'propSpotsInEdge'
+18 # spots mostly in edge zone (>50%) = 'nuSpotsMostlyInEdge'
+19 % edge zone covered = 'edgeCoveredbySpots'
+20 # spots touching actual edge (not zone)  = 'nuSpotsTouchActualEdge'
+21 % length of real petal edge (not zone) covered = 'realEdgeSpotted'
+22 avg dist of outline of spots to edge = 'avgDistSpotEdge2Edge'
+23 avg dist of centroid of spots to edge = 'avgDistSpotCentroid2Edge'
+
+Throat:
+
+24 % throat zone covered = 'throatCoveredbySpots'
+25 % percent of total spot area in throat = 'propSpotsInthroat'
+26 # spots touching throat zone = 'nuSpotsTouchThroat'
+27 # spots mostly in throat zone = 'nuSpotsMostlyInThroat'
+28 # spots touching actual cut/base = 'nuSpotsTouchCut'
 
 Regions of petal, by quadrant (as oriented in my pipeline)
 
-28  Spots in proximal half (quadrants I and II)
-29  Spots in Distal half (quadrants III and IV)
-30  Spots in quadrant I
-31  Spots in quadrant II
-32  Spots in quadrant III
-33  Spots in quadrant IV
+33 Spots with centroids in proximal half (quadrants I and II) = 'nuProxSpots'
+34 % of total spot area in proximal half (quadrants I and II) = 'propSpotsInProx'
+35 % proximal half covered by spots (quadrants I and II) = 'proxCoveredbySpots'
+
+36 Spots with centroids in Distal half (quadrants III and IV) = 'nuDistSpots'
+37 % of total spot area in Distal half (quadrants III and IV) = 'propSpotsInDist'       
+38 % Distal half covered by spots (quadrants III and IV) = 'distCoveredbySpots'
+
+39 Spots with centroids in quadrant I = 'nuQuadISpots'
+40 % of total spot area in quadrant I = 'propSpotsInQuadI'
+41 % quadrant I covered by spots = 'quadICoveredbySpots'
+
+42 Spots with centroids in quadrant II = 'nuQuadIISpots'
+43 % of total spot area in quadrant II = 'propSpotsInQuadII'
+44 % quadrant II covered by spots = 'quadIICoveredbySpots'
+
+
+45 Spots with centroids in quadrant III = 'nuQuadIIISpots'
+46 % of total spot area in quadrant III = 'quadIIISpotsInQuadIII'
+47 % quadrant III covered by spots = 'quadIIICoveredbySpots'
+
+
+48 Spots with centroids in quadrant IV = 'nuQuadIVSpots'
+49 % of total spot area in quadrant IV = 'propSpotsInQuadIV'
+50 % quadrant IV covered by spots = 'quadIVCoveredbySpots'
 
 
 ## figure them out
@@ -54,5 +74,8 @@ Regions of petal, by quadrant (as oriented in my pipeline)
 ## (should be in our digitization polies?)
 ## make module that generates panda
 ## convert to R for melia
+
+
+## how flexible are we? can we do glms of multiple loci or with multiple traits?
 
 

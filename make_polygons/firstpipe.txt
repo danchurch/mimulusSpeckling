@@ -3882,6 +3882,7 @@ from statistics import mean
 from shapely.validation import explain_validity
 
 
+
 ## load the polygons:
 
 wd='/home/daniel/Documents/mimulusSpeckling/make_polygons'
@@ -3935,7 +3936,6 @@ addOne(spots, a=0.5)
 
 ## gotta check our polys, are they valid?
 
-from shapely.validation import explain_validity
 
 explain_validity(edge)
 
@@ -4412,6 +4412,146 @@ medSpotsize
 nuSpots = len([ i.area for i in spots ])
 
 
+################## quadrants ####################
 
+## let's run through one quadrant. We should be able
+## to get a nice function for this:
+
+###### quad I ######
+
+#### nuQuadISpots 
+## in quad I, centroids need to be positive both X and y:
+
+[ i for i in spots if i.centroid.x > 0 and i.centroid.y > 0 ]
+quadIspots = [ i for i in spots if i.centroid.x > 0 and i.centroid.y > 0 ]
+nuQuadISpots = len(quadIspots)
+
+#### quadICoveredbySpots & propSpotsInQuadI
+
+## make a box for quadI: 
+quadIbox=sg.box(0,0,1,1)
+## get the area of our petal in this box:
+petalQuadI = petal.intersection(quadIbox)
+## get the area of spots that fall into this 
+spottedSurfaceQuadI = spots.intersection(petalQuadI)
+quadICoveredbySpots = spottedSurfaceQuadI.area / petalQuadI.area
+propSpotsInQuadI = spottedSurfaceQuadI.area / spots.area
+
+
+###### Quad II ###### 
+
+#### nuQuadIISpots 
+## in quad II, centroids need to be positive on y-axis and neg on x-axis
+
+[ i for i in spots if i.centroid.x > 0 and i.centroid.y > 0 ]
+quadIIspots = [ i for i in spots if i.centroid.x < 0 and i.centroid.y > 0 ]
+nuQuadIISpots = len(quadIIspots)
+
+#### quadIICoveredbySpots & propSpotsInQuadII
+## spotted surface in quadII / total area of spots 
+
+## make a box for quadII: 
+quadIIbox=sg.box(0,0,-1,1)
+## get the area of our petal in this box:
+petalQuadII = petal.intersection(quadIIbox)
+## get the area of spots that fall into this 
+spottedSurfaceQuadII = spots.intersection(petalQuadII)
+quadIICoveredbySpots = spottedSurfaceQuadII.area / petalQuadII.area
+propSpotsInQuadII = spottedSurfaceQuadII.area / spots.area
+
+
+####### quad III  ######
+#### nuQuadIIISpots 
+
+## in quad III, centroids need to be neg both X and y:
+[ i for i in spots if i.centroid.x < 0 and i.centroid.y < 0 ]
+quadIIIspots = [ i for i in spots if i.centroid.x < 0 and i.centroid.y < 0 ]
+nuQuadIIISpots = len(quadIIIspots)
+
+#### quadIIICoveredbySpots & propSpotsInQuadIII
+## spotted surface in quadIII / total area of spots 
+
+## make a box for quadIII: 
+quadIIIbox=sg.box(-1,-1,0,0)
+## get the area of our petal in this box:
+petalQuadIII = petal.intersection(quadIIIbox)
+## get the area of spots that fall into this 
+spottedSurfaceQuadIII = spots.intersection(petalQuadIII)
+quadIIICoveredbySpots = spottedSurfaceQuadIII.area / petalQuadIII.area
+propSpotsInQuadIII = spottedSurfaceQuadIII.area / spots.area
+
+
+###### QuadIV #######
+#### nuQuadIVSpots 
+## in quad IV, centroids need to be neg on y-axis and pos on x-axis
+
+[ i for i in spots if i.centroid.x > 0 and i.centroid.y < 0 ]
+
+quadIVspots = [ i for i in spots if i.centroid.x > 0 and i.centroid.y < 0 ]
+nuQuadIVSpots = len(quadIVspots)
+
+#### quadIVCoveredbySpots & propSpotsInQuadIV
+## spotted surface in quadIV / total area of spots 
+
+## make a box for quadIV: 
+quadIVbox=sg.box(0,-1,1,0)
+## get the area of our petal in this box:
+petalQuadIV = petal.intersection(quadIVbox)
+## get the area of spots that fall into this 
+spottedSurfaceQuadIV = spots.intersection(petalQuadIV)
+quadIVCoveredbySpots = spottedSurfaceQuadIV.area / petalQuadIV.area
+propSpotsInQuadIV = spottedSurfaceQuadIV.area / spots.area
+
+## good plotting sequence to see the spots in a quad
+plotOne(petal)
+addOne(quadIVbox, a=0.3, col='white')
+[ addOne(i, col='blue', a= 0.5) for i in spots ]
+[ addOne(i, col='red') for i in spottedSurfaceQuadIV ]
+
+
+###### Proximal half #####
+
+## should be additive, right?:
+## proximal should be one and two:
+
+## make a box 
+proxBox=sg.box(-1,0,1,1)
+## get the area of our petal in this box:
+petalProx = petal.intersection(proxBox)
+## get the area of spots that fall into this 
+spottedSurfaceProx = spots.intersection(petalProx)
+proxCoveredbySpots = spottedSurfaceProx.area / petalProx.area
+propSpotsInProx = spottedSurfaceProx.area / spots.area
+
+
+
+plotOne(petal)
+addOne(proxBox, a=0.3, col='white')
+[ addOne(i, col='blue', a= 0.5) for i in spots ]
+[ addOne(i, col='red') for i in spottedSurfaceProx ]
+
+###### Distal half #####
+
+## make a box 
+distBox=sg.box(-1,-1,1,0)
+## get the area of our petal in this box:
+petalDist = petal.intersection(distBox)
+## get the area of spots that fall into this 
+spottedSurfaceDist = spots.intersection(petalDist)
+distCoveredbySpots = spottedSurfaceDist.area / petalDist.area
+propSpotsInDist = spottedSurfaceDist.area / spots.area
+
+petalProx.area + petalDist.area
+propSpotsInDist + propSpotsInProx ## works.
+
+plotOne(petal)
+addOne(distBox, a=0.3, col='white')
+[ addOne(i, col='blue', a= 0.5) for i in spots ]
+[ addOne(i, col='red') for i in spottedSurfaceDist ]
+
+
+
+
+## okay, now to make a module out of this mess. 
 
 

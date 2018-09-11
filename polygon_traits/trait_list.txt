@@ -31,6 +31,9 @@ Edgeness:
 22 avg dist of outline of spots to edge = 'avgDistSpotEdge2Edge'
 23 avg dist of centroid of spots to edge = 'avgDistSpotCentroid2Edge'
 
+* 22 and 23 exclude spots that contact the basal cut on the petal, if possible
+* and measures the distance to the actual edge of the petal, not the zone
+
 Throat:
 
 24 % throat zone covered = 'throatCoveredbySpots'

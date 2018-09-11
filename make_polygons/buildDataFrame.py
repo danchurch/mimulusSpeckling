@@ -13,6 +13,14 @@ from statistics import mean
 ## functions here ##
 ####################
 
+def cleanFlower(flower):
+    flower.petal = flower.cleanPolys(flower.petal)
+    flower.spots = flower.cleanPolys(flower.spots)
+    flower.center = flower.cleanPolys(flower.center)
+    flower.edge = flower.cleanPolys(flower.edge)
+    flower.throat = flower.cleanPolys(flower.throat)
+    return(flower)
+
 ################
 ## class here ##
 ################
@@ -113,6 +121,7 @@ class Flower():
         if not polyBuff.is_valid:
             print('Unable to clean ' + flowerName + ' Still invalid. Returning empty polygon.')
             return(sg.polygon.Polygon())
+        else:
             print('Returning shiny new (multi)polygon.')
             return(polyBuff)
     ############ stats ##############################
@@ -154,7 +163,125 @@ class Flower():
         except:
             print('unable to calulate nuSpotsContainedInCenter')
             nuSpotsContainedInCenter = None
+        try:
+            nuSpotsTouchCenter = sum([ i.intersects(self.center) for i in self.spots ])
+        except:
+            print('unable to calulate nuSpotsTouchCenter')
+            nuSpotsTouchCenter = None
+        try:
+            spotsMostlyInCenter = [ i for i in self.spots if (i.intersection(self.center).area / i.area > 0.5) ]
+            nuSpotsMostlyInCenter = len(spotsMostlyInCenter)
+        except:
+            print('unable to calulate nuSpotsMostlyInCenter')
+            nuSpotsMostlyInCenter = None
+        try:
+            nuSpotCentroidsInCenter = sum([ i.centroid.intersects(self.center) for i in self.spots ] )
+        except:
+            print('unable to calulate nuSpotCentroidsInCenter')
+            nuSpotCentroidsInCenter = None
+        try:
+            avgDist2CenterAllSpots = mean([ i.centroid.distance(self.center.centroid) for i in self.spots ])
+        except:
+            print('unable to calulate avgDist2CenterAllSpots')
+            avgDist2CenterAllSpots = None
+        try:
+            spotsMostlyInCenter = [ i for i in self.spots if (i.intersection(self.center).area / i.area > 0.5) ]
+            avgDist2CenterCenterSpots = mean([ i.centroid.distance(self.center.centroid) for i in spotsMostlyInCenter ])
+        except:
+            print('unable to calulate avgDist2CenterCenterSpots')
+            avgDist2CenterCenterSpots = None
+        try:
+            partSpotsInCenter = [ i.intersection(self.center) for i in self.spots if i.intersects(self.center) ]
+            ## this makes multipolys often. To handle this...
+            ## make a list of lists, even of single polygons
+            listz = [ list(i) if type(i) == sg.multipolygon.MultiPolygon else [i] for i in partSpotsInCenter ]
+            unNest = sum(listz, []) ## seems to work... not sure why...
+            ## bring it back
+            partSpotsInCenter = sg.multipolygon.MultiPolygon(unNest)
+            propSpotsInCenter = partSpotsInCenter.area / self.spots.area
+            centerCoveredbySpots = partSpotsInCenter.area / self.center.area 
+        except:
+            print('unable to calulate propSpotsInCenter and centerCoveredbySpots')
+            propSpotsInCenter = None
+        try:
+            spotOnCentroid = any([ i.intersects(self.petal.centroid) for i in self.spots ])
+        except:
+            print('unable to calulate spotOnCentroid')
+            spotOnCentroid = None
         return(nuSpotsContainedInCenter,
+                nuSpotsTouchCenter,
+                nuSpotsMostlyInCenter,
+                nuSpotCentroidsInCenter,
+                avgDist2CenterAllSpots,
+                avgDist2CenterCenterSpots,
+                propSpotsInCenter,
+                centerCoveredbySpots,
+                spotOnCentroid,
+                )
+    def find_EdgeStats(self):
+        try:
+            nuSpotsContainedInEdge = sum([ i.within(self.edge) for i in self.spots ])
+        except:
+            print('unable to calulate nuSpotsContainedInEdge')
+            nuSpotsContainedInEdge = None
+        try:
+            nuSpotsTouchEdge = sum([ i.intersects(self.edge) for i in self.spots ])
+        except:
+            print('unable to calulate nuSpotsTouchEdge')
+            nuSpotsTouchEdge = None
+        try:
+            partSpotsInEdge = [ i.intersection(self.edge) for i in self.spots if i.intersects(self.edge) ]
+            ## make a list of lists, even of single polygons
+            listz = [ list(i) if type(i) == sg.multipolygon.MultiPolygon else [i] for i in partSpotsInEdge ]
+            unNest = sum(listz, []) ## seems to work... not sure why...
+            ## bring it back
+            partSpotsInEdge =  sg.multipolygon.MultiPolygon(unNest)
+            propSpotsInEdge = partSpotsInEdge.area / self.spots.area 
+        except:
+            print('unable to calulate propSpotsInEdge')
+            propSpotsInEdge = None
+        try:
+            nuSpotsMostlyInEdge = nuSpotsMostlyInEdge = len([ i for i in self.spots if (i.intersection(self.edge).area / i.area > 0.5) ])
+        except:
+            print('unable to calulate nuSpotsMostlyInEdge')
+            nuSpotsMostlyInEdge = None
+        try:
+            edgeCoveredbySpots = partSpotsInEdge.area / self.edge.area  
+        except:
+            print('unable to calulate edgeCoveredbySpots')
+            edgeCoveredbySpots = None
+        try:
+            nuSpotsTouchActualEdge = sum([ i.intersects(self.petal.exterior) for i in partSpotsInEdge ])
+        except:
+            print('unable to calulate nuSpotsTouchActualEdge')
+            nuSpotsTouchActualEdge = None
+        try:
+            spotEdges = sum([ i.intersection(self.petal.exterior).length for i in partSpotsInEdge ])
+            realEdgeSpotted = spotEdges / self.petal.exterior.length 
+        except:
+            print('unable to calulate realEdgeSpotted')
+            realEdgeSpotted = None
+        try:
+            flowerCut = self.throat.intersection(self.petal.exterior)
+            notTube = [ i for i in self.spots if not i.intersects(flowerCut)]
+            avgDistSpotEdge2Edge = mean([ self.petal.exterior.distance(i) for i in notTube ])
+        except:
+            print('unable to calulate avgDistSpotEdge2Edge')
+            avgDistSpotEdge2Edge = None
+        try:
+            avgDistSpotCentroid2Edge = mean([ self.petal.exterior.distance(i.centroid) for i in notTube ])
+        except:
+            print('unable to calulate avgDistSpotCentroid2Edge')
+            avgDistSpotCentroid2Edge = None
+        return(nuSpotsContainedInEdge,
+                nuSpotsTouchEdge,
+                propSpotsInEdge,
+                nuSpotsMostlyInEdge,
+                edgeCoveredbySpots,
+                nuSpotsTouchActualEdge,
+                realEdgeSpotted,
+                avgDistSpotEdge2Edge,
+                avgDistSpotCentroid2Edge,
                 )
     ############### fillOut columns #############
     def fillColumns(self):
@@ -165,7 +292,25 @@ class Flower():
         self.nuSpots,
             ) = self.find_generalStats()
         (self.nuSpotsContainedInCenter,
+        self.nuSpotsTouchCenter,
+        self.nuSpotsMostlyInCenter,
+        self.nuSpotCentroidsInCenter,
+        self.avgDist2CenterAllSpots,
+        self.avgDist2CenterCenterSpots,
+        self.propSpotsInCenter,
+        self.centerCoveredbySpots,
+        self.spotOnCentroid,
             ) = self.find_CenterStats()
+        (self.nuSpotsContainedInEdge,
+            self.nuSpotsTouchEdge,
+            self.propSpotsInEdge,
+            self.nuSpotsMostlyInEdge,
+            self.edgeCoveredbySpots,
+            self.nuSpotsTouchActualEdge,
+            self.realEdgeSpotted,
+            self.avgDistSpotEdge2Edge,
+            self.avgDistSpotCentroid2Edge,
+            ) = self.find_EdgeStats()
     ############### plotting ###################
     def plotOne(self, poly, l=2, a=1.0, col='yellow'):
         fig = plt.figure()
@@ -196,17 +341,21 @@ plt.ion()
 aa = Flower()
 aa.geojson="/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/P297F2/right/P297F2_right_polys.geojson"
 aa.parseGeoJson(aa.geojson)
+aa = cleanFlower(aa)
 
 aa.avgSpotSize
-aa.nuSpots
-aa.nuSpotsContainedInCenter
+aa.avgDistSpotEdge2Edge
+aa.avgDistSpotCentroid2Edge
 
 aa.fillColumns()
+
 aa.avgSpotSize
-aa.nuSpots
-aa.nuSpotsContainedInCenter
+aa.avgDistSpotEdge2Edge
+aa.avgDistSpotCentroid2Edge
+
 
 aa.plotOne(aa.petal)
 [ aa.addOne(i) for i in aa.spots ]
 aa.addOne(aa.center, a=0.3, col='orange')
+aa.addOne(aa.throat, a=0.3, col='orange')
 

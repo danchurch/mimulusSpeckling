@@ -59,7 +59,7 @@ class Flower():
                 self.avgDistSpotEdge2Edge = None
                 self.avgDistSpotCentroid2Edge = None
                 self.throatCoveredbySpots = None
-                self.propSpotsInthroat = None
+                self.propSpotsInThroat = None
                 self.nuSpotsTouchThroat = None
                 self.nuSpotsMostlyInThroat = None
                 self.nuSpotsTouchCut = None
@@ -81,6 +81,7 @@ class Flower():
                 self.nuQuadIVSpots = None
                 self.propSpotsInQuadIV = None
                 self.quadIVCoveredbySpots = None
+
     def parseGeoJson(self, geoj):
         with open(geoj) as gjf:
             aa = json.load(gjf)
@@ -124,6 +125,7 @@ class Flower():
         else:
             print('Returning shiny new (multi)polygon.')
             return(polyBuff)
+
     ############ stats ##############################
     def find_generalStats(self):
         try:
@@ -283,6 +285,144 @@ class Flower():
                 avgDistSpotEdge2Edge,
                 avgDistSpotCentroid2Edge,
                 )
+    def find_ThroatStats(self):
+        try:
+            partSpotsInThroat = [ i.intersection(self.throat) for i in self.spots if i.intersects(self.throat) ]
+            listz = [ list(i) if type(i) == sg.multipolygon.MultiPolygon else [i] for i in partSpotsInThroat ]
+            unNest = sum(listz, []) 
+            partSpotsInThroat =  sg.multipolygon.MultiPolygon(unNest)
+            throatCoveredbySpots = partSpotsInThroat.area / self.throat.area
+        except:
+            print('unable to calulate throatCoveredbySpots')
+            throatCoveredbySpots = None
+        try:
+            propSpotsInThroat = partSpotsInThroat.area / self.spots.area
+        except:
+            print('unable to calulate propSpotsInThroat')
+            propSpotsInThroat = None
+        try:
+            nuSpotsTouchThroat = sum([ i.intersects(self.throat) for i in self.spots ])
+        except:
+            print('unable to calulate nuSpotsTouchThroat')
+            nuSpotsTouchThroat = None
+        try:
+            nuSpotsMostlyInThroat = len([ i for i in self.spots if (i.intersection(self.throat).area / i.area > 0.5) ])
+        except:
+            print('unable to calulate nuSpotsMostlyInThroat')
+            nuSpotsMostlyInThroat = None
+        try:
+            nuSpotsTouchCut = len([ i for i in partSpotsInThroat if i.intersects(self.petal.exterior) ])
+        except:
+            print('unable to calulate nuSpotsTouchCut')
+            nuSpotsTouchCut = None
+        return(throatCoveredbySpots,
+               propSpotsInThroat, 
+               nuSpotsTouchThroat, 
+               nuSpotsMostlyInThroat, 
+               nuSpotsTouchCut, 
+                )
+    def find_ProxStats(self):
+        try:
+            ## make a box
+            proxBox=sg.box(-1,0,1,1)
+            ## get the area of our petal in this box:
+            petalProx = self.petal.intersection(proxBox)
+            ## get the area of spots that fall into this
+            spottedSurfaceProx = self.spots.intersection(petalProx)
+            ## the outputs
+            nuProxSpots = sum([ i.intersects(petalProx) for i in self.spots ])
+            propSpotsInProx = spottedSurfaceProx.area / self.spots.area
+            proxCoveredbySpots = spottedSurfaceProx.area / petalProx.area
+        except:
+            print('unable to calulate ProxStats')
+            nuProxSpots = None
+            propSpotsInProx = None
+            proxCoveredbySpots = None
+        return(nuProxSpots, 
+                propSpotsInProx,
+                proxCoveredbySpots,
+                )
+    def find_DistalStats(self):
+        try:
+            ## make a box
+            distBox=sg.box(-1,-1,1,0)
+            ## get the area of our petal in this box:
+            petalDist = self.petal.intersection(distBox)
+            ## get the area of spots that fall into this
+            spottedSurfaceDist = self.spots.intersection(petalDist)
+            ## the outputs
+            nuDistSpots = sum([ i.intersects(petalDist) for i in self.spots ])
+            propSpotsInDist = spottedSurfaceDist.area / self.spots.area
+            distCoveredbySpots = spottedSurfaceDist.area / petalDist.area
+        except:
+            print('unable to calulate DistalStats')
+            nuDistSpots = None
+            propSpotsInDist = None
+            distCoveredbySpots = None
+        return(nuDistSpots, 
+                propSpotsInDist,
+                distCoveredbySpots,
+                )
+    def find_QuadIStats(self):
+        try:
+            quadIbox=sg.box(0,0,1,1)
+            petalQuadI = self.petal.intersection(quadIbox)
+            spottedSurfaceQuadI = self.spots.intersection(petalQuadI)
+            nuQuadIspots = len([ i for i in self.spots if i.centroid.x > 0 and i.centroid.y > 0 ])
+            propSpotsInQuadI = spottedSurfaceQuadI.area / self.spots.area
+            quadICoveredbySpots = spottedSurfaceQuadI.area / petalQuadI.area
+        except:
+            print('unable to calulate QuadIStats')
+        return(
+            nuQuadIspots,
+            propSpotsInQuadI,
+            quadICoveredbySpots,
+                )
+    def find_QuadIIStats(self):
+        try:
+            quadIIbox=sg.box(-1,0,0,1)
+            petalQuadII = self.petal.intersection(quadIIbox)
+            spottedSurfaceQuadII = self.spots.intersection(petalQuadII)
+            nuQuadIISpots = len([ i for i in self.spots if i.centroid.x < 0 and i.centroid.y > 0 ])
+            propSpotsInQuadII = spottedSurfaceQuadII.area / self.spots.area
+            quadIICoveredbySpots = spottedSurfaceQuadII.area / petalQuadII.area
+        except:
+            print('unable to calulate QuadIIStats')
+        return(
+            nuQuadIISpots,
+            propSpotsInQuadII,
+            quadIICoveredbySpots,
+                )
+    def find_QuadIIIStats(self):
+        try:
+            quadIIIbox=sg.box(-1,-1,0,0)
+            petalQuadIII = self.petal.intersection(quadIIIbox)
+            spottedSurfaceQuadIII = self.spots.intersection(petalQuadIII)
+            nuQuadIIISpots = len([ i for i in self.spots if i.centroid.x < 0 and i.centroid.y < 0 ])
+            propSpotsInQuadIII = spottedSurfaceQuadIII.area / self.spots.area
+            quadIIICoveredbySpots = spottedSurfaceQuadIII.area / petalQuadIII.area
+        except:
+            print('unable to calulate QuadIIIStats')
+        return(
+            nuQuadIIISpots,
+            propSpotsInQuadIII,
+            quadIIICoveredbySpots,
+                )
+    def find_QuadIVStats(self):
+        try:
+            quadIVbox=sg.box(0,-1,1,0)
+            petalQuadIV = self.petal.intersection(quadIVbox)
+            spottedSurfaceQuadIV = self.spots.intersection(petalQuadIV)
+            nuQuadIVSpots = len([ i for i in self.spots if i.centroid.x > 0 and i.centroid.y < 0 ])
+            propSpotsInQuadIV = spottedSurfaceQuadIV.area / self.spots.area
+            quadIVCoveredbySpots = spottedSurfaceQuadIV.area / petalQuadIV.area
+        except:
+            print('unable to calulate QuadIVStats')
+        return(
+            nuQuadIVSpots,
+            propSpotsInQuadIV,
+            quadIVCoveredbySpots,
+                )
     ############### fillOut columns #############
     def fillColumns(self):
         (self.biggestSpotArea,
@@ -311,6 +451,36 @@ class Flower():
             self.avgDistSpotEdge2Edge,
             self.avgDistSpotCentroid2Edge,
             ) = self.find_EdgeStats()
+        (self.throatCoveredbySpots,
+            self.propSpotsInThroat,
+            self.nuSpotsTouchThroat,
+            self.nuSpotsMostlyInThroat,
+            self.nuSpotsTouchCut,
+            ) = self.find_ThroatStats()
+        (self.nuProxSpots,
+            self.propSpotsInProx,
+            self.proxCoveredbySpots,
+            ) = self.find_ProxStats()
+        (self.nuDistSpots,
+            self.propSpotsInDist,
+            self.distCoveredbySpots,
+            ) = self.find_DistalStats()
+        (self.nuQuadISpots,
+            self.propSpotsInQuadI,
+            self.quadICoveredbySpots,
+            ) = self.find_QuadIStats()
+        (self.nuQuadIISpots,
+            self.propSpotsInQuadII,
+            self.quadIICoveredbySpots,
+            ) = self.find_QuadIIStats()
+        (self.nuQuadIIISpots,
+            self.propSpotsInQuadIII,
+            self.quadIIICoveredbySpots,
+            ) = self.find_QuadIIIStats()
+        (self.nuQuadIVSpots,
+            self.propSpotsInQuadIV,
+            self.quadIVCoveredbySpots,
+            ) = self.find_QuadIVStats()
     ############### plotting ###################
     def plotOne(self, poly, l=2, a=1.0, col='yellow'):
         fig = plt.figure()
@@ -344,18 +514,35 @@ aa.parseGeoJson(aa.geojson)
 aa = cleanFlower(aa)
 
 aa.avgSpotSize
-aa.avgDistSpotEdge2Edge
-aa.avgDistSpotCentroid2Edge
+aa.nuQuadIISpots
+aa.propSpotsInQuadII
+aa.quadICoveredbySpots
 
 aa.fillColumns()
 
 aa.avgSpotSize
-aa.avgDistSpotEdge2Edge
-aa.avgDistSpotCentroid2Edge
 
+aa.nuQuadISpots
+aa.propSpotsInQuadI
+aa.quadICoveredbySpots
+
+aa.avgSpotSize
+
+aa.nuQuadIISpots
+aa.propSpotsInQuadII
+aa.quadIICoveredbySpots
+
+aa.nuQuadIIISpots
+aa.propSpotsInQuadIII
+aa.quadIIICoveredbySpots
+
+aa.nuQuadIVSpots
+aa.propSpotsInQuadIV
+aa.quadIVCoveredbySpots
 
 aa.plotOne(aa.petal)
 [ aa.addOne(i) for i in aa.spots ]
 aa.addOne(aa.center, a=0.3, col='orange')
 aa.addOne(aa.throat, a=0.3, col='orange')
+
 

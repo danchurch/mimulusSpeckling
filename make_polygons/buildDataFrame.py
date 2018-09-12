@@ -76,7 +76,7 @@ class Flower():
                 self.propSpotsInQuadII = None
                 self.quadIICoveredbySpots = None
                 self.nuQuadIIISpots = None
-                self.quadIIISpotsInQuadIII = None
+                self.propSpotsInQuadIII = None
                 self.quadIIICoveredbySpots = None
                 self.nuQuadIVSpots = None
                 self.propSpotsInQuadIV = None
@@ -481,6 +481,12 @@ class Flower():
             self.propSpotsInQuadIV,
             self.quadIVCoveredbySpots,
             ) = self.find_QuadIVStats()
+
+    ############### make a dictionary  ###################
+
+    def makeRow(self):
+
+
     ############### plotting ###################
     def plotOne(self, poly, l=2, a=1.0, col='yellow'):
         fig = plt.figure()
@@ -505,6 +511,7 @@ if __name__ == '__main__':
 
 
 ###############
+
 
 plt.ion()
 
@@ -540,9 +547,33 @@ aa.nuQuadIVSpots
 aa.propSpotsInQuadIV
 aa.quadIVCoveredbySpots
 
-aa.plotOne(aa.petal)
 [ aa.addOne(i) for i in aa.spots ]
 aa.addOne(aa.center, a=0.3, col='orange')
 aa.addOne(aa.throat, a=0.3, col='orange')
 
+## okay, seems like this works for making 
+## the class. 
 
+## can we get this flower class to spit 
+## out a row, to use in a dataframe?
+
+## the __main__ we'll actually construct
+## the dataframe
+
+row = vars(aa)
+row2 = row.copy()
+
+## can we make a dataframe from this?
+
+import pandas as pd
+
+pd.DataFrame([row, row2])
+
+
+## seems to work. how would we automate all 
+## this?
+
+## crawl through all flower files, create a class,
+## put the vars dictionary in a list,
+## make the dataframe. 
+## export as csv, dump on Melia. 

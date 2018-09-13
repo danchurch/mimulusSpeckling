@@ -4301,6 +4301,8 @@ addOne(center, col='orange', a=0.3)
 ## but what percentage of our spotted area lies in the 
 ## center?
 
+partSpotsInCenter 
+
 partSpotsInCenterArea
 
 propSpotsInCenter = partSpotsInCenterArea / spots.area  
@@ -4316,7 +4318,7 @@ spotOnCentroid = any([ i.intersects(petal.centroid) for i in spots ])
 
 ############# throat ############
 
-#### propSpotsInthroat
+#### propSpotsInThroat
 
 partSpotsInThroat = [ i.intersection(throat) for i in spots if i.intersects(throat) ]
 ## okay, but in case this divides up a spot and creates a multipolygon:
@@ -4582,7 +4584,7 @@ buildDataFrame.py
 #################################################
 #!/user/bin/env python3
 
-import os, json 
+import os, json, pickle
 import numpy as np
 import shapely.geometry as sg
 import shapely.ops as so
@@ -4590,159 +4592,76 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from descartes import PolygonPatch
 from statistics import mean
-
-####################
-## functions here ##
-####################
-
-################
-## class here ##
-################
+from buildDataFrame import Flower
 
 
-class Flower():
-    def __init__(self):
-                self.flowerName = None
-                self.geojson = None
-                self.petal = None
-                self.spots = None
-                self.center = None
-                self.edge = None
-                self.throat = None
-
-                self.biggestSpotArea = None
-                self.smallestSpotArea = None
-                self.avgSpotSize = None
-                self.medSpotSize = None
-                self.nuSpots = None
-
-                self.nuSpotsContainedInCenter = None
-
-                self.nuSpotsTouchCenter = None
-                self.nuSpotsMostlyInCenter = None
-                self.nuSpotCentroidsInCenter = None
-                self.avgDist2CenterAllSpots = None
-                self.avgDist2CenterCenterSpots = None
-                self.propSpotsInCenter = None
-                self.centerCoveredbySpots = None
-                self.spotOnCentroid = None
-
-                self.nuSpotsContainedInEdge = None
-                self.nuSpotsTouchEdge = None
-                self.propSpotsInEdge = None
-                self.nuSpotsMostlyInEdge = None
-                self.edgeCoveredbySpots = None
-                self.nuSpotsTouchActualEdge = None
-                self.realEdgeSpotted = None
-                self.avgDistSpotEdge2Edge = None
-                self.avgDistSpotCentroid2Edge = None
-
-                self.throatCoveredbySpots = None
-                self.propSpotsInthroat = None
-                self.nuSpotsTouchThroat = None
-                self.nuSpotsMostlyInThroat = None
-                self.nuSpotsTouchCut = None
-
-                self.nuProxSpots = None
-                self.propSpotsInProx = None
-                self.proxCoveredbySpots = None
-
-                self.nuDistSpots = None
-                self.propSpotsInDist = None
-                self.distCoveredbySpots = None
-
-                self.nuQuadISpots = None
-                self.propSpotsInQuadI = None
-                self.quadICoveredbySpots = None
-
-                self.nuQuadIISpots = None
-                self.propSpotsInQuadII = None
-                self.quadIICoveredbySpots = None
-
-                self.nuQuadIIISpots = None
-                self.quadIIISpotsInQuadIII = None
-                self.quadIIICoveredbySpots = None
-
-                self.nuQuadIVSpots = None
-                self.propSpotsInQuadIV = None
-                self.quadIVCoveredbySpots = None
-
-    def parseGeoJson(self, geoj):
-        with open(geoj) as gjf:
-            aa = json.load(gjf)
-            listP = (aa['features'])
-            try:
-                petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry']
-                self.petal = sg.shape(petalGJ)
-            except:
-                self.petal = sg.polygon.Polygon()
-            try:
-                spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry']
-                self.spots= sg.shape(spotsGJ)
-            except:
-                self.spots = sg.polygon.Polygon()
-            try:
-                centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry']
-                self.center = sg.shape(centerGJ)
-            except:
-                self.center = sg.polygon.Polygon()
-            try:
-                edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry']
-                self.edge = sg.shape(edgeGJ)
-            except:
-                self.edge = sg.polygon.Polygon()
-            try:
-                throatGJ = [ i for i in listP if i['properties']['id'] == 'Throat' ][0]['geometry']
-                self.throat = sg.shape(throatGJ)
-            except:
-                self.throat = sg.polygon.Polygon()
-    ## function to clean (multi)polygons if self-intersecting 
-    def cleanPolys(self, poly):
-        if poly.is_valid:
-            print('Polygon is ok! Returning it as is.')
-            return(poly)
-        elif not poly.is_valid:
-            polyBuff = poly.buffer(0.0)
-            print('Polygon is not valid...buffering...')
-        if not polyBuff.is_valid:
-            print('Unable to clean ' + flowerName + ' Still invalid. Returning empty polygon.')
-            return(sg.polygon.Polygon())
-        if polyBuff.is_valid:
-            print('Returning shiny new (multi)polygon.')
-            return(polyBuff)
-
-if __name__ == '__main__':
+## in bash, set up a nice directory to build the data frame:
 
 
-## this should accept the geojson object, parse it, 
-## produce all available statistics, and export these
-## in a form that can be used as a row in a dataframe
-## also plotting functions. 
+for i in $(find /home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/ -type f -name "*geojson");do
+echo $i
+cp $i /home/daniel/Documents/mimulusSpeckling/polygon_traits/geojs/
+done
 
-## so how to do this...
-
-## write all functions for parsing, cleaning, 
-## stats, and plotting. Place above. 
-
-## can one of the flower methods be filling out its out attributes?
-
-## where is our geojson for the sample flower?
-
-aa = Flower()
-aa.geojson="/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/P297F2/right/P297F2_right_polys.geojson"
-aa.parseGeoJson(aa.geojson)
-
-aa.petal
-
-aa.spots.is_valid
-
-aa.spots = aa.cleanPolys(aa.spots)
-
-aa.spots
+## now make our module so it can act on a directory and spit out a dataframe
 
 
-plotOne(aa.petal)
-[ addOne(i) for i in aa.spots ]
+## class is getting huge. Let's load it here.
+
+## make flowers:
+os.chdir(args.geojFolder)
+
+os.chdir('/home/daniel/Documents/mimulusSpeckling/polygon_traits/geojs')
+
+flowers = os.listdir()
+flowers.sort()
+flowerList = []
+
+for i,flower in enumerate(flowers):
+    fl = Flower()
+    fl.flowerName = flower.split(sep='_')[0]
+    fl.petalName = flower.split(sep='_')[1]
+    fl.geojson = flower
+    fl.parseGeoJson(flower)
+    fl.cleanFlower()
+    fl.fillColumns()
+    row = vars(fl)
+    flowerList.append(row)
+
+aa = pd.DataFrame(flowerList)
 
 
+aa.columns.values
 
+aa.columns.values[0]
+
+## we want to get rid of the geometries...
+
+del aa['petal']
+del aa['spots']
+del aa['center']
+del aa['edge']
+del aa['throat']
+
+## and reorder the columns:
+
+
+bb = aa.reindex_axis(sorted(aa.columns), axis=1)
+cc = aa.set_index('petalName').reset_index()
+dd = cc.set_index('flowerName').reset_index()
+
+aa.iloc[0:2,0:3]
+
+bb.iloc[0:2,0:3]
+cc.iloc[0:2,0:3]
+dd.iloc[0:2,0:3]
+
+
+aa = aa.set_index('petalName').reset_index()
+aa = aa.set_index('flowerName').reset_index()
+
+aa.to_csv("testFlower.csv")
+
+pickle.dump(aa, open("testFlower.p", "wb"))
+
+aa = pickle.load(open("testFlower.p", "rb"))

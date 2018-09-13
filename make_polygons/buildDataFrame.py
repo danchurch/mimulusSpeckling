@@ -1,6 +1,6 @@
 #!/user/bin/env python3
 
-import os, json 
+import os, json, argparse 
 import numpy as np
 import shapely.geometry as sg
 import shapely.ops as so
@@ -9,26 +9,14 @@ import pandas as pd
 from descartes import PolygonPatch
 from statistics import mean
 
-####################
-## functions here ##
-####################
-
-def cleanFlower(flower):
-    flower.petal = flower.cleanPolys(flower.petal)
-    flower.spots = flower.cleanPolys(flower.spots)
-    flower.center = flower.cleanPolys(flower.center)
-    flower.edge = flower.cleanPolys(flower.edge)
-    flower.throat = flower.cleanPolys(flower.throat)
-    return(flower)
-
 ################
 ## class here ##
 ################
 
-
 class Flower():
     def __init__(self):
                 self.flowerName = None
+                self.petalName = None
                 self.geojson = None
                 self.petal = None
                 self.spots = None
@@ -111,6 +99,7 @@ class Flower():
                 self.throat = sg.shape(throatGJ)
             except:
                 self.throat = sg.polygon.Polygon()
+
     ## function to clean (multi)polygons if self-intersecting 
     def cleanPolys(self, poly):
         if poly.is_valid:
@@ -125,6 +114,19 @@ class Flower():
         else:
             print('Returning shiny new (multi)polygon.')
             return(polyBuff)
+
+    ## use poly cleaning function to make a flower cleaning function
+    def cleanFlower(self):
+        assert isinstance(self, Flower), "Not flower"
+        self.petal = self.cleanPolys(self.petal)
+        self.spots = self.cleanPolys(self.spots)
+        ## we need our spots to be multipolygons, to make this class:
+        if type(self.spots) == sg.polygon.Polygon:
+            self.spots = sg.multipolygon.MultiPolygon([self.spots])
+        self.center = self.cleanPolys(self.center)
+        self.edge = self.cleanPolys(self.edge)
+        self.throat = self.cleanPolys(self.throat)
+
 
     ############ stats ##############################
     def find_generalStats(self):
@@ -425,67 +427,112 @@ class Flower():
                 )
     ############### fillOut columns #############
     def fillColumns(self):
-        (self.biggestSpotArea,
-        self.smallestSpotArea,
-        self.avgSpotSize,
-        self.medSpotSize,
-        self.nuSpots,
-            ) = self.find_generalStats()
-        (self.nuSpotsContainedInCenter,
-        self.nuSpotsTouchCenter,
-        self.nuSpotsMostlyInCenter,
-        self.nuSpotCentroidsInCenter,
-        self.avgDist2CenterAllSpots,
-        self.avgDist2CenterCenterSpots,
-        self.propSpotsInCenter,
-        self.centerCoveredbySpots,
-        self.spotOnCentroid,
-            ) = self.find_CenterStats()
-        (self.nuSpotsContainedInEdge,
-            self.nuSpotsTouchEdge,
-            self.propSpotsInEdge,
-            self.nuSpotsMostlyInEdge,
-            self.edgeCoveredbySpots,
-            self.nuSpotsTouchActualEdge,
-            self.realEdgeSpotted,
-            self.avgDistSpotEdge2Edge,
-            self.avgDistSpotCentroid2Edge,
-            ) = self.find_EdgeStats()
-        (self.throatCoveredbySpots,
-            self.propSpotsInThroat,
-            self.nuSpotsTouchThroat,
-            self.nuSpotsMostlyInThroat,
-            self.nuSpotsTouchCut,
-            ) = self.find_ThroatStats()
-        (self.nuProxSpots,
-            self.propSpotsInProx,
-            self.proxCoveredbySpots,
-            ) = self.find_ProxStats()
-        (self.nuDistSpots,
-            self.propSpotsInDist,
-            self.distCoveredbySpots,
-            ) = self.find_DistalStats()
-        (self.nuQuadISpots,
-            self.propSpotsInQuadI,
-            self.quadICoveredbySpots,
-            ) = self.find_QuadIStats()
-        (self.nuQuadIISpots,
-            self.propSpotsInQuadII,
-            self.quadIICoveredbySpots,
-            ) = self.find_QuadIIStats()
-        (self.nuQuadIIISpots,
-            self.propSpotsInQuadIII,
-            self.quadIIICoveredbySpots,
-            ) = self.find_QuadIIIStats()
-        (self.nuQuadIVSpots,
-            self.propSpotsInQuadIV,
-            self.quadIVCoveredbySpots,
-            ) = self.find_QuadIVStats()
-
-    ############### make a dictionary  ###################
-
-    def makeRow(self):
-
+        try:
+            assert(len(self.spots) > 0)
+            (self.biggestSpotArea,
+            self.smallestSpotArea,
+            self.avgSpotSize,
+            self.medSpotSize,
+            self.nuSpots,
+                ) = self.find_generalStats()
+            (self.nuSpotsContainedInCenter,
+            self.nuSpotsTouchCenter,
+            self.nuSpotsMostlyInCenter,
+            self.nuSpotCentroidsInCenter,
+            self.avgDist2CenterAllSpots,
+            self.avgDist2CenterCenterSpots,
+            self.propSpotsInCenter,
+            self.centerCoveredbySpots,
+            self.spotOnCentroid,
+                ) = self.find_CenterStats()
+            (self.nuSpotsContainedInEdge,
+                self.nuSpotsTouchEdge,
+                self.propSpotsInEdge,
+                self.nuSpotsMostlyInEdge,
+                self.edgeCoveredbySpots,
+                self.nuSpotsTouchActualEdge,
+                self.realEdgeSpotted,
+                self.avgDistSpotEdge2Edge,
+                self.avgDistSpotCentroid2Edge,
+                ) = self.find_EdgeStats()
+            (self.throatCoveredbySpots,
+                self.propSpotsInThroat,
+                self.nuSpotsTouchThroat,
+                self.nuSpotsMostlyInThroat,
+                self.nuSpotsTouchCut,
+                ) = self.find_ThroatStats()
+            (self.nuProxSpots,
+                self.propSpotsInProx,
+                self.proxCoveredbySpots,
+                ) = self.find_ProxStats()
+            (self.nuDistSpots,
+                self.propSpotsInDist,
+                self.distCoveredbySpots,
+                ) = self.find_DistalStats()
+            (self.nuQuadISpots,
+                self.propSpotsInQuadI,
+                self.quadICoveredbySpots,
+                ) = self.find_QuadIStats()
+            (self.nuQuadIISpots,
+                self.propSpotsInQuadII,
+                self.quadIICoveredbySpots,
+                ) = self.find_QuadIIStats()
+            (self.nuQuadIIISpots,
+                self.propSpotsInQuadIII,
+                self.quadIIICoveredbySpots,
+                ) = self.find_QuadIIIStats()
+            (self.nuQuadIVSpots,
+                self.propSpotsInQuadIV,
+                self.quadIVCoveredbySpots,
+                ) = self.find_QuadIVStats()
+        except AssertionError:
+            print('No spots detected. Most statistics will be None or 0.')
+            self.biggestSpotArea = None
+            self.smallestSpotArea = None
+            self.avgSpotSize = None
+            self.medSpotSize = None
+            self.nuSpots = 0
+            self.nuSpotsContainedInCenter = 0
+            self.nuSpotsTouchCenter = 0
+            self.nuSpotsMostlyInCenter = 0
+            self.nuSpotCentroidsInCenter = 0
+            self.avgDist2CenterAllSpots = None
+            self.avgDist2CenterCenterSpots = None
+            self.propSpotsInCenter = None
+            self.centerCoveredbySpots = 0
+            self.spotOnCentroid = False
+            self.nuSpotsContainedInEdge = 0
+            self.nuSpotsTouchEdge = 0
+            self.propSpotsInEdge = None
+            self.nuSpotsMostlyInEdge = 0
+            self.edgeCoveredbySpots = 0
+            self.nuSpotsTouchActualEdge = 0
+            self.realEdgeSpotted = 0
+            self.avgDistSpotEdge2Edge = None
+            self.avgDistSpotCentroid2Edge = None
+            self.throatCoveredbySpots = 0
+            self.propSpotsInThroat = None
+            self.nuSpotsTouchThroat = 0
+            self.nuSpotsMostlyInThroat = 0
+            self.nuSpotsTouchCut = 0
+            self.nuProxSpots = 0
+            self.propSpotsInProx = None
+            self.proxCoveredbySpots = 0
+            self.nuDistSpots = 0
+            self.propSpotsInDist = None
+            self.distCoveredbySpots = 0
+            self.nuQuadISpots = 0
+            self.propSpotsInQuadI = None
+            self.quadICoveredbySpots = 0
+            self.nuQuadIISpots = 0
+            self.propSpotsInQuadII = None
+            self.quadIICoveredbySpots = 0
+            self.nuQuadIIISpots = 0
+            self.propSpotsInQuadIII = None
+            self.quadIIICoveredbySpots = 0
+            self.nuQuadIVSpots = 0
+            self.propSpotsInQuadIV = None
+            self.quadIVCoveredbySpots = 0
 
     ############### plotting ###################
     def plotOne(self, poly, l=2, a=1.0, col='yellow'):
@@ -504,76 +551,42 @@ class Flower():
                       linewidth=l, alpha=a))
 
 
-
-
 if __name__ == '__main__':
 
+    ## deal with arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('geojFolder',
+                help=('The folder of geojson files that will '
+                        'a dataframe.'))
+    parser.add_argument('dataframe',
+                help=('The name of the dataframe, '
+                        'formatted as a .csv file'))
+    args = parser.parse_args()
 
+    ## make flowers:
+    os.chdir(args.geojFolder)
+    flowers = os.listdir()
+    flowers.sort()
+    flowerList = []
+    for i,flower in enumerate(flowers):
+        fl = Flower()
+        fl.flowerName = flower.split(sep='_')[0] 
+        fl.petalName = flower.split(sep='_')[1] 
+        fl.geojson = flower
+        fl.parseGeoJson(flower)
+        fl.cleanFlower()
+        fl.fillColumns()
+        row = vars(fl)
+        flowerList.append(row)
 
-###############
+    ## make dataframe:
+    flowerDf = pd.DataFrame(flowerList)
+    ## get our flower and petal name forward:
+    flowerDf = flowerDf.set_index('petalName').reset_index()
+    flowerDf = flowerDf.set_index('flowerName').reset_index()
+    ## get rid of geometries:
+    flowerDf = flowerDf.set_index('petalName').reset_index()
+    flowerDf = flowerDf.set_index('flowerName').reset_index()
 
-
-plt.ion()
-
-aa = Flower()
-aa.geojson="/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons/P297F2/right/P297F2_right_polys.geojson"
-aa.parseGeoJson(aa.geojson)
-aa = cleanFlower(aa)
-
-aa.avgSpotSize
-aa.nuQuadIISpots
-aa.propSpotsInQuadII
-aa.quadICoveredbySpots
-
-aa.fillColumns()
-
-aa.avgSpotSize
-
-aa.nuQuadISpots
-aa.propSpotsInQuadI
-aa.quadICoveredbySpots
-
-aa.avgSpotSize
-
-aa.nuQuadIISpots
-aa.propSpotsInQuadII
-aa.quadIICoveredbySpots
-
-aa.nuQuadIIISpots
-aa.propSpotsInQuadIII
-aa.quadIIICoveredbySpots
-
-aa.nuQuadIVSpots
-aa.propSpotsInQuadIV
-aa.quadIVCoveredbySpots
-
-[ aa.addOne(i) for i in aa.spots ]
-aa.addOne(aa.center, a=0.3, col='orange')
-aa.addOne(aa.throat, a=0.3, col='orange')
-
-## okay, seems like this works for making 
-## the class. 
-
-## can we get this flower class to spit 
-## out a row, to use in a dataframe?
-
-## the __main__ we'll actually construct
-## the dataframe
-
-row = vars(aa)
-row2 = row.copy()
-
-## can we make a dataframe from this?
-
-import pandas as pd
-
-pd.DataFrame([row, row2])
-
-
-## seems to work. how would we automate all 
-## this?
-
-## crawl through all flower files, create a class,
-## put the vars dictionary in a list,
-## make the dataframe. 
-## export as csv, dump on Melia. 
+    flowerDf.to_csv("testFlower.csv")
+    pickle.dump(flowerDf, open("testFlower.p", "wb"))

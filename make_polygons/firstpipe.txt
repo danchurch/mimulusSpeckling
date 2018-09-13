@@ -4580,7 +4580,7 @@ addOne(distBox, a=0.3, col='white')
 
 from shapely.validation import explain_validity
 
-buildDataFrame.py
+FlowerPetal.py
 #################################################
 #!/user/bin/env python3
 
@@ -4592,7 +4592,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from descartes import PolygonPatch
 from statistics import mean
-from buildDataFrame import Flower
+from FlowerPetal import FlowerPetal
 
 
 ## in bash, set up a nice directory to build the data frame:
@@ -4618,12 +4618,12 @@ flowers.sort()
 flowerList = []
 
 for i,flower in enumerate(flowers):
-    fl = Flower()
+    fl = FlowerPetal()
     fl.flowerName = flower.split(sep='_')[0]
     fl.petalName = flower.split(sep='_')[1]
     fl.geojson = flower
     fl.parseGeoJson(flower)
-    fl.cleanFlower()
+    fl.cleanFlowerPetal()
     fl.fillColumns()
     row = vars(fl)
     flowerList.append(row)
@@ -4660,8 +4660,15 @@ dd.iloc[0:2,0:3]
 aa = aa.set_index('petalName').reset_index()
 aa = aa.set_index('flowerName').reset_index()
 
-aa.to_csv("testFlower.csv")
+aa.to_csv("testFlowerPetal.csv")
 
-pickle.dump(aa, open("testFlower.p", "wb"))
+pickle.dump(aa, open("testFlowerPetal.p", "wb"))
 
-aa = pickle.load(open("testFlower.p", "rb"))
+aa = pickle.load(open("testFlowerPetal.p", "rb"))
+
+
+######### 
+
+## let's start playing with the manual correction process?
+
+

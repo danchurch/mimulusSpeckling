@@ -13,7 +13,7 @@ from statistics import mean
 ## class here ##
 ################
 
-class Flower():
+class FlowerPetal():
     def __init__(self):
                 self.flowerName = None
                 self.petalName = None
@@ -116,8 +116,8 @@ class Flower():
             return(polyBuff)
 
     ## use poly cleaning function to make a flower cleaning function
-    def cleanFlower(self):
-        assert isinstance(self, Flower), "Not flower"
+    def cleanFlowerPetal(self):
+        assert isinstance(self, FlowerPetal), "Not flower"
         self.petal = self.cleanPolys(self.petal)
         self.spots = self.cleanPolys(self.spots)
         ## we need our spots to be multipolygons, to make this class:
@@ -569,12 +569,12 @@ if __name__ == '__main__':
     flowers.sort()
     flowerList = []
     for i,flower in enumerate(flowers):
-        fl = Flower()
+        fl = FlowerPetal()
         fl.flowerName = flower.split(sep='_')[0] 
         fl.petalName = flower.split(sep='_')[1] 
         fl.geojson = flower
         fl.parseGeoJson(flower)
-        fl.cleanFlower()
+        fl.cleanFlowerPetal()
         fl.fillColumns()
         row = vars(fl)
         flowerList.append(row)
@@ -588,5 +588,5 @@ if __name__ == '__main__':
     flowerDf = flowerDf.set_index('petalName').reset_index()
     flowerDf = flowerDf.set_index('flowerName').reset_index()
 
-    flowerDf.to_csv("testFlower.csv")
-    pickle.dump(flowerDf, open("testFlower.p", "wb"))
+    flowerDf.to_csv("testFlowerPetal.csv")
+    pickle.dump(flowerDf, open("testFlowerPetal.p", "wb"))

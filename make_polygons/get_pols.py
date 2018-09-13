@@ -10,7 +10,7 @@ from skimage import measure
 
 ## for the actual conversion of raster to polygon:
 def digitizePols(file):
-    ## pad margins of image and get the contour of the petal shape
+    """pad margins of image and get the contour of the petal shape"""
     petal = np.genfromtxt (file, delimiter=",")
     petal_marg = np.insert(petal, petal.shape[1], 1, 1)
     petal_marg = np.insert(petal_marg, 0, 1, 1)
@@ -21,8 +21,8 @@ def digitizePols(file):
     polys = [ i for i in Pcontours if len(i) > 3 ]
     return(polys)
 
-## get centroid and scaling factor needed to standardize petals and spots
 def getPetGeoInfo(pet):
+    """get centroid and scaling factor needed to standardize petals and spots"""
     aa = sg.asPolygon(pet)
     area = aa.area
     scalar = area**(-1/2)
@@ -30,8 +30,8 @@ def getPetGeoInfo(pet):
     centerCoor = (center.x, center.y)
     return(scalar, centerCoor)
 
-## standardize a polygon
 def stand(pol, scale, cent):
+    """standardize a polygon"""
     aa = sg.asPolygon(pol)
     trans = sa.translate(aa, (-1*cent[0]), (-1*cent[1]))
     scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
@@ -39,6 +39,9 @@ def stand(pol, scale, cent):
 
 ## clean up small polygons and points
 def cleanCollections(geo):
+        """sometimes our digitizing creates smatterings of geometries instead 
+        of a single clean polygon. This attempts to prune down to the main polygon,
+        which is usually the object we want."""
     if type(geo) is not sg.polygon.Polygon:
         if type(geo) is sg.collection.GeometryCollection:
             onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]

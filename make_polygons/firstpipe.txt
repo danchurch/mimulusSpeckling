@@ -4684,9 +4684,30 @@ from FlowerPetal import FlowerPetal
 aa = pickle.load(open("testFlowerPetal.p", "rb"))
 
 
-## she wants each upper petal set averaged for all values
+## she wants:
 
-## and all plants combined (average)
+## rows for entire plant, not petals or flowers
 
-## then she wants 
+## each upper petal set averaged for all values
+
+## each trait reported twice - once for avereaged upper petals and once for lower petals
+
+######## so how do we do this? #######
+
+## not going to muck around with the 
+## existing panda. 
+
+## let's add an attribute, FlowerPetal.plant
+
+## this will identify the plant from which a 
+## a flower was taken. 
+
+## then we can sort by this when we create our dataframe.
+
+## then we can think about how to stack the petal info side by side as columns.
+
+
+
+
+
 

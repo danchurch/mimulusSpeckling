@@ -4669,6 +4669,24 @@ aa = pickle.load(open("testFlowerPetal.p", "rb"))
 
 ######### 
 
-## let's start playing with the manual correction process?
+## wrangle the data a little so Melia can play with it:
 
+import os, json, pickle
+import numpy as np
+import shapely.geometry as sg
+import shapely.ops as so
+import matplotlib.pyplot as plt
+import pandas as pd
+from descartes import PolygonPatch
+from statistics import mean
+from FlowerPetal import FlowerPetal
+
+aa = pickle.load(open("testFlowerPetal.p", "rb"))
+
+
+## she wants each upper petal set averaged for all values
+
+## and all plants combined (average)
+
+## then she wants 
 

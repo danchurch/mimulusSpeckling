@@ -1,6 +1,6 @@
-#!/user/bin/env python3
+#!/usr/bin/env python3
 
-import os, json, argparse 
+import os, json, argparse, re, pickle
 import numpy as np
 import shapely.geometry as sg
 import shapely.ops as so
@@ -15,6 +15,7 @@ from statistics import mean
 
 class FlowerPetal():
     def __init__(self):
+                self.plantName = None
                 self.flowerName = None
                 self.petalName = None
                 self.geojson = None
@@ -109,7 +110,7 @@ class FlowerPetal():
             polyBuff = poly.buffer(0.0)
             print('Polygon is not valid...buffering...')
         if not polyBuff.is_valid:
-            print('Unable to clean ' + flowerName + ' Still invalid. Returning empty polygon.')
+            print('Unable to clean ' + self.geojson + ' Still invalid. Returning empty polygon.')
             return(sg.polygon.Polygon())
         else:
             print('Returning shiny new (multi)polygon.')
@@ -556,37 +557,47 @@ if __name__ == '__main__':
     ## deal with arguments
     parser = argparse.ArgumentParser()
     parser.add_argument('geojFolder',
-                help=('The folder of geojson files that will '
-                        'a dataframe.'))
+                help=('The folder of geojson files.'))
     parser.add_argument('dataframe',
-                help=('The name of the dataframe, '
-                        'formatted as a .csv file'))
+                help=('The desired name of the output, '
+                        'formatted as a .csv file and'
+                        ' a pickled pandas dataframe, '
+                        'saved in the geojFolder.'
+                        '(Put it in quotes'))
     args = parser.parse_args()
 
-    ## make flowers:
+    ## make our FlowerPetal objects
     os.chdir(args.geojFolder)
-    flowers = os.listdir()
-    flowers.sort()
-    flowerList = []
-    for i,flower in enumerate(flowers):
+    petals = os.listdir()
+    petals.sort()
+    flowerpetalList = []
+    for i,plantFlowerPetal in enumerate(petals):
         fl = FlowerPetal()
-        fl.flowerName = flower.split(sep='_')[0] 
-        fl.petalName = flower.split(sep='_')[1] 
-        fl.geojson = flower
-        fl.parseGeoJson(flower)
+        fl.plantName = re.sub(r"(P.*)F.*",r"\1",plantFlowerPetal)
+        fl.flowerName = re.sub(r"P.*(F\d).*",r"\1",plantFlowerPetal)
+        fl.petalName = re.sub(".*(left|mid|right).*",r"\1",plantFlowerPetal)
+        fl.geojson = plantFlowerPetal
+        fl.parseGeoJson(plantFlowerPetal)
         fl.cleanFlowerPetal()
         fl.fillColumns()
         row = vars(fl)
-        flowerList.append(row)
+        flowerpetalList.append(row)
 
-    ## make dataframe:
-    flowerDf = pd.DataFrame(flowerList)
-    ## get our flower and petal name forward:
-    flowerDf = flowerDf.set_index('petalName').reset_index()
-    flowerDf = flowerDf.set_index('flowerName').reset_index()
+    ## make the all-petals dataframe dataframe:
+    allPetalDf = pd.DataFrame(flowerpetalList)
+
+    ## get our plant, flower and petal name forward:
+    allPetalDf = allPetalDf.set_index('petalName').reset_index()
+    allPetalDf = allPetalDf.set_index('flowerName').reset_index()
+    allPetalDf = allPetalDf.set_index('plantName').reset_index()
+
     ## get rid of geometries:
-    flowerDf = flowerDf.set_index('petalName').reset_index()
-    flowerDf = flowerDf.set_index('flowerName').reset_index()
+    del allPetalDf['petal']
+    del allPetalDf['spots']
+    del allPetalDf['center']
+    del allPetalDf['edge']
+    del allPetalDf['throat']
 
-    flowerDf.to_csv("testFlowerPetal.csv")
-    pickle.dump(flowerDf, open("testFlowerPetal.p", "wb"))
+## save it as a csv and pickle it:
+    allPetalDf.to_csv(args.dataframe + ".csv")
+    pickle.dump(allPetalDf, open(args.dataframe + ".p", "wb"))

@@ -4671,7 +4671,7 @@ aa = pickle.load(open("testFlowerPetal.p", "rb"))
 
 ## wrangle the data a little so Melia can play with it:
 
-import os, json, pickle
+import os, json, pickle, re
 import numpy as np
 import shapely.geometry as sg
 import shapely.ops as so
@@ -4683,7 +4683,6 @@ from FlowerPetal import FlowerPetal
 
 aa = pickle.load(open("testFlowerPetal.p", "rb"))
 
-
 ## she wants:
 
 ## rows for entire plant, not petals or flowers
@@ -4691,6 +4690,21 @@ aa = pickle.load(open("testFlowerPetal.p", "rb"))
 ## each upper petal set averaged for all values
 
 ## each trait reported twice - once for avereaged upper petals and once for lower petals
+
+
+## one of our names looks like this:
+
+
+
+fl.plantName
+fl.flowerName
+fl.petalName
+
+
+os.chdir(geojFolder)
+
+#os.chdir(args.geojFolder)
+
 
 ######## so how do we do this? #######
 
@@ -4702,12 +4716,206 @@ aa = pickle.load(open("testFlowerPetal.p", "rb"))
 ## this will identify the plant from which a 
 ## a flower was taken. 
 
-## then we can sort by this when we create our dataframe.
+## then we can sort by this some how when we create our dataframe.
 
 ## then we can think about how to stack the petal info side by side as columns.
 
+## say we want to generate a row for plant P421F1:
 
 
+geojFolder="/home/daniel/Documents/mimulusSpeckling/polygon_traits/geojs"
+
+os.chdir(geojFolder)
+
+aa = pickle.load(open("testing.p", "rb"))
 
 
+aa.set_index(['plantName', 'flowerName', 'petalName'], inplace=True)
+
+aa.sort_index(inplace=True)
+
+## okay, so that sorts our dataframe hierarchically. 
+
+## useful. 
+
+## todo:
+
+## work from inside out:
+
+## flatten the petal layer from 3 to 2: average the left and mid petal values for all traits
+
+## flatten the flower layer for 2-3 to 1: average every corresponding cell 
+
+## then each plant should have two rows: upper petals and lower petal
+
+## how can we take averages of "left" and "mid" rows?
+
+bb = aa.groupby('plantName').mean()
+
+bb.describe() ##?
+
+## I think we need a mask, just retain the left and mid images:
+
+aa.head(3)
+
+## how do we get just one row?
+cc = aa.loc[('P247', 'F1', 'right')]
+## works
+
+## does making a column an index remove from the column vector?  
+## yup. 
+
+## we need to average those two rows, in each column. This would 
+## be basically grouping by plant and petal, discarding the 
+## right image row. 
+
+## first, we need to make a mask that keeps only the left and mid 
+## petal image rows:
+
+
+## I think we gotta reset so we can treat these like data:
+aa.reset_index(inplace = True)
+
+## now mask out the lower petals ("right" petals)
+bb = aa[aa.petalName != 'right']
+
+## now can we group by plantName and flowerName, and take averages?
+
+## i think we gotta put our indices back...
+
+bb.head()
+
+bb.index
+
+bb.reset_index(inplace = True)
+
+bb.set_index(['plantName', 'flowerName', 'petalName'], inplace=True)
+
+bb.sort_index(inplace = True)
+
+## for multi-indexing, need to say levels)
+
+## I think this does it:
+cc = bb.groupby(['plantName', 'flowerName']).mean()
+
+## for some reason, this created a column for our integer index range.
+## get rid of it:
+
+del cc['level_0']
+
+## can we restore the petalName, call it "upper"?
+cc['petalName'] = 'upper'
+
+
+## okay, now we need our other ('right') petals back, and need these 
+## rows as columns
+
+## make another df with the 'right' petals:
+
+del aa['level_0']
+
+aa.reset_index(inplace = True)
+
+
+dd = aa[aa.petalName == 'right']
+
+del dd['level_0']
+
+dd['petalName'] = 'lower'
+
+## combine the two dfs:
+
+ee = pd.concat([cc,dd])
+
+cc.shape
+
+dd.shape
+
+ee.shape
+
+## weird new columns popping up. start over:
+
+rawDataDF = pickle.load(open("testing.p", "rb"))
+del rawDataDF['geojson']
+uppersRaw = rawDataDF[rawDataDF.petalName != 'right']
+lowerRaw = rawDataDF[rawDataDF.petalName == 'lower']
+uppersMean = uppersRaw.groupby(['plantName','flowerName']).mean()
+uppersMean.reset_index(inplace = True)
+uppersMean['petalName'] = 'upper'
+
+## check:
+uppersMean.shape
+lowerRaw.shape 
+
+all([ i in lowerRaw.columns for i in uppersMean.columns ]) 
+all([ i in uppersMean.columns for i in lowerRaw.columns ]) 
+
+[ i in lowerRaw.columns for i in uppersMean.columns ]
+[ i in uppersMean.columns for i in lowerRaw.columns ] 
+
+uppersMean.columns
+lowerRaw.columns 
+
+msk = np.array([ i not in uppersMean.columns for i in lowerRaw.columns ] )
+np.array(lowerRaw.columns)[ msk ]
+
+
+## okay, combine them:
+
+combRaw = pd.concat([ uppersMean, lowerRaw ])
+
+## can we sort this and make it pretty?
+
+combRaw.shape
+
+combRaw.set_index(['plantName', 'flowerName', 'petalName'], inplace=True)
+combRaw.sort_index(inplace = True)
+
+combRaw.iloc[0:5,0:3]
+
+combRaw.reset_index(inplace = True)
+
+## now what - we want to average plants for all these traits...
+
+plantDf = combRaw.groupby(['plantName','petalName']).mean()
+
+## and flip things around a bit. 
+
+meliaData = plantDf.unstack(level=1)
+
+## okay, and Melia would like to merge the top two rows
+
+aa = meliaData.reset_index() ## doesn't affect columns. 
+
+
+## final pipeline:
+import os, pickle
+import numpy as np
+import pandas as pd
+
+##get our python file for this data (could use the CSV instead)
+pickleFile="testing.p"
+rawDataDF = pickle.load(open(pickleFile, "rb"))
+## clean up 
+del rawDataDF['geojson']
+## split out the petal types
+uppersRaw = rawDataDF[rawDataDF.petalName != 'right']
+lowerRaw = rawDataDF[rawDataDF.petalName == 'right']
+## group by flowers for upper petal, average the upper petals
+uppersMean = uppersRaw.groupby(['plantName','flowerName']).mean()
+## clean up new columns 
+uppersMean.reset_index(inplace = True)
+## add petalName back in (dropped above)
+uppersMean['petalName'] = 'upper'
+lowerRaw['petalName'] = 'lower'
+## concatenate by row
+combRaw = pd.concat([ uppersMean, lowerRaw ])
+## take the average of each petal type nested within each plant
+plantDf = combRaw.groupby(['plantName','petalName']).mean()
+## localized transpose
+meliaData = plantDf.unstack(level=1)
+## collapse the hierarchical labels
+newName = pd.Series([ '_'.join(i) for i in aa ])
+meliaData.columns = newName
+meliaData.to_csv('meliaData.csv', na_rep='NaN')
 

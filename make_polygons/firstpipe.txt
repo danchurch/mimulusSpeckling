@@ -5005,6 +5005,12 @@ scp -r danthomas@10.4.2.6:/Users/danthomas/Documents/flowerImages/Plate2CroppedI
 
 /home/daniel/Documents/cooley_lab/flowerImages/Plate2CroppedImages
 
+## did some shuffling, the old directories (dougRaster, makepoly) should have all
+## the csvs, jpgs, mat files from melias now batch (plate2), in addition to the old 
+## files. 
+
+## try rerunning the script:
+
 
 
 

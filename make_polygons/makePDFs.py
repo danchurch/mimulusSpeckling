@@ -88,9 +88,9 @@ def plotYesZone (petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, x ,y):
 if __name__ == "__main__":
 
     ## make these into command line args?
-    polDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons'
-    dougDir='/home/daniel/Documents/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
-    targetDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/bigPDF/testNew'
+    polDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
+    dougDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+    targetDir='/home/daniel/Documents/cooley_lab/bigPDF'
 
     os.chdir(dougDir)
     aa = os.listdir()

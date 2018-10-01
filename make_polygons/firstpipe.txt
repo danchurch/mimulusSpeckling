@@ -5001,6 +5001,9 @@ end;
 ## probably not... let's start a branch, try it out. 
 
 
+scp -r danthomas@10.4.2.6:/Users/danthomas/Documents/flowerImages/Plate2CroppedImages .
+
+/home/daniel/Documents/cooley_lab/flowerImages/Plate2CroppedImages
 
 
 

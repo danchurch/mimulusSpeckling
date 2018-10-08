@@ -3747,7 +3747,8 @@ targetDir='/home/daniel/Documents/mimulusSpeckling/make_polygons/bigPDF/testNew'
 
 cd $targetDir
 
-pdftk !(echo * | sort) cat output digitizeBigPDF.09.06.2018.pdf
+
+pdftk $(echo * | sort) cat output digitizeBigPDF.10.08.2018.pdf
 
 ## okay, but text not searchable...
 
@@ -5036,52 +5037,63 @@ done
 
 ## and will require using matplotlib interactively. How do we do this?
 
+import FlowerPetal 
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 import numpy as np
+import pandas as pd
 import shapely.geometry as sg
 
+## create one flower petal:
+
+geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P765F1/left/P765F1_left_polys.geojson'
+fl = FlowerPetal.FlowerPetal()
+fl.plantName = P765
+fl.flowerName = 'F1'
+fl.petalName = 'left'
+fl.geojson = 'P765F1_left_polys.geojson'
+fl.parseGeoJson(geoJ)
+fl.cleanFlowerPetal()
+
+## plot it:
 plt.ion()
-
-
-def onclick(event):
-    print('%s click: button=%d, x=%d, y=%d, xdata=%f, ydata=%f' %
-          ('double' if event.dblclick else 'single', event.button,
-           event.x, event.y, event.xdata, event.ydata))
-
-## start by calling mpl_connect
-cid = fig.canvas.mpl_connect('button_press_event', onclick)
-
-## how do we apply this? can we write a function that generates positional data?
-## looks like this is save as event.x or event.y:
+fl.plotOne(fl.petal)
+fl.addOne(fl.spots)
+fl.addOne(fl.edge, a=0.5, col='white')
 
 ## a useful stackoverflow post at:
 ## https://stackoverflow.com/questions/25521120/store-mouse-click-event-coordinates-with-matplotlib
 
 
-fig, ax = plt.subplots()
-ax.plot(np.random.rand(10))
-
-points=[]
-
 def onclick(event):
     print('Point at x=%d y=%d' %(event.x, event.y))
-    xc, yc = event.x, event.y
+    xc, yc = event.xdata, event.ydata
     global points 
-    points.append((xc,yc))  
+    points.append([xc,yc])  
 
 aa=input('Is this throat polygon okay? (y/n)')  
 
+points=[]
 if aa == "y":
     print('moving on...')
 elif aa == "n":
     print('Okay, click the four points pf the throat.')
     print('Start with one corner and click counterclockwise.')
-    cid = fig.canvas.mpl_connect('button_press_event', onclick)
-    polA = sg.polygon.Polygon(points)
+    cid = plt.gcf().canvas.mpl_connect('button_press_event', onclick)
 else: 
     print("answer with \"y\" or \"n\"")
 
+plt.gcf().canvas.mpl_disconnect(cid)
+
 ## make a polygon from this
-## figure out how to make it snap to existing polygons
+
+polA = sg.polygon.Polygon(points)
+
+fl.addOne(polA, col='orange', a=1)
+
+
+## okay, works. we need to integrate it into the digitizing 
+## pipeline - the intersection of this trapezoid with exiting petal 
+## outline, etc. 
 
 

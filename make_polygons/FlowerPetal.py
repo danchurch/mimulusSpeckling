@@ -546,7 +546,7 @@ class FlowerPetal():
                       fc=col, ec='black',
                       linewidth=l, alpha=a))
     def addOne(self, poly, l=2, a=1.0, col='red'):
-        ax1 = plt.axes()
+        ax1 = plt.gca()
         ax1.add_patch(PolygonPatch(poly,
                       fc=col, ec='black',
                       linewidth=l, alpha=a))

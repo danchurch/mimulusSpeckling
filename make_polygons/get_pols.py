@@ -39,9 +39,9 @@ def stand(pol, scale, cent):
 
 ## clean up small polygons and points
 def cleanCollections(geo):
-        """sometimes our digitizing creates smatterings of geometries instead 
-        of a single clean polygon. This attempts to prune down to the main polygon,
-        which is usually the object we want."""
+    """sometimes our digitizing creates smatterings of geometries instead\
+    of a single clean polygon. This attempts to prune down to the main polygon,\
+    which is usually the object we want."""
     if type(geo) is not sg.polygon.Polygon:
         if type(geo) is sg.collection.GeometryCollection:
             onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]

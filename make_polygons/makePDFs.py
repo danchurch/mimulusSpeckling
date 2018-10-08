@@ -97,10 +97,6 @@ if __name__ == "__main__":
     bb = [ i for i in aa if 'JPG' in i]
 
     for flowerJpg in bb:
-        print(flowerJpg)
-
-
-    for flowerJpg in bb:
         flowerName = flowerJpg[0:-4] ##flower name
         fig = plt.figure()
         fig.suptitle(flowerName, fontsize=12)

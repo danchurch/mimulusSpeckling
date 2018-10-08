@@ -1,1808 +1,632 @@
-P247F1
-P247F1_left_polys
-P247F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.040524399022324686 0.38848841424805958 at 0.040524399022324686 0.38848841424805958
-P247F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P247F3
-P247F3_left_polys
-P247F3_mid_polys
-P247F3_right_polys
-P248F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.1374018479112212 0.56947541988945449 at 0.1374018479112212 0.56947541988945449
-P248F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P248F1_mid_polys
-P248F1_right_polys
-P248F2
-P248F2_left_polys
-P248F2_mid_polys
-P248F2_right_polys
-P248F3
-P248F3_left_polys
-P248F3_mid_polys
-P248F3_right_polys
-P253F1
-P253F1_left_polys
-P253F1_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.46523120167978205 0.18255479666084484 at 0.46523120167978205 0.18255479666084484
-P253F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P253F2
-P253F2_left_polys
-P253F2_mid_polys
-P253F2_right_polys
-P257F1
-P257F1_left_polys
-P257F1_mid_polys
-P257F1_right_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 143, in <module>
-    scale, cent = getPetGeoInfo(petPol)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 28, in getPetGeoInfo
-    scalar = area**(-1/2)
-ZeroDivisionError: 0.0 cannot be raised to a negative power
-P257F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.0021519353543963324 0.5241240943583273 at -0.0021519353543963324 0.5241240943583273
-P257F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P257F2_mid_polys
-P257F2_right_polys
-P257F3
-P257F3_left_polys
-P257F3_mid_polys
-P257F3_right_polys
-P258F1
-P258F1_left_polys
-P258F1_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.078016878065379894 -0.40624097031564532 at -0.078016878065379894 -0.40624097031564532
-P258F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P258F2
-P258F2_left_polys
-P258F2_mid_polys
-P258F2_right_polys
-P261F1
-P261F1_left_polys
-P261F1_mid_polys
-P261F1_right_polys
-P261F2
-P261F2_left_polys
-P261F2_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.38194829244749073 -0.49921501779325927 at -0.38194829244749073 -0.49921501779325927
-P261F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P261F3
-P261F3_left_polys
-P261F3_mid_polys
-P261F3_right_polys
-P297F1
-P297F1_left_polys
-P297F1_mid_polys
-P297F1_right_polys
-P297F2
-P297F2_left_polys
-P297F2_mid_polys
-P297F2_right_polys
-P299F1
-P299F1_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.055314807346667438 0.53476827559458306 at -0.055314807346667438 0.53476827559458306
-P299F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P299F1_right_polys
-P299F2
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.15183460442182481 0.54604262587638064 at 0.15183460442182481 0.54604262587638064
-P299F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P299F2_mid_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 143, in <module>
-    scale, cent = getPetGeoInfo(petPol)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 28, in getPetGeoInfo
-    scalar = area**(-1/2)
-ZeroDivisionError: 0.0 cannot be raised to a negative power
-P299F2_right_polys
-P301F1
-P301F1_left_polys
-P301F1_mid_polys
-P301F1_right_polys
-P331F1
-P331F1_left_polys
-P331F1_mid_polys
-P331F1_right_polys
-P331F2
-P331F2_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.24889031770964345 0.4576134906191241 at 0.24889031770964345 0.4576134906191241
-P331F2_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P331F2_right_polys
-P338F1
-P338F1_left_polys
-P338F1_mid_polys
-P338F1_right_polys
-P338F2
-P338F2_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.12645054038199957 0.46417472712937208 at 0.12645054038199957 0.46417472712937208
-P338F2_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P338F2_right_polys
-P339F1
-P339F1_left_polys
-P339F1_mid_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 147, in <module>
-    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 67, in findZones
-    holes = [center.exterior.coords])
-AttributeError: 'NoneType' object has no attribute 'coords'
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.19384602616804558 0.5362015962753014 at -0.19384602616804558 0.5362015962753014
-P339F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P339F2
-P339F2_left_polys
-P339F2_mid_polys
-P339F2_right_polys
-P341F1
-P341F1_left_polys
-P341F1_mid_polys
-P341F1_right_polys
-P341F2
-P341F2_left_polys
-P341F2_mid_polys
-P341F2_right_polys
-P342F1
-P342F1_left_polys
-P342F1_mid_polys
-P342F1_right_polys
-P342F2
-P342F2_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.058022349540166995 0.56677058557016158 at 0.058022349540166995 0.56677058557016158
-P342F2_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P342F2_right_polys
-P344F1
-P344F1_left_polys
-P344F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.28660958777192974 0.42176432095145594 at -0.28660958777192974 0.42176432095145594
-P344F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P344F2
-P344F2_left_polys
-P344F2_mid_polys
-P344F2_right_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 147, in <module>
-    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 67, in findZones
-    holes = [center.exterior.coords])
-AttributeError: 'NoneType' object has no attribute 'coords'
-P345F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.13457816531248734 0.40812205373511773 at -0.13457816531248734 0.40812205373511773
-P345F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P345F1_mid_polys
-P345F1_right_polys
-P345F2
-P345F2_left_polys
-P345F2_mid_polys
-P345F2_right_polys
-P348F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.15469181656184608 0.53222356197229492 at 0.15469181656184608 0.53222356197229492
-P348F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P348F1_mid_polys
-P348F1_right_polys
-P348F2
-P348F2_left_polys
-P348F2_mid_polys
-P348F2_right_polys
-P351F1
-P351F1_left_polys
-P351F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.16450779637992591 0.44420594271358593 at 0.16450779637992591 0.44420594271358593
-P351F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P351F2
-P351F2_left_polys
-P351F2_mid_polys
-P351F2_right_polys
-P352F1
-P352F1_left_polys
-P352F1_mid_polys
-P352F1_right_polys
-P352F2
-P352F2_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.34574114499914027 0.55882247757885073 at 0.34574114499914027 0.55882247757885073
-P352F2_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P352F2_right_polys
-P355F1
-P355F1_left_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.58232078082138039 0.11026091722223033 at 0.58232078082138039 0.11026091722223033
-P355F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.29307880078996723 0.43254999880880929 at 0.29307880078996723 0.43254999880880929
-P355F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P355F2
-P355F2_left_polys
-P355F2_mid_polys
-P355F2_right_polys
-P356F1
-P356F1_left_polys
-P356F1_mid_polys
-P356F1_right_polys
-P356F2
-P356F2_left_polys
-TopologyException: Input geom 0 is invalid: Ring Self-intersection at or near point 0.48646961129009014 -0.25435857508761761 at 0.48646961129009014 -0.25435857508761761
-P356F2_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P356F2_right_polys
-P357F1
-P357F1_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.18034696175722922 0.52867494738666332 at 0.18034696175722922 0.52867494738666332
-P357F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P357F1_right_polys
-P357F2
-P357F2_left_polys
-P357F2_mid_polys
-P357F2_right_polys
-P361F1
-P361F1_left_polys
-P361F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.0826088052193657 0.44893918029592372 at 0.0826088052193657 0.44893918029592372
-P361F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P361F2
-P361F2_left_polys
-P361F2_mid_polys
-P361F2_right_polys
-P363F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.15903790208745797 0.59166606043859038 at -0.15903790208745797 0.59166606043859038
-P363F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P363F1_mid_polys
-P363F1_right_polys
-P363F2
-P363F2_left_polys
-P363F2_mid_polys
-P363F2_right_polys
-P364F1
-P364F1_left_polys
-P364F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.037463721463972324 0.44650521371620461 at 0.037463721463972324 0.44650521371620461
-P364F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P364F2
-P364F2_left_polys
-P364F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.27639428144041522 0.36923936478645913 at -0.27639428144041522 0.36923936478645913
-P364F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P365F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.11371671743351425 0.56841666354531462 at -0.11371671743351425 0.56841666354531462
-P365F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P365F1_mid_polys
-P365F1_right_polys
-P365F2
-P365F2_left_polys
-P365F2_mid_polys
-P365F2_right_polys
-P366F1
-P366F1_left_polys
-P366F1_mid_polys
-P366F1_right_polys
-P366F2
-P366F2_left_polys
-P366F2_mid_polys
-P366F2_right_polys
-P368F1
-P368F1_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.25719302294277457 0.51240056329395223 at 0.25719302294277457 0.51240056329395223
-P368F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P368F1_right_polys
-P368F2
-P368F2_left_polys
-P368F2_mid_polys
-P368F2_right_polys
-P369F1
-P369F1_left_polys
-P369F1_mid_polys
-P369F1_right_polys
-P369F2
-P369F2_left_polys
-P369F2_mid_polys
-P369F2_right_polys
-P370F1
-P370F1_left_polys
-P370F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.22371485150174844 0.37333439199516755 at 0.22371485150174844 0.37333439199516755
-P370F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P370F2
-P370F2_left_polys
-P370F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.25632201722949044 0.3771080093643534 at -0.25632201722949044 0.3771080093643534
-P370F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P371F1
-P371F1_left_polys
-P371F1_mid_polys
-P371F1_right_polys
-P371F2
-P371F2_left_polys
-P371F2_mid_polys
-P371F2_right_polys
-P373F1
-P373F1_left_polys
-P373F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.10966638018316903 0.41860101252671339 at -0.10966638018316903 0.41860101252671339
-P373F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P373F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.23024897736439776 0.56756704802414026 at -0.23024897736439776 0.56756704802414026
-P373F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P373F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.043007424597843437 0.37227847913496026 at 0.043007424597843437 0.37227847913496026
-P373F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P374F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.22426451568700198 0.57437821954954216 at -0.22426451568700198 0.57437821954954216
-P374F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P374F1_mid_polys
-P374F1_right_polys
-P374F2
-P374F2_left_polys
-P374F2_mid_polys
-P374F2_right_polys
-P375F1
-P375F1_left_polys
-P375F1_mid_polys
-P375F1_right_polys
-P375F2
-P375F2_left_polys
-P375F2_mid_polys
-P375F2_right_polys
-P376F1
-P376F1_left_polys
-P376F1_mid_polys
-P376F1_right_polys
-P376F2
-P376F2_left_polys
-P376F2_mid_polys
-P376F2_right_polys
-P378F1
-P378F1_left_polys
-P378F1_mid_polys
-P378F1_right_polys
-P378F2
-P378F2_left_polys
-P378F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.084727412674575314 0.35764440126055325 at 0.084727412674575314 0.35764440126055325
-P378F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P379F1
-P379F1_left_polys
-P379F1_mid_polys
-P379F1_right_polys
-P379F2
-P379F2_left_polys
-P379F2_mid_polys
-P379F2_right_polys
-P380F1
-P380F1_left_polys
-P380F1_mid_polys
-P380F1_right_polys
-P380F2
-P380F2_left_polys
-P380F2_mid_polys
-P380F2_right_polys
-P381F1
-P381F1_left_polys
-P381F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.16805673528817103 0.31939241841643434 at -0.16805673528817103 0.31939241841643434
-P381F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P381F2
-P381F2_left_polys
-P381F2_mid_polys
-P381F2_right_polys
-P384F1
-P384F1_left_polys
-P384F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.045110894473274155 0.41515273881827031 at 0.045110894473274155 0.41515273881827031
-P384F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P384F2
-P384F2_left_polys
-P384F2_mid_polys
-P384F2_right_polys
-P385F1
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.31398468491849918 -0.58157739421548671 at 0.31398468491849918 -0.58157739421548671
-P385F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P385F1_mid_polys
-P385F1_right_polys
-P385F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.14986512719849474 0.57175980020724948 at -0.14986512719849474 0.57175980020724948
-P385F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P385F2_mid_polys
-P385F2_right_polys
-P386F1
-P386F1_left_polys
-P386F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.20196588845555299 0.40650697090460525 at -0.20196588845555299 0.40650697090460525
-P386F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P387F2
-P387F2_left_polys
-P387F2_mid_polys
-P387F2_right_polys
-P388F1
-P388F1_left_polys
-P388F1_mid_polys
-P388F1_right_polys
-P388F2
-TopologyException: Input geom 0 is invalid: Ring Self-intersection at or near point -0.0012046853962350943 -0.48411958140929529 at -0.0012046853962350943 -0.48411958140929529
-P388F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P388F2_mid_polys
-P388F2_right_polys
-P389F1
-P389F1_left_polys
-P389F1_mid_polys
-P389F1_right_polys
-P389F2
-P389F2_left_polys
-P389F2_mid_polys
-P389F2_right_polys
-P390F1
-P390F1_left_polys
-P390F1_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.4426404883824398 0.44880503013283846 at -0.4426404883824398 0.44880503013283846
-P390F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P390F2
-P390F2_left_polys
-P390F2_mid_polys
-P390F2_right_polys
-P393F1
-P393F1_left_polys
-P393F1_mid_polys
-P393F1_right_polys
-P393F2
-P393F2_left_polys
-P393F2_mid_polys
-P393F2_right_polys
-P397F1
-P397F1_left_polys
-P397F1_mid_polys
-P397F1_right_polys
-P397F2
-P397F2_left_polys
-P397F2_mid_polys
-P397F2_right_polys
-P398F1
-P398F1_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.35458887405016781 0.48510825015106668 at 0.35458887405016781 0.48510825015106668
-P398F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.32679716298062611 0.28151274798246684 at 0.32679716298062611 0.28151274798246684
-P398F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P398F2
-P398F2_left_polys
-P398F2_mid_polys
-P398F2_right_polys
-P399F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.31028410393030947 0.49231780504665018 at -0.31028410393030947 0.49231780504665018
-P399F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P399F1_mid_polys
-P399F1_right_polys
-P399F2
-P399F2_left_polys
-P399F2_mid_polys
-P399F2_right_polys
-P400F1
-P400F1_left_polys
-P400F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.26811348663485907 0.40627364404537714 at 0.26811348663485907 0.40627364404537714
-P400F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P400F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.065612219242200065 0.61973094358407632 at -0.065612219242200065 0.61973094358407632
-P400F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P400F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.15834371208242445 0.45063392486477988 at 0.15834371208242445 0.45063392486477988
-P400F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P400F3
-P400F3_left_polys
-P400F3_mid_polys
-P400F3_right_polys
-P401F1
-P401F1_left_polys
-P401F1_mid_polys
-P401F1_right_polys
-P401F2
-P401F2_left_polys
-P401F2_mid_polys
-P401F2_right_polys
-P402F1
-P402F1_left_polys
-P402F1_mid_polys
-P402F1_right_polys
-P402F2
-P402F2_left_polys
-P402F2_mid_polys
-P402F2_right_polys
-P403F1
-P403F1_left_polys
-P403F1_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.51345796010536993 0.22310100289137139 at 0.51345796010536993 0.22310100289137139
-P403F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P403F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.23792158056775881 0.30910611383034464 at 0.23792158056775881 0.30910611383034464
-P403F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P403F2_mid_polys
-P403F2_right_polys
-P404F1
-P404F1_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.11297072686596731 0.59193834691094716 at 0.11297072686596731 0.59193834691094716
-P404F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.29379953650558327 0.40678048676034423 at 0.29379953650558327 0.40678048676034423
-P404F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P404F2
-P404F2_left_polys
-P404F2_mid_polys
-P404F2_right_polys
-P405F1
-P405F1_left_polys
-P405F1_mid_polys
-P405F1_right_polys
-P405F2
-P405F2_left_polys
-P405F2_mid_polys
-P405F2_right_polys
-P405F3
-P405F3_left_polys
-P405F3_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.017563364066894679 0.40428928374032524 at 0.017563364066894679 0.40428928374032524
-P405F3_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P406F1
-P406F1_left_polys
-P406F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.10385713143701822 0.3934555183202596 at 0.10385713143701822 0.3934555183202596
-P406F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P406F2
-P406F2_left_polys
-P406F2_mid_polys
-P406F2_right_polys
-P406F3
-P406F3_left_polys
-P406F3_mid_polys
-P406F3_right_polys
-P407F1
-P407F1_left_polys
-P407F1_mid_polys
-P407F1_right_polys
-P407F2
-P407F2_left_polys
-P407F2_mid_polys
-P407F2_right_polys
-P407F3
-P407F3_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.22865264493311774 0.54012817799126578 at 0.22865264493311774 0.54012817799126578
-P407F3_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.15577136495562383 0.35886132688062528 at -0.15577136495562383 0.35886132688062528
-P407F3_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P408F1
-P408F1_left_polys
-P408F1_mid_polys
-P408F1_right_polys
-P408F2
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.47065590765510384 -0.42486215773133995 at 0.47065590765510384 -0.42486215773133995
-P408F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P408F2_mid_polys
-P408F2_right_polys
-P408F3
-P408F3_left_polys
-P408F3_mid_polys
-P408F3_right_polys
-P409F1
-P409F1_left_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.32615254341776778 0.39623278429671577 at -0.32615254341776778 0.39623278429671577
-P409F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.033357264468110617 -0.3547963184628688 at 0.033357264468110617 -0.3547963184628688
-P409F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P409F2
-P409F2_left_polys
-P409F2_mid_polys
-P409F2_right_polys
-P410F1
-P410F1_left_polys
-P410F1_mid_polys
-P410F1_right_polys
-P410F2
-P410F2_left_polys
-P410F2_mid_polys
-P410F2_right_polys
-P411F1
-P411F1_left_polys
-P411F1_mid_polys
-P411F1_right_polys
-P411F2
-P411F2_left_polys
-P411F2_mid_polys
-P411F2_right_polys
-P412F1
-P412F1_left_polys
-P412F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.2430059225714129 0.41799178123777148 at 0.2430059225714129 0.41799178123777148
-P412F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P412F2
-P412F2_left_polys
-P412F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.20177749192476083 0.39538977918704715 at 0.20177749192476083 0.39538977918704715
-P412F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P413F1
-P413F1_left_polys
-P413F1_mid_polys
-P413F1_right_polys
-P413F2
-P413F2_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.099499989244002579 0.55993889494149462 at 0.099499989244002579 0.55993889494149462
-P413F2_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P413F2_right_polys
-P414F1
-P414F1_left_polys
-P414F1_mid_polys
-P414F1_right_polys
-P414F2
-P414F2_left_polys
-P414F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.34911389452164665 0.34945686253696612 at 0.34911389452164665 0.34945686253696612
-P414F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P415F1
-P415F1_left_polys
-P415F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.29423899171208201 0.3750392839234491 at -0.29423899171208201 0.3750392839234491
-P415F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P415F2
-P415F2_left_polys
-P415F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.07382671075860886 0.38179565562375684 at -0.07382671075860886 0.38179565562375684
-P415F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P416F1
-P416F1_left_polys
-TopologyException: Input geom 0 is invalid: Ring Self-intersection at or near point -0.42118465297647717 -0.52712330713380307 at -0.42118465297647717 -0.52712330713380307
-P416F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.19257152872637298 0.36345169359546797 at 0.19257152872637298 0.36345169359546797
-P416F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P416F2
-P416F2_left_polys
-P416F2_mid_polys
-P416F2_right_polys
-P417F1
-P417F1_left_polys
-P417F1_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.452181778859232 -0.40523548348011557 at -0.452181778859232 -0.40523548348011557
-P417F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P417F2
-P417F2_left_polys
-P417F2_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.63165933278247843 -0.11652502340152196 at -0.63165933278247843 -0.11652502340152196
-P417F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P418F1
-P418F1_left_polys
-P418F1_mid_polys
-P418F1_right_polys
-P418F2
-P418F2_left_polys
-P418F2_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.63719451315009124 -0.067279416048410839 at -0.63719451315009124 -0.067279416048410839
-P418F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P419F1
-P419F1_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.19712682749114285 0.5395884724096579 at 0.19712682749114285 0.5395884724096579
-P419F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P419F1_right_polys
-P419F2
-P419F2_left_polys
-P419F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.16352876040893649 0.37333738008413309 at -0.16352876040893649 0.37333738008413309
-P419F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P420F1
-P420F1_left_polys
-P420F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.26021139324112375 0.3763404905824102 at 0.26021139324112375 0.3763404905824102
-P420F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P420F2
-P420F2_left_polys
-P420F2_mid_polys
-P420F2_right_polys
-P422F1
-P422F1_left_polys
-P422F1_mid_polys
-P422F1_right_polys
-P422F2
-P422F2_left_polys
-P422F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.10567015527498105 0.38035396853356246 at 0.10567015527498105 0.38035396853356246
-P422F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P423F1
-P423F1_left_polys
-P423F1_mid_polys
-P423F1_right_polys
-P423F2
-P423F2_left_polys
-P423F2_mid_polys
-P423F2_right_polys
-P424F1
-P424F1_left_polys
-P424F1_mid_polys
-P424F1_right_polys
-P424F2
-P424F2_left_polys
-P424F2_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.017458514335315065 -0.37135304905865546 at 0.017458514335315065 -0.37135304905865546
-P424F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P425F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.19490859212587547 0.51686007536525425 at -0.19490859212587547 0.51686007536525425
-P425F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P425F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.032951995597830075 0.37489107511846259 at -0.032951995597830075 0.37489107511846259
-P425F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P425F2
-P425F2_left_polys
-P425F2_mid_polys
-P425F2_right_polys
-P426F1
-P426F1_left_polys
-P426F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.09890656738944735 0.37861169175102499 at 0.09890656738944735 0.37861169175102499
-P426F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P426F2
-P426F2_left_polys
-P426F2_mid_polys
-P426F2_right_polys
-P428F1
-P428F1_left_polys
-P428F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.089280534583111859 0.36530537791238943 at 0.089280534583111859 0.36530537791238943
-P428F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P428F2
-P428F2_left_polys
-P428F2_mid_polys
-P428F2_right_polys
-P429F1
-P429F1_left_polys
-P429F1_mid_polys
-P429F1_right_polys
-P429F2
-P429F2_left_polys
-P429F2_mid_polys
-P429F2_right_polys
-P430F1
-P430F1_left_polys
-P430F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.16492529520604915 0.45858730554925875 at -0.16492529520604915 0.45858730554925875
-P430F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P430F2
-P430F2_left_polys
-P430F2_mid_polys
-P430F2_right_polys
-P431F1
-P431F1_left_polys
-P431F1_mid_polys
-P431F1_right_polys
-P431F2
-P431F2_left_polys
-P431F2_mid_polys
-P431F2_right_polys
-P432F1
-P432F1_left_polys
-P432F1_mid_polys
-P432F1_right_polys
-P432F2
-P432F2_left_polys
-P432F2_mid_polys
-P432F2_right_polys
-P434F1
-P434F1_left_polys
-P434F1_mid_polys
-P434F1_right_polys
-P435F1
-P435F1_left_polys
-P435F1_mid_polys
-P435F1_right_polys
-P435F2
-P435F2_left_polys
-P435F2_mid_polys
-P435F2_right_polys
-P436F1
-P436F1_left_polys
-P436F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.26035905019184913 0.39802755296622339 at -0.26035905019184913 0.39802755296622339
-P436F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P436F2
-P436F2_left_polys
-P436F2_mid_polys
-P436F2_right_polys
-P438F2
-P438F2_left_polys
-P438F2_mid_polys
-P438F2_right_polys
-P439F1
-P439F1_left_polys
-P439F1_mid_polys
-P439F1_right_polys
-P439F2
-P439F2_left_polys
-P439F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.076731410475234324 0.39149479886576638 at -0.076731410475234324 0.39149479886576638
-P439F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P440F1
-P440F1_left_polys
-P440F1_mid_polys
-P440F1_right_polys
-P440F2
-P440F2_left_polys
-P440F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.05966115712192066 0.41101880888150188 at -0.05966115712192066 0.41101880888150188
-P440F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P441F1
-P441F1_left_polys
-P441F1_mid_polys
-P441F1_right_polys
-P441F2
-P441F2_left_polys
-P441F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.24252839482948274 0.34496298015731469 at 0.24252839482948274 0.34496298015731469
-P441F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P442F1
-P442F1_left_polys
-P442F1_mid_polys
-P442F1_right_polys
-P500F1
-P500F1_left_polys
-P500F1_mid_polys
-P500F1_right_polys
-P500F2
-P500F2_left_polys
-P500F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.26885553247361405 0.37410990227353136 at -0.26885553247361405 0.37410990227353136
-P500F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P501F1
-P501F1_left_polys
-P501F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.070561985877587441 0.38356982349878732 at 0.070561985877587441 0.38356982349878732
-P501F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P501F2
-P501F2_left_polys
-P501F2_mid_polys
-P501F2_right_polys
-P502F1
-P502F1_left_polys
-P502F1_mid_polys
-P502F1_right_polys
-P502F2
-P502F2_left_polys
-P502F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.23954575839543268 0.39014480543400998 at -0.23954575839543268 0.39014480543400998
-P502F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P504F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.16697521968341772 0.63870596352177778 at -0.16697521968341772 0.63870596352177778
-P504F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P504F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.049610568668152236 0.33641412252287262 at 0.049610568668152236 0.33641412252287262
-P504F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P504F2
-P504F2_left_polys
-P504F2_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P504F2_right_polys
-P507F1
-P507F1_left_polys
-P507F1_mid_polys
-P507F1_right_polys
-P507F2
-P507F2_left_polys
-P507F2_mid_polys
-P507F2_right_polys
-P508F1
-P508F1_left_polys
-P508F1_mid_polys
-P508F1_right_polys
-P508F2
-P508F2_left_polys
-P508F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.22744697065187858 0.39661249411802735 at 0.22744697065187858 0.39661249411802735
-P508F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P509F1
-P509F1_left_polys
-P509F1_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.46711329752593567 -0.39359227745242914 at -0.46711329752593567 -0.39359227745242914
-P509F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P509F2
-P509F2_left_polys
-P509F2_mid_polys
-P509F2_right_polys
-P510F1
-P510F1_left_polys
-P510F1_mid_polys
-P510F1_right_polys
-P510F2
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.31783976601897834 0.38324342582953497 at 0.31783976601897834 0.38324342582953497
-P510F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P510F2_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.49996660152039829 -0.30294343925580408 at 0.49996660152039829 -0.30294343925580408
-P510F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P512F1
-P512F1_left_polys
-P512F1_mid_polys
-P512F1_right_polys
-P512F2
-P512F2_left_polys
-P512F2_mid_polys
-P512F2_right_polys
-P513F1
-P513F1_left_polys
-P513F1_mid_polys
-P513F1_right_polys
-P513F2
-P513F2_left_polys
-P513F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.090174085646765656 0.35009518656892408 at -0.090174085646765656 0.35009518656892408
-P513F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P514F1
-P514F1_left_polys
-P514F1_mid_polys
-P514F1_right_polys
-P514F2
-P514F2_left_polys
-P514F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.02106066307378987 0.35918323559702442 at 0.02106066307378987 0.35918323559702442
-P514F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P515F1
-P515F1_left_polys
-P515F1_mid_polys
-P515F1_right_polys
-P515F2
-P515F2_left_polys
-P515F2_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.031409588194418407 -0.3585904026058645 at 0.031409588194418407 -0.3585904026058645
-P515F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P517F1
-P517F1_left_polys
-P517F1_mid_polys
-P517F1_right_polys
-P517F2
-P517F2_left_polys
-P517F2_mid_polys
-P517F2_right_polys
-P518F1
-P518F1_left_polys
-P518F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.30747783748304297 0.40295862441926711 at 0.30747783748304297 0.40295862441926711
-P518F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P518F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.19355455692929616 0.47954596471002214 at -0.19355455692929616 0.47954596471002214
-P518F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P518F2_mid_polys
-P518F2_right_polys
-P519F1
-P519F1_left_polys
-P519F1_mid_polys
-P519F1_right_polys
-P519F2
-P519F2_left_polys
-P519F2_mid_polys
-P519F2_right_polys
-P520F1
-P520F1_left_polys
-P520F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.25924869571981357 0.43219615593004246 at -0.25924869571981357 0.43219615593004246
-P520F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P520F2
-P520F2_left_polys
-P520F2_mid_polys
-P520F2_right_polys
-P523F1
-P523F1_left_polys
-P523F1_mid_polys
-P523F1_right_polys
-P523F2
-P523F2_left_polys
-P523F2_mid_polys
-P523F2_right_polys
-P524F1
-P524F1_left_polys
-P524F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.28848509005560596 0.44186895099620133 at -0.28848509005560596 0.44186895099620133
-P524F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P524F2
-P524F2_left_polys
-P524F2_mid_polys
-P524F2_right_polys
-P527F1
-P527F1_left_polys
-P527F1_mid_polys
-P527F1_right_polys
-P527F2
-P527F2_left_polys
-P527F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.21720736044237565 0.42041990767326531 at 0.21720736044237565 0.42041990767326531
-P527F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P533F1
-P533F1_left_polys
-P533F1_mid_polys
-P533F1_right_polys
-P534F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.22241351516977587 0.59515597670897546 at 0.22241351516977587 0.59515597670897546
-P534F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P534F1_mid_polys
-P534F1_right_polys
-P541F1
-P541F1_left_polys
-P541F1_mid_polys
-P541F1_right_polys
-P541F2
-P541F2_left_polys
-P541F2_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.10085445976643596 0.5858132908633551 at -0.10085445976643596 0.5858132908633551
-P541F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P542F2
-P542F2_left_polys
-P542F2_mid_polys
-P542F2_right_polys
-P543F1
-P543F1_left_polys
-P543F1_mid_polys
-P543F1_right_polys
-P702F1
-P702F1_left_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.32730977900285474 -0.46384836127695056 at -0.32730977900285474 -0.46384836127695056
-P702F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P702F1_right_polys
-P702F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.28815572553244329 0.49096033715358828 at -0.28815572553244329 0.49096033715358828
-P702F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P702F2_mid_polys
-P702F2_right_polys
-P703F1
-P703F1_left_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.56214088051796951 0.084456659706785217 at -0.56214088051796951 0.084456659706785217
-P703F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P703F1_right_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 147, in <module>
-    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 67, in findZones
-    holes = [center.exterior.coords])
-AttributeError: 'MultiPolygon' object has no attribute 'exterior'
-P703F2
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.44016854681653478 0.28659345412031151 at -0.44016854681653478 0.28659345412031151
-P703F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P703F2_mid_polys
-P703F2_right_polys
-P704F1
-P704F1_left_polys
-P704F1_mid_polys
-P704F1_right_polys
-P704F3
-P704F3_left_polys
-P704F3_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.57099989853346433 0.10255685518882866 at 0.57099989853346433 0.10255685518882866
-P704F3_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P705F1
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.42677124177175779 -0.47879046602835545 at 0.42677124177175779 -0.47879046602835545
-P705F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P705F1_mid_polys
-P705F1_right_polys
-P705F2
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.24995824616523862 -0.6010410832186196 at 0.24995824616523862 -0.6010410832186196
-P705F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.2297277128773533 0.54086071057171592 at -0.2297277128773533 0.54086071057171592
-P705F2_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P705F2_right_polys
-P707F1
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.21616231017551171 0.52870420207229285 at 0.21616231017551171 0.52870420207229285
-P707F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P707F1_mid_polys
-P707F1_right_polys
-P707F2
-TopologyException: Input geom 0 is invalid: Ring Self-intersection at or near point 0.48456777334929557 -0.34548318902064801 at 0.48456777334929557 -0.34548318902064801
-P707F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P707F2_mid_polys
-P707F2_right_polys
-P708F1
-P708F1_left_polys
-P708F1_mid_polys
-P708F1_right_polys
-P708F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0 0.68017191371661234 at 0 0.68017191371661234
-P708F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P708F2_mid_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 147, in <module>
-    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 67, in findZones
-    holes = [center.exterior.coords])
-AttributeError: 'MultiPolygon' object has no attribute 'exterior'
-P708F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P709F1
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.47954559587817658 -0.31845683371446898 at 0.47954559587817658 -0.31845683371446898
-P709F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P709F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P709F1_right_polys
-P709F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.011868792018607396 0.56561069705314693 at -0.011868792018607396 0.56561069705314693
-P709F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.27540481871883188 0.62352508558438613 at 0.27540481871883188 0.62352508558438613
-P709F2_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P709F2_right_polys
-P710F1
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.42445131780049511 0.27873125207761479 at 0.42445131780049511 0.27873125207761479
-P710F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.46849731827430707 0.33265662170304511 at -0.46849731827430707 0.33265662170304511
-P710F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P710F1_right_polys
-P710F3
-P710F3_left_polys
-P710F3_mid_polys
-P710F3_right_polys
-P711F1
-P711F1_left_polys
-P711F1_mid_polys
-P711F1_right_polys
-P711F2
-P711F2_left_polys
-P711F2_mid_polys
-P711F2_right_polys
-P713F1
-P713F1_left_polys
-P713F1_mid_polys
-P713F1_right_polys
-P713F2
-P713F2_left_polys
-P713F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.24959248630105194 0.4189581388335179 at 0.24959248630105194 0.4189581388335179
-P713F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P714F1
-P714F1_left_polys
-P714F1_mid_polys
-P714F1_right_polys
-P714F3
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.040931917568028178 0.68649738006270511 at -0.040931917568028178 0.68649738006270511
-P714F3_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P714F3_mid_polys
-P714F3_right_polys
-P715F1
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.083642210221711977 0.69128746455570911 at -0.083642210221711977 0.69128746455570911
-P715F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P715F1_mid_polys
-P715F1_right_polys
-P715F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.23013884137630508 0.4815174010445859 at -0.23013884137630508 0.4815174010445859
-P715F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P715F2_mid_polys
-P715F2_right_polys
-P716F1
-P716F1_left_polys
-P716F1_mid_polys
-P716F1_right_polys
-P716F2
-P716F2_left_polys
-P716F2_mid_polys
-P716F2_right_polys
-P717F1
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.41674024195551751 0.57533964657469905 at 0.41674024195551751 0.57533964657469905
-P717F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.083644070616659724 0.4981000727167425 at -0.083644070616659724 0.4981000727167425
-P717F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P717F1_right_polys
-P717F2
-P717F2_left_polys
-P717F2_mid_polys
-P717F2_right_polys
-P719F1
-P719F1_left_polys
-P719F1_mid_polys
-P719F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P719F2
-P719F2_left_polys
-P719F2_mid_polys
-P719F2_right_polys
-P720F1
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.10174615212674439 0.6116967045134476 at -0.10174615212674439 0.6116967045134476
-P720F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P720F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P720F1_right_polys
-P720F2
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.054744672573577187 0.54334090861824091 at 0.054744672573577187 0.54334090861824091
-P720F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P720F2_mid_polys
-P720F2_right_polys
-P721F1
-P721F1_left_polys
-P721F1_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.45848046224161065 -0.36282055734240076 at 0.45848046224161065 -0.36282055734240076
-P721F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P721F2
-P721F2_left_polys
-P721F2_mid_polys
-P721F2_right_polys
-P722F1
-P722F1_left_polys
-P722F1_mid_polys
-P722F1_right_polys
-P722F2
-P722F2_left_polys
-P722F2_mid_polys
-P722F2_right_polys
-P723F1
-P723F1_left_polys
-P723F1_mid_polys
-P723F1_right_polys
-P723F2
-P723F2_left_polys
-P723F2_mid_polys
-P723F2_right_polys
-P724F1
-P724F1_left_polys
-P724F1_mid_polys
-P724F1_right_polys
-P724F2
-P724F2_left_polys
-P724F2_mid_polys
-P724F2_right_polys
-P725F1
-P725F1_left_polys
-P725F1_mid_polys
-P725F1_right_polys
-P725F2
-P725F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.52261645055488426 0.36771306986022445 at 0.52261645055488426 0.36771306986022445
-P725F2_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P725F2_right_polys
-P726F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.05641971579930187 0.51547555129648637 at -0.05641971579930187 0.51547555129648637
-P726F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P726F1_mid_polys
-P726F1_right_polys
-P726F2
-P726F2_left_polys
-P726F2_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.44422026119067748 0.35304001779979255 at -0.44422026119067748 0.35304001779979255
-P726F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P727F1
-P727F1_left_polys
-P727F1_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.1251416076473866 0.4783601533752686 at -0.1251416076473866 0.4783601533752686
-P727F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P727F2
-P727F2_left_polys
-P727F2_mid_polys
-P727F2_right_polys
-P728F1
-P728F1_left_polys
-P728F1_mid_polys
-P728F1_right_polys
-P728F2
-P728F2_left_polys
-P728F2_mid_polys
-P728F2_right_polys
-P729F1
-P729F1_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.083141473053831877 0.54085298494184775 at -0.083141473053831877 0.54085298494184775
-P729F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P729F1_right_polys
-P729F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.25702839753883355 0.49499573064928692 at -0.25702839753883355 0.49499573064928692
-P729F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P729F2_mid_polys
-P729F2_right_polys
-P730F2
-P730F2_left_polys
-P730F2_mid_polys
-P730F2_right_polys
-P730F3
-P730F3_left_polys
-P730F3_mid_polys
-P730F3_right_polys
-P731F1
-P731F1_left_polys
-P731F1_mid_polys
-P731F1_right_polys
-P731F2
-P731F2_left_polys
-P731F2_mid_polys
-P731F2_right_polys
-P732F1
-P732F1_left_polys
-P732F1_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.15717217678554191 0.49924692714155661 at 0.15717217678554191 0.49924692714155661
-P732F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P732F2
-P732F2_left_polys
-P732F2_mid_polys
-P732F2_right_polys
-P733F3
-P733F3_left_polys
-P733F3_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.4389591235210506 0.33471352380613423 at -0.4389591235210506 0.33471352380613423
-P733F3_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P733F4
-P733F4_left_polys
-P733F4_mid_polys
-P733F4_right_polys
-P734F1
-P734F1_left_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 147, in <module>
-    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 67, in findZones
-    holes = [center.exterior.coords])
-AttributeError: 'MultiPolygon' object has no attribute 'exterior'
-P734F1_mid_polys
-P734F1_right_polys
-P734F2
-P734F2_left_polys
-P734F2_mid_polys
-P734F2_right_polys
-P737F1
-P737F1_left_polys
-P737F1_mid_polys
-P737F1_right_polys
-P737F2
-P737F2_left_polys
-P737F2_mid_polys
-P737F2_right_polys
-P738F1
-P738F1_left_polys
-P738F1_mid_polys
-P738F1_right_polys
-P738F2
-P738F2_left_polys
-P738F2_mid_polys
-P738F2_right_polys
-P739F1
-P739F1_left_polys
-P739F1_mid_polys
-P739F1_right_polys
-P739F2
-P739F2_left_polys
-P739F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.15662386215748264 0.45877745916715018 at 0.15662386215748264 0.45877745916715018
-P739F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P740F1
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.054581820070318456 0.54563567622018672 at -0.054581820070318456 0.54563567622018672
-P740F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P740F1_mid_polys
-P740F1_right_polys
-P740F2
-P740F2_left_polys
-P740F2_mid_polys
-P740F2_right_polys
-P741F1
-P741F1_left_polys
-P741F1_mid_polys
-P741F1_right_polys
-P741F2
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.11989850472023543 0.48359075944205843 at 0.11989850472023543 0.48359075944205843
-P741F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P741F2_mid_polys
-P741F2_right_polys
-P742F1
-P742F1_left_polys
-P742F1_mid_polys
-P742F1_right_polys
-P742F2
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.026292828294103791 0.54389670982142047 at -0.026292828294103791 0.54389670982142047
-P742F2_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P742F2_mid_polys
-P742F2_right_polys
-P743F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.25819888974716115 0.25454691760092435 at -0.25819888974716115 0.25454691760092435
-P743F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.024703454998900684 -0.65507285082761968 at -0.024703454998900684 -0.65507285082761968
-P743F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P743F1_right_polys
-P743F2
-P743F2_left_polys
-P743F2_mid_polys
-P743F2_right_polys
-P744F1
-P744F1_left_polys
-P744F1_mid_polys
-P744F1_right_polys
-P745F1
-P745F1_left_polys
-P745F1_mid_polys
-P745F1_right_polys
-P745F2
-P745F2_left_polys
-P745F2_mid_polys
-P745F2_right_polys
-P746F3
-P746F3_left_polys
-P746F3_mid_polys
-P746F3_right_polys
-P746F4
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.092455894059854785 0.55427244215887173 at -0.092455894059854785 0.55427244215887173
-P746F4_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.33478858748027135 0.46818566869237538 at -0.33478858748027135 0.46818566869237538
-P746F4_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P746F4_right_polys
-P747F1
-P747F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P747F1_mid_polys
-P747F1_right_polys
-P747F2
-P747F2_left_polys
-P747F2_mid_polys
-P747F2_right_polys
-P748F1
-P748F1_left_polys
-P748F1_mid_polys
-P748F1_right_polys
-P748F2
-P748F2_left_polys
-P748F2_mid_polys
-P748F2_right_polys
-P749F1
-P749F1_left_polys
-P749F1_mid_polys
-P749F1_right_polys
-P749F2
-P749F2_left_polys
-P749F2_mid_polys
-P749F2_right_polys
-P750F3
-P750F3_left_polys
-P750F3_mid_polys
-P750F3_right_polys
-P750F4
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.16634231071128086 0.5618214304287058 at -0.16634231071128086 0.5618214304287058
-P750F4_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P750F4_mid_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.3406920682575682 0.36878029169273224 at -0.3406920682575682 0.36878029169273224
-P750F4_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P751F1
-P751F1_left_polys
-P751F1_mid_polys
-P751F1_right_polys
-P751F2
-P751F2_left_polys
-P751F2_mid_polys
-P751F2_right_polys
-P752F3
-P752F3_left_polys
-P752F3_mid_polys
-P752F3_right_polys
-P752F4
-P752F4_left_polys
-P752F4_mid_polys
-P752F4_right_polys
-P753F1
-TopologyException: Input geom 0 is invalid: Ring Self-intersection at or near point -0.11727993057035969 -0.5013881834562165 at -0.11727993057035969 -0.5013881834562165
-P753F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P753F1_mid_polys
-P753F1_right_polys
-P753F2
-P753F2_left_polys
-P753F2_mid_polys
-P753F2_right_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 147, in <module>
-    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 67, in findZones
-    holes = [center.exterior.coords])
-AttributeError: 'NoneType' object has no attribute 'coords'
-P754F1
-P754F1_left_polys
-P754F1_mid_polys
-P754F1_right_polys
-P754F4
-P754F4_left_polys
-P754F4_mid_polys
-P754F4_right_polys
-P755F1
-P755F1_left_polys
-P755F1_mid_polys
-P755F1_right_polys
-P755F3
-P755F3_left_polys
-P755F3_mid_polys
-P755F3_right_polys
-P756F1
-P756F1_left_polys
-P756F1_mid_polys
-P756F1_right_polys
-P756F4
-P756F4_left_polys
-P756F4_mid_polys
-P756F4_right_polys
-P757F1
-P757F1_left_polys
-P757F1_mid_polys
-P757F1_right_polys
-P757F2
-P757F2_left_polys
-P757F2_mid_polys
-P757F2_right_polys
-P758F1
-P758F1_left_polys
-P758F1_mid_polys
-P758F1_right_polys
-P758F2
-P758F2_left_polys
-P758F2_mid_polys
-P758F2_right_polys
-P759F1
-P759F1_left_polys
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.35565669945052381 0.40885794906413508 at -0.35565669945052381 0.40885794906413508
-P759F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point -0.61976150318811196 0.021747692203815717 at -0.61976150318811196 0.021747692203815717
-P759F1_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P759F2
-P759F2_left_polys
-P759F2_mid_polys
-P759F2_right_polys
-P760F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.16841699625858281 0.61591623070362567 at -0.16841699625858281 0.61591623070362567
-P760F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P760F1_mid_polys
-P760F1_right_polys
-P760F2
-P760F2_left_polys
-P760F2_mid_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 147, in <module>
-    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 67, in findZones
-    holes = [center.exterior.coords])
-AttributeError: 'MultiPolygon' object has no attribute 'exterior'
-P760F2_right_polys
-P761F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point 0.14981997430541044 0.57086383278627095 at 0.14981997430541044 0.57086383278627095
-P761F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P761F1_mid_polys
-P761F1_right_polys
-P761F2
-P761F2_left_polys
-P761F2_mid_polys
-P761F2_right_polys
-P762F1
-P762F1_left_polys
-P762F1_mid_polys
-P762F1_right_polys
-P762F2
-P762F2_left_polys
-P762F2_mid_polys
-P762F2_right_polys
-P763F1
-P763F1_left_polys
-P763F1_mid_polys
-P763F1_right_polys
-P763F2
-P763F2_left_polys
-P763F2_mid_polys
-P763F2_right_polys
-P764F1
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.11536658368545846 0.49738402563380796 at -0.11536658368545846 0.49738402563380796
-P764F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P764F1_mid_polys
-P764F1_right_polys
-P764F2
-P764F2_left_polys
-P764F2_mid_polys
-P764F2_right_polys
-P765F1
-P765F1_left_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.1027334463407569 0.45914488053327795 at -0.1027334463407569 0.45914488053327795
-P765F1_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P765F1_right_polys
-P765F2
-P765F2_left_polys
-P765F2_mid_polys
-P765F2_right_polys
-P766F4
-P766F4_left_polys
-P766F4_mid_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 147, in <module>
-    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 67, in findZones
-    holes = [center.exterior.coords])
-AttributeError: 'NoneType' object has no attribute 'coords'
-P766F4_right_polys
-P767F1
-P767F1_left_polys
-P767F1_mid_polys
-P767F1_right_polys
-P767F2
-P767F2_left_polys
-P767F2_mid_polys
-P767F2_right_polys
-P768F2
-P768F2_left_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 143, in <module>
-    scale, cent = getPetGeoInfo(petPol)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 28, in getPetGeoInfo
-    scalar = area**(-1/2)
-ZeroDivisionError: 0.0 cannot be raised to a negative power
-P768F2_mid_polys
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.32117519660890259 0.30687506585055468 at -0.32117519660890259 0.30687506585055468
-P768F2_right_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P768F3
-P768F3_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P768F3_mid_polys
-P768F3_right_polys
-P769F3
-TopologyException: Input geom 1 is invalid: Self-intersection at or near point -0.040681384482374468 1.1435822871466323 at -0.040681384482374468 1.1435822871466323
-P769F3_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P769F3_mid_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P769F3_right_polys
-P769F4
-P769F4_left_polys
-Traceback (most recent call last):
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 147, in <module>
-    center, edge, throat = findZones(standPet, args.centerSize, 0.07)
-  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py", line 67, in findZones
-    holes = [center.exterior.coords])
-AttributeError: 'NoneType' object has no attribute 'coords'
-P769F4_mid_polys
-P769F4_right_polys
-P770F1
-P770F1_left_polys
-P770F1_mid_polys
-P770F1_right_polys
-P770F2
-P770F2_left_polys
-P770F2_mid_polys
-P770F2_right_polys
-P771F1
-TopologyException: Input geom 0 is invalid: Self-intersection at or near point 0.53567139989239387 -0.43834469942161175 at 0.53567139989239387 -0.43834469942161175
-P771F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P771F1_mid_polys
-P771F1_right_polys
-P771F2
-P771F2_left_polys
-P771F2_mid_polys
-P771F2_right_polys
-P772F1
-P772F1_left_polys
-Throat calculations failed. Throat will be empty and Edge will consist of entire margin.
-P772F1_mid_polys
-P772F1_right_polys
-P772F2
-P772F2_left_polys
-P772F2_mid_polys
-P772F2_right_polys
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P247F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P247F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P247F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P247F3/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P247F3/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P247F3/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P248F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P248F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P248F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P248F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P248F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P248F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P248F3/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P248F3/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P248F3/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P253F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P253F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P253F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P253F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P253F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P253F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P257F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P257F1/mid
+We are on right
+Error - GeoJson not found.
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P257F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P257F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P257F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P257F3/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P257F3/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P257F3/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P258F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P258F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P258F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P258F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P258F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P258F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P261F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P261F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P261F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P261F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P261F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P261F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P261F3/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P261F3/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P261F3/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P297F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P297F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P297F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P297F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P297F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P297F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P299F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P299F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P299F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P299F2/left
+We are on mid
+Error - GeoJson not found.
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P299F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P301F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P301F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P301F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P331F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P331F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P331F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P331F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P331F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P331F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P338F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P338F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P338F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P338F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P338F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P338F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P339F1/left
+We are on mid
+Error - GeoJson not found.
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P339F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P339F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P339F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P339F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P341F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P341F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P341F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P341F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P341F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P341F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P342F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P342F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P342F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P342F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P342F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P342F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P344F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P344F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P344F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P344F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P344F2/mid
+We are on right
+Error - GeoJson not found.
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P345F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P345F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P345F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P345F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P345F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P345F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P348F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P348F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P348F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P348F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P348F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P348F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P351F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P351F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P351F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P351F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P351F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P351F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P352F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P352F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P352F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P352F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P352F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P352F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P355F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P355F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P355F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P355F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P355F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P355F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P356F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P356F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P356F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P356F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P356F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P356F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P357F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P357F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P357F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P357F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P357F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P357F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P361F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P361F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P361F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P361F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P361F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P361F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P363F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P363F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P363F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P363F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P363F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P363F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P364F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P364F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P364F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P364F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P364F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P364F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P365F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P365F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P365F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P365F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P365F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P365F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P366F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P366F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P366F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P366F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P366F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P366F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P368F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P368F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P368F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P368F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P368F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P368F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P369F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P369F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P369F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P369F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P369F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P369F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P370F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P370F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P370F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P370F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P370F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P370F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P371F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P371F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P371F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P371F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P371F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P371F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P373F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P373F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P373F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P373F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P373F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P373F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P374F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P374F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P374F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P374F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P374F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P374F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P375F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P375F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P375F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P375F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P375F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P375F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P376F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P376F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P376F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P376F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P376F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P376F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P378F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P378F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P378F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P378F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P378F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P378F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P379F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P379F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P379F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P379F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P379F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P379F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P380F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P380F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P380F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P380F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P380F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P380F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P381F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P381F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P381F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P381F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P381F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P381F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P384F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P384F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P384F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P384F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P384F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P384F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P385F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P385F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P385F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P385F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P385F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P385F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P386F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P386F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P386F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P387F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P387F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P387F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P388F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P388F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P388F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P388F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P388F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P388F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P389F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P389F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P389F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P389F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P389F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P389F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P390F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P390F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P390F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P390F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P390F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P390F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P393F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P393F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P393F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P393F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P393F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P393F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P397F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P397F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P397F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P397F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P397F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P397F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P398F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P398F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P398F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P398F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P398F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P398F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P399F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P399F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P399F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P399F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P399F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P399F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P400F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P400F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P400F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P400F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P400F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P400F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P400F3/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P400F3/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P400F3/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P401F1/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P401F1/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P401F1/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P401F2/left
+We are on mid
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P401F2/mid
+We are on right
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P401F2/right
+We are on left
+GeoJson found at: /Users/danthomas/Documents/speckling/make_polygons/polygons/P402F1/left

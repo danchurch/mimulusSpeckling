@@ -113,41 +113,44 @@ if __name__ == "__main__":
         img=mpimg.imread(imgFullName)
         ax1.imshow(img)
         ## second row is Doug's rasters
-        os.chdir(polDir + "/" + flowerName) ## go to flower directory
-        counter = 0 ## for keeping track of the 6 plots, second row
-        for n,j in enumerate(['left', 'mid', 'right']):
-            os.chdir(j)
-            print("We are on " + j)
-            spotsCSV = [ i for i in os.listdir() if 'spots' in i ][0]
-            petalCSV = [ i for i in os.listdir() if 'petal' in i ][0]
-            ## get rasters as CSVs
-            petalMat = np.genfromtxt(petalCSV, delimiter=',')
-            spotsMat = np.genfromtxt(spotsCSV, delimiter=',')
-            ## plot these two rasters, petal outline and spots
-            ax = plt.subplot2grid((4,6), (1, counter))
-            ax.imshow(petalMat, cmap='gray')
-            counter += 1
-            ax = plt.subplot2grid((4,6), (1, counter))
-            ax.imshow(spotsMat, cmap='gray')
-            counter += 1
-            ## get geojsons, turn them into polygons
-            try: 
-                geoj = [ i for i in os.listdir() if 'geojson' in i ][0]
-                print('GeoJson found at: ' + os.getcwd())
-                petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly = parseGeoj(geoj)
-            except: 
-                print('Error - GeoJson not found.')
-            ## row 3 plot petal and spot geojsons if we have them. 
-            try:
-                plotNoZone(petalPoly, spotsPoly, 2, n)
-            except: 
-                ax=plt.subplot2grid((4,3),(2,n)) ## blank
-            ## row 4 plot these with zones, if we have them:
-            try:
-                    plotYesZone(petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, 3, n)
-            except: 
-                ax=plt.subplot2grid((4,3),(3,n)) ## blank
-            os.chdir(polDir + "/" + flowerName) ## go back to flower directory
-        plt.savefig(targetDir + "/" + flowerName + ".pdf")
-        os.chdir(dougDir)
-
+        try:
+            os.chdir(polDir + "/" + flowerName) ## go to flower directory
+            counter = 0 ## for keeping track of the 6 plots, second row
+            for n,j in enumerate(['left', 'mid', 'right']):
+                os.chdir(j)
+                print("We are on " + j)
+                spotsCSV = [ i for i in os.listdir() if 'spots' in i ][0]
+                petalCSV = [ i for i in os.listdir() if 'petal' in i ][0]
+                ## get rasters as CSVs
+                petalMat = np.genfromtxt(petalCSV, delimiter=',')
+                spotsMat = np.genfromtxt(spotsCSV, delimiter=',')
+                ## plot these two rasters, petal outline and spots
+                ax = plt.subplot2grid((4,6), (1, counter))
+                ax.imshow(petalMat, cmap='gray')
+                counter += 1
+                ax = plt.subplot2grid((4,6), (1, counter))
+                ax.imshow(spotsMat, cmap='gray')
+                counter += 1
+                ## get geojsons, turn them into polygons
+                try: 
+                    geoj = [ i for i in os.listdir() if 'geojson' in i ][0]
+                    print('GeoJson found at: ' + os.getcwd())
+                    petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly = parseGeoj(geoj)
+                except: 
+                    print('Error - GeoJson not found.')
+                ## row 3 plot petal and spot geojsons if we have them. 
+                try:
+                    plotNoZone(petalPoly, spotsPoly, 2, n)
+                except: 
+                    ax=plt.subplot2grid((4,3),(2,n)) ## blank
+                ## row 4 plot these with zones, if we have them:
+                try:
+                        plotYesZone(petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, 3, n)
+                except: 
+                    ax=plt.subplot2grid((4,3),(3,n)) ## blank
+                os.chdir(polDir + "/" + flowerName) ## go back to flower directory
+            plt.savefig(targetDir + "/" + flowerName + ".pdf")
+        except FileNotFoundError as eror:
+            print(eror)
+        finally:
+            os.chdir(dougDir)

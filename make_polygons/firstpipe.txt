@@ -5096,4 +5096,4 @@ fl.addOne(polA, col='orange', a=1)
 ## pipeline - the intersection of this trapezoid with exiting petal 
 ## outline, etc. 
 
-
+## I think this means a branch. 

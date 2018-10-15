@@ -5078,7 +5078,7 @@ if aa == "y":
     print('moving on...')
 elif aa == "n":
     print('Okay, click the four points pf the throat.')
-    print('Start with one corner and click counterclockwise.')
+    print("Start with one corner and click counterclockwise.")
     cid = plt.gcf().canvas.mpl_connect('button_press_event', onclick)
 else: 
     print("answer with \"y\" or \"n\"")
@@ -5099,4 +5099,24 @@ fl.addOne(polA, col='orange', a=1)
 ## I think this means a branch. 
 
 ## we're on addInt now...
+
+## grab one example petal for this work
+
+## P247F3
+csvDir="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F3/right"
+
+## review: to use our old module:
+
+getpols='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py'
+
+$getpols $csvDir 0.5 ./
+
+## okay, now how do we build in the interactive component?
+
+## add in the zone calling to the findZones function...
+## the center calling works almost perfectly. 
+## Its just the throat
+
+ls -ltr $csvDir
+
 

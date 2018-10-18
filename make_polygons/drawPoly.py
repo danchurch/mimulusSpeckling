@@ -1,3 +1,5 @@
+import FlowerPetal
+import os
 from matplotlib import pyplot as plt
 from shapely import geometry as sg
 from descartes import PolygonPatch
@@ -46,3 +48,62 @@ ax = fig.add_subplot(111)
 ax.set_title('click to build polygons')
 polyBuilder = PolyBuilder()
 
+## Picker ##
+
+
+geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P765F1/left/P765F1_left_polys.geojson'
+fl = FlowerPetal.FlowerPetal()
+fl.plantName = P765
+fl.flowerName = 'F1'
+fl.petalName = 'left'
+fl.geojson = 'P765F1_left_polys.geojson'
+fl.parseGeoJson(geoJ)
+fl.cleanFlowerPetal()
+
+
+class PolyPicker:
+    def __init__(self, petal):
+        self.cid = plt.gcf().canvas.mpl_connect('pick_event', self)
+        self.petal = petal
+        self.spot = None
+        self.x = None
+        self.y = None
+    def __call__(self, event):
+        event.artist.set_facecolor('green')
+        self.x = event.mouseevent.xdata
+        self.y = event.mouseevent.ydata
+        pt=sg.point.Point([self.x, self.y])
+        self.spot = [ i for i in fl.spots if i.contains(pt) ]
+
+
+[ i for i in fl.spots if i.contains(pt) ]
+
+[ i.contains(pt) for i in fl.spots ]
+
+## plot it:
+
+plt.ion()
+fl.plotOne(fl.petal)
+fl.addOne(fl.spots, pick=True)
+
+polyPicker = PolyPicker(fl)
+
+fl.addOne(polyPicker.spot, col='black', a=1.0)
+
+
+fl.addOne(fl.spots)
+
+#fl.addOne(fl.petal)
+
+
+[ i for i in fl.spots if self.xdata,self.yadata ]
+
+
+
+fig = plt.figure()
+ax = plt.axes()
+ax.add_patch(PolygonPatch(fl.petal,
+              fc='blue', ec='black',
+              picker=None,
+              #picker=True,
+              linewidth=0.5, alpha=0.5))

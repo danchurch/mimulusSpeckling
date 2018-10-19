@@ -31,7 +31,6 @@ class PolyBuilder:
             plt.gca().add_patch(PolygonPatch(self.poly,
                           fc='red', ec='black',
                           linewidth=0.5, alpha=0.3))
-            #plt.gcf().canvas.draw()
         except ValueError:
             return
         finally:
@@ -50,7 +49,6 @@ polyBuilder = PolyBuilder()
 
 ## Picker ##
 
-
 geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P765F1/left/P765F1_left_polys.geojson'
 fl = FlowerPetal.FlowerPetal()
 fl.plantName = P765
@@ -60,25 +58,37 @@ fl.geojson = 'P765F1_left_polys.geojson'
 fl.parseGeoJson(geoJ)
 fl.cleanFlowerPetal()
 
-
 class PolyPicker:
     def __init__(self, petal):
         self.cid = plt.gcf().canvas.mpl_connect('pick_event', self)
         self.petal = petal
         self.spot = None
+        self.otherSpots = []
         self.x = None
         self.y = None
     def __call__(self, event):
-        event.artist.set_facecolor('green')
         self.x = event.mouseevent.xdata
         self.y = event.mouseevent.ydata
+        aa=plt.gca().get_xlim()
+        bb=plt.gca().get_ylim()
+        plt.gca().cla()
+        plt.gca().set_xlim(aa)
+        plt.gca().set_ylim(bb)
         pt=sg.point.Point([self.x, self.y])
-        self.spot = [ i for i in fl.spots if i.contains(pt) ]
+        self.otherSpots = [ i for i in list(fl.spots) if not i.contains(pt) ]
+        self.spot = [ i for i in list(fl.spots) if i.contains(pt) ][0]
+        for i in self.otherSpots:
+                plt.gca().add_patch(PolygonPatch(i,
+                              fc='red', ec='black',
+                              picker=True,
+                              linewidth=0.2, alpha=0.5))
+        plt.gca().add_patch(PolygonPatch(self.spot,
+                      fc='green', ec='black',
+                      picker=True,
+                      linewidth=0.4, alpha=1.0))
 
 
-[ i for i in fl.spots if i.contains(pt) ]
 
-[ i.contains(pt) for i in fl.spots ]
 
 ## plot it:
 
@@ -88,22 +98,12 @@ fl.addOne(fl.spots, pick=True)
 
 polyPicker = PolyPicker(fl)
 
-fl.addOne(polyPicker.spot, col='black', a=1.0)
+aa = plt.gca().patches
 
 
-fl.addOne(fl.spots)
+## print flower, select spot to change, redraw, delete old polygon, append new ones
 
-#fl.addOne(fl.petal)
-
-
-[ i for i in fl.spots if self.xdata,self.yadata ]
+## how do we integrate these two objects to correct a problem 
+## spot?
 
 
-
-fig = plt.figure()
-ax = plt.axes()
-ax.add_patch(PolygonPatch(fl.petal,
-              fc='blue', ec='black',
-              picker=None,
-              #picker=True,
-              linewidth=0.5, alpha=0.5))

@@ -546,13 +546,21 @@ class FlowerPetal():
                       fc=col, ec='black',
                       picker=pick,
                       linewidth=l, alpha=a))
+
     def addOne(self, poly, l=2, a=1.0, col='red', pick=None):
         ax1 = plt.gca()
-        for i in poly:
-            ax1.add_patch(PolygonPatch(i,
+        try:
+            for i in poly:
+                ax1.add_patch(PolygonPatch(i,
+                              fc=col, ec='black',
+                              picker=pick,
+                              linewidth=l, alpha=a))
+        except TypeError:
+            ax1.add_patch(PolygonPatch(poly,
                           fc=col, ec='black',
                           picker=pick,
                           linewidth=l, alpha=a))
+
 
 
 if __name__ == '__main__':

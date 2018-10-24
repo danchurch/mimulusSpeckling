@@ -561,6 +561,37 @@ class FlowerPetal():
                           picker=pick,
                           linewidth=l, alpha=a))
 
+    ########### saving out geojson flowerPetal object ########
+    def saveOut(self, outFileName=None):
+        if outFileName is None: outFileName = self.geojson
+        featC = {
+                "type" : "FeatureCollection",
+                "features" : [],
+                }
+        ## fill it with features
+        partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
+        sgPols=[self.petal,
+                self.spots,
+                self.center,
+                self.edge,
+                self.throat]
+        ## each geometry needs a feature wrapper
+        for i,part in enumerate(sgPols):
+            try:
+                gj_i = sg.mapping(part)
+            except:
+                gj_i = {"type": "Polygon", "coordinates": []}
+            finally:
+                feature_i = {"type": "Feature",
+                      "geometry": gj_i,
+                      "properties": {"id":(partNames[i])}}
+                featC['features'].append(feature_i)
+        ## write it out
+        with open(outFileName, 'w') as fp:
+            json.dump(featC, fp)
+
+
+#### end of flowerPetal class #####
 
 
 if __name__ == '__main__':

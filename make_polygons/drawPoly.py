@@ -1,5 +1,5 @@
 import FlowerPetal
-import os, copy
+import os, copy, json
 import matplotlib.backend_bases
 from matplotlib import pyplot as plt
 from shapely import geometry as sg
@@ -119,13 +119,13 @@ class DrawGap:
             self.fig.suptitle('Done breaking spot.')
             self.fig.canvas.mpl_disconnect(self.mouseCid)
             self.fig.canvas.mpl_disconnect(self.keyCid)
-            breakSpot(self.flowerPetal,self.spot, self.gap)
+            breakSpot = BreakSpot(self.flowerPetal,self.spot, self.gap)
         return
 ############ drawGap ##################
 
 ############ breakSpots ##################
 
-class breakSpot:
+class BreakSpot:
     def __init__(self, flowerPetal, oldSpot, gap):
         plt.gcf().suptitle("Spots split! Do another?")
         self.flowerPetal = flowerPetal
@@ -147,30 +147,31 @@ class breakSpot:
         self.ax.set_xlim(aa); self.ax.set_ylim(bb)
         self.ax.add_patch(PolygonPatch(self.flowerPetal.petal,
                       fc='yellow', ec='black',
+                      picker=None,
                       linewidth=2, alpha=1.0))
         self.ax.add_patch(PolygonPatch(self.flowerPetal.spots,
                       fc='red', ec='black',
+                      picker=True,
                       linewidth=2, alpha=1.0))
         self.keyCid = self.fig.canvas.mpl_connect('key_press_event', self)
     def __call__(self,event):
-        print(event)
+        if event.key in {'y','Y'}:
+            self.fig.canvas.mpl_disconnect(self.keyCid)
+            polyPicker = PolyPicker(self.flowerPetal)
+        if event.key in {'n','N'}:
+            plt.gcf().suptitle("Spot editing completed.")
+            self.fig.canvas.mpl_disconnect(self.keyCid)
+            return
  
 ############ breakSpots ##################
 
 
-class testMpl:
-    def __init__(self):
-        self.keyCid = plt.gcf().canvas.mpl_connect('key_press_event', self)
-        self.mouseCid = plt.gcf().canvas.mpl_connect('button_press_event', self)
-        self.event = None
-    def __call__(self, event):
-        print(event)
-        self.event = event
-            #plt.gcf().canvas.mpl_disconnect(self.keyCid)
+os.chdir('/home/daniel/Desktop')
 
-xx = testMpl()
+fl.saveOut()
 
 
+if __name__ == '__main__':
 
 
 
@@ -185,6 +186,7 @@ fl.geojson = 'P765F1_left_polys.geojson'
 fl.parseGeoJson(geoJ)
 fl.cleanFlowerPetal()
 plt.ion()
+
 fl.plotOne(fl.petal)
 fl.addOne(fl.spots, pick=True)
 
@@ -193,21 +195,28 @@ done = input('Spots okay? (y/n): ')
 if done == 'n':
     print("Pick a spot to edit.")
     ## pick it
-    aa = PolyPicker(fl)
+    polyPicker = PolyPicker(fl)
 
-## show where to break it
-if aa.spotConfirmed: bb = DrawGap(fl, aa.spot) 
+save = input('Save new spots? (y/n): ')
+    if save in {'y','Y'}:
 
-breakSpot(fl,bb.spot,bb.poly)
-## break it, add it to the spots
+    if save in {'n','N'}:
+        disc = input("Discard your changes to this petal? (y/n): ")
+            if disc in {'y','Y'}:
 
-len(fl.spots)
 
-
-len(fl.spots)
+## meh, stay with the gui:
 
 
 
 ## seems pretty smooth for one spot. 
 
 ## how about an entire petal?
+
+## check behaviour of a "non-edit"
+
+## put in spot check
+
+## put in petal check
+
+

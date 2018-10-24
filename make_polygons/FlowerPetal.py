@@ -71,8 +71,8 @@ class FlowerPetal():
                 self.propSpotsInQuadIV = None
                 self.quadIVCoveredbySpots = None
 
-    def parseGeoJson(self, geoj):
-        with open(geoj) as gjf:
+    def parseGeoJson(self):
+        with open(self.geojson) as gjf:
             aa = json.load(gjf)
             listP = (aa['features'])
             try:
@@ -605,7 +605,7 @@ if __name__ == '__main__':
                         'formatted as a .csv file and'
                         ' a pickled pandas dataframe, '
                         'saved in the geojFolder.'
-                        '(Put it in quotes'))
+                        '(Put it in quotes)'))
     args = parser.parse_args()
 
     ## make our FlowerPetal objects

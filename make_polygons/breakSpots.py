@@ -1,194 +1,219 @@
+#!/usr/bin/env python3
+
 import FlowerPetal
-import os, copy
+import os, copy, json, argparse
 import matplotlib.backend_bases
 from matplotlib import pyplot as plt
 from shapely import geometry as sg
 from descartes import PolygonPatch
 
-
-## to breakup a spot:
-class spotBreaker:
-    def __init__(self, spot):
-        self.spot = spot
-        self.poly = sg.polygon.Polygon()
-        self.xs = []
-        self.ys = []
-        self.mouseCid = plt.gcf().canvas.mpl_connect('button_press_event', self)
-        self.keyCid = plt.gcf().canvas.mpl_connect('key_press_event', self)
-    def __call__(self, event):
-        if plt.get_current_fig_manager().toolbar.mode != '': return
-        elif event.inaxes!=plt.gca(): return
-        elif event.name == 'button_press_event':
-            aa=plt.gca().get_xlim(); bb=plt.gca().get_ylim()
-            plt.plot(event.xdata, event.ydata, marker='o', markersize=3, color="black")
-            plt.gca().set_xlim(aa); plt.gca().set_ylim(bb)
-            self.xs.append(event.xdata)
-            self.ys.append(event.ydata)
-            try:
-                self.poly = sg.polygon.Polygon(list(zip(self.xs, self.ys)))
-                aa=plt.gca().get_xlim(); bb=plt.gca().get_ylim()
-                plt.gca().cla()
-                plt.gca().set_xlim(aa); plt.gca().set_ylim(bb)
-                plt.gca().add_patch(PolygonPatch(self.spot,
-                              fc='green', ec='black',
-                              linewidth=0.5, alpha=0.3))
-                plt.gca().add_patch(PolygonPatch(self.poly,
-                              fc='red', ec='black',
-                              linewidth=0.5, alpha=0.5))
-                return
-            except ValueError:
-                return
-        elif event.name == 'key_press_event' and event.key == 'enter': 
-            print ('done!')
-            plt.gcf().canvas.mpl_disconnect(self.mouseCid)
-            plt.gcf().canvas.mpl_disconnect(self.keyCid)
-        return
-
-
-class testMpl:
-    def __init__(self):
-        self.keyCid = plt.gcf().canvas.mpl_connect('key_press_event', self)
-        self.mouseCid = plt.gcf().canvas.mpl_connect('button_press_event', self)
-        self.event = None
-    def __call__(self, event):
-        print(event)
-        self.event = event
-            #plt.gcf().canvas.mpl_disconnect(self.keyCid)
-
-aa = testMpl()
-
-## need to build a clip by the petal outline. 
-
-
-
-## Picker ##
+############ Picker ##################
 class PolyPicker:
-    def __init__(self, petal):
+    def __init__(self, flowerPetal):
+        plt.gcf().suptitle("Pick a spot to edit.")
+        self.fig = plt.gcf()
+        self.axes = plt.gca()
         self.cidPick = plt.gcf().canvas.mpl_connect('pick_event', self)
         self.cidEnter = plt.gcf().canvas.mpl_connect('key_press_event', self)
-        self.petal = petal
+        self.flowerPetal = flowerPetal
         self.spot = None
-        self.closePlot = False
-        self.noSpot = False
+        self.spotConfirmed = False
         self.otherSpots = []
         self.x = None
         self.y = None
     def __call__(self, event):
+        plt.ion()
         if event.name == 'pick_event':
             self.x = event.mouseevent.xdata
             self.y = event.mouseevent.ydata
-            self.closePlot = False
-            plt.gcf().suptitle("")
-            aa=plt.gca().get_xlim(); bb=plt.gca().get_ylim()
-            plt.gca().cla()
-            plt.gca().set_xlim(aa); plt.gca().set_ylim(bb)
+            self.spotConfirmed = False
+            self.fig.suptitle("")
+            aa=self.axes.get_xlim(); bb=self.axes.get_ylim()
+            self.axes.cla()
+            self.fig.suptitle("Press enter to confirm spot.")
+            self.axes.add_patch(PolygonPatch(self.flowerPetal.petal,
+                          fc='yellow', ec='black',
+                          linewidth=2, alpha=1.0))
+            self.axes.set_xlim(aa); self.axes.set_ylim(bb)
             pt=sg.point.Point([self.x, self.y])
-            self.otherSpots = [ i for i in list(fl.spots) if not i.contains(pt) ]
-            self.spot = [ i for i in list(fl.spots) if i.contains(pt) ][0]
+            self.otherSpots = [ i for i in list(self.flowerPetal.spots) if not i.contains(pt) ]
+            self.spot = [ i for i in list(self.flowerPetal.spots) if i.contains(pt) ][0]
             for i in self.otherSpots:
-                    plt.gca().add_patch(PolygonPatch(i,
+                    self.axes.add_patch(PolygonPatch(i,
                                   fc='red', ec='black',
                                   picker=True,
-                                  linewidth=0.2, alpha=0.2))
-            plt.gca().add_patch(PolygonPatch(self.spot,
+                                  linewidth=2, alpha=1.0))
+            self.axes.add_patch(PolygonPatch(self.spot,
                           fc='green', ec='black',
                           picker=True,
-                          linewidth=0.4, alpha=1.0))
+                          linewidth=2, alpha=1.0))
         elif event.name == 'key_press_event' and event.key == 'enter': 
             try:
                 assert(self.spot is not None)
-                if self.closePlot:
-                    plt.gcf().suptitle("Bye!")
-                    plt.gcf().canvas.mpl_disconnect(self.cidPick)
-                    plt.gcf().canvas.mpl_disconnect(self.cidEnter)
-                    plt.close()
-                elif not self.closePlot:
-                    plt.gcf().suptitle("Spot chosen. Press enter again to confirm")
-                    self.closePlot = True
-                    return
+                self.spotConfirmed = True
+                self.fig.canvas.mpl_disconnect(self.cidPick)
+                self.fig.canvas.mpl_disconnect(self.cidEnter)
+                drawGap = DrawGap(self.flowerPetal, self.spot)  
+                self.fig.suptitle("Spot picked...break it up!")
             except AssertionError as err:
-                if self.noSpot == False: 
-                    plt.gcf().suptitle("No spot chosen. Is this correct? Press \"enter\" again to confirm.")
-                    self.noSpot = True 
-                elif self.noSpot == True: 
-                    plt.gcf().suptitle("Okay, no spots edited.")
-                    plt.gcf().canvas.mpl_disconnect(self.cidPick)
-                    plt.gcf().canvas.mpl_disconnect(self.cidEnter)
+                self.fig.suptitle("No spot picked? press escape "
+                                + "to leave without editing.")
+                plt.ioff()
+                return
+############ Picker ##################
+
+############ drawGap ##################
+class DrawGap:
+    def __init__(self, flowerPetal, spot):
+        plt.gcf().suptitle("Draw where you want to break spot")
+        self.event = None
+        self.fig = plt.gcf()
+        self.axes = plt.gca()
+        self.flowerPetal = flowerPetal
+        self.spot = spot
+        self.gap = sg.polygon.Polygon()
+        self.xs = []
+        self.ys = []
+        self.mouseCid = self.fig.canvas.mpl_connect('button_press_event', self)
+        self.keyCid = self.fig.canvas.mpl_connect('key_press_event', self)
+    def addPoint(self):
+        aa=self.axes.get_xlim(); bb=self.axes.get_ylim()
+        self.axes.plot(self.event.xdata, 
+                        self.event.ydata, 
+                        marker='o', 
+                        markersize=3, 
+                        color="black")
+        self.axes.set_xlim(aa); self.axes.set_ylim(bb)
+        self.xs.append(self.event.xdata)
+        self.ys.append(self.event.ydata)
+    def drawPol(self):
+        try:
+            self.gap = sg.polygon.Polygon(list(zip(self.xs, self.ys)))
+            aa=self.axes.get_xlim(); bb=self.axes.get_ylim()
+            self.axes.cla()
+            self.axes.set_xlim(aa); self.axes.set_ylim(bb)
+            self.axes.add_patch(PolygonPatch(self.flowerPetal.petal,
+                          fc='yellow', ec='black',
+                          linewidth=2, alpha=1.0))
+            self.axes.add_patch(PolygonPatch(self.spot,
+                          fc='red', ec='black',
+                          linewidth=2, alpha=1.0))
+            self.axes.add_patch(PolygonPatch(self.gap,
+                          fc='yellow', ec='black',
+                          linewidth=1, alpha=1.0))
+            return
+        except ValueError:
+            return
+    def __call__(self, event):
+        plt.ion()
+        self.event = event
+        if plt.get_current_fig_manager().toolbar.mode != '': return
+        elif event.name == 'button_press_event':
+            if event.inaxes!=self.axes: return
+            elif event.button==1:
+                self.addPoint()
+                self.drawPol()
+                plt.ioff()
+                return
+            elif event.button in {2,3}:
+                self.xs.pop()
+                self.ys.pop()
+                self.drawPol()
+                plt.ioff()
+                self.fig.ioff()
+                return
+        elif event.name == 'key_press_event' and event.key == 'enter': 
+            self.fig.suptitle('Done breaking spot.')
+            self.fig.canvas.mpl_disconnect(self.mouseCid)
+            self.fig.canvas.mpl_disconnect(self.keyCid)
+            breakSpot = BreakSpot(self.flowerPetal,self.spot, self.gap)
+        plt.ioff()
+        return
+############ drawGap ##################
+
+############ breakSpots ##################
+
+class BreakSpot:
+    def __init__(self, flowerPetal, oldSpot, gap):
+        plt.gcf().suptitle("Spots split! Do another?")
+        self.flowerPetal = flowerPetal
+        self.oldSpot = oldSpot
+        self.gap = gap
+        self.fig = plt.gcf()
+        self.ax = plt.gca()
+        self.newSpots = self.oldSpot.difference(self.gap)
+        lsc = list(self.flowerPetal.spots)
+        lsc.remove(oldSpot) 
+        try:
+            nls = lsc + list(self.newSpots)
+        except TypeError as err:
+            lsc.append(self.newSpots)
+            nls = lsc
+        self.flowerPetal.spots = sg.multipolygon.MultiPolygon(nls)
+        aa=self.ax.get_xlim(); bb=self.ax.get_ylim()
+        self.ax.cla()
+        self.ax.set_xlim(aa); self.ax.set_ylim(bb)
+        self.ax.add_patch(PolygonPatch(self.flowerPetal.petal,
+                      fc='yellow', ec='black',
+                      picker=None,
+                      linewidth=2, alpha=1.0))
+        self.ax.add_patch(PolygonPatch(self.flowerPetal.spots,
+                      fc='red', ec='black',
+                      picker=True,
+                      linewidth=2, alpha=1.0))
+        self.keyCid = self.fig.canvas.mpl_connect('key_press_event', self)
+    def __call__(self,event):
+        plt.ion()
+        if event.key in {'y','Y'}:
+            self.fig.canvas.mpl_disconnect(self.keyCid)
+            polyPicker = PolyPicker(self.flowerPetal)
+        if event.key in {'n','N'}:
+            plt.gcf().suptitle("Spot editing completed.")
+            self.fig.canvas.mpl_disconnect(self.keyCid)
+            plt.close()
+            return
+ 
+############ breakSpots ##################
+
+if __name__ == '__main__':
+
+    ## deal with arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('geoJ',
+                help=('The geojson file of the petal.'),
+                type=str)
+    parser.add_argument('--outFileName','-o', 
+                help=('place to put edited geojson. '
+                      'If none, geojson will overwrite. '
+                      'Use quotes.'),
+                default=None, type=str)
+    args = parser.parse_args()
 
                 
-#geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P765F1/left/P765F1_left_polys.geojson'
-geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P765F1/right/P765F1_right_polys.geojson'
-fl = FlowerPetal.FlowerPetal()
-fl.plantName = 'P765'
-fl.flowerName = 'F1'
-fl.petalName = 'left'
-fl.geojson = 'P765F1_left_polys.geojson'
-fl.parseGeoJson(geoJ)
-fl.cleanFlowerPetal()
+    ## load flower geojson and plot cartoon of flower:
+    fl = FlowerPetal.FlowerPetal()
+    fl.geojson = args.geoJ
+    fl.parseGeoJson()
+    fl.cleanFlowerPetal()
+    plt.ion()
+    fl.plotOne(fl.petal)
+    fl.addOne(fl.spots, pick=True)
 
-## plot all spots, pick one:
-plt.ion()
-fl.plotOne(fl.petal)
-fl.addOne(fl.spots, pick=True)
+    ok = input('Spots okay? (y/n): ') 
+    plt.ioff()
 
-## pick it
-aa = PolyPicker(fl)
+    if ok == 'n':
+        print("Pick a spot to edit.")
+        ## pick it
+        polyPicker = PolyPicker(fl)
+    elif ok == 'y': quit()
 
-## plot spot of interest
-plt.ion()
-fl.plotOne(fl.petal)
-fl.addOne(aa.spot)
+    plt.ioff()
+    plt.show()
+    ## the blocking by the plot is needed, to keep 
+    ## the script from ending before data is collected. 
 
-## break it
-bb = spotBreaker(aa.spot) 
-
-fl.plotOne(bb.spot)
-
-## one of the "breaker polygons":
-fl.addOne(bb.poly)
-
-## this is what we want:
-fl.addOne(bb.spot.difference(bb.poly), col='purple')
-
-newSpots = bb.spot.difference(bb.poly)
-
-## so this spot needs to be deleted from the flowerpetal object,
-## and these new spots added 
-
-## how to do this...
-
-zz = [ i for i in fl.spots if i == (aa.spot) ][0]
-
-fl.plotOne(zz)
-
-## works, but how to remove just this spot?
-## does this make a deep copy?
-## not sure. to be safe:
-
-sc = copy.deepcopy(fl.spots)
-lsc = list(sc)
-lsc.remove(zz)
-sg.multipolygon.MultiPolygon(lsc)
-
-len(fl.spots)
-fl.spots = sg.multipolygon.MultiPolygon(lsc)
-len(fl.spots)
-
-## works, now add the two new spots?
-
-sc = copy.deepcopy(fl.spots)
-lsc = list(sc)
-
-nlsc = lsc + list(newSpots)
-
-
-len(fl.spots)
-fl.spots = sg.multipolygon.MultiPolygon(nlsc)
-len(fl.spots)
-
-fl.plotOne(fl.petal)
-fl.addOne(fl.spots)
-
-## works. build it back into the breaker.
+    ## save new spots:
+    fl.saveOut(args.outFileName)
 
 

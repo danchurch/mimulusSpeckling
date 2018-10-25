@@ -5120,3 +5120,22 @@ $getpols $csvDir 0.5 ./
 ls -ltr $csvDir
 
 
+## so we made a module for breaking up spots. How do we use it?
+
+## the plan would be to rerun Melias's corrected images with our 
+## old digitizing pipeline, then run this on all the images. 
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons
+
+## to use our spot breaker module
+
+## example petal:
+fl=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P760F1/left/P760F1_left_polys.geojson
+
+## the jpeg for this:
+
+jp=/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P760F1.JPG
+
+./breakSpots.py $fl -o /home/daniel/test.geojson -j $jp
+
+

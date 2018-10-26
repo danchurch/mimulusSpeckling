@@ -619,7 +619,7 @@ if __name__ == '__main__':
         fl.flowerName = re.sub(r"P.*(F\d).*",r"\1",plantFlowerPetal)
         fl.petalName = re.sub(".*(left|mid|right).*",r"\1",plantFlowerPetal)
         fl.geojson = plantFlowerPetal
-        fl.parseGeoJson(plantFlowerPetal)
+        fl.parseGeoJson()
         fl.cleanFlowerPetal()
         fl.fillColumns()
         row = vars(fl)

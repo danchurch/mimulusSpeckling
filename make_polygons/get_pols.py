@@ -120,37 +120,39 @@ def findZones(standPol, percent, simp=0.05):
     tRapPoly = sg.polygon.Polygon(tRap)
 
     ## polygon calculations start here, risky:
-#    try:
-    tBuff = tRapPoly.buffer(0.1)
-    noTrap = marg.difference(tRapPoly)
-    notInTrap = [ i for i in noTrap if i.within(tBuff) ]
-    mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
-    margInTrap = tRapPoly.intersection(marg)
-    throatRaw = margInTrap.union(mpNotInTrap )
-    throat = cleanCollections(throatRaw)
-    edgeRaw = marg.difference(throat)
-    edge = cleanCollections(edgeRaw)
-    ## bring up a plot of the zones:
-    plt.ion()
-    plotOne(standPet)
-    addOne(standSpots)
-    addOne(edge, col='white', a=0.5)
-    addOne(throat, col='purple', a=0.5)
-    ## ask user if the digitization worked:
-    sanCheck=input('Is this throat polygon OK?')
+    try:
+        tBuff = tRapPoly.buffer(0.1)
+        noTrap = marg.difference(tRapPoly)
+        notInTrap = [ i for i in noTrap if i.within(tBuff) ]
+        mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
+        margInTrap = tRapPoly.intersection(marg)
+        throatRaw = margInTrap.union(mpNotInTrap )
+        throat = cleanCollections(throatRaw)
+        edgeRaw = marg.difference(throat)
+        edge = cleanCollections(edgeRaw)
+#   ## bring up a plot of the zones:
+#   plt.ion()
+#   plotOne(standPet)
+#   addOne(standSpots)
+#   addOne(edge, col='white', a=0.5)
+#   addOne(throat, col='purple', a=0.5)
+#   ## ask user if the digitization worked:
+#   sanCheck=input('Is this throat polygon OK?')
 #        assert (sanCheck in ['y','Y','yes']), "Not a good polygon? Time to redraw."
 #    except AssertionError as err:
 #        print(err)
-        ## time to get interactive
-    if sanCheck not in ['y','Y','yes']:
-            polA=redrawThroat(marg,standPet)
-            addOne(polA, col='orange', a=1)
+#       ## time to get interactive
+#   if sanCheck not in ['y','Y','yes']:
+#           polA=redrawThroat(marg,standPet)
+#           addOne(polA, col='orange', a=1)
 #    finally:
 #        plt.close()
 #        return(center, edge, throat)
-    else:
-        print ("moving one")
-
+    except:
+        print ("Zones failed...")
+        center, edge, throat = None, None, None
+    finally:
+        return(center, edge, throat)
 
 
 if __name__ == "__main__":
@@ -220,8 +222,7 @@ if __name__ == "__main__":
     for i,part in enumerate([standPet, standSpots, center, edge, throat]):
         try:
             gj_i = sg.mapping(part)
-        #except AttributeError:
-        except:
+        except NameError:
             gj_i = {"type": "Polygon", "coordinates": []}
         finally:
             feature_i = {"type": "Feature",

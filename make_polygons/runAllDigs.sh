@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-getpols='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_pols.py'
-wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
-
+getpols='/Users/danthomas/Documents/speckling/make_polygons/get_pols.py'
+wd='/Users/danthomas/Documents/speckling/make_polygons/polygons'
 
 cd $wd
 

@@ -5139,3 +5139,7 @@ jp=/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cro
 ./breakSpots.py $fl -o /home/daniel/test.geojson -j $jp
 
 
+
+###### redigitize Melia's edited petals #######
+
+

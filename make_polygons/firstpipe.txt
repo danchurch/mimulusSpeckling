@@ -5142,4 +5142,152 @@ jp=/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cro
 
 ###### redigitize Melia's edited petals #######
 
+## melia re-edited the photos, which is awesome.
+## but she renamed a lot of them, adding the characters
+## "_LI" to indicate if a photo was edited.
+
+## let's get rid of this:
+
+wd='/Users/danthomas/Documents/speckling/make_polygons/polygons'
+
+cd $wd
+
+ls -d *_*
+
+for i in *_*; do
+    echo $i
+    echo ${i/_LI/}
+    mv $i ${i/_LI/}
+done
+
+for i in  $(find . -name "*_LI*"); do
+    echo $i
+    echo ${i/_LI/}
+    mv $i ${i/_LI/}
+    echo ""
+done
+
+## worked, I think...now try the script:
+
+
+########### 
+
+#!/usr/bin/env bash
+
+#getpols='/home/daniel/Documents/mimulusSpeckling/make_polygons/get_pols.py'
+#wd='/home/daniel/Documents/mimulusSpeckling/make_polygons/polygons'
+
+getpols='/Users/danthomas/Documents/speckling/make_polygons/get_pols.py/'
+wd='/Users/danthomas/Documents/speckling/make_polygons/polygons'
+
+cd $wd
+
+for i in *; do
+    echo $i
+    cd $i
+    for j in *; do
+        fullN=$PWD/$j
+        $getpols $fullN 0.5 $fullN
+    done
+    cd ../
+done
+
+####################
+
+## throwing errors...
+
+## try it out on one file, editing on my machine:
+
+inF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/'
+outF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/'
+
+./get_pols.py $inF 0.5 $outF
+
+###########
+
+## back on labcomp
+
+## get our script going...
+(./runAllDigs.sh &) &
+
+## check progress
+
+ls -R | grep geojson
+
+ls -R | grep geojson | wc -l
+
+ls -R | grep "\.csv" | wc -l
+
+## that's gotta run for a while...
+
+## what to do in the meantime?
+
+## the next step are the stats and PDF
+
+## so debug the stats pipeline? This is all
+## in the FlowerPetal module...
+
+## check wth one file...
+
+wd='/Users/danthomas/Documents/speckling/make_polygons'
+#ex='/Users/danthomas/Documents/speckling/make_polygons/polygons/P247F1/left'
+
+ex='/home/daniel/Documents/cooley_lab'
+
+cd $wd
+
+./FlowerPetal.py $ex 'test'
+
+scp danthomas@10.4.2.6:/Users/danthomas/Documents/speckling/make_polygons/polygons/P247F1/left/P247F1_left_polys.geojson ./
+
+
+cd $wd
+
+cd $geojF
+
+## I forget, what does this program need?
+## a flat folder with all the geojs of interest
+## and 
+
+geojF="/Users/danthomas/Documents/geojsons"
+
+find . -name "*.geojson" -exec cp {} $geojF \;
+
+cd $geojF
+$wd/FlowerPetal.py $geojF "test"
+
+## looks fine. Just need the digitizing to finish...
+
+## well, let's make sure the pdf maker is working too.
+
+## huh, a lot of these failed. Shit, I didn't log them...
+
+## okay, well, let's right a script that should run all night on the lab comp,
+
+## first check pdf maker...should work out of the box...
+## yeah right. 
+
+## not a real module, the arguments are hard-coded into it,
+## so if these are correct, should just need to:
+
+(./makePDFs.py &) &
+
+
+targetDir='/Users/danthomas/Documents/bigPDF'
+
+
+## while we're on the lab mac, there's a script (on my machine I'd use pdftk):
+
+"/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o $targetDir  $targetDir/*.pdf
+
+## well, shit. it looks like all of melias new images failed. 
+## where? Why?
+
+## presumably they're not digitizing... so repeat with one or two
+
+## both 247s failed. Try one of these.
+
+fl="247F1_LI.JPG"
+
+
 

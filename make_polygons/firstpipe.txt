@@ -5130,11 +5130,13 @@ cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons
 ## to use our spot breaker module
 
 ## example petal:
-fl=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P760F1/left/P760F1_left_polys.geojson
+fl=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P338F1/left/P338F1_left_polys.geojson
 
 ## the jpeg for this:
 
-jp=/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P760F1.JPG
+#jp=/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P760F1.JPG
+
+jp=/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P338F1.JPG
 
 ./breakSpots.py $fl -o /home/daniel/test.geojson -j $jp
 
@@ -5240,21 +5242,20 @@ cd $wd
 
 scp danthomas@10.4.2.6:/Users/danthomas/Documents/speckling/make_polygons/polygons/P247F1/left/P247F1_left_polys.geojson ./
 
-
-cd $wd
-
-cd $geojF
-
 ## I forget, what does this program need?
 ## a flat folder with all the geojs of interest
 ## and 
 
-geojF="/Users/danthomas/Documents/geojsons"
+cd $wd
 
 find . -name "*.geojson" -exec cp {} $geojF \;
 
+geojF="/Users/danthomas/Documents/geojsons"
+
+
 cd $geojF
-$wd/FlowerPetal.py $geojF "test"
+
+$wd/FlowerPetal.py $geojF "automated_stats_29.10.2018"
 
 ## looks fine. Just need the digitizing to finish...
 
@@ -5273,12 +5274,19 @@ $wd/FlowerPetal.py $geojF "test"
 (./makePDFs.py &) &
 
 
-targetDir='/Users/danthomas/Documents/bigPDF'
+#targetDir='/Users/danthomas/Documents/bigPDF'
+
+targetDir='/home/daniel/Documents/cooley_lab/bigPDF'
 
 
-## while we're on the lab mac, there's a script (on my machine I'd use pdftk):
-
+## while we're on the lab mac, there's a script 
 "/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o $targetDir  $targetDir/*.pdf
+
+##(on my machine I'd use pdftk):
+
+ls $targetDir/*
+
+pdftk $targetDir/* output $targetDir/bigPDF_29.10.2018.pdf
 
 ## well, shit. it looks like all of melias new images failed. 
 ## where? Why?
@@ -5288,6 +5296,82 @@ targetDir='/Users/danthomas/Documents/bigPDF'
 ## both 247s failed. Try one of these.
 
 fl="247F1_LI.JPG"
+
+flDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right'
+
+ls $flDir
+## this failed...
+
+## okay, running out of time. Plan, rerun the digitizing with some sort of logging. Check it when we get back.
+
+
+## okay back. sync up the comps...
+
+## now, what worked? The pdf is failing in a lot of ways, 
+## but what about our geojsons?
+
+## for instance...
+
+## P247F3
+
+## is not in our PDF. But there are geojsons:
+ls -R /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F3
+
+## look at these in QGIS:
+## looks good...
+
+## hmm... so what happened in the pdf maker?
+
+## let's try running our makepdf module in the interpreter...
+
+## next time build in better error logging...
+
+## ah, here we are - Melia's files have all lowercase extension, Doug's have
+## uppercase. 
+
+## and this script looks for the original jpgs files, so presumably the names
+## aren't matching up. 
+
+## so let's change the names in melia's folder Rotated_and_Cropped images
+## to match the old names (no "_LI", and "jpg" to "JPG"):
+
+## change polygon names:
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped
+
+## get rid of the _LI
+
+find . -name "*_LI*" 
+
+for i in *_LI*; do
+    echo $i
+    echo ${i/_LI/}
+    mv $i ${i/_LI/}
+done
+
+for i in *jpg; do
+    echo $i
+    echo ${i/jpg/JPG}
+    mv $i ${i/jpg/JPG}
+done
+
+
+## okay... does this fix our PDFmaker prolems?
+
+
+## do it on my comp:
+
+./makePDFs.py  &> makePDF_log_29.10.2018.txt
+
+## seems okay. Did I run these stats already? I forget...
+
+## okay, got em. They are now at:
+
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits
+
+## so what? I think we need to convert these to a form that 
+## tassel can use... we had a script for this, too somewhere...
+
 
 
 

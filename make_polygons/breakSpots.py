@@ -170,10 +170,13 @@ class BreakSpot:
                       fc='yellow', ec='black',
                       picker=None,
                       linewidth=2, alpha=1.0))
-        self.axs.add_patch(PolygonPatch(self.flowerPetal.spots,
-                      fc='red', ec='black',
-                      picker=True,
-                      linewidth=2, alpha=1.0))
+        try:
+            self.axs.add_patch(PolygonPatch(self.flowerPetal.spots,
+                          fc='red', ec='black',
+                          picker=True,
+                          linewidth=2, alpha=1.0))
+        except ValueError as err:
+            pass
         self.keyCid = self.fig.canvas.mpl_connect('key_press_event', self)
     def __call__(self,event):
         plt.ion()
@@ -238,6 +241,14 @@ if __name__ == '__main__':
     plt.show()
     ## the blocking by the plot is needed, to keep 
     ## the script from ending before data is collected. 
+
+### check to make sure new spots are good
+#    reallyOK = input("Revised spots okay? (y/n): ")
+#    if ok == 'n':
+#        print("Shoot. Starting over.")
+#        ## pick it
+#        polyPicker = PolyPicker(fl, fig=flf, axs=fla)
+#    elif ok == 'y': quit()
 
     ## save new spots:
     fl.saveOut(outFileName=args.outFileName)

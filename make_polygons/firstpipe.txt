@@ -5372,6 +5372,36 @@ done
 ## so what? I think we need to convert these to a form that 
 ## tassel can use... we had a script for this, too somewhere...
 
+############ back to spots ##########
 
+## okay time to break some spots. 
+
+## first, we have to make our spotbreaker handle 
+## situations where all spots are deleted by our editing.
+## this is necessary where the entire petal space
+## was interprested as a spot.
+
+## example petal:
+fl=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P338F1/left/P338F1_left_polys.geojson
+## the jpeg for this:
+jp=/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P338F1.JPG
+
+./breakSpots.py $fl -o /home/daniel/test.geojson -j $jp
+
+
+## just curious, can we make our spotbreaker recursive?
+
+def factorial(n):
+    print("factorial has been called with n = " + str(n))
+    if n == 1:
+        return 1
+    else:
+        res = n * factorial(n-1)
+        print("intermediate result for ", n, " * factorial(" ,n-1, "): ",res)
+        return res  
+
+print(factorial(5))
+
+## neat, but can we apply this to our module?
 
 

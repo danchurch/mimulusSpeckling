@@ -2,7 +2,8 @@
 
 import FlowerPetal
 import os, copy, json, argparse
-import matplotlib.backend_bases
+import matplotlib as mp
+#import matplotlib.backend_bases
 from matplotlib import pyplot as plt
 import matplotlib.image as mpimg
 from shapely import geometry as sg
@@ -67,7 +68,7 @@ class PolyPicker:
         elif event.name == 'key_press_event' and event.key == 'escape': 
             self.fig.canvas.mpl_disconnect(self.cidPick)
             self.fig.canvas.mpl_disconnect(self.cidEnter)
-            plt.close()
+            plt.ioff()
             return
 ############ Picker ##################
 
@@ -129,7 +130,6 @@ class DrawGap:
                 self.ys.pop()
                 self.drawPol()
                 plt.ioff()
-                self.fig.ioff()
                 return
         elif event.name == 'key_press_event' and event.key == 'enter': 
             self.fig.suptitle('Done breaking spot.')
@@ -182,16 +182,85 @@ class BreakSpot:
         plt.ion()
         if event.key in {'y','Y'}:
             self.fig.canvas.mpl_disconnect(self.keyCid)
-            polyPicker = PolyPicker(fl, fig=flf, axs=fla)
+            polyPicker = PolyPicker(self.flowerPetal, fig=self.fig, axs=self.axs)
         if event.key in {'n','N'}:
             plt.gcf().suptitle("Spot editing completed.")
             print("Spot editing completed.")
             self.fig.canvas.mpl_disconnect(self.keyCid)
             plt.close('all')
             return
+
  
 ############ breakSpots ##################
 
+########### top level function ###########
+def top_level(args):
+    plt.ion()
+    jpegFig=plt.figure()
+    img=mpimg.imread(args.jpeg)
+    plt.imshow(img, origin='lower')
+    if mp.get_backend() == 'TkAgg':
+        jpegFig.canvas.manager.window.wm_geometry("+900+0")
+        jpegFig.set_size_inches([6,3], forward = True)
+
+    #if mp.get_backend() == 'TkAgg':
+    #    fig2.canvas.manager.window.wm_geometry("+950+450")
+    #    fig2.set_size_inches([4,4], forward = True)
+
+                
+    ## load flower geojson and plot cartoon of flower:
+    fl = FlowerPetal.FlowerPetal()
+    fl.geojson = args.geoJ
+    fl.parseGeoJson()
+    fl.cleanFlowerPetal()
+    fl.plotOne(fl.petal)
+    fl.addOne(fl.spots, pick=True)
+    ## hold onto these for the other objects
+    flf = plt.gcf()
+    fla = flf.gca()
+    if mp.get_backend() == 'TkAgg':
+        flf.canvas.manager.window.wm_geometry("+900+400")
+        flf.set_size_inches([5,5], forward = True)
+
+    ok = input('Spots okay? (y/n): ') 
+    plt.ioff()
+
+    if ok == 'n':
+        print("Pick a spot to edit.")
+        ## pick it
+        polyPicker = PolyPicker(fl, fig=flf, axs=fla)
+    elif ok == 'y': quit()
+
+    plt.ioff()
+    plt.show()
+    ## the blocking by the plot is needed, to keep 
+    ## the script from ending before data is collected. 
+
+    ## check to make sure new spots are good
+    fl.plotOne(fl.petal)
+    fl.addOne(fl.spots, pick=True)
+    flf = plt.gcf()
+    fla = flf.gca()
+    if mp.get_backend() == 'TkAgg':
+        flf.canvas.manager.window.wm_geometry("+900+400")
+        flf.set_size_inches([5,5], forward = True)
+    flf.suptitle("Revised spots okay? (y/n): ")
+    reallyOK = input("Revised spots okay? (y/n): ")
+    if reallyOK == 'n':
+        print("Shoot. Starting over.")
+        top_level(args)
+    elif reallyOK == 'y': 
+        ## save new spots:
+        fl.saveOut(outFileName=args.outFileName)
+        print('Saving to: ' + args.outFileName)
+        print('and done!')
+        plt.close('all')
+        quit()
+########### top level function ###########
+
+
+
+########### main #######################
 if __name__ == '__main__':
 
     ## deal with arguments
@@ -212,50 +281,4 @@ if __name__ == '__main__':
 
     ## load the original jpeg:
 
-    plt.ion()
-    jpegFig=plt.figure()
-    img=mpimg.imread(args.jpeg)
-    plt.imshow(img, origin='lower')
-                
-    ## load flower geojson and plot cartoon of flower:
-    fl = FlowerPetal.FlowerPetal()
-    fl.geojson = args.geoJ
-    fl.parseGeoJson()
-    fl.cleanFlowerPetal()
-    fl.plotOne(fl.petal)
-    fl.addOne(fl.spots, pick=True)
-    ## hold onto these for the other objects
-    flf = plt.gcf()
-    fla = flf.gca()
-
-    ok = input('Spots okay? (y/n): ') 
-    plt.ioff()
-
-    if ok == 'n':
-        print("Pick a spot to edit.")
-        ## pick it
-        polyPicker = PolyPicker(fl, fig=flf, axs=fla)
-    elif ok == 'y': quit()
-
-    plt.ioff()
-    plt.show()
-    ## the blocking by the plot is needed, to keep 
-    ## the script from ending before data is collected. 
-
-### check to make sure new spots are good
-#    reallyOK = input("Revised spots okay? (y/n): ")
-#    if ok == 'n':
-#        print("Shoot. Starting over.")
-#        ## pick it
-#        polyPicker = PolyPicker(fl, fig=flf, axs=fla)
-#    elif ok == 'y': quit()
-
-    ## save new spots:
-    fl.saveOut(outFileName=args.outFileName)
-    print('Saving to: ' + args.outFileName)
-    print('and done!')
-
-    quit()
-
-
-
+top_level(args)

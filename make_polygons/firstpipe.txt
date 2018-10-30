@@ -5404,4 +5404,59 @@ print(factorial(5))
 
 ## neat, but can we apply this to our module?
 
+## yup. Didn't even have to debug. 
 
+## changing the location of a pyplot?
+
+import matplotlib as mp
+import matplotlib.pyplot as plt
+
+plt.ion()
+fig = plt.figure()
+ax = plt.axes()
+ax.plot([0,1],[1,1])
+
+fig.canvas.manager.window.wm_geometry("+600+600")
+
+dir(fig.canvas.manager.window)
+
+## for my window, seems that the x goes from 0-1000, the y from 0-500?
+## I have a 1600 x 900 pixel screen, so it seems like this is an
+## absolute position system based on pixels.
+
+
+## is there a way to change the size of a plotting window?
+## forward parameter changes exisitng canvas size
+## sizes in inches. weird. 
+
+fig.set_size_inches([4,4], forward = True)
+
+fig.get_size_inches()
+
+fig.set_size_inches([8,8], forward = False)
+
+fig.set_size_inches([8,8], forward = True)
+
+plt.ion()
+
+fig = plt.figure()
+ax = plt.axes()
+ax.plot([0,1],[1,1])
+fig2 = plt.figure()
+ax2 = plt.axes()
+ax2.plot([0,1],[1,0])
+
+if mp.get_backend() == 'TkAgg': 
+    fig.canvas.manager.window.wm_geometry("+900+0")
+    fig.set_size_inches([8,4], forward = True)
+    fig2.canvas.manager.window.wm_geometry("+950+450")
+    fig2.set_size_inches([4,4], forward = True)
+
+## okay - put this on the moduel
+
+## example petal:
+fl=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P338F1/left/P338F1_left_polys.geojson
+## the jpeg for this:
+jp=/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P338F1.JPG
+
+./breakSpots.py $fl -o /home/daniel/test.geojson -j $jp

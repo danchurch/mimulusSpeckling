@@ -61,15 +61,9 @@ class PolyPicker:
                                     axs=self.axs )  
                 self.fig.suptitle("Spot picked...break it up!")
             except AssertionError as err:
-                self.fig.suptitle("No spot picked? press escape "
-                                + "to leave without editing.")
+                self.fig.suptitle("No spot picked.")
                 plt.ioff()
                 return
-        elif event.name == 'key_press_event' and event.key == 'escape': 
-            self.fig.canvas.mpl_disconnect(self.cidPick)
-            self.fig.canvas.mpl_disconnect(self.cidEnter)
-            plt.ioff()
-            return
 ############ Picker ##################
 
 ############ drawGap ##################

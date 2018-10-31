@@ -126,14 +126,18 @@ class DrawGap:
                 plt.ioff()
                 return
         elif event.name == 'key_press_event' and event.key == 'enter': 
-            self.fig.suptitle('Done breaking spot.')
-            self.fig.canvas.mpl_disconnect(self.mouseCid)
-            self.fig.canvas.mpl_disconnect(self.keyCid)
-            breakSpot = BreakSpot(flowerPetal=self.flowerPetal, 
-                                  oldSpot=self.spot, 
-                                  gap=self.gap, 
-                                  fig=self.fig, 
-                                  axs=self.axs)
+            try:
+                assert(self.gap.is_valid)
+                self.fig.suptitle('Done breaking spot.')
+                self.fig.canvas.mpl_disconnect(self.mouseCid)
+                self.fig.canvas.mpl_disconnect(self.keyCid)
+                breakSpot = BreakSpot(flowerPetal=self.flowerPetal, 
+                                      oldSpot=self.spot, 
+                                      gap=self.gap, 
+                                      fig=self.fig, 
+                                      axs=self.axs)
+            except AssertionError as error:
+                self.fig.suptitle('Polygon not valid, back up.')
         plt.ioff()
         return
 ############ drawGap ##################

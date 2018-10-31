@@ -119,13 +119,24 @@ class FlowerPetal():
     ## use poly cleaning function to make a flower cleaning function
     def cleanFlowerPetal(self):
         assert isinstance(self, FlowerPetal), "Not flower"
+        print('Checking petal')
         self.petal = self.cleanPolys(self.petal)
+        ## check to see if this made a multipolygon:
+        if type(self.petal) == sg.multipolygon.MultiPolygon:
+            print('This made a multipolygon for your petal.')
+            areas = [ i.area for i in self.petal ]
+            self.petal = [ i for i in self.petal if i.area == max(areas) ][0]
+            print('Picking largest polygon for petal.')
+        print('Checking spots')
         self.spots = self.cleanPolys(self.spots)
         ## we need our spots to be multipolygons, to make this class:
         if type(self.spots) == sg.polygon.Polygon:
             self.spots = sg.multipolygon.MultiPolygon([self.spots])
+        print('Checking center')
         self.center = self.cleanPolys(self.center)
+        print('Checking edge')
         self.edge = self.cleanPolys(self.edge)
+        print('Checking throat')
         self.throat = self.cleanPolys(self.throat)
 
 

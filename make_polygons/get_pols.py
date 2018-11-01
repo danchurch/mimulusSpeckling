@@ -72,31 +72,10 @@ def cleanCollections(geo):
     elif type(geo) is sg.polygon.Polygon:
         return(geo)
 
-def redrawThroat(marg, standPet):
-    def onclick(event):
-        print('Point at x=%d y=%d' %(event.x, event.y))
-        xc, yc = event.xdata, event.ydata
-        global points
-        points.append([xc,yc])
 
-    print('Okay, click the four points pf the throat.')
-    print("Start with one corner and click counterclockwise.")
-    points=[]
-    cid = plt.gcf().canvas.mpl_connect('button_press_event', onclick)
-    plt.gcf().canvas.mpl_disconnect(cid)
-    print('made it here')
-    print(cid)
-    polA = sg.polygon.Polygon(points)
-    return(polA)
+#########################################
 
-
-
-    """ often the zone-finding algorithm failes, so we need to help it """
-
-
-## define our zones
-def findZones(standPol, percent, simp=0.05):
-
+def findCenter(standPol, percent):
     ## generate margin/center
     center = standPol
     rad = 0
@@ -106,30 +85,71 @@ def findZones(standPol, percent, simp=0.05):
     marg = sg.polygon.Polygon(
             standPol.exterior,
             holes = [center.exterior.coords])
+    return(marg)
 
-    ## break up margin into edge and throat:
-    simPol = marg.simplify(simp)
-    simPolA = np.array(simPol.exterior.xy).transpose()
-    simPolAsorted = simPolA[simPolA[:,1].argsort()[::-1]]
-    outCorners = simPolAsorted[0:2]
-    simPolB = np.array(simPol.interiors[0].xy).transpose()
-    simPolBsorted = simPolB[simPolB[:,1].argsort()[::-1]]
-    inCorners = simPolBsorted[0:2,]
-    inCorners = np.flipud(inCorners)
-    tRap = np.concatenate((outCorners,inCorners))
-    tRapPoly = sg.polygon.Polygon(tRap)
 
-    ## polygon calculations start here, risky:
-    try:
-        tBuff = tRapPoly.buffer(0.1)
-        noTrap = marg.difference(tRapPoly)
-        notInTrap = [ i for i in noTrap if i.within(tBuff) ]
-        mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
-        margInTrap = tRapPoly.intersection(marg)
-        throatRaw = margInTrap.union(mpNotInTrap )
-        throat = cleanCollections(throatRaw)
-        edgeRaw = marg.difference(throat)
-        edge = cleanCollections(edgeRaw)
+#############################################
+
+
+####### Throat - underdevelopment ###################################
+#def redrawThroat(marg, standPet):
+#    def onclick(event):
+#        print('Point at x=%d y=%d' %(event.x, event.y))
+#        xc, yc = event.xdata, event.ydata
+#        global points
+#        points.append([xc,yc])
+#
+#    print('Okay, click the four points pf the throat.')
+#    print("Start with one corner and click counterclockwise.")
+#    points=[]
+#    cid = plt.gcf().canvas.mpl_connect('button_press_event', onclick)
+#    plt.gcf().canvas.mpl_disconnect(cid)
+#    print('made it here')
+#    print(cid)
+#    polA = sg.polygon.Polygon(points)
+#    return(polA)
+#
+#
+#
+#    """ often the zone-finding algorithm failes, so we need to help it """
+#
+#
+### define our zones
+#def findZones(standPol, percent, simp=0.05):
+#
+#    ## generate margin/center
+#    center = standPol
+#    rad = 0
+#    while center.area > percent:
+#        center = standPol.buffer(rad)
+#        rad -= .001
+#    marg = sg.polygon.Polygon(
+#            standPol.exterior,
+#            holes = [center.exterior.coords])
+#
+#    ## break up margin into edge and throat:
+#    simPol = marg.simplify(simp)
+#    simPolA = np.array(simPol.exterior.xy).transpose()
+#    simPolAsorted = simPolA[simPolA[:,1].argsort()[::-1]]
+#    outCorners = simPolAsorted[0:2]
+#    simPolB = np.array(simPol.interiors[0].xy).transpose()
+#    simPolBsorted = simPolB[simPolB[:,1].argsort()[::-1]]
+#    inCorners = simPolBsorted[0:2,]
+#    inCorners = np.flipud(inCorners)
+#    tRap = np.concatenate((outCorners,inCorners))
+#    tRapPoly = sg.polygon.Polygon(tRap)
+#
+#    ## polygon calculations start here, risky:
+#    try:
+#        tBuff = tRapPoly.buffer(0.1)
+#        noTrap = marg.difference(tRapPoly)
+#        notInTrap = [ i for i in noTrap if i.within(tBuff) ]
+#        mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
+#        margInTrap = tRapPoly.intersection(marg)
+#        throatRaw = margInTrap.union(mpNotInTrap )
+#        throat = cleanCollections(throatRaw)
+#        edgeRaw = marg.difference(throat)
+#        edge = cleanCollections(edgeRaw)
 #   ## bring up a plot of the zones:
 #   plt.ion()
 #   plotOne(standPet)
@@ -148,11 +168,12 @@ def findZones(standPol, percent, simp=0.05):
 #    finally:
 #        plt.close()
 #        return(center, edge, throat)
-    except:
-        print ("Zones failed...")
-        center, edge, throat = None, None, None
-    finally:
-        return(center, edge, throat)
+#    except:
+#        print ("Zones failed...")
+#        center, edge, throat = None, None, None
+#    finally:
+#        return(center, edge, throat)
+####### Throat - underdevelopment ###################################
 
 
 if __name__ == "__main__":
@@ -206,7 +227,9 @@ if __name__ == "__main__":
     standPet = stand(petPol, scale, cent)
     standSpot = [ stand(i, scale, cent) for i in spotPol ]
     standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
-    center, edge, throat = findZones(standPet, args.centerSize, simp)
+#    center, edge, throat = findZones(standPet, args.centerSize, simp)
+    edge, throat = None, None  
+    center = findCenter(standPet, args.centerSize)
 
     ## outputs 
 

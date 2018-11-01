@@ -82,10 +82,8 @@ def findCenter(standPol, percent):
     while center.area > percent:
         center = standPol.buffer(rad)
         rad -= .001
-    marg = sg.polygon.Polygon(
-            standPol.exterior,
-            holes = [center.exterior.coords])
-    return(marg)
+    cent = sg.polygon.Polygon(center.exterior.coords)
+    return(cent)
 
 
 #############################################

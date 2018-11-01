@@ -5046,13 +5046,16 @@ import shapely.geometry as sg
 
 ## create one flower petal:
 
-geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P765F1/left/P765F1_left_polys.geojson'
+geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/P247F1_left_polys.geojson'
+
 fl = FlowerPetal.FlowerPetal()
 fl.plantName = P765
 fl.flowerName = 'F1'
 fl.petalName = 'left'
-fl.geojson = 'P765F1_left_polys.geojson'
-fl.parseGeoJson(geoJ)
+fl.geojson = 'P247F1_left_polys.geojson'
+
+fl.parseGeoJson()
+
 fl.cleanFlowerPetal()
 
 ## plot it:
@@ -5288,6 +5291,8 @@ ls $targetDir/*
 
 pdftk $targetDir/* output $targetDir/bigPDF_29.10.2018.pdf
 
+pdftk $targetDir/* output $targetDir/bigPDF_01.11.2018.pdf
+
 ## well, shit. it looks like all of melias new images failed. 
 ## where? Why?
 
@@ -5460,3 +5465,223 @@ fl=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P33
 jp=/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P338F1.JPG
 
 ./breakSpots.py $fl -o /home/daniel/test.geojson -j $jp
+
+
+#########
+
+## okay, so how do we apply this module to all the images 
+## we've created?
+
+## probably easiest to make a flat directory of the geojsons,
+## and the jpegs, and one for outputs. 
+
+## then we can get clever about subbing them back into our 
+## file hierarchy with find or something. 
+
+## flat directory of geojsons
+
+pols='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
+forSpot='/home/daniel/Documents/cooley_lab/forSpotBreak'
+newSpot='/home/daniel/Documents/cooley_lab/editedGeojs'
+dougDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+toyDir='/home/daniel/Documents/cooley_lab/spotBreakToy'
+## script is at:
+breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py'
+
+mkdir $forSpot
+
+cd $pols
+
+## get all our geojsons in there
+find . -name "*.geojson" -exec cp {} $forSpot \;
+
+## now we need all of our matching jpegs in there...
+
+cd $forSpot
+
+for i in *; do
+    j=${i%%_*}
+    k="$dougDir/$j"*JPG
+    cp $k $forSpot
+done
+
+## okay, now how do we run through our images and correct?
+
+## I don't think we'll be able to do these in one or a few sittings. 
+## so the key may be to set aside the amount we want to do 
+
+## let's try doing just the P240's
+toyDir='/home/daniel/Documents/cooley_lab/spotBreakToy'
+breakSpots=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py
+
+mkdir $toyDir
+
+cp /home/daniel/Documents/cooley_lab/forSpotBreak/P24?* $toyDir
+
+
+cd $toyDir
+## to do just these:
+
+for i in *geojson; do 
+    echo $i
+    j=${i%%_*}.JPG
+    k=${i/.geojson/_spots_edited.geojson}
+    $breakSpots $i -o $k -j $j
+    echo $k
+done
+
+## right... where was I?
+
+## fix in the weird polygon issue.
+
+## Done. What about the big pipeline...
+
+## fails with this file:
+
+i='P247F1_left_polys.geojson'
+
+echo $i
+
+j=${i%%_*}.JPG
+
+k=${i/.geojson/_spots_edited.geojson}
+
+$breakSpots $i -o $k -j $j
+
+echo $k
+
+
+## says the petal is a multipolygon. Weird...
+makepols='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons'
+
+cd $makepols
+
+python3
+import FlowerPetal
+import os
+import matplotlib.pyplot as plt
+
+makepols='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons'
+pols='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
+forSpot='/home/daniel/Documents/cooley_lab/forSpotBreak'
+newSpot='/home/daniel/Documents/cooley_lab/editedGeojs'
+dougDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+toyDir='/home/daniel/Documents/cooley_lab/spotBreakToy'
+
+plt.ion()
+
+os.chdir(toyDir)
+
+
+geoJ='P247F1_left_polys.geojson'
+
+fl = FlowerPetal.FlowerPetal()
+fl.geojson = geoJ
+fl.parseGeoJson()
+
+fl.cleanFlowerPetal()
+
+fl.plotOne(fl.petal)
+
+fl.petal[1].area
+
+[ i for i in fl.petal ]
+
+areas = [ i.area for i in fl.petal ]
+fl.petal = [ i for i in fl.petal if i.area == max(areas) ][0]
+
+
+
+## okay, debugged. Now, why are some of these central ("right") petals failing?
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons
+
+less runAllDigs.log
+
+## not sure. no errors logged...
+
+## manually rerun the digitizing of one polygon?
+
+
+inF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/'
+outF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/'
+./get_pols.py $inF 0.5 $outF
+
+## seems like invalid polygon is the problem...
+
+## debugged, I think. Let's try rerunning our get_pols.py script 
+
+## our script for this is: runAllDigs.sh
+
+## but to be sure, let's get rid of the existing geojsons...
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons
+
+find . -name "*.geojson" -exec rm {} \;
+
+## then rerun the digitizations...
+
+## what to do in the meantime?
+## there are 180 flower images, so ~540 jsons 
+## should result from this.
+
+find . -name "*geojson" | wc -l 
+## 33 right now, yeah, gonna run all night. 
+
+## so waht can we do? Start breaking polygons on 
+## the ones that are already done, right? 
+
+## take a break then dive in...
+
+## our process above was confusing, start over. 
+
+## let's start with all thh 200 flowers
+
+## We need a directory with the jpgs and the geojsons from these:
+
+P200='/home/daniel/Documents/cooley_lab/P200'
+pols='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
+dougRaster='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+ 
+#mkdir $P200
+
+
+cd $P200
+
+## get geojsons:
+find $pols -name "P2*.geojson" -exec cp {} $P200 \;
+## get JPGs:
+find $dougRaster -name "P2*.JPG" -exec cp {} $P200 \;
+
+## now break them up:
+
+breakSpots=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py
+
+cd $P200
+
+for i in *geojson; do 
+    echo $i
+    j=${i%%_*}.JPG
+    k=${i/.geojson/_spots_edited.geojson}
+    $breakSpots $i -o $k -j $j
+done
+
+## well, that works well. How did our redigitizing go?
+
+
+cd $pols
+
+find . -name "*geojson" | wc -l
+
+## 537, so just one fail? Seems promising. 
+
+## now to rerun our pdf maker?
+
+targetDir='/home/daniel/Documents/cooley_lab/bigPDF'
+
+
+./makePDFs.py  &> makePDF_log_29.10.2018.txt
+
+
+## okay, let's start archiving these curated petals
+

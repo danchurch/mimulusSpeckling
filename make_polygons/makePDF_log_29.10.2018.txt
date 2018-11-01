@@ -3,13 +3,13 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P374F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P374F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P366F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P366F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P366F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P257F2/left
 We are on mid
@@ -19,7 +19,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P385F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P385F2/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P385F2/right
 We are on left
@@ -39,7 +39,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P418F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P418F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P338F1/left
 We are on mid
@@ -89,11 +89,11 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P441F1/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P399F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P399F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P399F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P361F1/left
 We are on mid
@@ -103,13 +103,13 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P418F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P418F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P418F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P342F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P342F2/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P342F2/right
 We are on left
@@ -121,7 +121,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P345F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P345F2/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P345F2/right
 We are on left
@@ -143,7 +143,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P378F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P403F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P403F2/mid
 We are on right
@@ -159,7 +159,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P412F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P412F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P438F2/left
 We are on mid
@@ -171,15 +171,15 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P431F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P431F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P351F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P351F2/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P351F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P342F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P342F1/mid
 We are on right
@@ -201,7 +201,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P415F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P415F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P379F1/left
 We are on mid
@@ -235,7 +235,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P299F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P299F1/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P299F1/right
 We are on left
@@ -277,7 +277,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P355F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P355F1/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P355F1/right
 We are on left
@@ -285,7 +285,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P435F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P435F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P248F1/left
 We are on mid
@@ -297,11 +297,11 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P436F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P436F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P352F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P352F2/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P352F2/right
 We are on left
@@ -309,11 +309,11 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P412F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P412F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P405F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P405F2/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P405F2/right
 We are on left
@@ -345,7 +345,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P338F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P338F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P339F1/left
 We are on mid
@@ -361,11 +361,11 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P401F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P401F1/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P401F1/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P425F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P425F1/mid
 We are on right
@@ -375,29 +375,29 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P440F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P440F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P406F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P406F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P406F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P352F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P352F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P352F1/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P400F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P400F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P400F2/right
 We are on left
 Error - GeoJson not found.
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P405F1/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P405F1/right
 We are on left
@@ -417,19 +417,19 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P441F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P441F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P426F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P426F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P426F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P404F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P404F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P404F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P417F2/left
 We are on mid
@@ -441,9 +441,9 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P425F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P425F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P413F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P413F2/mid
 We are on right
@@ -451,13 +451,13 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P366F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P366F1/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P366F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P390F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P390F2/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P390F2/right
 We are on left
@@ -471,13 +471,13 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P351F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P351F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P430F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P430F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P430F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P348F1/left
 We are on mid
@@ -487,9 +487,9 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P368F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P368F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P368F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P407F3/left
 We are on mid
@@ -503,11 +503,11 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P404F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P417F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P417F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P417F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P248F3/left
 We are on mid
@@ -519,19 +519,19 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P439F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P439F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P373F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P373F1/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P373F1/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P363F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P363F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P363F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P397F2/left
 We are on mid
@@ -551,7 +551,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P407F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P356F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P356F2/mid
 We are on right
@@ -573,7 +573,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P400F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P400F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P400F3/left
 We are on mid
@@ -591,7 +591,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P390F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P390F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P297F2/left
 We are on mid
@@ -605,7 +605,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P357F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P413F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P413F1/mid
 We are on right
@@ -627,7 +627,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P386F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P386F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P380F1/left
 We are on mid
@@ -637,15 +637,15 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P416F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P416F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P416F1/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P429F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P429F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P429F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P397F1/left
 We are on mid
@@ -693,7 +693,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P364F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P364F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P299F2/left
 We are on mid
@@ -709,21 +709,21 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P374F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P374F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P374F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P402F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P402F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P402F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P387F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P387F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P387F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P411F1/left
 We are on mid
@@ -741,27 +741,27 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P420F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P420F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P430F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P430F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P430F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P419F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P419F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P419F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P399F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P399F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P399F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P365F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P365F1/mid
 We are on right
@@ -777,7 +777,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P385F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P385F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P429F2/left
 We are on mid
@@ -821,7 +821,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P416F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P408F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P408F2/mid
 We are on right
@@ -837,31 +837,31 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P428F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P428F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P414F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P414F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P414F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P379F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P379F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P379F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P258F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P258F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P258F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P370F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P370F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P370F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P423F2/left
 We are on mid
@@ -869,11 +869,11 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P423F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P406F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P406F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P406F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P424F1/left
 We are on mid
@@ -891,13 +891,13 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P424F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P424F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P414F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P414F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P414F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P436F2/left
 We are on mid
@@ -909,7 +909,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P432F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P432F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P420F2/left
 We are on mid
@@ -933,13 +933,13 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P378F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P378F1/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P373F2/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P373F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P373F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P388F2/left
 We are on mid
@@ -947,9 +947,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P388F2/right
 We are on left
-GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P257F1/left/usr/local/lib/python3.6/dist-packages/matplotlib/pyplot.py:513: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
-  max_open_warning, RuntimeWarning)
-
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P257F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P257F1/mid
 We are on right
@@ -971,7 +969,9 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P423F1/mid
 We are on right
-GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P423F1/right
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P423F1/right/usr/local/lib/python3.6/dist-packages/matplotlib/pyplot.py:513: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  max_open_warning, RuntimeWarning)
+
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P422F2/left
 We are on mid
@@ -985,19 +985,19 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P415F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P398F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P398F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P398F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P370F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P370F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P370F1/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P253F1/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P253F1/mid
 We are on right
@@ -1007,9 +1007,9 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P365F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P365F2/right
 We are on left
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P257F3/left
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P257F3/mid
 We are on right
@@ -1017,9 +1017,9 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P409F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P409F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P409F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P431F1/left
 We are on mid
@@ -1031,11 +1031,11 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P258F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P258F1/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P402F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P402F2/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P402F2/right
 We are on left
@@ -1053,13 +1053,13 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P341F2/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P341F2/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P341F2/right
 We are on left
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P440F1/left
 We are on mid
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P440F1/mid
 We are on right
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P440F1/right
 We are on left
@@ -1079,7 +1079,7 @@ GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygo
 We are on mid
 GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/mid
 We are on right
-Error - GeoJson not found.
+GeoJson found at: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right
 Exception in Tkinter callback
 Traceback (most recent call last):
   File "/usr/lib/python3.6/tkinter/__init__.py", line 1702, in __call__

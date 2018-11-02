@@ -4,9 +4,6 @@ getSpots='/Users/danthomas/Documents/speckling/make_polygons/get_spots.py'
 getZones='/Users/danthomas/Documents/speckling/make_polygons/get_zones.py'
 wd='/Users/danthomas/Documents/speckling/make_polygons/polygons'
 
-$getSpots $inF $outF
-$getZones $inF 0.5 
-
 cd $wd
 
 for i in *; do
@@ -15,7 +12,7 @@ for i in *; do
     for j in *; do
         fullN=$PWD/$j
         $getSpots $fullN $fullN
-        $getZones $fullN 0.5 
+        find $fullN -name "*.geojson" -exec $getZones {} 0.5 
     done
     cd ../
 done

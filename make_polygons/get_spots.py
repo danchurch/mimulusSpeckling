@@ -61,6 +61,28 @@ def cleanCollections(geo):
         return(geo)
 
 
+def writeGeoJ(petal, spots, center, edge, throat):
+    """Function for putting polygons into a dictionary that can be written out \
+    to json format, = geojson."""
+    featC = {
+            "type" : "FeatureCollection",
+            "features" : [],
+            }
+
+    ## fill it with features
+    partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
+    ## each geometry needs a feature wrapper
+    for i,part in enumerate([petal, spots, center, edge, throat]):
+        try:
+            gj_i = sg.mapping(part)
+        except (NameError, AttributeError):
+            gj_i = {"type": "Polygon", "coordinates": []}
+        finally:
+            feature_i = {"type": "Feature",
+                  "geometry": gj_i,
+                  "properties": {"id":(partNames[i])}}
+            featC['features'].append(feature_i)
+    return(featC)
 
 if __name__ == "__main__":
 
@@ -104,27 +126,11 @@ if __name__ == "__main__":
     ## outputs ##
 
     ## define get a dictionary that resembles a geojson feature collection:
-    featC = {
-            "type" : "FeatureCollection",
-            "features" : [],
-            }
 
-    ## fill it with features
-    partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
-    ## each geometry needs a feature wrapper
-    for i,part in enumerate([standPet, standSpots, center, edge, throat]):
-        try:
-            gj_i = sg.mapping(part)
-        except (NameError, AttributeError):
-            gj_i = {"type": "Polygon", "coordinates": []}
-        finally:
-            feature_i = {"type": "Feature",
-                  "geometry": gj_i,
-                  "properties": {"id":(partNames[i])}}
-            featC['features'].append(feature_i)
+    geoDict = writeGeoJ(standPet, standSpots, center, edge, throat)
 
     ## write it out
     with open(outFileName, 'w') as fp:
-        json.dump(featC, fp)
+        json.dump(geoDict, fp)
 
 

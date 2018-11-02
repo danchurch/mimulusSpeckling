@@ -5754,8 +5754,93 @@ cp $inF .
 
 ## first, let's merge the edited files 
 
+cur='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/curated_petals/P200'
+
+cd $cur
+
 for i in *edited*; do 
-ls $i
-ls ${i/_spots_edited/}
+    ls $i
+    ls ${i/_spots_edited/}
+    mv $i ${i/_spots_edited/}
 done
+
+
+## did this work? yup
+
+## so now... how do we get rid of the zones we don't want? 
+
+
+## edit our existing module to make a convenient function for saving out
+## our petals as geojsons...
+
+## check our new  spot caller again:
+
+inF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/'
+outF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/'
+
+./get_spots.py $inF $outF
+
+## okay works. So use the new writeout function for our convenience in a mini-python script to fix these
+## curate polygons?
+
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons'
+
+cd "$cur"
+cp P247F1_left_polys.geojson ../../
+
+cd "$wd"
+
+python3
+
+## cleanoutPolys.py
+#########################################################
+
+#! /usr/bin/env python3
+import os, json, argparse
+from get_spots import writeGeoJ
+from get_zones import parseGeoJson 
+
+## deal with arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('geojson',
+            help=("""Name of the geojson file to which you want to\
+                    assign zones. """))
+parser.add_argument('outFileName',
+            help=("""Name of the geojson file to which you want to\
+                    assign zones. """))
+
+args = parser.parse_args()
+
+petal,spots,center,edge,throat = parseGeoJson(args.geojson)
+
+## now remove the throat and edge polygons (center should be fine?)
+
+throat, edge = None, None 
+
+aa = writeGeoJ(petal, spots, center, edge, throat)
+
+with open(args.outFileName, 'w') as fp:
+    json.dump(aa, fp)
+
+#########################################################################3
+
+## now try it out: 
+
+cleanout='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/cleanoutPolys.py'
+
+cd $cur
+
+for i in *geojson; do
+    ls $i
+    echo ${i/.g/_edited.g}
+    $cleanout $i ${i/.g/_edited.g}
+done
+
+## worked, it looks like. 
+
+## so we're caught up, I think. Throats and edges are removed from all 
+## spot-broken images. 
+
+## new ones shouldn't have throat/edges. sync up and check this.
+
 

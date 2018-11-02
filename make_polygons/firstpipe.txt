@@ -5745,3 +5745,17 @@ cp $inF .
 ## so now, rerun the digitizing on the lab comp.
 
 ## we need to change the shell script for this...
+
+
+## get some food, then..
+
+## okay, how can we clean our already spot-broken 
+## flowerpetal geojsons?
+
+## first, let's merge the edited files 
+
+for i in *edited*; do 
+ls $i
+ls ${i/_spots_edited/}
+done
+

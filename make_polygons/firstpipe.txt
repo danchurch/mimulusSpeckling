@@ -5721,5 +5721,27 @@ inF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P
 
 outF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/'
 
-./get_pols.py $inF 0.5 $outF
+./get_spots.py $inF $outF
 
+## seems to work...
+
+## now the zone caller, which right now only works for the center polygon:
+
+inF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/P247F1_right_polys.geojson'
+outF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/test.geojson'
+
+./get_zones.py -h
+
+./get_zones.py $inF 0.5 -o $outF
+
+## does the default naming function work?
+
+cp $inF .
+
+./get_zones.py P247F1_right_polys.geojson 0.5 
+
+## seems to work. 
+
+## so now, rerun the digitizing on the lab comp.
+
+## we need to change the shell script for this...

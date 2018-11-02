@@ -9,51 +9,16 @@ import shapely.errors
 from skimage import measure
 from descartes import PolygonPatch
 
-## for the actual conversion of raster to polygon:
-def digitizePols(file):
-    """pad margins of image and get the contour of the petal shape"""
-    petal = np.genfromtxt (file, delimiter=",")
-    petal_marg = np.insert(petal, petal.shape[1], 1, 1)
-    petal_marg = np.insert(petal_marg, 0, 1, 1)
-    petal_marg = np.insert(petal_marg, petal.shape[0], 1, 0)
-    petal_marg = np.insert(petal_marg, 0, 1, 0)
-    Pcontours = measure.find_contours(petal_marg, 0)
-    ## gotta ditch <3 points, they are lines
-    polys = [ i for i in Pcontours if len(i) > 3 ]
-    return(polys)
+def findCenter(standPol, percent):
+    ## generate margin/center
+    center = standPol
+    rad = 0
+    while center.area > percent:
+        center = standPol.buffer(rad)
+        rad -= .001
+    cent = sg.polygon.Polygon(center.exterior.coords)
+    return(cent)
 
-def getPetGeoInfo(pet):
-    """get centroid and scaling factor needed to standardize petals and spots"""
-    aa = sg.asPolygon(pet)
-    area = aa.area
-    scalar = area**(-1/2)
-    center = aa.centroid
-    centerCoor = (center.x, center.y)
-    return(scalar, centerCoor)
-
-def stand(pol, scale, cent):
-    """standardize a polygon"""
-    aa = sg.asPolygon(pol)
-    trans = sa.translate(aa, (-1*cent[0]), (-1*cent[1]))
-    scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
-    return(scaled)
-
-def plotOne(poly, l=2, a=1.0, col='yellow'):
-    fig = plt.figure()
-    ax1 = plt.axes()
-    ax1.set_xlim(min(poly.exterior.xy[0]), max(poly.exterior.xy[0]))
-    ax1.set_ylim(min(poly.exterior.xy[1]), max(poly.exterior.xy[1]))
-    ax1.set_aspect('equal')
-    ax1.add_patch(PolygonPatch(poly,
-                  fc=col, ec='black',
-                  linewidth=l, alpha=a))
-    plt.show()
-
-def addOne(poly, l=2, a=1.0, col='red'):
-    ax1 = plt.gca()
-    ax1.add_patch(PolygonPatch(poly,
-                  fc=col, ec='black',
-                  linewidth=l, alpha=a))
 
 
 ## clean up small polygons and points
@@ -72,21 +37,37 @@ def cleanCollections(geo):
     elif type(geo) is sg.polygon.Polygon:
         return(geo)
 
+def parseGeoJson(geojson):
+    with open(geojson) as gjf:
+        aa = json.load(gjf)
+        listP = (aa['features'])
+        try:
+            petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry']
+            petal = sg.shape(petalGJ)
+        except:
+            petal = sg.polygon.Polygon()
+        try:
+            spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry']
+            spots= sg.shape(spotsGJ)
+        except:
+            spots = sg.polygon.Polygon()
+        try:
+            centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry']
+            center = sg.shape(centerGJ)
+        except:
+            center = sg.polygon.Polygon()
+        try:
+            edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry']
+            edge = sg.shape(edgeGJ)
+        except:
+            edge = sg.polygon.Polygon()
+        try:
+            throatGJ = [ i for i in listP if i['properties']['id'] == 'Throat' ][0]['geometry']
+            throat = sg.shape(throatGJ)
+        except:
+            throat = sg.polygon.Polygon()
+    return(petal,spots,center,edge,throat)
 
-#########################################
-
-def findCenter(standPol, percent):
-    ## generate margin/center
-    center = standPol
-    rad = 0
-    while center.area > percent:
-        center = standPol.buffer(rad)
-        rad -= .001
-    cent = sg.polygon.Polygon(center.exterior.coords)
-    return(cent)
-
-
-#############################################
 
 
 ####### Throat - underdevelopment ###################################
@@ -178,60 +159,45 @@ if __name__ == "__main__":
 
     ## deal with arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('folder', 
-                help=("Name of folder that contains two files:"
-                      " that contains grayscale petal outlint and spot "
-                        "information in the form of CSVs."))
+    parser.add_argument('geojson', 
+                help=("""Name of the geojson file to which you want to\
+                        assign zones. """))
     parser.add_argument('centerSize', 
-                help=("give the proportion of the middle of the flower"
-                      " you would like to call Center Zone, from 0.01"
-                      " to 0.99."),
+                help=("""give the proportion of the middle of the flower \
+                       you would like to call Center Zone, from 0.01 \
+                       to 0.99."""),
                 type=float)
-    parser.add_argument("-s", "--simp", 
-                help=("How much simplification to inflict on the petal"
-                      " polygons to find zones. A good start might be 0.05"
-                      " (the default)"),
-                default=0.05,
-                type=float)
-    parser.add_argument('destination', 
-                help=("Folder where you would like this file."))
+    parser.add_argument('-o', '--out', 
+                help=("Name for outfile. If none given, modified in place."),
+                type=str,
+                default=None)
+#    parser.add_argument("-s", "--simp", 
+#                help=("""How much simplification to inflict on the petal 
+#                       polygons to find zones. A good start might be 0.05
+#                       (the default). This is not used right now, as the 
+#                        zone calling is under development, only the center 
+#                        polygon is stable."""),
+#                default=0.05,
+#                type=float)
+
     args = parser.parse_args()
 
-    if args.simp is not None:
-        simp = args.simp
+    if args.out is not None:
+        outFileName = args.out
+    else:
+        outFileName = args.geojson
 
-    ## organize name
-    os.chdir(args.folder)
-    here = os.getcwd()
-    petalName = os.path.basename(here)
-    flowerName = os.path.basename(os.path.dirname(here))
-    gjName = (flowerName + "_"
-              + petalName
-              + "_polys")
-    outFileName = ( args.destination + "/"
-                    + flowerName + "_"
-                    + petalName
-                    + "_polys.geojson")
+    ## parse the geojson
+    petal,spots,center,edge,throat = parseGeoJson(args.geojson)
 
-    ## run through digitizing, standardizing, zone calling pipeline
-    print(gjName)
-    aa = os.listdir()
-    for i in aa:
-        if "petal" in i:
-            petPol = digitizePols(i)[0] 
-        elif "spots" in i:
-            spotPol = digitizePols(i)
-    scale, cent = getPetGeoInfo(petPol)
-    standPet = stand(petPol, scale, cent)
-    standSpot = [ stand(i, scale, cent) for i in spotPol ]
-    standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
-#    center, edge, throat = findZones(standPet, args.centerSize, simp)
+    print(args.geojson)
+#    center, edge, throat = findZones(standPet, args.centerSize, args.simp)
     edge, throat = None, None  
-    center = findCenter(standPet, args.centerSize)
+    center = findCenter(petal, args.centerSize)
 
     ## outputs 
 
-    ## define get a dictionary that resembles a geojson feature collection:
+    ## write it back out to geojson (need to write a function for this...)
     featC = {
             "type" : "FeatureCollection",
             "features" : [],
@@ -240,7 +206,7 @@ if __name__ == "__main__":
     ## fill it with features
     partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
     ## each geometry needs a feature wrapper
-    for i,part in enumerate([standPet, standSpots, center, edge, throat]):
+    for i,part in enumerate([petal, spots, center, edge, throat]):
         try:
             gj_i = sg.mapping(part)
         except (NameError, AttributeError):

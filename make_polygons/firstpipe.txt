@@ -5685,3 +5685,41 @@ targetDir='/home/daniel/Documents/cooley_lab/bigPDF'
 
 ## okay, let's start archiving these curated petals
 
+## now, we need to edit out the zone calls, and rerun. 
+## then clean out the ones we just curated. 
+
+## today just modify the digpol script and set it to 
+## rerunning
+
+## try it with the edits:
+
+inF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/'
+outF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/'
+./get_pols.py $inF 0.5 $outF
+
+
+## okay - check to make sure get_pols is behaving.
+## the rerun on labcomp
+## fix existing, curated files - 
+
+## make zone calling a separate module?
+
+## two digitizing modules - one for spots, stable, one for zones, under construction
+
+## and then keep digitizing.
+
+
+## let's split apart the spot-calling and the zone calling modules.
+
+## the spot caller will create the geojson and slots in the geojson
+## for the zones but not fill them
+
+## the zone caller will , for the moment, only create the center zone.
+## and be developed later for calling the throat and edges. 
+
+inF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/'
+
+outF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/'
+
+./get_pols.py $inF 0.5 $outF
+

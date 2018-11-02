@@ -12,7 +12,7 @@ for i in *; do
     for j in *; do
         fullN=$PWD/$j
         $getSpots $fullN $fullN
-        find $fullN -name "*.geojson" -exec $getZones {} 0.5 
+        find $fullN -name "*.geojson" -exec $getZones {} 0.5 \;
     done
     cd ../
 done

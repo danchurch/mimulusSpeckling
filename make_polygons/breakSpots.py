@@ -22,17 +22,17 @@ class PolyPicker:
         self.otherSpots = []
         self.x = None
         self.y = None
-        self.fig.suptitle("Pick a spot to edit.")
+        self.axs.set_title("Pick a spot to edit.")
     def __call__(self, event):
         plt.ion()
         if event.name == 'pick_event':
             self.x = event.mouseevent.xdata
             self.y = event.mouseevent.ydata
             self.spotConfirmed = False
-            self.fig.suptitle("")
+            self.axs.set_title("")
             aa=self.axs.get_xlim(); bb=self.axs.get_ylim()
             self.axs.cla()
-            self.fig.suptitle("Press enter to confirm spot.")
+            self.axs.set_title("Press enter to confirm spot.")
             self.axs.add_patch(PolygonPatch(self.flowerPetal.petal,
                           fc='yellow', ec='black',
                           linewidth=2, alpha=1.0))
@@ -59,9 +59,9 @@ class PolyPicker:
                                     spot=self.spot,   
                                     fig=self.fig,   
                                     axs=self.axs )  
-                self.fig.suptitle("Spot picked...break it up!")
+                self.axs.set_title("Spot picked...break it up!")
             except AssertionError as err:
-                self.fig.suptitle("No spot picked.")
+                self.axs.set_title("No spot picked.")
                 plt.ioff()
                 return
 ############ Picker ##################
@@ -77,7 +77,7 @@ class DrawGap:
         self.gap = sg.polygon.Polygon()
         self.xs = []
         self.ys = []
-        self.fig.suptitle("Draw where you want to break spot")
+        self.axs.set_title("Draw where you want to break spot")
         self.mouseCid = self.fig.canvas.mpl_connect('button_press_event', self)
         self.keyCid = self.fig.canvas.mpl_connect('key_press_event', self)
     def addPoint(self):
@@ -128,7 +128,7 @@ class DrawGap:
         elif event.name == 'key_press_event' and event.key == 'enter': 
             try:
                 assert(self.gap.is_valid)
-                self.fig.suptitle('Done breaking spot.')
+                self.axs.set_title('Done breaking spot.')
                 self.fig.canvas.mpl_disconnect(self.mouseCid)
                 self.fig.canvas.mpl_disconnect(self.keyCid)
                 breakSpot = BreakSpot(flowerPetal=self.flowerPetal, 
@@ -137,7 +137,7 @@ class DrawGap:
                                       fig=self.fig, 
                                       axs=self.axs)
             except AssertionError as error:
-                self.fig.suptitle('Polygon not valid, back up.')
+                self.axs.set_title('Polygon not valid, back up.')
         plt.ioff()
         return
 ############ drawGap ##################
@@ -152,7 +152,7 @@ class BreakSpot:
         self.gap = gap
         self.axs = axs
         self.newSpots = self.oldSpot.difference(self.gap)
-        self.fig.suptitle("Spots split! Do another?")
+        self.axs.set_title("Spots split! Do another?")
         lsc = list(self.flowerPetal.spots)
         lsc.remove(oldSpot) 
         try:
@@ -215,6 +215,7 @@ def top_level(args):
     fl.addOne(fl.spots, pick=True)
     ## hold onto these for the other objects
     flf = plt.gcf()
+    flf.suptitle(fl.geojson)
     fla = flf.gca()
     if mp.get_backend() == 'TkAgg':
         flf.canvas.manager.window.wm_geometry("+900+400")
@@ -238,11 +239,14 @@ def top_level(args):
     fl.plotOne(fl.petal)
     fl.addOne(fl.spots, pick=True)
     flf = plt.gcf()
+    flf.suptitle(fl.geojson)
     fla = flf.gca()
+
+
     if mp.get_backend() == 'TkAgg':
         flf.canvas.manager.window.wm_geometry("+900+400")
         flf.set_size_inches([5,5], forward = True)
-    flf.suptitle("Revised spots okay? (y/n): ")
+    fla.set_title("Revised spots okay? (y/n): ")
     reallyOK = input("Revised spots okay? (y/n): ")
     if reallyOK == 'n':
         print("Shoot. Starting over.")

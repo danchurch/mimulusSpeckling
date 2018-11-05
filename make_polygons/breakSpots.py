@@ -152,7 +152,6 @@ class BreakSpot:
         self.gap = gap
         self.axs = axs
         self.newSpots = self.oldSpot.difference(self.gap)
-        self.axs.set_title("Spots split! Do another?")
         lsc = list(self.flowerPetal.spots)
         lsc.remove(oldSpot) 
         try:
@@ -164,6 +163,7 @@ class BreakSpot:
         aa=self.axs.get_xlim(); bb=self.axs.get_ylim()
         self.axs.cla()
         self.axs.set_xlim(aa); self.axs.set_ylim(bb)
+        self.axs.set_title("Spots split! Do another?")
         self.axs.add_patch(PolygonPatch(self.flowerPetal.petal,
                       fc='yellow', ec='black',
                       picker=None,
@@ -178,6 +178,7 @@ class BreakSpot:
         self.keyCid = self.fig.canvas.mpl_connect('key_press_event', self)
     def __call__(self,event):
         plt.ion()
+        print('made it here')
         if event.key in {'y','Y'}:
             self.fig.canvas.mpl_disconnect(self.keyCid)
             polyPicker = PolyPicker(self.flowerPetal, fig=self.fig, axs=self.axs)
@@ -200,10 +201,6 @@ def top_level(args):
     if mp.get_backend() == 'TkAgg':
         jpegFig.canvas.manager.window.wm_geometry("+900+0")
         jpegFig.set_size_inches([6,3], forward = True)
-
-    #if mp.get_backend() == 'TkAgg':
-    #    fig2.canvas.manager.window.wm_geometry("+950+450")
-    #    fig2.set_size_inches([4,4], forward = True)
 
                 
     ## load flower geojson and plot cartoon of flower:
@@ -283,4 +280,4 @@ if __name__ == '__main__':
 
     ## load the original jpeg:
 
-top_level(args)
+    top_level(args)

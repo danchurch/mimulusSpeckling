@@ -5889,7 +5889,7 @@ find $dougRaster -name "P3*.JPG" -exec cp {} $P300 \;
 ## now break them up:
 
 breakSpots=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py
-
+P300='/home/daniel/Documents/cooley_lab/P300'
 cd $P300
 
 for i in *geojson; do 
@@ -5901,4 +5901,71 @@ done
 
 ## not sure what to do about blushes, for instance P301F1. For now count as non-spot
 
+
+## debug time. 
+
+
+import breakSpots
+import FlowerPetal
+import os, copy, json, argparse
+import matplotlib as mp
+#import matplotlib.backend_bases
+from matplotlib import pyplot as plt
+import matplotlib.image as mpimg
+from shapely import geometry as sg
+from descartes import PolygonPatch
+
+
+exJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P247F1.JPG'
+exF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/P247F1_left_polys.geojson'
+
+plt.ion()
+jpegFig=plt.figure()
+img=mpimg.imread(exJ)
+plt.imshow(img, origin='lower')
+if mp.get_backend() == 'TkAgg':
+    jpegFig.canvas.manager.window.wm_geometry("+900+0")
+    jpegFig.set_size_inches([6,3], forward = True)
+
+
+## load flower geojson and plot cartoon of flower:
+fl = FlowerPetal.FlowerPetal()
+fl.geojson = exF
+fl.parseGeoJson()
+fl.cleanFlowerPetal()
+fl.plotOne(fl.petal)
+fl.addOne(fl.spots, pick=True)
+
+## hold onto these for the other objects
+flf = plt.gcf()
+flf.suptitle(fl.geojson)
+fla = flf.gca()
+if mp.get_backend() == 'TkAgg':
+    flf.canvas.manager.window.wm_geometry("+900+400")
+    flf.set_size_inches([5,5], forward = True)
+
+ok = input('Spots okay? (y/n): ')
+
+plt.ioff()
+
+
+if ok == 'n':
+    print("Pick a spot to edit.")
+    ## pick it
+    polyPicker = breakSpots.PolyPicker(fl, fig=flf, axs=fla)
+
+
+elif ok == 'y': quit()
+
+plt.ioff()
+plt.show()
+## the blocking by the plot is needed, to keep
+## the script from ending before data is collected.
+
+## check to make sure new spots are good
+fl.plotOne(fl.petal)
+fl.addOne(fl.spots, pick=True)
+flf = plt.gcf()
+flf.suptitle(fl.geojson)
+fla = flf.gca()
 

@@ -5838,9 +5838,67 @@ done
 
 ## worked, it looks like. 
 
+## merge these back in:
+
+for i in *edited*; do 
+    ls $i
+    ls ${i/_edited/}
+    mv $i ${i/_edited/}
+done
+
+## weird, one file at least is missing the center...
+
+P247F1_right_polys
+
+ls P247F1_right_polys*
+
+## thanks to our breaking up the script we can rerun the 
+## zone creation only on this:
+
+getzone=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_zones.py
+
+cd $cur
+
+$getzone P247F1_right_polys.geojson 0.5 -o P247F1_right_polys.geojson_edit
+
+
 ## so we're caught up, I think. Throats and edges are removed from all 
 ## spot-broken images. 
 
 ## new ones shouldn't have throat/edges. sync up and check this.
+
+## looks good. 
+
+## now, start digitizing the three hunnys
+
+
+P300='/home/daniel/Documents/cooley_lab/P300'
+pols='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
+dougRaster='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+ 
+mkdir $P300
+
+
+cd $P300
+
+## get geojsons:
+find $pols -name "P3*.geojson" -exec cp {} $P300 \;
+## get JPGs:
+find $dougRaster -name "P3*.JPG" -exec cp {} $P300 \;
+
+## now break them up:
+
+breakSpots=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py
+
+cd $P300
+
+for i in *geojson; do 
+    echo $i
+    j=${i%%_*}.JPG
+    k=${i/.geojson/_spots_edited.geojson}
+    $breakSpots $i -o $k -j $j
+done
+
+## not sure what to do about blushes, for instance P301F1. For now count as non-spot
 
 

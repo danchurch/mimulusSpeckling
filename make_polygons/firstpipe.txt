@@ -5969,3 +5969,410 @@ flf = plt.gcf()
 flf.suptitle(fl.geojson)
 fla = flf.gca()
 
+#######################
+
+breakSpots=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py
+P300='/home/daniel/Documents/cooley_lab/P300'
+cd $P300
+
+for i in *geojson; do 
+    echo $i
+    j=${i%%_*}.JPG
+    k=${i/.geojson/_spots_edited.geojson}
+    $breakSpots $i -o $k -j $j
+done
+
+
+########################
+
+## meh, let's see if we can do better than doug's 
+## pipeline:
+
+
+## let's explore the scikitimage tools, start with 
+## the canny edge detector...
+
+http://scikit-image.org/docs/stable/auto_examples/edges/plot_canny.html#sphx-glr-auto-examples-edges-plot-canny-py
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import ndimage as ndi
+import imageio
+
+from skimage import feature
+
+im = np.zeros((128, 128))
+im[32:-32, 32:-32] = 1
+
+im = ndi.rotate(im, 15, mode='constant')
+im = ndi.gaussian_filter(im, 4)
+im += 0.2 * np.random.random(im.shape)
+
+# Compute the Canny filter for two values of sigma
+edges1 = feature.canny(im)
+edges2 = feature.canny(im, sigma=3)
+
+fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=(8, 3),
+                                    sharex=True, sharey=True)
+
+
+ax1.imshow(im, cmap=plt.cm.gray)
+ax1.axis('off')
+ax1.set_title('noisy image', fontsize=20)
+
+ax2.imshow(edges1, cmap=plt.cm.gray)
+ax2.axis('off')
+ax2.set_title('Canny filter, $\sigma=1$', fontsize=20)
+
+ax3.imshow(edges2, cmap=plt.cm.gray)
+ax3.axis('off')
+ax3.set_title('Canny filter, $\sigma=3$', fontsize=20)
+
+fig.tight_layout()
+
+plt.show()
+
+## neat. Does it work on one of our petal images?
+
+exJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P247F1.JPG'
+
+aa = imageio.imread(exJ)
+
+## what if we just want the right most ('lower') petal? :
+
+bb = aa[:,1000:,:]
+
+fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=(8, 3),
+                                    sharex=True, sharey=True)
+
+fig, (ax1,ax2) = plt.subplots(nrows=2,ncols=1,
+                    #sharex = True,
+                    #sharey = True,
+                    figsize=(8,3),
+                    )
+
+[ i.set_aspect('equal') for i in [ax1,ax2] ]
+
+ax1.imshow(aa)
+
+ax2.imshow(bb)
+
+plt.tight_layout()
+
+## okay, how can we feed the second image to the edge detector?
+
+## first step is to get the petal outlines:
+
+## look at this example:
+## http://scikit-image.org/docs/stable/auto_examples/color_exposure/plot_regional_maxima.html#sphx-glr-auto-examples-color-exposure-plot-regional-maxima-py
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.ndimage import gaussian_filter
+from skimage import data
+from skimage import img_as_float
+from skimage.morphology import reconstruction
+
+# Convert to float: Important for subtraction later which won't work with uint8
+
+
+
+fig, ax = plt.subplots()
+ax.imshow(data.coins())
+
+image = img_as_float(data.coins())
+
+
+imageG = gaussian_filter(image, 1)
+
+fig, (ax1,ax2) = plt.subplots(nrows=1,ncols=2)
+ax1.imshow(image)
+ax2.imshow(imageG)
+
+image = gaussian_filter(image, 1)
+
+seed = np.copy(image)
+
+seed[1:-1, 1:-1] 
+
+## make background to pixel with lowest brightness
+seed[1:-1, 1:-1] = image.min()
+
+fig, (ax1,ax2,ax3) = plt.subplots(nrows=3,ncols=1)
+
+ax1.imshow(image)
+ax2.imshow(imageG)
+ax3.imshow(seed)
+
+mask = image
+
+dilated = reconstruction(seed, mask, method='dilation')
+
+plt.close('all')
+
+fig, (ax1,ax2,ax3,ax4) = plt.subplots(nrows=4,ncols=1)
+fig, (ax1,ax2,ax3,ax4) = plt.subplots(nrows=1,ncols=4)
+
+fig1, axes1 = plt.subplots(nrows=1,ncols=4)
+type(axes1[0])
+
+fig2, axes2 = plt.subplots(nrows=2,ncols=3)
+type(axes2[0,0])
+
+axes1[0].plot([0,1],[0,1])
+axes2[0,0].plot([0,1],[0,1])
+
+axes1[1].imshow(image)
+
+axes2[0,1].imshow(image)
+
+for i in range(2):
+    for j in range(3):
+        ax[i, j].text(0.5, 0.5, str((i, j)),
+                      fontsize=18, ha='center')
+
+fig3, axes = plt.subplots(nrows=2,ncols=2)
+axes[0,0].imshow(image)
+axes[0,0].set_title('image')
+axes[0,1].imshow(imageG)
+axes[0,1].set_title('imageG/mask')
+axes[1,0].imshow(seed)
+axes[1,0].set_title('seed')
+axes[1,1].imshow(dilated)
+axes[1,1].set_title('dilated')
+fig3.tight_layout()
+
+## what does reconstruct do? 
+
+dilated = reconstruction(seed, mask, method='dilation')
+
+## a little fuzzy on that. seems like:
+## "seed" decides what values will grow, 
+## "mask" decides the maximum amount of 
+## change that can happen at each pixel
+
+
+## still kind of hazy...
+## but from there
+
+fig = plt.figure()
+ax = plt.axes()
+
+ax.imshow(image - dilated, cmap='gray')
+ax.set_title('image - dilated')
+
+## alternatively, set some threshold manually
+## use this to determine what colors get "saved"
+
+h = 0.4
+seed = image - h
+
+dilated = reconstruction(seed, mask, method='dilation')
+hdome = image - dilated
+
+fig = plt.figure()
+ax = plt.axes()
+ax.imshow(
+ax.set_title('image - '+h)
+
+
+
+
+
+
+##############################
+
+## just found out that none of Melia's 
+## edits to the kmeans centers were
+## be taken into account, doug's 
+## "cluster" objects don't update
+## with her manual edits
+
+## so we need to grab "petals.____.data" for each petal
+
+## hate matlab, so let's focus on just getting the matrices
+## out into python, we'll reformat into images there
+
+octave --no-gui
+
+#wd = '/Users/danthomas/Documents/speckling/make_polygons/polygons/';
+#dougRasterDir = "/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/";
+
+wd = '/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons';
+dougRasterDir = '/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped';
+cd(dougRasterDir)
+
+files = dir('P*.mat');
+
+for file = files';
+    im = file.name;
+    imName = regexprep(im,'\.mat', ''); 
+    %% go get our file, come back
+    cd(dougRasterDir);
+    rast=load(im);
+    cd(wd);
+    %% make a spot for our image, go to it:
+    mkdir(imName);
+    cd (imName);
+    %% get our petal names (left, right mid)
+    petNames = fieldnames(rast.Petals.Clusters);
+    %% split images into petal and spot, export, for each of the three petals:
+    for i = 1:length(petNames);
+        pet = rast.Petals.(petNames{i}).data; %petal at hand
+        mkdir(petNames{i});
+        cd(petNames{i});
+        %% for octave
+        fileNamePetal = [imName "_" char(petNames(i)) "_" 'melted.csv'];
+        %% for matlab, this may work better?
+        %%fileNamePetal = imName + "_" +  petNames(i) + "_" + 'melted.csv';
+        csvwrite(fileNamePetal,pet);
+        cd ..;
+    end;
+    cd(wd);
+end;
+
+## ' ## just because it's screwing up my syntax
+
+## seems to work in octave
+
+## okay, can we look at them in python?
+
+python3 
+
+import matplotlib, os
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import img_as_float
+
+ex="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/P247F1_left_melted.csv"
+
+aa = np.genfromtxt(ex, delimiter=',')
+
+## can we make a image matrix out of this?
+
+## make an empty array from the max x and y coordinates:
+
+## the third column - what is it? it only returns "2", which 
+## I think means this is back ground?
+
+np.unique(aa[:,2])
+
+np.unique(aa[:,3])
+
+#3 the fourth column returns two values,  
+## seems more promising. Can we visualize this?
+
+## first, how to turn it into a matrix?
+
+## zip up the coordinates:
+
+coords = list(zip(aa[:,0],aa[:,1]))
+
+coords = list(zip(aa[:,0].astype(int),aa[:,1].astype(int)))
+
+
+plt.ion()
+fig = plt.figure()
+
+ax = plt.axes()
+
+ax.plot(coords)
+
+plt.scatter(aa[:,0].astype(int),aa[:,1].astype(int))
+
+plt.plot(aa[:,0].astype(int),aa[:,1].astype(int))
+
+help(ax.plot)
+
+## uh, weird. There's an extra line
+
+ax.get_children()
+
+bb = [ i for i in aa if isinstance(i, matplotlib.lines.Line2D) ]
+
+bb[0]
+
+## it's the first line object. Why is this created?
+bb[0].set_visible(False) 
+
+## not sure, but this works:
+
+plt.gca().clear()
+plt.plot(aa[:,0].astype(int),aa[:,1].astype(int))
+
+
+
+## anyway..seems like we can use coords to make 
+## a new matrix
+
+## create matrix:
+
+orig = np.genfromtxt(ex, delimiter=',')
+orig = orig.astype(int)
+Xmax=np.max(orig[:,1])
+Ymax=np.max(orig[:,0])
+petal = np.zeros([Xmax,Ymax])
+spots = np.zeros([Xmax,Ymax])
+for i in orig:
+    petal[i[1]-1,i[0]-1] = i[2]
+    spots[i[1]-1,i[0]-1] = i[3]
+
+## how do we convert to grey scale?
+
+petal = petal.astype(int)
+petal[petal == 2] = 1
+spots = spots.astype(int)
+spots[spots == 2] = 0
+
+
+np.unique(spots)
+
+
+fig, axes = plt.subplots(nrows=1,ncols=2, sharey=True)
+for i in axes:
+    i.set_aspect('equal')
+
+axes[0].imshow(petal, cmap='gray')
+axes[1].imshow(spots, cmap='gray')
+
+## now we want to get just the petal background:
+
+## to get the petal only...
+dd=cc.copy()
+dd[dd == 3] = 2
+ax.imshow(dd)
+
+## to get the spots only...
+ee=cc.copy()
+ee[ee == 2] = 0
+ax.imshow(ee)
+
+## then save these out using our old file names
+## want to get rid of the "_melted" and add in "petal" or "spot"
+
+bn = os.path.basename(ex)
+petalName=bn.replace("_melted","_petal")
+spotsName=bn.replace("_melted","_spots")
+
+## to save our petal background:
+
+np.savetxt(petalName, petal, delimiter=",")
+np.savetxt(spotsName, spots, delimiter=",")
+
+## this should be readable to our previous scripts.
+## may need to tweak or invert the grayscale values...
+
+## but that's for tomorrow.
+
+## basically, we applied the above new matlab script, 
+## for extracting Melia's new petal images
+## then we'll apply the above to write our new csvs 
+
+## so make the above into a module runnable from the 
+## command line. Then use find to apply to all 
+## "melted" files. 
+
+## ugh this is painful.
+
+

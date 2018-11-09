@@ -6343,7 +6343,7 @@ dd=cc.copy()
 dd[dd == 3] = 2
 ax.imshow(dd)
 
-## to get the spots only...
+# to get the spots only...
 ee=cc.copy()
 ee[ee == 2] = 0
 ax.imshow(ee)
@@ -6375,4 +6375,29 @@ np.savetxt(spotsName, spots, delimiter=",")
 
 ## ugh this is painful.
 
+## so can we apply our python patch? or integrate it some how?
 
+## seems like it should fit well into our det_spots script
+
+## should take the form of a function or two to whip 
+
+## we can skip the csv step, methinks, since get_pols takes 
+## a numpy array anyway
+
+## try out our modifies spot-finder with an example 
+
+exL="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/P247F1_left_melted.csv"
+
+exR="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/P247F1_right_melted.csv"
+
+exF="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/"
+
+./get_spots.py $exL -d $PWD
+
+./get_spots.py $exR -d $PWD
+
+## seems to work. Can we get our pipeline running for this?
+
+## seems like we want to clean out our polygon folders of the old geojsons
+
+## for this we need to edit our runAllDigs.sh file

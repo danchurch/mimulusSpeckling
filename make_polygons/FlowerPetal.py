@@ -560,17 +560,21 @@ class FlowerPetal():
 
     def addOne(self, poly, l=2, a=1.0, col='red', pick=None):
         ax1 = plt.gca()
-        try:
-            for i in poly:
-                ax1.add_patch(PolygonPatch(i,
+        if poly.is_empty:
+            print('Empty polgyon?')
+            return
+        elif not poly.is_empty:
+            try:
+                for i in poly:
+                    ax1.add_patch(PolygonPatch(i,
+                                  fc=col, ec='black',
+                                  picker=pick,
+                                  linewidth=l, alpha=a))
+            except TypeError:
+                ax1.add_patch(PolygonPatch(poly,
                               fc=col, ec='black',
                               picker=pick,
                               linewidth=l, alpha=a))
-        except TypeError:
-            ax1.add_patch(PolygonPatch(poly,
-                          fc=col, ec='black',
-                          picker=pick,
-                          linewidth=l, alpha=a))
 
     ########### saving out geojson flowerPetal object ########
     def saveOut(self, outFileName=None):

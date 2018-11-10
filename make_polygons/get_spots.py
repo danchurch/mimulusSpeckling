@@ -27,8 +27,6 @@ def parseDougMatrix(file):
     spots = np.zeros([Xmax,Ymax])
     for i in orig:
         petal[i[0]-1,i[1]-1] = i[3]
-        #petal[i[1]-1,i[0]-1] = i[3]
-        #spots[i[1]-1,i[0]-1] = i[3]
         spots[i[0]-1,i[1]-1] = i[3]
     ## 0 is background color
     ## 2 is petal color
@@ -43,50 +41,71 @@ def parseDougMatrix(file):
     spots[spots == 3] = 0
     return(petal,spots)
 
-
-
-
 ## for the actual conversion of raster to polygon:
 def digitizePols(mat):
     """pad margins of image and get the contour of the petal shape"""
-    petal_marg = np.insert(mat, mat.shape[1], 1, 1)
-    petal_marg = np.insert(petal_marg, 0, 1, 1)
-    petal_marg = np.insert(petal_marg, mat.shape[0], 1, 0)
-    petal_marg = np.insert(petal_marg, 0, 1, 0)
-    Pcontours = measure.find_contours(petal_marg, 0)
-    #return(Pcontours)
-    ## gotta ditch <3 points, they are lines
-    polys = [ i for i in Pcontours if len(i) >= 4 ]
-    ## make shapely objects
-    try:
-        assert len(polys) > 0
-        if len(polys) == 1: 
-            shapelyPoly = sg.Polygon(polys[0]) 
-        elif len(polys) > 1: 
-            lpols = [ sg.Polygon(i) for i in polys ]
-            shapelyPoly = sg.MultiPolygon(lpols) 
-        return(shapelyPoly)
-    except AssertionError as err:
-        print("No polygons returned. " + str(err))
-        return()
+    ## is the matrix just background color? then return empty polygon
+    if (mat == 1).all(): 
+            shapelyPoly = sg.Polygon() 
+    else:
+        petal_marg = np.insert(mat, mat.shape[1], 1, 1)
+        petal_marg = np.insert(petal_marg, 0, 1, 1)
+        petal_marg = np.insert(petal_marg, mat.shape[0], 1, 0)
+        petal_marg = np.insert(petal_marg, 0, 1, 0)
+        Pcontours = measure.find_contours(petal_marg, 0)
+        if Pcontours:
+            #return(Pcontours)
+            ## gotta ditch <3 points, they are lines
+            polys = [ i for i in Pcontours if len(i) >= 4 ]
+            ## make shapely objects
+            if len(polys) == 1: 
+                shapelyPoly = sg.Polygon(polys[0]) 
+            elif len(polys) > 1: 
+                lpols = [ sg.Polygon(i) for i in polys ]
+                shapelyPoly = sg.MultiPolygon(lpols) 
+        elif not Pcontours: shapelyPoly = sg.MultiPolygon() 
+    return(shapelyPoly)
 
 
-## debugging
-#exL="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/P247F1_left_melted.csv"
-#petal, spots = parseDougMatrix(exL)
+# debugging
+
+#ex="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P261F3/left/P261F3_left_melted.csv"
+#petal, spots = parseDougMatrix(ex)
 #
-#exR="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/P247F1_right_melted.csv"
-#petal, spots = parseDougMatrix(exR)
+#orig = np.genfromtxt(ex, delimiter=',')
+#
+#(orig[:,3] == 2).all()
+#
+#[ i for i in list(orig[:,3]) if i != 2.0 ]
+#
 #
 #aa = digitizePols(petal)
+#
 #bb = digitizePols(spots)
+#
+#(spots == 1).all()
+#
+#from shapely.validation import explain_validity
+#
+#explain_validity(aa)
+#explain_validity(bb)
+#
+#aa = cleanCollections(aa)
+#
+#cc = cleanSpots(bb)
+#
+#
+#explain_validity(cc)
 #
 #plt.ion()
 #
 #plt.close('all')
 #
 #fig, ax = plt.subplots(1,1)
+#
 #ax.imshow(petal, cmap='gray')
+#
+#ax.imshow(spots, cmap='gray')
 #
 #
 #fig, axes = plt.subplots(nrows=1,ncols=2, sharey=True)
@@ -94,12 +113,15 @@ def digitizePols(mat):
 #axes[1].imshow(spots, cmap='gray')
 #
 #os.chdir('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons')
+#
 #import FlowerPetal
 #
 #fl = FlowerPetal.FlowerPetal()
 #
 #fl.plotOne(aa)
 #fl.addOne(bb)
+#
+#fl.addOne(aa)
 
 def getPetGeoInfo(pet):
     """get centroid and scaling factor needed to standardize petals and spots"""
@@ -117,20 +139,30 @@ def stand(pol, scale, cent):
 
 ## clean up small polygons and points
 def cleanCollections(geo):
-    """sometimes our digitizing creates smatterings of geometries instead\
-    of a single clean polygon. This attempts to prune down to the main polygon,\
+    """sometimes our digitizing of petals creates smatterings of geometries instead
+    of a single clean polygon. This attempts to prune down to the main polygon,
     which is usually the object we want."""
-    if type(geo) is not sg.polygon.Polygon:
-        if type(geo) is sg.collection.GeometryCollection:
-            onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]
-        else:
-            onlyPolys = geo
+    if not geo.is_valid: 
+        print('polygon invalid, buffering')
+        geo = geo.buffer(0.0)
+    if isinstance(geo, sg.collection.BaseMultipartGeometry):
+        onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]
         areas = [ i.area for i in onlyPolys ]
         biggestPoly = [ i for i in onlyPolys if i.area == max(areas) ][0]
-        return(biggestPoly)
-    elif type(geo) is sg.polygon.Polygon:
-        return(geo)
+    elif isinstance(geo, sg.Polygon):
+        biggestPoly = geo
+    return(biggestPoly)
 
+def cleanSpots(SpotsMultiPoly):
+    """Tries to clean up spot collections, leaving them as a multipolygon"""
+    if not SpotsMultiPoly.is_valid: 
+        print('polygon invalid, buffering')
+        SpotsMultiPoly = SpotsMultiPoly.buffer(0.0)
+    if isinstance(SpotsMultiPoly, sg.MultiPolygon):
+        SpotsMultiPoly = sg.MultiPolygon([ i.buffer(0.0) for i in SpotsMultiPoly ])
+    elif isinstance(SpotsMultiPoly, sg.Polygon):
+        SpotsMultiPoly = SpotsMultiPoly.buffer(0)
+    return(SpotsMultiPoly)
 
 def writeGeoJ(petal, spots, center, edge, throat):
     """Function for putting polygons into a dictionary that can be written out \
@@ -200,7 +232,8 @@ if __name__ == "__main__":
     petalMat, spotsMat = parseDougMatrix(meltBaseName)
     petPolRaw = digitizePols(petalMat) 
     petPol = cleanCollections(petPolRaw)
-    spotPol = digitizePols(spotsMat)
+    spotPolRaw = digitizePols(spotsMat)
+    spotPol = cleanSpots(spotPolRaw)
 
     scale, cent = getPetGeoInfo(petPol)
     standPet = stand(petPol, scale, cent)

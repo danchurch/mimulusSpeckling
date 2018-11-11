@@ -6387,9 +6387,7 @@ np.savetxt(spotsName, spots, delimiter=",")
 ## try out our modifies spot-finder with an example 
 
 exL="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/P247F1_left_melted.csv"
-
 exR="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/P247F1_right_melted.csv"
-
 exF="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/"
 
 ./get_spots.py $exL -d $PWD
@@ -6400,4 +6398,47 @@ exF="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P
 
 ## seems like we want to clean out our polygon folders of the old geojsons
 
+#find . -name "*geojson" -exec rm {} \;
+
 ## for this we need to edit our runAllDigs.sh file
+
+find . -name "*melted.csv" -exec ls {} \;
+
+## or maybe we can just do something like this:
+
+getSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_spots.py'
+getZones='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_zones.py'
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
+## lab mac
+#getSpots='/Users/danthomas/Documents/speckling/make_polygons/get_spots.py'
+#getZones='/Users/danthomas/Documents/speckling/make_polygons/get_zones.py'
+#wd='/Users/danthomas/Documents/speckling/make_polygons/polygons'
+
+
+find . -name "*melted.csv" -exec $getSpots {} \; |& tee petals_and_spots.log
+
+find . -name "*.geojson" -exec $getZones {} 0.5 \; |& tee zones.log
+
+
+## okay, that works, but stopped it, because lotsabugs
+
+## images like:
+P261F3_mid_polys
+
+P261F3_left_polys
+
+## okay, debugged, reran digitizing. 
+
+## can we get our pdfmaker fired up again?
+
+
+
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons'
+cd $wd
+
+./makePDFs.py  |& tee makePDF_log_11.10.2018.txt
+
+cd /home/daniel/Documents/cooley_lab/bigPDF
+
+
+pdftk * output bigPDF_10.11.2018.pdf

@@ -72,13 +72,16 @@ def plotYesZone (petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, x ,y):
                       linewidth=l, alpha=1.0))
     except: 
         ax1.set_xlabel('No spots detected')
-    ax1.add_patch(PolygonPatch(centerPoly,
-                  fc='white', ec='black',
-                  linewidth=l, alpha=alp))
-    ax1.add_patch(PolygonPatch(edgePoly,
-                  fc='white', ec='black',
-                  linewidth=l, alpha=alp))
     try:
+        ax1.add_patch(PolygonPatch(centerPoly,
+                      fc='white', ec='black',
+                      linewidth=l, alpha=alp))
+    except: 
+        ax1.set_xlabel('No center detected')
+    try:
+        ax1.add_patch(PolygonPatch(edgePoly,
+                      fc='white', ec='black',
+                      linewidth=l, alpha=alp))
         ax1.add_patch(PolygonPatch(throatPoly,
                       fc='white', ec='black',
                       linewidth=l, alpha=alp))
@@ -150,6 +153,7 @@ if __name__ == "__main__":
                     ax=plt.subplot2grid((4,3),(3,n)) ## blank
                 os.chdir(polDir + "/" + flowerName) ## go back to flower directory
             plt.savefig(targetDir + "/" + flowerName + ".pdf")
+            plt.close('all')
         except FileNotFoundError as eror:
             print(eror)
         finally:

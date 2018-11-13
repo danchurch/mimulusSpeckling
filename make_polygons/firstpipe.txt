@@ -6409,10 +6409,12 @@ find . -name "*melted.csv" -exec ls {} \;
 getSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_spots.py'
 getZones='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_zones.py'
 wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
+
 ## lab mac
-#getSpots='/Users/danthomas/Documents/speckling/make_polygons/get_spots.py'
-#getZones='/Users/danthomas/Documents/speckling/make_polygons/get_zones.py'
-#wd='/Users/danthomas/Documents/speckling/make_polygons/polygons'
+
+getSpots='/Users/danthomas/Documents/speckling/make_polygons/get_spots.py'
+getZones='/Users/danthomas/Documents/speckling/make_polygons/get_zones.py'
+wd='/Users/danthomas/Documents/speckling/make_polygons/polygons'
 
 
 find . -name "*melted.csv" -exec $getSpots {} \; |& tee petals_and_spots.log
@@ -6442,3 +6444,43 @@ cd /home/daniel/Documents/cooley_lab/bigPDF
 
 
 pdftk * output bigPDF_10.11.2018.pdf
+
+
+## let's get a folder for josh to look at:
+
+pols='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
+geoj='/home/daniel/Documents/cooley_lab/geojsons'
+
+find $pols -name "*geojson" -exec cp {} $geoj  \;
+
+##############
+
+
+## hop back into the zones...
+
+## tweaked with the I/O of the two modules
+
+## any bugs?
+
+inF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/P247F1_right_melted.csv'
+outF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/'
+
+./get_spots.py $inF -d $outF
+
+./get_zones.py P247F1_right_polys.geojson 0.5
+
+## seems to work. Can we sick the lab computer on this?
+
+
+getSpots='/Users/danthomas/Documents/speckling/make_polygons/get_spots.py'
+getZones='/Users/danthomas/Documents/speckling/make_polygons/get_zones.py'
+wd='/Users/danthomas/Documents/speckling/make_polygons/polygons'
+
+
+find . -name "*melted.csv" -exec $getSpots {} \; |& tee petals_and_spots.log
+
+find . -name "*.geojson" -exec $getZones {} 0.5 \; |& tee zones.log
+
+
+
+

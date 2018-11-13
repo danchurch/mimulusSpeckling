@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse, os, json, shapely
+import geojsonIO as gj
 import numpy as np
 import matplotlib.pyplot as plt
 import shapely.geometry as sg
@@ -19,6 +20,14 @@ def findCenter(standPol, percent):
     cent = sg.polygon.Polygon(center.exterior.coords)
     return(cent)
 
+def cleanPoly(pol):
+    try:
+        assert isinstance(pol, sg.Polygon)
+        pol = pol.buffer(0)
+        return(pol)
+    except AssertionError:
+        print('not a polygon')
+        return
 
 
 ## clean up small polygons and points
@@ -37,40 +46,8 @@ def cleanCollections(geo):
     elif type(geo) is sg.polygon.Polygon:
         return(geo)
 
-def parseGeoJson(geojson):
-    with open(geojson) as gjf:
-        aa = json.load(gjf)
-        listP = (aa['features'])
-        try:
-            petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry']
-            petal = sg.shape(petalGJ)
-        except:
-            petal = sg.polygon.Polygon()
-        try:
-            spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry']
-            spots= sg.shape(spotsGJ)
-        except:
-            spots = sg.polygon.Polygon()
-        try:
-            centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry']
-            center = sg.shape(centerGJ)
-        except:
-            center = sg.polygon.Polygon()
-        try:
-            edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry']
-            edge = sg.shape(edgeGJ)
-        except:
-            edge = sg.polygon.Polygon()
-        try:
-            throatGJ = [ i for i in listP if i['properties']['id'] == 'Throat' ][0]['geometry']
-            throat = sg.shape(throatGJ)
-        except:
-            throat = sg.polygon.Polygon()
-    return(petal,spots,center,edge,throat)
 
-
-
-####### Throat - underdevelopment ###################################
+###### Throat - underdevelopment ###################################
 #def redrawThroat(marg, standPet):
 #    def onclick(event):
 #        print('Point at x=%d y=%d' %(event.x, event.y))
@@ -87,72 +64,57 @@ def parseGeoJson(geojson):
 #    print(cid)
 #    polA = sg.polygon.Polygon(points)
 #    return(polA)
-#
-#
-#
-#    """ often the zone-finding algorithm failes, so we need to help it """
-#
-#
-### define our zones
-#def findZones(standPol, percent, simp=0.05):
-#
-#    ## generate margin/center
-#    center = standPol
-#    rad = 0
-#    while center.area > percent:
-#        center = standPol.buffer(rad)
-#        rad -= .001
-#    marg = sg.polygon.Polygon(
-#            standPol.exterior,
-#            holes = [center.exterior.coords])
-#
-#    ## break up margin into edge and throat:
-#    simPol = marg.simplify(simp)
-#    simPolA = np.array(simPol.exterior.xy).transpose()
-#    simPolAsorted = simPolA[simPolA[:,1].argsort()[::-1]]
-#    outCorners = simPolAsorted[0:2]
-#    simPolB = np.array(simPol.interiors[0].xy).transpose()
-#    simPolBsorted = simPolB[simPolB[:,1].argsort()[::-1]]
-#    inCorners = simPolBsorted[0:2,]
-#    inCorners = np.flipud(inCorners)
-#    tRap = np.concatenate((outCorners,inCorners))
-#    tRapPoly = sg.polygon.Polygon(tRap)
-#
-#    ## polygon calculations start here, risky:
-#    try:
-#        tBuff = tRapPoly.buffer(0.1)
-#        noTrap = marg.difference(tRapPoly)
-#        notInTrap = [ i for i in noTrap if i.within(tBuff) ]
-#        mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
-#        margInTrap = tRapPoly.intersection(marg)
-#        throatRaw = margInTrap.union(mpNotInTrap )
-#        throat = cleanCollections(throatRaw)
-#        edgeRaw = marg.difference(throat)
-#        edge = cleanCollections(edgeRaw)
-#   ## bring up a plot of the zones:
-#   plt.ion()
-#   plotOne(standPet)
-#   addOne(standSpots)
-#   addOne(edge, col='white', a=0.5)
-#   addOne(throat, col='purple', a=0.5)
-#   ## ask user if the digitization worked:
-#   sanCheck=input('Is this throat polygon OK?')
-#        assert (sanCheck in ['y','Y','yes']), "Not a good polygon? Time to redraw."
-#    except AssertionError as err:
-#        print(err)
-#       ## time to get interactive
-#   if sanCheck not in ['y','Y','yes']:
-#           polA=redrawThroat(marg,standPet)
-#           addOne(polA, col='orange', a=1)
-#    finally:
-#        plt.close()
-#        return(center, edge, throat)
-#    except:
-#        print ("Zones failed...")
-#        center, edge, throat = None, None, None
-#    finally:
-#        return(center, edge, throat)
-####### Throat - underdevelopment ###################################
+
+
+
+    """ often the zone-finding algorithm failes, so we need to help it """
+
+
+## define our zones
+def findEdgeThroat(petal, center, simp=0.5):
+    #simp=0.5
+    ## generate margin/center
+    petal = cleanPoly(petal)
+    center = cleanPoly(center)
+    marg = sg.polygon.Polygon(
+            petal.exterior,
+            holes = [center.exterior.coords])
+    ## break up margin into edge and throat:
+    simPol = marg.simplify(simp)
+    ## get array of x,y coords separated
+    simPolA = np.array(simPol.exterior.xy).transpose()
+    ## sort by y coords:
+    simPolAsorted = simPolA[simPolA[:,1].argsort()[::-1]]
+    leftSide=simPolAsorted[simPolAsorted[:,0] < 0]
+    upperleft=leftSide[0,:]
+    rightSide=simPolAsorted[simPolAsorted[:,0] > 0]
+    upperright=rightSide[0,:]
+    simPolB = np.array(simPol.interiors[0].xy).transpose()
+    simPolBsorted = simPolB[simPolB[:,1].argsort()[::-1]]
+    leftSide=simPolBsorted[simPolBsorted[:,0] < 0]
+    lowerleft=leftSide[0,:]
+    rightSide=simPolBsorted[simPolBsorted[:,0] > 0]
+    lowerright=rightSide[0,:]
+    corners = np.stack((upperleft, upperright,lowerright,lowerleft))
+    tRapPoly = cleanPoly(sg.polygon.Polygon(corners))
+    try:
+        tBuff = tRapPoly.buffer(0.1)
+        tBuff = cleanPoly(tBuff)
+        noTrap = marg.difference(tRapPoly)
+        notInTrap = [ i for i in noTrap if i.within(tBuff) ]
+        mpNotInTrap = sg.multipolygon.MultiPolygon(notInTrap)
+        margInTrap = tRapPoly.intersection(marg)
+        throatRaw = margInTrap.union(mpNotInTrap )
+        throat = cleanCollections(throatRaw)
+        edgeRaw = marg.difference(throat)
+        edge = cleanCollections(edgeRaw)
+    except:
+        print ("Zones failed...")
+        edge, throat = None, None
+    finally:
+        return(edge, throat)
+
+###### Throat - underdevelopment ###################################
 
 
 if __name__ == "__main__":
@@ -188,34 +150,16 @@ if __name__ == "__main__":
         outFileName = args.geojson
 
     ## parse the geojson
-    petal,spots,center,edge,throat = parseGeoJson(args.geojson)
+    petal,spots,center,edge,throat = gj.parseGeoJson(args.geojson)
 
     print(args.geojson)
-#    center, edge, throat = findZones(standPet, args.centerSize, args.simp)
-    edge, throat = None, None  
     center = findCenter(petal, args.centerSize)
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
 
     ## outputs 
 
-    ## write it back out to geojson (need to write a function for this...)
-    featC = {
-            "type" : "FeatureCollection",
-            "features" : [],
-            }
-
-    ## fill it with features
-    partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
-    ## each geometry needs a feature wrapper
-    for i,part in enumerate([petal, spots, center, edge, throat]):
-        try:
-            gj_i = sg.mapping(part)
-        except (NameError, AttributeError):
-            gj_i = {"type": "Polygon", "coordinates": []}
-        finally:
-            feature_i = {"type": "Feature",
-                  "geometry": gj_i,
-                  "properties": {"id":(partNames[i])}}
-            featC['features'].append(feature_i)
+    ## write it back out to geojson 
+    featC = gj.writeGeoJ(petal,spots,center,edge,throat)
 
     ## write it out
     with open(outFileName, 'w') as fp:

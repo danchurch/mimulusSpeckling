@@ -7,7 +7,7 @@ Slots for throat, and edge will be created
 but left as empty polygon objects.
 """
 
-import argparse, os, json, shapely
+import argparse, os, json, shapely, geojsonIO
 import numpy as np
 import matplotlib.pyplot as plt
 import shapely.geometry as sg
@@ -67,62 +67,6 @@ def digitizePols(mat):
     return(shapelyPoly)
 
 
-# debugging
-
-#ex="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P261F3/left/P261F3_left_melted.csv"
-#petal, spots = parseDougMatrix(ex)
-#
-#orig = np.genfromtxt(ex, delimiter=',')
-#
-#(orig[:,3] == 2).all()
-#
-#[ i for i in list(orig[:,3]) if i != 2.0 ]
-#
-#
-#aa = digitizePols(petal)
-#
-#bb = digitizePols(spots)
-#
-#(spots == 1).all()
-#
-#from shapely.validation import explain_validity
-#
-#explain_validity(aa)
-#explain_validity(bb)
-#
-#aa = cleanCollections(aa)
-#
-#cc = cleanSpots(bb)
-#
-#
-#explain_validity(cc)
-#
-#plt.ion()
-#
-#plt.close('all')
-#
-#fig, ax = plt.subplots(1,1)
-#
-#ax.imshow(petal, cmap='gray')
-#
-#ax.imshow(spots, cmap='gray')
-#
-#
-#fig, axes = plt.subplots(nrows=1,ncols=2, sharey=True)
-#axes[0].imshow(petal, cmap='gray')
-#axes[1].imshow(spots, cmap='gray')
-#
-#os.chdir('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons')
-#
-#import FlowerPetal
-#
-#fl = FlowerPetal.FlowerPetal()
-#
-#fl.plotOne(aa)
-#fl.addOne(bb)
-#
-#fl.addOne(aa)
-
 def getPetGeoInfo(pet):
     """get centroid and scaling factor needed to standardize petals and spots"""
     area = pet.area
@@ -164,28 +108,6 @@ def cleanSpots(SpotsMultiPoly):
         SpotsMultiPoly = SpotsMultiPoly.buffer(0)
     return(SpotsMultiPoly)
 
-def writeGeoJ(petal, spots, center, edge, throat):
-    """Function for putting polygons into a dictionary that can be written out \
-    to json format, = geojson."""
-    featC = {
-            "type" : "FeatureCollection",
-            "features" : [],
-            }
-
-    ## fill it with features
-    partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
-    ## each geometry needs a feature wrapper
-    for i,part in enumerate([petal, spots, center, edge, throat]):
-        try:
-            gj_i = sg.mapping(part)
-        except (NameError, AttributeError):
-            gj_i = {"type": "Polygon", "coordinates": []}
-        finally:
-            feature_i = {"type": "Feature",
-                  "geometry": gj_i,
-                  "properties": {"id":(partNames[i])}}
-            featC['features'].append(feature_i)
-    return(featC)
 
 if __name__ == "__main__":
 
@@ -249,7 +171,7 @@ if __name__ == "__main__":
 
     ## define get a dictionary that resembles a geojson feature collection:
 
-    geoDict = writeGeoJ(standPet, standSpots, center, edge, throat)
+    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, center, edge, throat)
 
     ## write it out
     with open(outFileName, 'w') as fp:

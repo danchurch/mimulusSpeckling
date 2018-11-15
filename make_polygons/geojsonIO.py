@@ -89,4 +89,8 @@ def addOne(poly, l=2, a=1.0, col='red', pick=None):
                           picker=pick,
                           linewidth=l, alpha=a))
 
-
+def clearOne():
+    aa=plt.gca().get_xlim(); bb=plt.gca().get_ylim()
+    plt.gca().cla()
+    plt.gca().set_xlim(aa); plt.gca().set_ylim(bb)
+ 

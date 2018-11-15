@@ -2,6 +2,8 @@
 
 import os, argparse, json
 import matplotlib.pyplot as plt
+import numpy as np
+import shapely.geometry as sg
 import geojsonIO as gj
 import get_zones as gz
 
@@ -37,16 +39,81 @@ def valNum():
     finally:
         return(aa)
 
-def main(geojson, centerSize, simp):
-    ## run autocall and plot:
-    petal,spots,center,edge,throat = auto_call( geojson, 
-                                                centerSize, 
-                                                simp)
+def getNewEdgeThroat(pol, petal, center):
+    aa = pol.intersection(petal)
+    newThroat = aa.difference(center)
+    marg = petal.difference(center)
+    newEdge = marg.difference(newThroat)
+    return(newEdge, newThroat)
+
+class PolyMaker:
+    def __init__(self, petal, center):
+        gj.plotOne(petal)
+        gj.addOne(center, col='white', a=0.5)
+        self.petal = petal
+        self.center = center
+        self.fig = plt.gcf()
+        self.ax = plt.gca()
+        self.verts = []
+        self.poly = None
+        self.mouseCID = self.fig.canvas.mpl_connect('button_press_event', self)
+        self.keyCID = self.fig.canvas.mpl_connect('key_press_event', self)
+    def __call__(self,event):
+        if plt.get_current_fig_manager().toolbar.mode != '': return
+        self.event = event
+        if event.name == "button_press_event":
+            if event.inaxes!=self.ax: return
+            if event.button == 1:
+                self.verts.append((event.xdata,event.ydata))
+            elif event.button != 1:
+                try:
+                    self.verts.pop()
+                except IndexError as err:
+                    print(err)
+                    pass
+            aa = np.array(self.verts).transpose()
+            gj.clearOne()
+            gj.addOne(self.petal, col='yellow')
+            gj.addOne(self.center, col='white', a=0.5)
+            try:
+                assert(len(self.verts) > 0)
+                self.ax.plot(aa[0],aa[1],'o', color='red')
+            except (IndexError, AssertionError) as err:
+                pass
+            ## plot poly
+            try:
+                gj.clearOne()
+                gj.addOne(self.petal, col='yellow')
+                gj.addOne(self.center, col='white', a=0.5)
+                self.ax.plot(aa[0],aa[1],'o', color='red')
+                gj.addOne(sg.Polygon(self.verts), a= 0.3)
+            except (ValueError, IndexError):
+                pass
+        elif event.name == "key_press_event" and event.key == 'enter':
+            self.ax.set_title('Creating/updating polygon')
+            self.poly = sg.Polygon(self.verts)
+        elif event.name == "key_press_event" and event.key == 'escape':
+            plt.close('all')
+            self.fig.canvas.mpl_disconnect(self.mouseCID)
+            self.fig.canvas.mpl_disconnect(self.keyCID)
+            return
+
+
+def main( petal,spots,center,edge,throat, centerSize, geojson):
     plt.ion()
     plotFlowerZones(petal,spots,center,edge,throat)
     print("Here's the flower and zones. Look ok? ", end = "")
     ZonesOK=choice()
-    if ZonesOK == 'y': quit()
+
+    if ZonesOK == 'y': 
+        ## write it out?
+        print("Save this?")
+        saveYN = choice()
+        if saveYN == 'y':
+            featC = gj.writeGeoJ(petal, spots, center, edge, throat)
+            with open(outFileName, 'w') as fp:
+                json.dump(featC, fp)
+        quit()
     elif ZonesOK == 'n': 
         print('Try automated zone call with another simplification level?', end ="")
         anotherSimp=choice()
@@ -55,20 +122,49 @@ def main(geojson, centerSize, simp):
         print('Enter simplification level. ', end ="")
         simp=valNum()
         plt.close('all')
-        main(geojson, centerSize, simp)
+        petal,spots,center,edge,throat = auto_call( geojson, 
+                                                    centerSize, 
+                                                    simp)
+        main( petal,spots,center,edge,throat, args.centerSize, args.geojson)
+
     elif anotherSimp == 'n':
         print('Try manual zone call?', end ="")
         manDraw=choice()
 
     if manDraw == 'y':
-        print('okay, its time to get real...')
-
-
-
+        plt.close('all')
+        print('Draw polygon to define the left and right boundaries of throat')
+        pm = PolyMaker(petal, center)
+        print('Good?', end ="")
+        choice()
 
     elif manDraw == 'n':
         print("I'm confused....")
-        main(geojson, centerSize, simp)
+        plt.close('all')
+        #main(geojson, centerSize, simp)
+
+    edge, throat = getNewEdgeThroat(pm.poly, petal, center)
+
+    plotFlowerZones(petal,spots,center,edge,throat)
+
+
+    print('Save new zones?')
+    newOK=choice()
+
+    if newOK == 'y':
+        ## write it out
+        featC = gj.writeGeoJ(petal, spots, center, edge, throat)
+        with open(outFileName, 'w') as fp:
+            json.dump(featC, fp)
+        quit()
+
+    if newOk == 'n': 
+        plt.close('all')
+        print('Starting over...')
+        main( petal,spots,center,edge,throat, args.centerSize, args.simp, args.geojson)
+
+
+########################################
 
 if __name__ == '__main__':
 
@@ -82,12 +178,12 @@ if __name__ == '__main__':
                        you would like to call Center Zone, from 0.01 \
                        to 0.99."""),
                 type=float)
-    parser.add_argument("simplification",
-                help=("""How much simplification to inflict on the petal
-                       polygons to find zones. A good start might be 0.5
-                       (the default)."""),
-                default=0.5,
-                type=float)
+#    parser.add_argument("simplification",
+#                help=("""How much simplification to inflict on the petal
+#                       polygons to find zones. A good start might be 0.5
+#                       (the default)."""),
+#                default=0.5,
+#                type=float)
     parser.add_argument('-o', '--out',
                 help=("Name for outfile. If none given, modified in place."),
                 type=str,
@@ -100,35 +196,16 @@ if __name__ == '__main__':
     else:
         outFileName = args.geojson
 
-######
+##############
 
-## for debug
-#class Args:
-#    def __init__(self):
-#        self.geojson = "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P338F1/right/P338F1_right_polys.geojson"
-#        self.centerSize = 0.5
-#        self.simplification = 0.5
-#
-#args=Args()
+
+petal,spots,center,edge,throat = gj.parseGeoJson(args.geojson)
+main( petal,spots,center,edge,throat, args.centerSize, args.geojson)
+
+#############
 
 
 
 
-#        petal,spots,center,edge,throat = auto_call( geojson, 
-#                                                    centerSize, 
-#                                                    simp)
-#
-
-main(args.geojson,
-        args.centerSize,
-        args.simplification) 
-
-#    ## write it out
-#    with open(outFileName, 'w') as fp:
-#        json.dump(featC, fp)
-
-##########3
-
-## interactive zone caller.
 
 

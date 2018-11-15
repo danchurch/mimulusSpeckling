@@ -6516,45 +6516,74 @@ pdftk * output bigPDF_13.11.2018.pdf
 ## level and finally a complete point-and-click redraw of the 
 ## throat zone. 
 
+wd="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons"
+
+os.chdir(wd)
 
 ## the pnc ....
 
 import os, argparse, json
 import matplotlib.pyplot as plt
 import numpy as np
+import geojsonIO as gj
+import shapely.geometry as sg
 
-class zoneMaker:
+class polyMaker:
     def __init__(self,fig, ax):
         self.fig = fig
         self.ax = ax
         self.verts = []
+        self.poly = None
         self.mouseCID = self.fig.canvas.mpl_connect('button_press_event', self)
+        self.keyCID = self.fig.canvas.mpl_connect('key_press_event', self)
     def __call__(self,event):
         if plt.get_current_fig_manager().toolbar.mode != '': return
         self.event = event
-        if event.button == 1: 
-            self.verts.append((event.xdata,event.ydata))
-        if event.button != 1: 
+        if event.name == "button_press_event":
+            if event.button == 1: 
+                self.verts.append((event.xdata,event.ydata))
+            if event.button != 1: 
+                try:
+                    self.verts.pop()
+                except IndexError:
+                    pass
+            aa = np.array(self.verts).transpose()
+            self.ax.scatter(aa[0],aa[1], s=30, color='red')
             try:
-                self.verts.pop()
-            except IndexError:
+                gj.clearOne()
+                self.ax.scatter(aa[0],aa[1], s=30, color='red')
+                gj.addOne(sg.Polygon(self.verts))
+            except ValueError:
                 pass
-        aa = np.array(z.verts).transpose()
-        self.ax.scatter(aa[0],aa[1], s=30, color='red')
-
-
-        print(self.verts)
+        elif event.name == "key_press_event" and event.key == 'enter': 
+            self.ax.set_title('Creating/updating polygon')
+            self.poly = sg.Polygon(self.verts)
+            return
 
 plt.ion()
 
 fig, ax = plt.subplots(1,1)
-z = zoneMaker(fig, ax)
+z = polyMaker(fig, ax)
 
-aa = np.array(z.verts).transpose()
 
-z.ax.plot(aa[0],aa[1])
-
-z.ax.scatter(aa[0],aa[1], s=30, color='red')
+os.system('read -s -n 1 -p "Press any key to continue..."')
+print
 
 ## and now?
+
+z = 3
+
+try:
+    print('a')
+    print('b')
+    assert(z==4)
+    print('c')
+except AssertionError:
+    print('d')
+
+ex='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P338F1/right/P338F1_right_polys.geojson'
+
+./manZoneCaller.py $ex 0.5 --out "test.geojson"
+
+
 

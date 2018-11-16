@@ -1,9 +1,0 @@
-getSpots='/Users/danthomas/Documents/speckling/make_polygons/get_spots.py'
-getZones='/Users/danthomas/Documents/speckling/make_polygons/get_zones.py'
-wd='/Users/danthomas/Documents/speckling/make_polygons/polygons'
-
-find . -name "*melted.csv" -exec $getSpots {} \; |& tee petals_and_spots.log
-
-find . -name "*.geojson" -exec $getZones {} 0.5 \; |& tee zones.log
-
-

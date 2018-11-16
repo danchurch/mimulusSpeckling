@@ -6585,5 +6585,36 @@ ex='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P3
 
 ./manZoneCaller.py $ex 0.5 --out "test.geojson"
 
+## okay, so can we create a loop for checking all the geojsons?
 
+## get them all into one directory:
+
+pols="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons"
+geojFolder="/home/daniel/Documents/cooley_lab/geojsons"
+wd="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons"
+
+find $pols -name "*geojson" -exec cp {} $geojFolder \; 
+
+## now go through these?
+
+for i in *; do
+    echo $i
+    $wd/manZoneCaller.py $i 0.5 --out ${i/.geojson/_mod.geojson}
+    echo ${i/.geojson/_mod.geojson}
+done
+
+
+## a couple problem petals...
+
+i="P248F3_right_polys.geojson"
+
+i="P399F1_right_polys.geojson"
+
+i="P368F2_right_polys.geojson"
+
+i="P422F2_right_polys.geojson"
+
+i="P441F2_left_polys.geojson"
+
+$wd/manZoneCaller.py $i 0.5 --out ${i/.geojson/_mod.geojson}
 

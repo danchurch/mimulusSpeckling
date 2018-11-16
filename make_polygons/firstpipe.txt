@@ -6618,3 +6618,30 @@ i="P441F2_left_polys.geojson"
 
 $wd/manZoneCaller.py $i 0.5 --out ${i/.geojson/_mod.geojson}
 
+## wow, 348 out 535 files had to be modified. 
+
+## next time, try the simplification at 0.1
+
+## fold in the "mod" files:
+
+for i in *mod.geojson; do
+    echo $i
+    mv $i ${i/_mod/}
+done
+
+## let's run our pdfmaker on this:
+
+## although, it looks like 
+
+makePDFs.py
+
+
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons'
+cd $wd
+
+./makePDFs.py  |& tee makePDF_log_13.11.2018.txt
+
+cd /home/daniel/Documents/cooley_lab/bigPDF
+
+
+pdftk * output bigPDF_13.11.2018.pdf

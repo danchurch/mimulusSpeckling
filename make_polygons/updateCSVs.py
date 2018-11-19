@@ -13,8 +13,17 @@ args = parser.parse_args()
 
 matfile = args.meltedDir 
 
+##matfile="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/P247F1_right_melted.csv"
+
 ## parse melted dir, make petal and spot matrices
 petal,spots = parseDougMatrix(matfile)
+
+## can we shave this down to the edges of the petals?
+petalRows = np.any(petal!=1, axis=1)
+
+newPetal = petal[petalRows,:]
+newSpots = spots[petalRows,:]
+## use petal outline as boundary
 
 ## name stuff
 meltName = os.path.basename(matfile)
@@ -25,7 +34,6 @@ spotsName = meltName.replace("melted","spots")
 outSpotsName = meltDir + "/" + spotsName
 
 ## save out
-np.savetxt(outPetalName, petal, delimiter = ',')
-np.savetxt(outSpotsName, spots, delimiter = ',')
-
+np.savetxt(outPetalName, newPetal, delimiter = ',')
+np.savetxt(outSpotsName, newSpots, delimiter = ',')
 

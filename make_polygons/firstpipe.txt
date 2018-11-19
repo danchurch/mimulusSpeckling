@@ -6629,12 +6629,9 @@ for i in *mod.geojson; do
     mv $i ${i/_mod/}
 done
 
-## let's run our pdfmaker on this:
 
-## although, it looks like 
 
 makePDFs.py
-
 
 wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons'
 cd $wd
@@ -6645,3 +6642,117 @@ cd /home/daniel/Documents/cooley_lab/bigPDF
 
 
 pdftk * output bigPDF_13.11.2018.pdf
+
+
+## but shoot, our dougdebug has changed things a bit...
+
+## can we insert our updated petal and spot matrices asCSVs where they are 
+## wanted by the pdfmaker?
+
+matfile="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/P247F1_left_melted.csv"
+
+#!/usr/bin/env python3
+
+import os
+import numpy as np
+from get_spots import parseDougMatrix
+
+## args
+parser = argparse.ArgumentParser()
+parser.add_argument('meltedDir',
+            help=("""Name of the melted matrix from Doug to which you want 
+                    save as two CSVs (petal and spots). """))
+parser.parse_args()
+args.meltedDir = matfile
+
+
+## parse melted dir, make petal and spot matrices
+petal,spots = parseDougMatrix(matfile)
+
+## name stuff
+meltName = os.path.basename(matfile)
+meltDir = os.path.dirname(matfile)
+petalName = meltName.replace("melted","petal")
+outPetalName = meltDir + "/" + petalName
+spotsName = meltName.replace("melted","spots")
+outSpotsName = meltDir + "/" + spotsName
+
+## save out
+np.savetxt(outPetalName, petal, delimiter = ',')
+np.savetxt(outSpotsName, spots, delimiter = ',')
+
+
+## to use it
+
+ex="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/left/P247F1_left_melted.csv"
+
+./updateCSVs.py $ex
+
+## looks okay. Can we walk around the polygon directory and fix things?
+
+
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons'
+cd $wd
+
+find . -name "*_melted.csv" -exec ./updateCSVs.py {} \;
+
+## and to update our geojsons? The current ones are here:
+
+geojF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons'
+
+## polygon folder here:
+
+polys='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
+
+## we want to go through all of our files in this folder, and replace them 
+## where they are found in the polygons folder....
+
+for i in $geojF/*; do
+    fn=$(basename $i)
+    echo $fn
+    dest=$(find $polys -name $fn)
+    echo $dest
+    cp $i $dest
+done
+
+## okay. Everything is uptodate, I think...
+
+## can we make a pdf to be sure?
+
+./makePDFs.py
+
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons'
+cd $wd
+
+./makePDFs.py  |& tee makePDF_log_16.11.2018.txt
+
+cd /home/daniel/Documents/cooley_lab/bigPDF
+
+
+pdftk * output bigPDF_16.11.2018.pdf
+
+## if that works...
+
+## it doesn't. fuck. 
+
+
+## can we rerun our stats? wake up brain, how do we do this?...
+
+## I think we just need a directory full of geojsons, should spit out the files we need:
+
+FlowerPetal='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/FlowerPetal.py'
+geojF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons'
+
+$FlowerPetal $geojF "automated_stats_16.11.2018" |& tee stats_log_16.11.2018.txt
+
+## now we want to convert this to a form that tassel can use...
+
+## 
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/FlowerPetal2Tassel
+
+## make a few changes... and...
+
+./flowerPetal2tassel.py
+
+## 

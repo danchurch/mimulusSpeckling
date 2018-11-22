@@ -6755,4 +6755,54 @@ cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/FlowerPetal
 
 ./flowerPetal2tassel.py
 
-## 
+####################################
+
+## okay, so now what? do some spot breaking. 
+
+## after things are fairly clean, start on the RNA project. 
+
+## let's just break the large obvious ones. We'll keep the geojson folder current as the 
+## place for curated geoj's, also the ones tucked into their respective plant 
+## folders...
+
+## the geoj folder will be the working folder,
+## when all images in it are run through an
+## edit, the individual flower folders will be
+## updated.
+
+
+breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py'
+dougRaster='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+geojF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons'
+
+cd $geojF
+
+for i in *geojson; do 
+    ii=$geojF"/"$i
+    j=${i%%_*}.JPG
+    jj=$dougRaster"/"$j
+    k=${i/.geojson/_spots_edited.geojson}
+    kk=$geojF"/"$k
+    echo $ii
+    #echo $jj
+    #echo $kk
+    $breakSpots $ii -o $kk -j $jj
+done
+
+
+## images that didn't work at all, many spots lost:
+
+## errors redo?
+P297F2_mid_polys.geojson
+P339F1_mid_polys.geojson
+P348F2_left
+P370F1_left
+P371F1_mid
+P385F2_mid
+P400F2_mid
+
+
+skipped accidentally:
+P401F1_right_polys.geojson
+
+

@@ -6800,9 +6800,29 @@ P370F1_left
 P371F1_mid
 P385F2_mid
 P400F2_mid
+P405F3_right
+P424F1_left
+P424F1_mid
 
 
-skipped accidentally:
+## skipped accidentally:
 P401F1_right_polys.geojson
+P432F2_left
 
 
+## skipped by computer?
+P424F2_mid, _right
+
+
+
+
+
+## rerun the latest data for melia - got to remap samples
+
+data='/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/FlowerPetal2Tassel/automatedResuls_forTassle_16.11.2018.csv'
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/Melia_Josh_rearrange
+
+
+
+./sortJoshCSVs.py $data --map mapSample2plant.csv --outputName plate1forTassel_26.11.2018.csv

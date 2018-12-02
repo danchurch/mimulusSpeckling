@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 ##get our python file for this data (could use the CSV instead)
-pickleFile="automated_stats_16.11.2018.p"
+pickleFile="flowerPetalDF_27.11.2018.p"
 rawDataDF = pickle.load(open(pickleFile, "rb"))
 ## clean up 
 del rawDataDF['geojson']
@@ -28,4 +28,4 @@ meliaData = plantDf.unstack(level=1)
 ## collapse the hierarchical labels
 newName = ['_'.join(col).strip() for col in meliaData.columns.values] 
 meliaData.columns = newName
-meliaData.to_csv('automatedResuls_forTassle_16.11.2018.csv', na_rep='NaN')
+meliaData.to_csv('automatedResuls_forTassle_27.11.2018.csv', na_rep='NaN')

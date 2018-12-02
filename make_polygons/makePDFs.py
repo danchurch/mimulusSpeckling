@@ -93,6 +93,8 @@ if __name__ == "__main__":
     ## make these into command line args?
 
     ## my comp
+
+    workingGeoJDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working'
     polDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
     dougDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
     targetDir='/home/daniel/Documents/cooley_lab/bigPDF'
@@ -136,9 +138,13 @@ if __name__ == "__main__":
                 counter += 1
                 ## get geojsons, turn them into polygons
                 try: 
-                    geoj = [ i for i in os.listdir() if 'geojson' in i ][0]
-                    print('GeoJson found at: ' + os.getcwd())
-                    petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly = parseGeoj(geoj)
+                    ## originally, we used the geojsons in the polygon file tree
+                    #geoj = [ i for i in os.listdir() if 'geojson' in i ][0]
+                    ## but now let's use the working directory for geojsons
+                    geoj = [ i for i in os.listdir(workingGeoJDir) if j in i and flowerName in i ][0]
+                    geojFull = (workingGeoJDir + "/" +geoj)
+                    petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly = parseGeoj(geojFull)
+                    print('GeoJson found: ' + geojFull)
                 except: 
                     print('Error - GeoJson not found.')
                 ## row 3 plot petal and spot geojsons if we have them. 
@@ -158,3 +164,6 @@ if __name__ == "__main__":
             print(eror)
         finally:
             os.chdir(dougDir)
+
+
+

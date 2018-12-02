@@ -1,0 +1,86 @@
+
+
+Upper Left petals 
+
+
+
+
+Before spot-breaking
+
+Call:
+adonis(formula = phenData ~ plants, permutations = 10000) 
+
+Permutation: free
+Number of permutations: 10000
+
+Terms added sequentially (first to last)
+
+           Df SumsOfSqs  MeanSqs F.Model      R2    Pr(>F)    
+plants     69    20.275 0.293843  4.8888 0.83429 9.999e-05 ***
+Residuals  67     4.027 0.060105         0.16571              
+Total     136    24.302                  1.00000              
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+
+
+After spot-breaking
+
+Call:
+adonis(formula = phenData ~ plants, permutations = 10000) 
+
+Permutation: free
+Number of permutations: 10000
+
+Terms added sequentially (first to last)
+
+           Df SumsOfSqs  MeanSqs F.Model      R2    Pr(>F)    
+plants     68   19.6430 0.288868   5.326 0.84783 9.999e-05 ***
+Residuals  65    3.5254 0.054238         0.15217              
+Total     133   23.1685                  1.00000              
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+Lower petals
+
+
+Before spot-breaking
+
+Call:
+adonis(formula = phenData ~ plants, permutations = 10000) 
+
+Permutation: free
+Number of permutations: 10000
+
+Terms added sequentially (first to last)
+
+           Df SumsOfSqs  MeanSqs F.Model      R2    Pr(>F)    
+plants     69   12.4549 0.180506  2.9457 0.76339 9.999e-05 ***
+Residuals  63    3.8604 0.061277         0.23661              
+Total     132   16.3153                  1.00000              
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+
+
+After spot-breaking
+
+Call:
+adonis(formula = phenData ~ plants, permutations = 10000) 
+
+Permutation: free
+Number of permutations: 10000
+
+Terms added sequentially (first to last)
+
+           Df SumsOfSqs  MeanSqs F.Model      R2    Pr(>F)    
+plants     69   12.2267 0.177198  2.8738 0.77978 9.999e-05 ***
+Residuals  56    3.4529 0.061659         0.22022              
+Total     125   15.6796                  1.00000              
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

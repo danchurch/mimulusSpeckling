@@ -6790,32 +6790,107 @@ for i in *geojson; do
 done
 
 
-## images that didn't work at all, many spots lost:
+############# messedUpImages ##############
 
-## errors redo?
-P297F2_mid_polys.geojson
+## images that didn't work at all, many spots lost: 
+
 P339F1_mid_polys.geojson
-P348F2_left
-P370F1_left
-P371F1_mid
-P385F2_mid
-P400F2_mid
-P405F3_right
-P424F1_left
-P424F1_mid
+P348F2_left_polys.geojson
+P370F1_left_polys.geojson
+P371F1_mid_polys.geojson
+P385F2_mid_polys.geojson
+P400F2_mid_polys.geojson
+P405F3_right_polys.geojson
+P424F1_left_polys.geojson
+P424F1_mid_polys.geojson
+
+########################################################################
+
 
 
 ## skipped accidentally:
 P401F1_right_polys.geojson
 P432F2_left
 
+P440F2_mid to P442F1
+
 
 ## skipped by computer?
 P424F2_mid, _right
+P435F2_right_polys.geojson
 
 
+## these last two weren't made. Why not?
+## try rerunning the digitizing stuff on them. 
+
+## how can we loop through these remainders?
 
 
+P401F1_right_polys.geojson
+P424F2_mid_polys.geojson
+P424F2_right_polys.geojson
+P432F2_left_polys.geojson
+P435F2_right_polys.geojson
+P440F2_mid_polys.geojson
+P440F2_right_polys.geojson
+P440F2_right_polys_spots_edited.geojson
+P441F1_left_polys.geojson
+P441F1_mid_polys.geojson
+P441F1_right_polys.geojson
+P441F2_left_polys.geojson
+P441F2_mid_polys.geojson
+P441F2_right_polys.geojson
+P442F1_left_polys.geojson
+P442F1_mid_polys.geojson
+P442F1_right_polys.geojson
+
+zoop=(\
+P401F1_right_polys.geojson \
+P432F2_left_polys.geojson \
+P435F2_right_polys.geojson \
+P440F2_mid_polys.geojson \
+P441F1_left_polys.geojson \
+P441F1_mid_polys.geojson \
+P441F1_right_polys.geojson \
+P441F2_left_polys.geojson \
+P441F2_mid_polys.geojson \
+P441F2_right_polys.geojson \
+P442F1_left_polys.geojson \
+P442F1_mid_polys.geojson \
+P442F1_right_polys.geojson\
+)
+
+breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py'
+dougRaster='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+geojF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons'
+
+cd $geojF
+
+for i in ${zoop[@]}; do
+    ii=$geojF"/"$i
+    j=${i%%_*}.JPG
+    jj=$dougRaster"/"$j
+    k=${i/.geojson/_spots_edited.geojson}
+    kk=$geojF"/"$k
+    echo $ii
+    #echo $jj
+    #echo $kk
+    $breakSpots $ii -o $kk -j $jj
+done
+
+## still fucked:
+
+P435F2_right_polys.geojson
+
+i='P435F2_right_polys.geojson'
+ii=$geojF"/"$i
+j=${i%%_*}.JPG
+jj=$dougRaster"/"$j
+k=${i/.geojson/_spots_edited.geojson}
+kk=$geojF"/"$k
+$breakSpots $ii -o $kk -j $jj
+
+$breakSpots P435F2_right_polys_spots_edited.geojson -o P435F2_right_polys_spots_edited.geojson -j $jj
 
 ## rerun the latest data for melia - got to remap samples
 
@@ -6823,6 +6898,663 @@ data='/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/FlowerPe
 
 cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/Melia_Josh_rearrange
 
-
-
 ./sortJoshCSVs.py $data --map mapSample2plant.csv --outputName plate1forTassel_26.11.2018.csv
+
+## okay, now what?
+
+## merge in our edited polygons:
+
+for i in *edited.geojson; do
+    ls $i
+    ls ${i/_spots_edited/}
+    mv $i ${i/_spots_edited/}
+done
+
+
+## rerun pdf. stats using the edited geojsons
+
+## the pdf:
+
+
+## then figure out how to compare petals from the same 
+## plant?
+
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons'
+cd $wd
+
+./makePDFs.py  |& tee makePDF_log_27.11.2018.txt
+
+cd /home/daniel/Documents/cooley_lab/bigPDF
+
+
+pdftk * output bigPDF_27.11.2018.pdf
+
+## should we exclude our messedUpImages?
+
+##yeah
+
+## first, rerun the one that we think can be easily corrected:
+
+breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py'
+dougRaster='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+geojF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working'
+
+$breakSpots P297F2_mid_polys.geojson -o P297F2_mid_polys_edit.geojson -j $dougRaster"/"P297F2.JPG 
+
+## better
+
+## now exclude the other funky ones:
+
+mess=(\
+P339F1_mid_polys.geojson \
+P348F2_left_polys.geojson \
+P370F1_left_polys.geojson \
+P371F1_mid_polys.geojson \
+P385F2_mid_polys.geojson \
+P400F2_mid_polys.geojson \
+P405F3_right_polys.geojson \
+P424F1_left_polys.geojson \
+P424F1_mid_polys.geojson)
+
+for i in ${mess[@]}; do
+    rm $i
+done
+## okay, and rerun stats:
+
+## now FlowerPetal.py, on a folder of geojsons
+
+FlowerPetal=/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/FlowerPetal.py 
+
+./FlowerPetal.py $geojF "flowerPetalDF_27.11.2018" |& tee flowerPetalDF_27.11.2018.log
+
+## now add the problem geojsons back in from 
+## the classic file tree:
+
+for i in ${mess[@]}; do
+    echo $i
+    find ../ -name $i -exec cp {} ./ \;
+done
+
+for i in ${mess[@]}; do
+    ls $i
+done
+
+## okay, so now what?
+
+#############################
+
+## stats time - checking effect of plant
+
+## Arielle wants us to check the effect of plant 
+## on these petal phenotypes as we are measuring them 
+## now.
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/FlowerPetal2Tassel
+
+python3 
+
+import os
+import pickle
+import sklearn.datasets
+import numpy as np
+import pandas as pd
+import shapely.geometry as sg
+import matplotlib.pyplot as plt
+import sklearn.manifold as manifold
+import scipy.spatial.distance as dist
+import skbio.stats.distance as skstat
+from descartes import PolygonPatch
+
+fp = pickle.load(open('flowerPetalDF_27.11.2018.p', 'rb'))
+fp.drop(columns='geojson', inplace=True)
+
+## separate by petals
+
+upperLeft = fp[fp.petalName == 'left'].copy()
+upperRight = fp[fp.petalName == 'mid'].copy()
+lower = fp[fp.petalName == 'right'].copy()
+
+#upperLeft.drop(columns='petalName', inplace=True)
+#upperRight.drop(columns='petalName', inplace=True)
+#lower.drop(columns='petalName', inplace=True)
+
+## now can we create a distance matrix with bc?
+
+## I think we want a dataframe without non=pheno labels:
+
+#aa = upperLeft.drop(columns=['plantName', 'flowerName'])
+aa = upperLeft
+
+test1=np.sum(aa, axis=1) > 0
+test2=aa.nuSpots > 0
+all(test1==test2)
+
+## yeah, so let's remove all petals with no spots
+
+aaNoSpots = aa[aa.nuSpots > 0]
+
+aa.shape
+aaNoSpots.shape
+
+bb = dist.pdist(aa, metric='braycurtis')
+
+cc = dist.squareform(bb)
+
+## there are lots of nan's in there. How many?
+
+len(bb) ## 15225
+
+np.isnan(bb)
+
+sum(np.isnan(bb)) ## 10,274. Most of the comparisons. 
+
+## why so many? are the comparisons brittle to NaNs?  
+
+aa.isna().sum(axis=0) ## by column/trait. looks like 37 petals petals consistently failed
+
+aa.isna().sum(axis=1) ## by row/petal. looks like 17 traits consistently fail
+
+## what are these columns that consistently fail? note them and remove them?
+
+aa.isna().sum(axis=0) 
+## it looks like if we remove the prop____ columns we will greatly improve the
+## situation. 
+
+aa[aa['nuSpots'] == 0] 
+## yeah, the problem is that the no-spot flowers are creating NaN comparisons
+## two options - remove the proportion traits, or remove the no-spots petals
+
+## do both? see if they say the same thing? 
+
+## 1 - remove the proportion traits:
+
+props=[ i for i in aa.columns if i.startswith('prop') ]
+
+aa.isna().sum(axis=0) 
+
+aa.isna().sum(axis=0) > 0
+## edgeCoveredbySpots has two NaNs, maybe don't drop this?
+
+
+
+sum(aa.isna().sum(axis=0) > 0) ##18
+sum(aa.isna().sum(axis=0) > 2) ##17
+sum(aa.isna().sum(axis=0) > 10)  ##17
+## same. the only marginal trait is edgeCoveredbySpots
+## where are those NaN's? What failed?
+
+aa[aa['edgeCoveredbySpots'].isna()]
+
+## the culprits are P408F1_left, P417F1_left
+## I have no idea why these failed. They look fine. 
+## hate to lose them, but maybe just let them get thrown 
+## out? Not a huge loss..
+
+## this throws them out:
+bb = aa[aa['edgeCoveredbySpots'].notna()]
+
+## actually, a better way to do this, using
+## a threshhold of 10 or less NaNs
+
+##bb = aa.dropna(axis='columns')
+
+## clean out the columns with lotsa NaNs
+bb = aa.dropna(axis='columns', thresh=len(aa)-10).copy()
+bb.shape
+bb.dropna(axis='rows', inplace=True)
+bb.shape
+
+aa.shape
+bb.shape
+
+## once these columns are out, does the pdist matrix look better?
+
+## drop the naming columns, for the moment:
+cc = bb.drop(['plantName', 'flowerName', 'petalName'], axis='columns')
+dd = dist.pdist(cc, metric='braycurtis')
+ee = dist.squareform(dd)
+
+help(skstat.DistanceMatrix)
+
+ff = skstat.DistanceMatrix(ee)
+
+## not working... says NaNs somewhere
+
+np.isnan(ee).any() ## in there somewhere:
+
+bb.isna().any() ## not in our original data
+cc.isna().any() ## same
+
+## so where are these NaNs coming from?
+
+sum(np.isnan(ee))
+
+np.savetxt('zoop.txt', ee)
+
+## okay, can we do a permanova on this?
+
+skstat.permanova(ee, aa, 'plantName')
+
+## what is causing the NaNs?
+
+## for instance - what is the BC dist between 
+
+## rows 13 and 14
+
+## doesn't work
+a12=cc.iloc[12,:]
+a13=cc.iloc[13,:]
+dist.braycurtis(a12,a13)
+
+
+## works
+a0=cc.iloc[0,:]
+a1=cc.iloc[1,:]
+dist.braycurtis(a0,a1)
+
+
+b0=[0,0,0.345,True]
+b1=[0,1,0.9,True]
+dist.braycurtis(b0,b1)
+
+b0=[0,0,0,False]
+b1=[0,0,0,False]
+dist.braycurtis(b0,b1)
+## looks like all-zero comparisons.
+## again 
+
+## so I think we gotta get rid of all zero rows
+
+np.sum(cc, axis=1) > 0
+
+cc.loc[30]
+
+aa.loc[30]
+
+## yup. so, get rid of non-spot rows, back in the beginning...
+## if we're doing this, we can keep the proportion stats
+
+aaNoSpots.shape
+bb.shape
+
+aaNoSpots = aa[aa.nuSpots > 0] ## only want spotted petals
+bb = aaNoSpots.dropna(axis='columns', thresh=len(aaNoSpots)-10).copy() ## get rid of any columns causing NAs, = edgeCoveredbySpots
+bb.dropna(axis='rows', inplace=True)  ## get rid of any remain rows with NA
+bb.reset_index(inplace=True, drop=True)
+cc = bb.drop(['plantName', 'flowerName', 'petalName'], axis='columns') ## get rid of labels, to make dist matrix
+dd = dist.pdist(cc, metric='braycurtis')
+ee = dist.squareform(dd)
+
+## does the dist matrix command work now?
+ff = skstat.DistanceMatrix(ee)
+## yup
+
+permPlant = skstat.permanova(ff, bb, 'plantName') ## doesn't work
+
+permPlant = skstat.permanova(ff, bb['plantName']) ## works
+
+permPlant = skstat.permanova(ff, bb['plantName'], permutations=10000)
+
+
+## huh, don't see any sort of variance explained measure. 
+
+## can we visualize with NMS?
+
+mds = manifold.MDS(n_components=2, metric=True, max_iter=3000, eps=1e-12,
+                    dissimilarity="precomputed", n_jobs=1,
+                    n_init=1)
+
+nmds = manifold.MDS(n_components=2, metric=False, max_iter=3000, eps=1e-12,
+                    dissimilarity="precomputed", n_jobs=1,
+                    n_init=1)
+
+nmds.fit_transform(ff) ## nope.
+
+
+mpts = nmds.fit_transform(ee) ## works
+
+pts = nmds.fit_transform(ee) ## works
+
+
+plt.ion()
+
+plt.scatter(pts[:,0],pts[:,1])
+
+## can we draw hulls around the plant groups?
+
+## make a dataframe with plant name as index
+
+## group by plant name, create a polygor for each, buffered. 
+
+## plot
+
+## to start - make a dataframe or dictionary
+
+
+polygon = sg.Polygon([[0, 0], [1, 0], [1, 1], [0, 1]])
+
+## so it's good that this is coming as a list of lists?
+## but hard to group this way. DF time
+
+len(pts)
+
+plant = bb['plantName']
+XX = pd.Series(pts[:,0])
+YY = pd.Series(pts[:,1])
+nmsPts = pd.concat([plant,XX,YY],axis=1)
+byPl = nmsPts.groupby('plantName')
+
+mX = pd.Series(mpts[:,0])
+mY = pd.Series(mpts[:,1])
+msPts = pd.concat([plant,mX,mY],axis=1)
+mbyPl = msPts.groupby('plantName')
+
+
+## plot a line between the points:
+
+fig = plt.figure()
+ax = plt.axes()
+for i in plant.unique():
+    iDF=byPl.get_group(i)
+    shpCoords=list(zip(iDF.iloc[:,1],iDF.iloc[:,2]))
+    if len(shpCoords) == 1:
+        shp=sg.Point(shpCoords)
+    elif len(shpCoords) == 2:
+        shp=sg.LineString(shpCoords)
+    elif len(shpCoords) > 2:
+        shp=sg.Polygon(shpCoords)
+    #buff=shp.buffer(distance=0.1)
+    #x,y = buff.exterior.xy
+    #ax.plot(x, y)
+    ax.plot(iDF.iloc[:,1],iDF.iloc[:,2])
+    ax.scatter(iDF.iloc[:,1],iDF.iloc[:,2])
+
+## redo this with mds
+
+## send the bio
+## then see if we can reconstruct from the pre-spotbreaking
+## data. 
+
+## save the dataframe that we did all the above with:
+
+len(bb['plantName'])
+
+upperLeftOut=pd.concat( [bb['plantName'], cc], axis=1)
+
+help(pd.concat)
+
+upperLeftOut.to_csv('upperLeft_phenotype.csv')
+
+########### 
+
+## seems like there's no estimate of variance explained by the 
+## ugh, let's go to R
+
+#install.packages('vegan')
+library('vegan')
+
+cc = read.csv('upperLeft_phenotype.csv', header=TRUE)
+
+## remove the first column:
+
+dd = cc[,-1]
+plants = dd[,1]
+phenData = dd[,-1]
+
+## for permanova? need a dataframe of the phenotype data
+## can we export our curated data fram from above? 
+
+adonis(phenData ~ plants, permutations = 10000)
+
+## oops looks like we need to change the True's to TRUE's, False to FALSE:
+
+## sed 's/True/TRUE/g' upperLeft_phenotype.csv -i
+
+
+upperLeft_spotsB_perm <- adonis(phenData ~ plants, permutations = 10000)
+
+save(upperLeft_spotsB_perm, file="upperLeft_spotsB_perm.rda")
+
+
+
+## can we do something like this for the older data?
+
+
+## start over, in python:
+
+## where is our pre-spot break data?
+
+##############
+
+
+## ugh, gotta find the old, pre-broken spot geojsons...
+## looks like I have the good-zone, bad spot files in 
+## my file tree for the polygons...
+
+## make a directory of just these, recalculate the stats:
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons
+
+mkdir spotsNotB
+
+find /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons -name "*geojson" -exec cp {} spotsNotB/ \;
+
+spotsNotB='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/spotsNotB'
+
+## rerun our flowerpetal script on this 
+
+flowerPetal='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/FlowerPetal.py'
+
+$flowerPetal spotsNotB "spotsNotB"
+
+## is this what we need?
+
+##############
+python3
+
+import os
+import pickle
+import sklearn.datasets
+import numpy as np
+import pandas as pd
+import shapely.geometry as sg
+import matplotlib.pyplot as plt
+import sklearn.manifold as manifold
+import scipy.spatial.distance as dist
+import skbio.stats.distance as skstat
+from descartes import PolygonPatch
+
+phenoPickle='spotsNotB.p'
+fp = pickle.load(open(phenoPickle, 'rb'))
+
+fp.drop(columns='geojson', inplace=True)
+
+upperLeft = fp[fp.petalName == 'left'].copy()
+upperRight = fp[fp.petalName == 'mid'].copy()
+lower = fp[fp.petalName == 'right'].copy()
+
+aa = upperLeft
+
+aaNoSpots = aa[aa.nuSpots > 0] ## only want spotted petals
+bb = aaNoSpots.dropna(axis='columns', thresh=len(aaNoSpots)-10).copy() ## get rid of any columns causing NAs, = edgeCoveredbySpots
+bb.dropna(axis='rows', inplace=True)  ## get rid of any remain rows with NA
+bb.reset_index(inplace=True, drop=True)
+cc = bb.drop(['plantName', 'flowerName', 'petalName'], axis='columns') ## get rid of labels, to make dist matrix
+dd = dist.pdist(cc, metric='braycurtis')
+ee = dist.squareform(dd)
+
+## we lose a lot (~40 petals) when we get rid of nans, but this 
+## is similar to the spots-broken above. 
+
+## can we visualize with NMS?
+
+nmds = manifold.MDS(n_components=2, metric=False, max_iter=3000, eps=1e-12,
+                    dissimilarity="precomputed", n_jobs=1,
+                    n_init=1)
+pts = nmds.fit_transform(ee) ## works
+
+plant = bb['plantName']
+XX = pd.Series(pts[:,0])
+YY = pd.Series(pts[:,1])
+nmsPts = pd.concat([plant,XX,YY],axis=1)
+byPl = nmsPts.groupby('plantName')
+
+fig = plt.figure()
+ax = plt.axes()
+for i in plant.unique():
+    iDF=byPl.get_group(i)
+    shpCoords=list(zip(iDF.iloc[:,1],iDF.iloc[:,2]))
+    if len(shpCoords) == 1:
+        shp=sg.Point(shpCoords)
+    elif len(shpCoords) == 2:
+        shp=sg.LineString(shpCoords)
+    elif len(shpCoords) > 2:
+        shp=sg.Polygon(shpCoords)
+    #buff=shp.buffer(distance=0.1)
+    #x,y = buff.exterior.xy
+    #ax.plot(x, y)
+    ax.plot(iDF.iloc[:,1],iDF.iloc[:,2])
+    ax.scatter(iDF.iloc[:,1],iDF.iloc[:,2])
+
+## looks similar. Save out:
+
+upperLeftOut=pd.concat( [bb['plantName'], cc], axis=1)
+
+
+upperLeftOut.to_csv('upperLeft_spotsNotB_phenotype.csv')
+
+
+## fix the t/f's with sed again,
+## and back to R...
+
+######################
+
+## rerun our script with the unbroken spots csv
+
+library('vegan')
+
+cc = read.csv('upperLeft_spotsNotB_phenotype.csv', header=TRUE)
+
+## remove the first column:
+
+dd = cc[,-1]
+plants = dd[,1]
+phenData = dd[,-1]
+
+adonis(phenData ~ plants, permutations = 10000)
+
+upperLeft_spotsNotB_perm <- adonis(phenData ~ plants, permutations = 10000)
+
+save(upperLeft_spotsNotB_perm, file="upperLeft_spotsNotB_perm.rda")
+
+upperLeft_spotsB_perm
+
+upperLeft_spotsNotB_perm
+
+
+################ repeat with lower petals #############
+
+## these might be different. let's look. Back to python:
+
+
+python3
+
+import os
+import pickle
+import sklearn.datasets
+import numpy as np
+import pandas as pd
+import shapely.geometry as sg
+import matplotlib.pyplot as plt
+import sklearn.manifold as manifold
+import scipy.spatial.distance as dist
+import skbio.stats.distance as skstat
+from descartes import PolygonPatch
+
+## spots not broken
+phenoPickle='spotsNotB.p'
+
+fp = pickle.load(open(phenoPickle, 'rb'))
+fp.drop(columns='geojson', inplace=True)
+upperLeft = fp[fp.petalName == 'left'].copy()
+upperRight = fp[fp.petalName == 'mid'].copy()
+lower = fp[fp.petalName == 'right'].copy()
+
+aa = lower
+
+aaNoSpots = aa[aa.nuSpots > 0] ## only want spotted petals
+bb = aaNoSpots.dropna(axis='columns', thresh=len(aaNoSpots)-10).copy() ## get rid of any columns causing NAs, = edgeCoveredbySpots
+bb.dropna(axis='rows', inplace=True)  ## get rid of any remain rows with NA
+bb.reset_index(inplace=True, drop=True)
+cc = bb.drop(['plantName', 'flowerName', 'petalName'], axis='columns') ## get rid of labels, to make dist matrix
+dd = dist.pdist(cc, metric='braycurtis')
+
+dfOut=pd.concat( [bb['plantName'], cc], axis=1)
+dfOut.to_csv('lower_spotsNotB_phenotype.csv')
+
+## repeat, with spots broken:
+
+## spots broken
+phenoPickle='/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/FlowerPetal2Tassel/flowerPetalDF_27.11.2018.p'
+fp = pickle.load(open(phenoPickle, 'rb'))
+fp.drop(columns='geojson', inplace=True)
+upperLeft = fp[fp.petalName == 'left'].copy()
+upperRight = fp[fp.petalName == 'mid'].copy()
+lower = fp[fp.petalName == 'right'].copy()
+aa = lower
+
+aaNoSpots = aa[aa.nuSpots > 0] ## only want spotted petals
+bb = aaNoSpots.dropna(axis='columns', thresh=len(aaNoSpots)-10).copy() ## get rid of any columns causing NAs, = edgeCoveredbySpots
+bb.dropna(axis='rows', inplace=True)  ## get rid of any remain rows with NA
+bb.reset_index(inplace=True, drop=True)
+cc = bb.drop(['plantName', 'flowerName', 'petalName'], axis='columns') ## get rid of labels, to make dist matrix
+dd = dist.pdist(cc, metric='braycurtis')
+
+dfOut=pd.concat( [bb['plantName'], cc], axis=1)
+dfOut.to_csv('lower_spotsB_phenotype.csv')
+
+
+## and to R
+
+
+### lower broken spots:
+
+cc = read.csv('lower_spotsB_phenotype.csv', header=TRUE)
+
+## remove the first column:
+dd = cc[,-1]
+plants = dd[,1]
+phenData = dd[,-1]
+adonis(phenData ~ plants, permutations = 10000)
+
+lower_spotsNotB_perm <- adonis(phenData ~ plants, permutations = 10000)
+
+save(lower_spotsNotB_perm, file="lower_spotsNotB_perm.rda")
+
+## lower, spots  brokem:
+
+library('vegan')
+
+cc = read.csv('lower_spotsNotB_phenotype.csv', header=TRUE)
+
+## remove the first column:
+dd = cc[,-1]
+plants = dd[,1]
+phenData = dd[,-1]
+adonis(phenData ~ plants, permutations = 10000)
+
+lower_spotsB_perm <- adonis(phenData ~ plants, permutations = 10000)
+
+save(lower_spotsB_perm, file="lower_spotsB_perm.rda")
+
+####
+
+## summaries:
+
+sink('byPlant_permanova_summaries.txt')
+upperLeft_spotsNotB_perm
+upperLeft_spotsB_perm
+lower_spotsNotB_perm
+lower_spotsB_perm
+sink()
+

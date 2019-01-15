@@ -7558,3 +7558,14 @@ lower_spotsNotB_perm
 lower_spotsB_perm
 sink()
 
+
+###############################
+
+## and we're back, from Ecuador, etc...
+
+## time to update documentation:
+
+## first git flag the current versions, I think they'll be 
+## needed 
+
+

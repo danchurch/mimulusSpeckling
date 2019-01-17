@@ -7465,11 +7465,15 @@ import sklearn.datasets
 import numpy as np
 import pandas as pd
 import shapely.geometry as sg
+import shapely.ops as so
 import matplotlib.pyplot as plt
 import sklearn.manifold as manifold
 import scipy.spatial.distance as dist
 import skbio.stats.distance as skstat
 from descartes import PolygonPatch
+import FlowerPetal, geojsonIO
+import matplotlib.pyplot as plt
+from statistics import mean
 
 ## spots not broken
 phenoPickle='spotsNotB.p'
@@ -7567,5 +7571,202 @@ sink()
 
 ## first git flag the current versions, I think they'll be 
 ## needed 
+
+## where is our petal plotting function these days? 
+
+## looks like I haven't updated the archived, "official" polygons (geojsons)
+## from our working versions. 
+## the working versions had manually corrected zones, and broken spots. 
+
+## check with qgis...
+
+## actually, looks the zones are up to date. But spots are not broken 
+## in our official archives. 
+
+## I think it's time to do this, both Arielle and Josh's lab seem to 
+## think that the the broken spots work. 
+
+## how to do this...
+
+find /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working -name "P403F1_left_polys.geojson" -type f
+find /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons -name "P403F1_left_polys.geojson" -type f 
+
+## so...
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working
+ 
+for i in *; do
+    ls $i
+    aa=$(find /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons -name $i -type f -exec dirname {} \; )
+    ls $aa
+    cp $i $aa
+done
+
+## looks good to me. updating on github
+
+## now, catch up the documentation...how to talk about the interactive corrections?
+
+## rerun our spotbreaker to get a screen shot:
+
+ 
+breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py'
+dougRaster='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+
+geojF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons'
+
+cd $geojF
+
+for i in *geojson; do 
+    ii=$geojF"/"$i
+    j=${i%%_*}.JPG
+    jj=$dougRaster"/"$j
+    k=${i/.geojson/_spots_edited.geojson}
+    kk=$geojF"/"$k
+    echo $ii
+    echo $jj
+    echo $kk
+    $breakSpots $ii -o $kk -j $jj
+done
+
+$breakSpots $ii -o $kk -j $jj
+
+
+find . -name "P423F2*"
+
+find . -name "P423F2_mid_polys*" 
+
+
+$breakSpots ./make_polygons/geojsons_working/P248F1_right_polys.geojson -o deleteme.geojson -j ./dougRaster/Rotated_and_Cropped/P248F1.JPG
+
+## do it with our manual zone caller, too:
+
+./manZoneCaller.py -o zoop ./geojsons_working/P248F1_right_polys.geojson 0.5
+
+
+## testing edits in FlowerPetal:
+
+plt.ion()
+geojsonName = "/home/daniel/Documents/cooley_lab/mimulusSpeckling/\
+make_polygons/polygons/P297F2/right/P297F2_right_polys.geojson"
+flP = FlowerPetal.FlowerPetal()
+flP.flowerName = 'P297F2'
+flP.petalName = 'right'
+## assign the geojson filename:
+flP.geojson = geojsonName
+## read the geojson, turn it into Shapely polygons 
+flP.parseGeoJson()
+flP.fillColumns()
+
+geojsonIO.plotOne(flP.petal); geojsonIO.addOne(flP.spots)
+
+
+plt.ion()
+
+vars(flP)
+
+flP.avgDistSpotEdge2Edge
+
+flP.petal.exterior
+
+
+fig = plt.figure()
+
+ax = plt.gca()
+x, y = flP.petal.exterior.xy
+ax.plot(x, y)
+
+## okay, we want just the edge of the petal, without the throat cut:
+
+flowerCut = flP.throat.intersection(flP.petal.exterior)
+
+## conversely:
+
+dir(flP.petal.exterior)
+
+aa = flP.petal.exterior.difference(flP.throat)
+
+aa = flP.petal.exterior.difference(flP.throat.buffer(0.01))
+
+fig = plt.figure()
+ax = plt.axes()
+for i in aa:
+    x, y =  i.xy
+    ax.plot(x, y)
+
+fig, axes = plt.subplots(
+
+
+
+fig = plt.figure()
+ax = plt.axes()
+
+
+## so buffer, then join 
+
+throatfrags = flP.petal.exterior.difference(flP.throat.buffer(0.01))
+if len(throatfrags) > 1:
+    throatJoin = so.linemerge(throatfrags)
+
+x, y =  lineJoin.xy
+plt.gca().plot(x, y)
+
+fig = plt.figure()
+ax = plt.axes()
+ax.plot(x, y)
+
+## now, can we get the distance of the spots to there?
+
+from statistics import mean
+
+avgDistSpotEdge2Edge = mean([ flP.petal.exterior.distance(i) for i in flP.spots ])
+
+avgDistSpotEdge2Edge = mean([ throatJoin.distance(i) for i in flP.spots ])
+
+flP.avgDistSpotEdge2Edge 
+
+flP.avgDistSpotCentroid2Edge
+
+throatfrags = flP.petal.exterior.difference(flP.throat.buffer(0.01))
+if len(throatfrags) > 1:
+    throatJoin = so.linemerge(throatfrags)
+else: throatJoin = throatfrags
+
+[ throatJoin.distance(i) for i in flP.spots ]
+
+[ flP.petal.exterior.distance(i.centroid) for i in flP.spots ]
+
+#########
+
+## we need a diagram showing the quadrats:
+
+geojsonIO.plotOne(flP.petal); geojsonIO.addOne(flP.spots)
+proxBox=sg.box(-1,0,1,1)
+geojsonIO.addOne(proxBox, col='white', a=0.5)
+
+
+quadIVbox=sg.box(0,-1,1,0)
+
+geojsonIO.plotOne(quadIVbox)
+
+
+
+plt.close('all')
+geojsonIO.plotOne(flP.petal); geojsonIO.addOne(flP.spots)
+ax = plt.gca()
+## moving spines we want
+ax.spines['right'].set_position('zero')
+ax.spines['bottom'].set_position('zero')
+## removing the other spines
+ax.spines['left'].set_visible(False)
+ax.spines['top'].set_visible(False)
+## removing the tick marks
+ax.tick_params(bottom="off", right="off")
+## get rid of the tick labels
+ax.get_xaxis().set_ticks([])
+ax.get_yaxis().set_ticks([])
+## increase line width
+ax.axhline(linewidth=4, color = "k")
+ax.axvline(linewidth=4, color = "k")
+
 
 

@@ -278,14 +278,16 @@ class FlowerPetal():
             print('unable to calulate realEdgeSpotted')
             realEdgeSpotted = None
         try:
-            flowerCut = self.throat.intersection(self.petal.exterior)
-            notTube = [ i for i in self.spots if not i.intersects(flowerCut)]
-            avgDistSpotEdge2Edge = mean([ self.petal.exterior.distance(i) for i in notTube ])
+            throatfrags = self.petal.exterior.difference(self.throat.buffer(0.01))
+            if len(throatfrags) > 1:
+                petalRim = so.linemerge(throatfrags)
+            else: petalRim = throatfrags
+            avgDistSpotEdge2Edge = mean([ petalRim.distance(i) for i in self.spots ])
         except:
             print('unable to calulate avgDistSpotEdge2Edge')
             avgDistSpotEdge2Edge = None
         try:
-            avgDistSpotCentroid2Edge = mean([ self.petal.exterior.distance(i.centroid) for i in notTube ])
+            avgDistSpotCentroid2Edge = mean([ petalRim.distance(i.centroid) for i in self.spots ])
         except:
             print('unable to calulate avgDistSpotCentroid2Edge')
             avgDistSpotCentroid2Edge = None
@@ -382,13 +384,13 @@ class FlowerPetal():
             quadIbox=sg.box(0,0,1,1)
             petalQuadI = self.petal.intersection(quadIbox)
             spottedSurfaceQuadI = self.spots.intersection(petalQuadI)
-            nuQuadIspots = len([ i for i in self.spots if i.centroid.x > 0 and i.centroid.y > 0 ])
+            nuQuadISpots = len([ i for i in self.spots if i.centroid.x > 0 and i.centroid.y > 0 ])
             propSpotsInQuadI = spottedSurfaceQuadI.area / self.spots.area
             quadICoveredbySpots = spottedSurfaceQuadI.area / petalQuadI.area
         except:
             print('unable to calulate QuadIStats')
         return(
-            nuQuadIspots,
+            nuQuadISpots,
             propSpotsInQuadI,
             quadICoveredbySpots,
                 )

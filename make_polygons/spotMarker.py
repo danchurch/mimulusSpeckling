@@ -58,4 +58,3 @@ class SpotMarker:
             except (IndexError):
                 self.centerpt = None
                 self.circle = None
-                pass

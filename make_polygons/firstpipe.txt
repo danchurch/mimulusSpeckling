@@ -7933,6 +7933,46 @@ ax.text(0.25, -0.25, "IV", fontsize=25,
 fig.canvas.mpl_disconnect(aa.markCID)
 fig.canvas.mpl_disconnect(aa.releaseCID)
 del(aa)
+
 aa = spotMarker.SpotMarker()
+
+
+## seems to work. How can we add these spots to the mix
+
+## do we want to add them to the flowerPetal objects? why not? 
+
+## we'll have to do a little retrofitting, though. 
+
+## these inkspots will be multipolygons, collections of polygons
+
+aa.circlePolys
+
+## we'll add a sixth feature to our geojson, spotEvents
+
+## first we need a dictionary with three slots:
+
+bb = {
+    "type": "Feature",
+    "geometry": None,
+    "properties": {"id": "spotEvents"}
+    }
+
+## can we get our shapely poygons into a format that 
+## works here?
+
+## if we feed it the whole thing?
+
+bb['type'] = sg.mapping(sg.MultiPolygon(aa.circlePolys))
+
+## seems to work...
+
+## and this would be inserted into our existing geojsons as
+## a sixth feature. 
+
+## can we add this to one of our flowerPetal objects?
+
+## big change. 
+
+## let's do a commit and a branch...
 
 

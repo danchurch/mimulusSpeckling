@@ -56,4 +56,6 @@ class SpotMarker:
                 self.centerpt = self.centerpts[-1]
                 self.circle = self.circs[-1]
             except (IndexError):
+                self.centerpt = None
+                self.circle = None
                 pass

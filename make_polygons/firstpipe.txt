@@ -7461,6 +7461,7 @@ python3
 
 import os
 import pickle
+import spotMarker
 import sklearn.datasets
 import numpy as np
 import pandas as pd
@@ -7749,13 +7750,11 @@ quadIVbox=sg.box(0,-1,1,0)
 
 geojsonIO.plotOne(quadIVbox)
 
-geojsonIO.plotOne(flP.petal); geojsonIO.addOne(flP.spots)
 
 
-plt.gca().cla()
 
-plt.close('all')
 
+plt.ion()
 geojsonIO.plotOne(flP.petal); geojsonIO.addOne(flP.spots)
 ax = plt.gca()
 ## moving spines we want
@@ -7804,62 +7803,136 @@ class SpotMarker:
         self.fig = plt.gcf()
         self.ax = plt.gca()
         self.event = None
-        self.oldx = None
-        self.oldy = None
+        self.centerx = None
+        self.centery = None
+        self.centerpt = None
         self.circs = []
+        self.centerpts = []
+        self.circlePolys = []
+        self.circle = None
         self.markCID = self.fig.canvas.mpl_connect('button_press_event', self)
-        self.circleCID = self.fig.canvas.mpl_connect('button_release_event', self)
+        self.releaseCID = self.fig.canvas.mpl_connect('button_release_event', self)
     def __call__(self, event):
         if plt.get_current_fig_manager().toolbar.mode != '': return
         self.event = event
-        if self.event.name == 'button_press_event':
-            self.oldx = event.xdata; self.oldy = event.ydata
+        if (self.event.name == 'button_press_event' 
+            and self.event.button == 1):
+            self.centerx = event.xdata; self.centery = event.ydata
             try:
-                self.ax.plot(event.xdata, event.ydata, 
+                self.centerpt, = self.ax.plot(event.xdata, event.ydata, 
                         marker='+', markersize=3, color = 'k')
+                self.centerpts.append(self.centerpt)
             except ValueError:
                 pass
-        if self.event.name == 'button_release_event':
-            circleRad = distance.euclidean((self.oldx, self.oldy),(event.xdata, event.ydata))
-            circle = plt.Circle((self.oldx, self.oldy), circleRad, color='blue')
-            plt.gca().add_artist(circle)
+        elif (self.event.name == 'button_release_event'
+            and self.event.button == 1):
+            circleRad = distance.euclidean((self.centerx, self.centery),
+                                    (event.xdata, event.ydata))
+            self.circle = plt.Circle((self.centerx, self.centery), circleRad)
+            self.circs.append(self.circle)
+            self.ax.add_patch(self.circle)
+            circlePoly = sg.Polygon(self.circle.get_verts())
+            self.circlePolys.append(circlePoly)
+        elif (self.event.name == 'button_press_event' 
+            and self.event.button != 1):
+            try:
+                self.centerpt.remove()
+                self.circle.remove()
+                del(self.centerpts[-1])
+                self.centerpt = self.centerpts[-1]
+                del(self.circs[-1])
+                self.circle = self.circs[-1]
+                del(self.self.circlePolys[-1])
+            except (ValueError, IndexError):
+                pass
 
-circle2.get_verts()
 
+## okay, use that to make a polygon
+
+fig.canvas.mpl_disconnect(aa.markCID)
+fig.canvas.mpl_disconnect(aa.releaseCID)
 del(aa)
 aa = SpotMarker()
 
-event.xdata, event.ydata
+aa.event.xdata, aa.event.ydata
 
-x1 = 3
-x2 = 5
-y1 = 6
-y2 = 9
-
-
-
-a = (1, 2, 3)
-b = (4, 5, 6)
-dst = distance.euclidean(a, b)
-
-        if self.event.name == 'button_press_event':
-            try:
-                self.ax.plot(event.xdata, event.ydata, 
-                        marker='+', markersize=3, color = 'k')
-            except ValueError:
-                pass
-        if self.event.name == 'button_release_event':
-            print(self.event.guiEvent)
+bb = 1
+cc = 2
+if (bb == 1 
+    and cc == 2):
+    print("zzop")
 
 
-            circle = plt.Circle((event.xdata, event.ydata), 0.2, color='blue')
-            plt.gca().add_artist(circle)
+cc = ['a','b','c','d']
 
 
-## how to make circles?
+### okay, unwieldy, time to start treating this like a module:
 
-circle2 = plt.Circle((0.5, 0.5), 0.2, color='blue')
-plt.gca().add_artist(circle2)
+import spotMarker
 
-## we want to click on a point, then create a circle that expands until you click again... tricky...
+
+
+
+import os
+import pickle
+import spotMarker
+import sklearn.datasets
+import numpy as np
+import pandas as pd
+import shapely.geometry as sg
+import shapely.ops as so
+import matplotlib.pyplot as plt
+import sklearn.manifold as manifold
+import scipy.spatial.distance as dist
+import skbio.stats.distance as skstat
+from descartes import PolygonPatch
+import FlowerPetal, geojsonIO
+import matplotlib.pyplot as plt
+from statistics import mean
+from scipy.spatial import distance
+plt.ion()
+geojsonName = "/home/daniel/Documents/cooley_lab/mimulusSpeckling/\
+make_polygons/polygons/P297F2/right/P297F2_right_polys.geojson"
+flP = FlowerPetal.FlowerPetal()
+flP.flowerName = 'P297F2'
+flP.petalName = 'right'
+## assign the geojson filename:
+flP.geojson = geojsonName
+## read the geojson, turn it into Shapely polygons 
+flP.parseGeoJson()
+flP.fillColumns()
+geojsonIO.plotOne(flP.petal); geojsonIO.addOne(flP.spots)
+ax = plt.gca()
+## moving spines we want
+ax.spines['right'].set_position('zero')
+ax.spines['bottom'].set_position('zero')
+## removing the other spines
+ax.spines['left'].set_visible(False)
+ax.spines['top'].set_visible(False)
+## removing the tick marks
+ax.tick_params(bottom="off", right="off")
+## get rid of the tick labels
+ax.get_xaxis().set_ticks([])
+ax.get_yaxis().set_ticks([])
+## increase line width
+ax.axhline(linewidth=4, color = "k")
+ax.axvline(linewidth=4, color = "k")
+props = dict(boxstyle='round', facecolor='wheat', alpha=0.7)
+ax.text(0.25, 0.25, "I", fontsize=25,
+        verticalalignment='top', bbox=props)
+ax.text(-0.25, 0.25, "II", fontsize=25,
+        verticalalignment='top', bbox=props)
+ax.text(-0.25, -0.25, "III", fontsize=25,
+        verticalalignment='top', bbox=props)
+ax.text(0.25, -0.25, "IV", fontsize=25,
+        verticalalignment='top', bbox=props)
+
+
+
+
+fig.canvas.mpl_disconnect(aa.markCID)
+fig.canvas.mpl_disconnect(aa.releaseCID)
+del(aa)
+aa = spotMarker.SpotMarker()
+
 

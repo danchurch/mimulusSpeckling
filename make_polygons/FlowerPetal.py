@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os, json, argparse, re, pickle
+import geojsonIO
 import numpy as np
 import shapely.geometry as sg
 import shapely.ops as so
@@ -24,6 +25,7 @@ class FlowerPetal():
                 self.center = None
                 self.edge = None
                 self.throat = None
+                self.spotEstimates = None
                 self.biggestSpotArea = None
                 self.smallestSpotArea = None
                 self.avgSpotSize = None
@@ -72,34 +74,7 @@ class FlowerPetal():
                 self.quadIVCoveredbySpots = None
 
     def parseGeoJson(self):
-        with open(self.geojson) as gjf:
-            aa = json.load(gjf)
-            listP = (aa['features'])
-            try:
-                petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry']
-                self.petal = sg.shape(petalGJ)
-            except:
-                self.petal = sg.polygon.Polygon()
-            try:
-                spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry']
-                self.spots= sg.shape(spotsGJ)
-            except:
-                self.spots = sg.polygon.Polygon()
-            try:
-                centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry']
-                self.center = sg.shape(centerGJ)
-            except:
-                self.center = sg.polygon.Polygon()
-            try:
-                edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry']
-                self.edge = sg.shape(edgeGJ)
-            except:
-                self.edge = sg.polygon.Polygon()
-            try:
-                throatGJ = [ i for i in listP if i['properties']['id'] == 'Throat' ][0]['geometry']
-                self.throat = sg.shape(throatGJ)
-            except:
-                self.throat = sg.polygon.Polygon()
+                self.petal, self.spots, self.center, self.edge, self.throat, self.spotEstimates = geojsonIO.parseGeoJson(self.geojson) 
 
     ## function to clean (multi)polygons if self-intersecting 
     def cleanPolys(self, poly):
@@ -549,64 +524,11 @@ class FlowerPetal():
             self.quadIVCoveredbySpots = 0
 
     ############### plotting ###################
-    def plotOne(self, poly, l=2, a=1.0, col='yellow', pick=None):
-        fig = plt.figure()
-        ax1 = plt.axes()
-        ax1.set_xlim(min(poly.exterior.xy[0]), max(poly.exterior.xy[0]))
-        ax1.set_ylim(min(poly.exterior.xy[1]), max(poly.exterior.xy[1]))
-        ax1.set_aspect('equal')
-        ax1.add_patch(PolygonPatch(poly,
-                      fc=col, ec='black',
-                      picker=pick,
-                      linewidth=l, alpha=a))
+    def plotOne(self=None, poly=None, l=2, a=1.0, col='yellow', pick=None):
+        print('oops. Use the new geojsonIO plotOne function instead.')
 
-    def addOne(self, poly, l=2, a=1.0, col='red', pick=None):
-        ax1 = plt.gca()
-        if poly.is_empty:
-            print('Empty polgyon?')
-            return
-        elif not poly.is_empty:
-            try:
-                for i in poly:
-                    ax1.add_patch(PolygonPatch(i,
-                                  fc=col, ec='black',
-                                  picker=pick,
-                                  linewidth=l, alpha=a))
-            except TypeError:
-                ax1.add_patch(PolygonPatch(poly,
-                              fc=col, ec='black',
-                              picker=pick,
-                              linewidth=l, alpha=a))
-
-    ########### saving out geojson flowerPetal object ########
-    def saveOut(self, outFileName=None):
-        if outFileName is None: outFileName = self.geojson
-        featC = {
-                "type" : "FeatureCollection",
-                "features" : [],
-                }
-        ## fill it with features
-        partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
-        sgPols=[self.petal,
-                self.spots,
-                self.center,
-                self.edge,
-                self.throat]
-        ## each geometry needs a feature wrapper
-        for i,part in enumerate(sgPols):
-            try:
-                gj_i = sg.mapping(part)
-            except:
-                gj_i = {"type": "Polygon", "coordinates": []}
-            finally:
-                feature_i = {"type": "Feature",
-                      "geometry": gj_i,
-                      "properties": {"id":(partNames[i])}}
-                featC['features'].append(feature_i)
-        ## write it out
-        with open(outFileName, 'w') as fp:
-            json.dump(featC, fp)
-
+    def addOne(self=None, poly=None, l=2, a=1.0, col='red', pick=None):
+        print('oops. Use the new geojsonIO addOne function instead.')
 
 #### end of flowerPetal class #####
 

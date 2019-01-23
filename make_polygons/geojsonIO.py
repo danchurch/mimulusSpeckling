@@ -34,9 +34,14 @@ def parseGeoJson(geojson):
             throat = sg.shape(throatGJ)
         except:
             throat = sg.polygon.Polygon()
-    return(petal,spots,center,edge,throat)
+        try:
+            spotEstimatesGJ = [ i for i in listP if i['properties']['id'] == 'spotEstimates' ][0]['geometry']
+            spotEstimates = sg.shape(spotsGJ)
+        except:
+            spotEstimates = sg.polygon.Polygon()
+    return(petal,spots,center,edge,throat, spotEstimates)
 
-def writeGeoJ(petal, spots, center, edge, throat):
+def writeGeoJ(petal, spots, center, edge, throat, spotEstimates):
     """Function for putting polygons into a dictionary that can be written out \
     to json format, = geojson."""
     featC = {
@@ -45,9 +50,9 @@ def writeGeoJ(petal, spots, center, edge, throat):
             }
 
     ## fill it with features
-    partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat']
+    partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat', 'spotEstimates']
     ## each geometry needs a feature wrapper
-    for i,part in enumerate([petal, spots, center, edge, throat]):
+    for i,part in enumerate([petal, spots, center, edge, throat, spotEstimates]):
         try:
             gj_i = sg.mapping(part)
         except (NameError, AttributeError):

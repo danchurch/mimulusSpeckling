@@ -7852,6 +7852,7 @@ class SpotMarker:
 fig.canvas.mpl_disconnect(aa.markCID)
 fig.canvas.mpl_disconnect(aa.releaseCID)
 del(aa)
+
 aa = SpotMarker()
 
 aa.event.xdata, aa.event.ydata
@@ -7890,6 +7891,7 @@ import FlowerPetal, geojsonIO
 import matplotlib.pyplot as plt
 from statistics import mean
 from scipy.spatial import distance
+
 plt.ion()
 geojsonName = "/home/daniel/Documents/cooley_lab/mimulusSpeckling/\
 make_polygons/polygons/P297F2/right/P297F2_right_polys.geojson"
@@ -7898,10 +7900,14 @@ flP.flowerName = 'P297F2'
 flP.petalName = 'right'
 ## assign the geojson filename:
 flP.geojson = geojsonName
+
 ## read the geojson, turn it into Shapely polygons 
 flP.parseGeoJson()
+
 flP.fillColumns()
+
 geojsonIO.plotOne(flP.petal); geojsonIO.addOne(flP.spots)
+fig = plt.gcf()
 ax = plt.gca()
 ## moving spines we want
 ax.spines['right'].set_position('zero')
@@ -7910,7 +7916,7 @@ ax.spines['bottom'].set_position('zero')
 ax.spines['left'].set_visible(False)
 ax.spines['top'].set_visible(False)
 ## removing the tick marks
-ax.tick_params(bottom="off", right="off")
+ax.tick_params(bottom=False, right=False)
 ## get rid of the tick labels
 ax.get_xaxis().set_ticks([])
 ax.get_yaxis().set_ticks([])
@@ -7926,6 +7932,7 @@ ax.text(-0.25, -0.25, "III", fontsize=25,
         verticalalignment='top', bbox=props)
 ax.text(0.25, -0.25, "IV", fontsize=25,
         verticalalignment='top', bbox=props)
+aa = spotMarker.SpotMarker()
 
 
 
@@ -7934,7 +7941,6 @@ fig.canvas.mpl_disconnect(aa.markCID)
 fig.canvas.mpl_disconnect(aa.releaseCID)
 del(aa)
 
-aa = spotMarker.SpotMarker()
 
 
 ## seems to work. How can we add these spots to the mix
@@ -7954,7 +7960,7 @@ aa.circlePolys
 bb = {
     "type": "Feature",
     "geometry": None,
-    "properties": {"id": "spotEvents"}
+    "properties": {"id": "spotEstimates"}
     }
 
 ## can we get our shapely poygons into a format that 
@@ -7966,6 +7972,25 @@ bb['type'] = sg.mapping(sg.MultiPolygon(aa.circlePolys))
 
 ## seems to work...
 
+def choice():
+    try:
+        aa = input("(y/n): ")
+        assert aa in {"y","n"}
+        return(aa)
+    except AssertionError as err:
+        print('Enter "y" or "n"')
+        return(choice())
+
+def choice():
+    try:
+        aa = input("Finished (y)? ")
+        assert aa == "y"
+    except AssertionError as err:
+        print('Enter "y" when done.')
+        choice()
+
+bb = choice()
+
 ## and this would be inserted into our existing geojsons as
 ## a sixth feature. 
 
@@ -7974,5 +7999,26 @@ bb['type'] = sg.mapping(sg.MultiPolygon(aa.circlePolys))
 ## big change. 
 
 ## let's do a commit and a branch...
+
+## okay, how do we integrate this?
+
+## 1 - geojsonIO needs an extra slot for inkspots
+## 2 - flowerpetal needs to be cleaned up, updated - needs to use the geojsonIO module more, anyway
+## 3 - get_spots and and get_zones might need tweaked, but the geojsonIO should be able to handle 
+## none results from these. If not, that needs to be fixed, anyway. 
+
+## The plan? fix geojson to handle a sixth feature slot. 
+
+## so we need a top level script, when spotmarker is called, that leaves a spot estimate 
+## multipolygon in the new spotEstimates slot of the geojson
+
+## our geojsonIO should be able to handle a non-existent slot, and make a new one
+## and our spotMarker should be able to fill it
+
+## so we need to make spotMarker accessible from the shell:
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons
+
+./spotMarker.py geojsons_working/P423F2_mid_polys.geojson -o test.geojson 
 
 

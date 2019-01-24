@@ -7900,48 +7900,22 @@ flP.flowerName = 'P297F2'
 flP.petalName = 'right'
 ## assign the geojson filename:
 flP.geojson = geojsonName
-
 ## read the geojson, turn it into Shapely polygons 
 flP.parseGeoJson()
-
 flP.fillColumns()
+petArt = geojsonIO.plotOne(flP.petal); geojsonIO.addOne(flP.spots)
 
-geojsonIO.plotOne(flP.petal); geojsonIO.addOne(flP.spots)
 fig = plt.gcf()
 ax = plt.gca()
-## moving spines we want
-ax.spines['right'].set_position('zero')
-ax.spines['bottom'].set_position('zero')
-## removing the other spines
-ax.spines['left'].set_visible(False)
-ax.spines['top'].set_visible(False)
-## removing the tick marks
-ax.tick_params(bottom=False, right=False)
-## get rid of the tick labels
-ax.get_xaxis().set_ticks([])
-ax.get_yaxis().set_ticks([])
-## increase line width
-ax.axhline(linewidth=4, color = "k")
-ax.axvline(linewidth=4, color = "k")
-props = dict(boxstyle='round', facecolor='wheat', alpha=0.7)
-ax.text(0.25, 0.25, "I", fontsize=25,
-        verticalalignment='top', bbox=props)
-ax.text(-0.25, 0.25, "II", fontsize=25,
-        verticalalignment='top', bbox=props)
-ax.text(-0.25, -0.25, "III", fontsize=25,
-        verticalalignment='top', bbox=props)
-ax.text(0.25, -0.25, "IV", fontsize=25,
-        verticalalignment='top', bbox=props)
 aa = spotMarker.SpotMarker()
-
-
-
 
 fig.canvas.mpl_disconnect(aa.markCID)
 fig.canvas.mpl_disconnect(aa.releaseCID)
 del(aa)
 
+circle = sg.Point(0, 0).buffer(0.1)
 
+bb = geojsonIO.addOne(circle)
 
 ## seems to work. How can we add these spots to the mix
 
@@ -8021,4 +7995,17 @@ cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons
 
 ./spotMarker.py geojsons_working/P423F2_mid_polys.geojson -o test.geojson 
 
+## seems to work. What now?
+
+## we'll use our working directory:
+
+spotMarker='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/spotMarker.py'
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working
+
+for i in *; do
+echo $i
+echo ${i/.geojson/_withEst.geojson}
+$spotMarker $i -o ${i/.geojson/_withEst.geojson}
+done
 

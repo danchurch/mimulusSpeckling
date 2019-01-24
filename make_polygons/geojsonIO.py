@@ -70,10 +70,11 @@ def plotOne(poly, l=2, a=1.0, col='yellow', pick=None):
     ax1.set_xlim(min(poly.exterior.xy[0]), max(poly.exterior.xy[0]))
     ax1.set_ylim(min(poly.exterior.xy[1]), max(poly.exterior.xy[1]))
     ax1.set_aspect('equal')
-    ax1.add_patch(PolygonPatch(poly,
+    art = ax1.add_patch(PolygonPatch(poly,
                   fc=col, ec='black',
                   picker=pick,
                   linewidth=l, alpha=a))
+    return(art)
 
 
 def addOne(poly, l=2, a=1.0, col='red', pick=None):
@@ -83,16 +84,19 @@ def addOne(poly, l=2, a=1.0, col='red', pick=None):
         return
     elif not poly.is_empty:
         try:
+            art = None
             for i in poly:
                 ax1.add_patch(PolygonPatch(i,
                               fc=col, ec='black',
                               picker=pick,
                               linewidth=l, alpha=a))
         except TypeError:
-            ax1.add_patch(PolygonPatch(poly,
+            art = ax1.add_patch(PolygonPatch(poly,
                           fc=col, ec='black',
                           picker=pick,
                           linewidth=l, alpha=a))
+    return(art)
+
 
 def clearOne():
     aa=plt.gca().get_xlim(); bb=plt.gca().get_ylim()

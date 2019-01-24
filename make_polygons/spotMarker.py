@@ -18,11 +18,9 @@ class SpotMarker:
         self.event = None
         self.centerx = None
         self.centery = None
-        self.centerpt = None
         self.circs = []
+        self.circArts = []
         self.centerpts = []
-        self.circlePolys = []
-        self.circle = None
         self.markCID = self.fig.canvas.mpl_connect('button_press_event', self)
         self.releaseCID = self.fig.canvas.mpl_connect('button_release_event', self)
         self.keyCID = self.fig.canvas.mpl_connect('key_press_event', self)
@@ -43,21 +41,20 @@ class SpotMarker:
             and self.event.button == 1):
             circleRad = distance.euclidean((self.centerx, self.centery),
                                     (event.xdata, event.ydata))
-            self.circle = plt.Circle((self.centerx, self.centery), circleRad)
-            self.circs.append(self.circle)
-            self.ax.add_patch(self.circle)
-            circlePoly = sg.Polygon(self.circle.get_verts())
-            self.circlePolys.append(circlePoly)
+            circle = sg.Point(self.centerx, self.centery).buffer(circleRad)
+            self.circs.append(circle)
+            circArt = geojsonIO.addOne(self.circs[-1], col = 'blue')
+            self.circArts.append(circArt)
 
         elif (self.event.name == 'button_press_event' 
             and self.event.button != 1):
             try:
                 self.centerpt.remove()
-                self.circle.remove()
+                self.circArts[-1].remove()
                 del(self.centerpts[-1])
+                del(self.circArts[-1])
                 del(self.circs[-1])
-                del(self.circlePolys[-1])
-            except (IndexError):
+            except (IndexError, AttributeError, ValueError):
                 pass
             try:
                 self.centerpt = self.centerpts[-1]
@@ -99,7 +96,7 @@ def main(geojson):
     geojsonIO.plotOne(petal); geojsonIO.addOne(spots)
     spotMarker = SpotMarker()
     choice()
-    spotEstimates = sg.MultiPolygon(spotMarker.circlePolys)
+    spotEstimates = sg.MultiPolygon(spotMarker.circs)
     featC = geojsonIO.writeGeoJ(petal,spots,center,edge,throat, spotEstimates)
     with open(outFileName, 'w') as fp:
         json.dump(featC, fp)

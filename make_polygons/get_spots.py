@@ -16,13 +16,18 @@ import shapely.errors
 from skimage import measure
 
 def parseDougMatrix(file):
-    """Get numpy arrays that can be used as images
-    from Doug's weird melted matrix that results
-    when you manually correct his color centers """
     orig = np.genfromtxt(file, delimiter=',')
     orig = orig.astype(int)
     Ymax=np.max(orig[:,1])
+    Ymin=np.min(orig[:,1])
     Xmax=np.max(orig[:,0])
+    Xmin=np.min(orig[:,0])
+    BB = [
+        [Xmin,Ymin],
+        [Xmax,Ymin],
+        [Xmax,Ymax],
+        [Xmin,Ymax],
+        ]
     petal = np.zeros([Xmax,Ymax])
     spots = np.zeros([Xmax,Ymax])
     for i in orig:
@@ -39,7 +44,7 @@ def parseDougMatrix(file):
     spots[spots == 0] = 1
     spots[spots == 2] = 1
     spots[spots == 3] = 0
-    return(petal,spots)
+    return(BB,petal,spots)
 
 ## for the actual conversion of raster to polygon:
 def digitizePols(mat):
@@ -151,7 +156,7 @@ if __name__ == "__main__":
     print(gjName)
     aa = os.listdir()
 
-    petalMat, spotsMat = parseDougMatrix(meltBaseName)
+    petalMat, spotsMat, photoBB = parseDougMatrix(meltBaseName)
     petPolRaw = digitizePols(petalMat) 
     petPol = cleanCollections(petPolRaw)
     spotPolRaw = digitizePols(spotsMat)
@@ -171,7 +176,7 @@ if __name__ == "__main__":
 
     ## define get a dictionary that resembles a geojson feature collection:
 
-    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, center, edge, throat)
+    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, center, edge, throat, photoBB)
 
     ## write it out
     with open(outFileName, 'w') as fp:

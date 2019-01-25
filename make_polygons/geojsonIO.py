@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from descartes import PolygonPatch
 
 
-
 def parseGeoJson(geojson):
     with open(geojson) as gjf:
         aa = json.load(gjf)
@@ -39,9 +38,13 @@ def parseGeoJson(geojson):
             spotEstimates = sg.shape(spotsGJ)
         except:
             spotEstimates = sg.polygon.Polygon()
-    return(petal,spots,center,edge,throat, spotEstimates)
+        try:
+            photoBB = [ i for i in listP if i['properties']['id'] == 'photoBB' ][0]['geometry']['coordinates'][0]
+        except:
+            photoBB = None
+    return(petal,spots,center,edge,throat, spotEstimates, photoBB)
 
-def writeGeoJ(petal, spots, center, edge, throat, spotEstimates):
+def writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB=[]):
     """Function for putting polygons into a dictionary that can be written out \
     to json format, = geojson."""
     featC = {
@@ -62,6 +65,12 @@ def writeGeoJ(petal, spots, center, edge, throat, spotEstimates):
                   "geometry": gj_i,
                   "properties": {"id":(partNames[i])}}
             featC['features'].append(feature_i)
+    feature_i = {"type": "Feature",
+          "geometry": {"type": "Polygon",
+                       "coordinates": [photoBB]},
+          "properties": {"id":'photoBB'}}
+    featC['features'].append(feature_i)
+
     return(featC)
 
 def plotOne(poly, l=2, a=1.0, col='yellow', pick=None):

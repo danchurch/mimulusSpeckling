@@ -7875,6 +7875,7 @@ import spotMarker
 
 
 import os
+import json
 import pickle
 import spotMarker
 import sklearn.datasets
@@ -7889,6 +7890,7 @@ import skbio.stats.distance as skstat
 from descartes import PolygonPatch
 import FlowerPetal, geojsonIO
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 from statistics import mean
 from scipy.spatial import distance
 
@@ -8008,4 +8010,281 @@ echo $i
 echo ${i/.geojson/_withEst.geojson}
 $spotMarker $i -o ${i/.geojson/_withEst.geojson}
 done
+
+## oops, forgot that we want to do this with the raw images...
+
+## how to get these?
+
+## where does Doug delineate his bounding boxes?
+
+## okay, the pixel coordinates are available in Doug's mat files. 
+
+## So we're back to matlab (maybe octave):
+
+## for example:
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P434F1.mat
+
+octave-cli
+
+load /home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P434F1.mat
+
+who
+
+Petals.left.data(:,1)
+
+Petals.left.data(:,4)
+
+Petals.left.data(1,:)
+
+## to get our bounding box, we need the max and mins of the first two columns 
+
+min(Petals.left.data(:,1)) ## 34
+min(Petals.left.data(:,2)) ## 66
+
+max(Petals.left.data(:,1)) ## 363
+max(Petals.left.data(:,2)) ## 425
+
+
+## so I think this means that our lower left corner of the left petal 
+## bounding (34, 66) and upper right (363, 425)?
+
+## does this make sense if we examine the photo in matplotlib:
+
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import numpy as np
+
+exJPG="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P434F1.JPG"
+
+img=mpimg.imread(exJPG)
+
+#img=mpimg.imread(exJPG).astype("float")
+
+plt.ion()
+
+#plt.imshow(img)
+plt.gca().invert_yaxis()
+
+## bounding (34, 66) and upper right (363, 425)?
+
+aa = img[34:364,66:425]
+
+bb = img[66:364,34:425]
+
+cc = img[34:364,34:425]
+
+fig, axes = plt.subplots(4,1)
+
+axes[0].imshow(exJPG)
+
+axes[1].imshow(aa)
+
+plt.imshow(bb)
+
+plt.imshow(cc)
+
+## hmm, is there an issue of inversion the y-axis here?
+
+fig = plt.figure()
+ax = plt.axes()
+plt.imshow(img)
+
+fig, axes = plt.subplots(2,1)
+cc = img[114:415,961:1389]
+axes[0].imshow(img)
+axes[1].imshow(cc)
+
+## it does look like there may be an inversion in the rows/columns.
+## doug's matrix gives the column ("x") pixel coordinate first, 
+## the matplotlib scripts are the reverse of this, column pixel 
+## coordinate is given first... 
+
+## anyway, we can recreate the BB from Doug's melted csv. Seems like 
+## the bounding box might be good info to retain from Doug's pipeline.
+
+## so where do we build this into our pipeline?
+
+## 1 - we want to save the work that has already been done, in the 
+## flowers that have had manual correction of spots and zones
+## (plate 1). We need to add this info retroactively somehow to 
+## the record. 
+
+## 2 - but we also want to build this into our pipeline for the next
+## batches of automated phenotyping (plate 2+)
+
+## so want do we do?
+
+## seems like we have to store this info in the geojson? 
+
+
+file="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P434F1/right/P434F1_right_melted.csv"
+
+
+def parseDougMatrix(file):
+    orig = np.genfromtxt(file, delimiter=',')
+    orig = orig.astype(int)
+    Ymax=np.max(orig[:,1])
+    Ymin=np.min(orig[:,1])
+    Xmax=np.max(orig[:,0])
+    Xmin=np.min(orig[:,0])
+    BB = [
+        (Xmin,Ymin),
+        (Xmax,Ymin),
+        (Xmax,Ymax),
+        (Xmin,Ymax),
+        ]
+    petal = np.zeros([Xmax,Ymax])
+    spots = np.zeros([Xmax,Ymax])
+    for i in orig:
+        petal[i[0]-1,i[1]-1] = i[3]
+        spots[i[0]-1,i[1]-1] = i[3]
+    ## 0 is background color
+    ## 2 is petal color
+    ## 3 is spot color
+    petal = petal.astype(int)
+    petal[petal == 0] = 1
+    petal[petal == 2] = 0
+    petal[petal == 3] = 0
+    spots = spots.astype(int)
+    spots[spots == 0] = 1
+    spots[spots == 2] = 1
+    spots[spots == 3] = 0
+    return(BB,petal,spots)
+
+parseDougMatrix(file)
+
+BB = [
+    [Xmin,Ymin],
+    [Xmax,Ymin],
+    [Xmax,Ymax],
+    [Xmin,Ymax],
+    ]
+
+geojson='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working/P434F1_right_polys.geojson'
+##P434F1
+
+fl=geojsonIO.parseGeoJson(geojson)[0]
+
+geojsonIO.plotOne(fl)
+
+geojsonIO.addOne(sg.Polygon(a), a=0.2)
+
+
+## okay, BB is created from the CSV. From there, it needs to make it into 
+## the geojson 
+
+## we'll leave it unscaled, and it can be used, I think, to clip the original photos. 
+
+## added handling to geojson, and scripted in the retainment of the bounding box in the 
+## get_spots script...
+
+## have to do some testing on that, when we run the second plate of images through
+
+## but how do we add it to flowers we have already done a lot of work on, that we don't 
+## want to rerun through our pipeline? (plate 1)
+
+## to make the bounding box of a petal...
+
+def getBB(file):
+    orig = np.genfromtxt(file, delimiter=',')
+    orig = orig.astype(int)
+    Ymax=max(orig[:,1])
+    Ymin=min(orig[:,1])
+    Xmax=max(orig[:,0])
+    Xmin=min(orig[:,0])
+    BB = np.array([
+        [Xmin,Ymin],
+        [Xmax,Ymin],
+        [Xmax,Ymax],
+        [Xmin,Ymax],
+        ]).tolist()
+    return(BB)
+
+ 
+csv="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P434F1/right/P434F1_right_melted.csv"
+geojson='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working/P434F1_right_polys.geojson'
+
+jpg="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P434F1.JPG"
+
+
+petal,spots,center,edge,throat, spotEstimates, photoBB = geojsonIO.parseGeoJson(geojson)
+
+photoBB = getBB(csv)
+
+test = geojsonIO.writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB)
+
+
+with open('test.geojson', 'w') as fp:
+    json.dump(test, fp)
+
+petal,spots,center,edge,throat, spotEstimates, photoBB = geojsonIO.parseGeoJson("test.geojson")
+
+## works, but not sure if this list of list helps us... can we clip a photo with this?
+
+xxyy = list(zip(*photoBB))
+Xmin = min(xxyy[0])
+Xmax = max(xxyy[0])
+Ymin = min(xxyy[1])
+Ymax = max(xxyy[1])
+
+dd = img[Ymin:Ymax,Xmin:Xmax]
+
+plt.ion()
+
+img=mpimg.imread(jpg)
+fig, axes = plt.subplots(2,1)
+axes[0].imshow(img)
+axes[1].imshow(dd)
+
+## what happens if we put our petals polygon on their first?
+
+fig = plt.fig()
+ax = plt.axes()
+ax.imshow(dd)
+geojsonIO.addOne(petal)
+
+## scales are all off. 
+
+aa = geojsonIO.plotOne(petal, a=0.4)
+plt.gca().imshow(dd, extent=plt.gca().get_xlim() + plt.gca().get_ylim(), 
+                origin = 'lower')
+
+aa.remove()
+
+## huh, that works really well...
+
+## now what?
+
+## I did all this to be able to estimate spot sizes. 
+
+## so we need to add the bounding boxes to all geojsons:
+
+def getBB(file):
+    orig = np.genfromtxt(file, delimiter=',')
+    orig = orig.astype(int)
+    Ymax=max(orig[:,1])
+    Ymin=min(orig[:,1])
+    Xmax=max(orig[:,0])
+    Xmin=min(orig[:,0])
+    BB = np.array([
+        [Xmin,Ymin],
+        [Xmax,Ymin],
+        [Xmax,Ymax],
+        [Xmin,Ymax],
+        ]).tolist()
+    return(BB)
+
+
+def addPhotoBB(geojson, csv):
+    petal,spots,center,edge,throat, spotEstimates, photoBB = geojsonIO.parseGeoJson(geojson)
+    photoBB = getBB(csv)
+    newGeo = geojsonIO.writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB)
+    with open(geojson, 'w') as fp:
+        json.dump(newGeo, fp)
+
+geoWork="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working"
+os.chdir(geoWork)
+
+os.listdir()
+
 

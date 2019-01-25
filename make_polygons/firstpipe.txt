@@ -7879,6 +7879,7 @@ import json
 import pickle
 import spotMarker
 import sklearn.datasets
+import pprint as pp
 import numpy as np
 import pandas as pd
 import shapely.geometry as sg
@@ -8259,6 +8260,10 @@ aa.remove()
 
 ## so we need to add the bounding boxes to all geojsons:
 
+import json
+import geojsonIO
+import numpy as np
+
 def getBB(file):
     orig = np.genfromtxt(file, delimiter=',')
     orig = orig.astype(int)
@@ -8282,9 +8287,66 @@ def addPhotoBB(geojson, csv):
     with open(geojson, 'w') as fp:
         json.dump(newGeo, fp)
 
-geoWork="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working"
-os.chdir(geoWork)
 
-os.listdir()
+geoJs = os.listdir()
+
+## so, tomorrow, we need to match up csv files with geojson files. Basically
+## we need to move through each subdirectory with each petal of each flower. 
+
+## solution will probably involve os.walk()
+
+
+polys="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons"
+
+os.chdir(polys)
+
+os.walk(os.getcwd())
+
+aa = list(os.walk(os.getcwd()))
+
+pp.pprint(aa)
+
+## ugh, this is a mess. let's do this in the shell. 
+## giving these functions there own module
+
+## try it with two test files:
+## in shell
+
+exCSV="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P403F1/left/P403F1_left_melted.csv"
+exGeo="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P403F1/left/P403F1_left_polys.geojson"
+exJPG="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/P403F1.JPG"
+cp $exCSV test.csv
+cp $exGeo test.geojson
+
+grep "photoBB"  test.geojson ## nada
+
+./fixPhotoBBs.py test.geojson test.csv
+
+grep "photoBB"  test.geojson ## there!
+
+## looks good...
+
+python3
+
+petal,spots,center,edge,throat, spotEstimates, photoBB = geojsonIO.parseGeoJson("test.geojson")
+plt.ion()
+geojsonIO.plotOne(petal)
+xxyy = list(zip(*photoBB))
+Xmin = min(xxyy[0])
+Xmax = max(xxyy[0])
+Ymin = min(xxyy[1])
+Ymax = max(xxyy[1])
+img=mpimg.imread(exJPG)
+dd = img[Ymin:Ymax,Xmin:Xmax]
+aa = geojsonIO.plotOne(petal, a=0.2)
+plt.gca().imshow(dd, extent=plt.gca().get_xlim() + plt.gca().get_ylim(), 
+                origin = 'lower')
+
+aa.remove()
+
+## will need to make the above into a function soon...
+## anyway, this worked. Can we apply to all of our 
+## existing, highly edited flowerpetal geojsons?
+
 
 

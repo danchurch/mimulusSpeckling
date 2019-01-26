@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+"""this is a one-shot module for retroactively 
+getting bounding boxes into geojsons that don't 
+have them. In the future, this will be done as
+part of the digitizing pipeline."""
+
 import json
 import argparse
 import geojsonIO

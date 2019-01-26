@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
-import argparse, json
+import argparse, json, pathlib, os, re
 import numpy as np
 import shapely.geometry as sg
 import shapely.ops as so
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 from descartes import PolygonPatch
 import FlowerPetal, geojsonIO
 from scipy.spatial import distance
@@ -81,6 +82,32 @@ class SpotMarker:
 
 ######### helper functions #################
 
+#geojson='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working/P423F2_right_polys.geojson'
+#jpgs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+#findJPG(geojson, jpgs)
+
+def findJPG(geojson, jpgs):
+    allJpgs = os.listdir(jpgs)
+    aa = re.search('(P.*?)_', geojson.name)
+    flowerName = aa.groups()[0]
+    jpgName = [ i for i in allJpgs if (flowerName in i and "JPG" in i) ][0]
+    jpg = pathlib.Path(jpgName)
+    return(jpg)
+
+def photoAndPetal(geojson,jpgs,jpg):
+    petal,spots,center,edge,throat, spotEstimates, photoBB = geojsonIO.parseGeoJson(geojson)
+    plt.ion()
+    xxyy = list(zip(*photoBB))
+    Xmin = min(xxyy[0])
+    Xmax = max(xxyy[0])
+    Ymin = min(xxyy[1])
+    Ymax = max(xxyy[1])
+    img=mpimg.imread(jpgs / jpg)
+    dd = img[Ymin:Ymax,Xmin:Xmax]
+    aa = geojsonIO.plotOne(petal, a=0.5)
+    plt.gca().imshow(dd, extent=plt.gca().get_xlim() + plt.gca().get_ylim(),
+                    origin = 'lower')
+
 def choice():
     """ a way to keep the script running till user is done"""
     try:
@@ -90,14 +117,17 @@ def choice():
         print('Enter "y" when done.')
         choice()
 
-def main(geojson): 
+def main(geojson, jpgs): 
+    geojson = pathlib.Path(geojson)
+    jpgs = pathlib.Path(jpgs)
     plt.ion()
-    petal,spots,center,edge,throat,spotEstimates = geojsonIO.parseGeoJson(geojson)
-    geojsonIO.plotOne(petal); geojsonIO.addOne(spots)
+    petal,spots,center,edge,throat,spotEstimates,photoBB = geojsonIO.parseGeoJson(geojson)
+    jpg=findJPG(geojson, jpgs)
+    photoAndPetal(geojson,jpgs,jpg)
     spotMarker = SpotMarker()
     choice()
     spotEstimates = sg.MultiPolygon(spotMarker.circs)
-    featC = geojsonIO.writeGeoJ(petal,spots,center,edge,throat, spotEstimates)
+    featC = geojsonIO.writeGeoJ(petal,spots,center,edge,throat,spotEstimates,photoBB)
     with open(outFileName, 'w') as fp:
         json.dump(featC, fp)
 
@@ -111,16 +141,20 @@ if __name__ == "__main__":
                 help=("""Name of the geojson file to which you want to
                         estimate spots. """),
                 type=str)
+    parser.add_argument('jpgs',
+                help=("""Name of the folder of jpg images."""),
+                type=str)
     parser.add_argument('-o', '--out',
                 help=("Name for outfile. If none given, modified in place."),
                 type=str,
                 default=None)
 
     args = parser.parse_args()
+
     if args.out is not None:
         outFileName = args.out
     else:
         outFileName = args.geojson
 
-    main(args.geojson)
+    main(args.geojson,args.jpgs)
 

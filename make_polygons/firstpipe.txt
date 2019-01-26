@@ -7875,6 +7875,8 @@ import spotMarker
 
 
 import os
+import pathlib
+import re
 import json
 import pickle
 import spotMarker
@@ -8348,5 +8350,126 @@ aa.remove()
 ## anyway, this worked. Can we apply to all of our 
 ## existing, highly edited flowerpetal geojsons?
 
+## back into shell, 
 
 
+fixPhotoBBs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/fixPhotoBBs.py"
+geoJs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working"
+archives="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons"
+
+exGeo="P423F2_right_polys.geojson"
+
+cd $geoJs
+
+
+grep "photoBB" $exGeo
+
+dn=$(find $archives -name "$exGeo" -exec dirname {} \;)
+csv=$(find $dn -name "*melted*")
+
+
+$fixPhotoBBs $exGeo $csv
+
+grep "photoBB" $exGeo
+
+############ loop for this ################
+
+fixPhotoBBs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/fixPhotoBBs.py"
+geoJs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working"
+archives="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons"
+
+cd $geoJs
+
+for i in *; do
+    echo $i
+    grep "photoBB" $i
+    echo $csv
+    dn=$(find $archives -name $i -exec dirname {} \;)
+    csv=$(find $dn -name "*melted*")
+    $fixPhotoBBs $i $csv
+    grep "photoBB" $i
+done
+
+
+## seems to be working. 
+
+## something is messed up with P423F2_mid_polys, checkout with Git, redo:
+
+i='P423F2_right_polys.geojson' 
+dn=$(find $archives -name $i -exec dirname {} \;)
+csv=$(find $dn -name "*melted*")
+$fixPhotoBBs $i $csv
+
+grep "photoBB" $i
+
+## do some spot checks, then update the archives...
+
+
+## okay, to use this across all of our geojsons...
+
+geoJs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working"
+jpgs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped"
+
+folder = pathlib.Path("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons")
+
+file_to_open = data_folder / "raw_data.txt"
+
+
+def findJPG(geojson, geoJs, jpgs):
+    allJpgs = os.listdir(jpgs)
+    allGeoJs = os.listdir(geoJs)
+    aa = re.search('(P.*?)_', geojson)
+    flowerName = aa.groups()[0]
+    JPG=jpgs + "/" + [ i for i in allJpgs if (flowerName in i and "JPG" in i) ][0]
+    JPG=jpgs + "/" + [ i for i in allJpgs if (flowerName in i and "JPG" in i) ][0]
+    return(JPG)
+
+def photoAndPetal(geojson, JPG):
+    petal,spots,center,edge,throat, spotEstimates, photoBB = geojsonIO.parseGeoJson(geojson)
+    plt.ion()
+    xxyy = list(zip(*photoBB))
+    Xmin = min(xxyy[0])
+    Xmax = max(xxyy[0])
+    Ymin = min(xxyy[1])
+    Ymax = max(xxyy[1])
+    img=mpimg.imread(JPG)
+    dd = img[Ymin:Ymax,Xmin:Xmax]
+    aa = geojsonIO.plotOne(petal, a=0.5)
+    plt.gca().imshow(dd, extent=plt.gca().get_xlim() + plt.gca().get_ylim(), 
+                    origin = 'lower')
+
+geojson='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working/P408F1_mid_polys.geojson'
+
+JPG = findJPG(geojson, geoJs, jpgs)
+photoAndPetal(geojson, JPG)
+
+geojson = geoJs + "/" + allGeoJs[180]
+spotCheck(geojson, geoJs, jpgs)
+
+## seems to have worked well.
+
+## when I return, set up the spotMarker to work with this setup. 
+
+## back. okay, how are we doing this?
+## we want to use spotMarker, but we need it to 
+## work over  
+
+for i in *; do
+echo $i
+echo ${i/.geojson/_withEst.geojson}
+$spotMarker $i -o ${i/.geojson/_withEst.geojson}
+done
+
+aa = pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons')
+bb = aa / "zoop.txt"
+
+
+## get spotMarker working on one file:
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons
+
+geojson='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working/P423F2_right_polys.geojson'
+jpgs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+spotMarker='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/spotMarker.py'
+
+$spotMarker $geojson $jpgs -o test.geojson

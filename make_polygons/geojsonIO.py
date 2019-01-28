@@ -3,7 +3,6 @@ import shapely.geometry as sg
 import matplotlib.pyplot as plt
 from descartes import PolygonPatch
 
-
 def parseGeoJson(geojson):
     with open(geojson) as gjf:
         aa = json.load(gjf)
@@ -42,14 +41,19 @@ def parseGeoJson(geojson):
             photoBB = [ i for i in listP if i['properties']['id'] == 'photoBB' ][0]['geometry']['coordinates'][0]
         except:
             photoBB = None
-    return(petal,spots,center,edge,throat, spotEstimates, photoBB)
+        try:
+            scalingFactor = aa['properties']["scalingFactor"]
+        except:
+            scalingFactor = None
+    return(petal,spots,center,edge,throat, spotEstimates, photoBB, scalingFactor)
 
-def writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB=[]):
+def writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB, scalingFactor):
     """Function for putting polygons into a dictionary that can be written out \
     to json format, = geojson."""
     featC = {
             "type" : "FeatureCollection",
             "features" : [],
+            "properties" : [],
             }
 
     ## fill it with features
@@ -65,12 +69,17 @@ def writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB=[]):
                   "geometry": gj_i,
                   "properties": {"id":(partNames[i])}}
             featC['features'].append(feature_i)
+    ## add photo bounding box
     feature_i = {"type": "Feature",
           "geometry": {"type": "Polygon",
                        "coordinates": [photoBB]},
           "properties": {"id":'photoBB'}}
     featC['features'].append(feature_i)
-
+    ## add scalingFactor
+    try:
+        featC['properties'] = {"scalingFactor": scalingFactor}
+    except (NameError, AttributeError):
+        featC['properties'] = {"scalingFactor": None}
     return(featC)
 
 def plotOne(poly, l=2, a=1.0, col='yellow', pick=None):

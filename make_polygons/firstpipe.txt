@@ -8472,4 +8472,177 @@ geojson='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojso
 jpgs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
 spotMarker='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/spotMarker.py'
 
+pathlib.Path(jpgs)
+
 $spotMarker $geojson $jpgs -o test.geojson
+
+geojson
+
+geojson = pathlib.Path(geojson)
+
+dir(geojson)
+
+geojson.absolute()
+
+geojson.name
+
+## okay seems to work, for one example file.
+
+## the goal is to get this working for all files, then get it working on the mac...
+
+## but first, we need to build in retaining the scaling factor into the petals,
+## and apply them retroactively to the petals that have already been curating
+## (= plate 1)
+
+
+## I feel okay about merging the branches...
+
+## how can we build in the scaling factor?
+
+## I think we can add a properties sub-object to the highest level of our 
+## geojson. Seems like the scaling factor should be stored there.
+
+## will the geojsons parse if we add this high-level object?
+
+## yup, seems okay with a little tweaking. 
+
+## how do we add this to flowerpetals already hand-edited?
+
+## take the photos back through the pipeline, just up to the point of findiing 
+## the scaling factor:
+
+cp "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working/P351F2_mid_polys.geojson" exGeo.geojson
+cp "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P351F2/mid/P351F2_mid_melted.csv" testMelted.csv
+
+python3
+
+import get_spots, geojsonIO, json
+
+photoBB, petalMat, spotsMat = get_spots.parseDougMatrix("testMelted.csv")
+petPolRaw = get_spots.digitizePols(petalMat)
+petPol = get_spots.cleanCollections(petPolRaw)
+spotPolRaw = get_spots.digitizePols(spotsMat)
+spotPol = get_spots.cleanSpots(spotPolRaw)
+scale, cent = get_spots.getPetGeoInfo(petPol)
+
+## all of these are gotten already...need to redo?
+## shoot, don't see a way to reconstruct. So, yeah, gotta regenerate from 
+## Doug's data...
+## I do have a bunch of old csvs constructed from Doug's melted matrix, but I 
+## don't trust these. Should probably just clean them out. 
+
+## a function:
+
+def getScale(meltedMatrix):
+    photoBB, petalMat, spotsMat = get_spots.parseDougMatrix(meltedMatrix)
+    petPolRaw = get_spots.digitizePols(petalMat)
+    petPol = get_spots.cleanCollections(petPolRaw)
+    scale,_ = get_spots.getPetGeoInfo(petPol)
+    return(scale)
+
+getScale("testMelted.csv")
+
+## ok, works try it on some others?
+
+getScale("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P247F1/right/P247F1_right_melted.csv")
+getScale("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P389F1/right/P389F1_right_melted.csv")
+## looks okay. package it up and use it:
+
+## addScale.py
+ 
+#!/usr/bin/env python3
+
+import get_spots, geojsonIO, json, argparse
+
+def getScale(meltedMatrix):
+    photoBB, petalMat, spotsMat = get_spots.parseDougMatrix(meltedMatrix)
+    petPolRaw = get_spots.digitizePols(petalMat)
+    petPol = get_spots.cleanCollections(petPolRaw)
+    scale,_ = get_spots.getPetGeoInfo(petPol)
+    return(scale)
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('meltedMatrix',
+                help=("""Name of file that contains CSV versions of
+                         doug's "melted" matrix, the result of
+                         manually choosing color centers from his
+                         matlab color-categorization scripts.
+                       """))
+    parser.add_argument('geojson',
+                help=("""geojson file that you are adding scaling factor to"""), 
+                default=None)
+    parser.add_argument('outFileName',"-o",
+                help=("""output geojson file"""), 
+                default=None)
+
+    args = parser.parse_args()
+    if args.outFileName:
+        outFileName = args.outFileName
+    else outFileName = args.geojson
+
+    ## deal with arguments
+
+    ## read old geojson:
+    (petal, spots, 
+        center, edge, throat, 
+        spotEstimates, 
+        photoBB, 
+        scalingFactor) = geojsonIO.parseGeoJson(args.geojson)
+
+    ## get scaling factor
+    scalingFactor=getScale(args.meltedMatrix)
+
+    ## Write  out new geojson:
+    geoDict = geojsonIO.writeGeoJ(petal, spots, 
+            center, edge, throat, 
+            spotEstimates, photoBB, 
+            scalingFactor)
+
+    with open(outFileName, 'w') as fp:
+        json.dump(geoDict, fp)
+
+## write out to a module, use it:
+
+cp "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working/P351F2_mid_polys.geojson" exGeo.geojson
+
+cp "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/P351F2/mid/P351F2_mid_melted.csv" testMelted.csv
+addScale="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/addScale.py"
+
+$addScale testMelted.csv exGeo.geojson -o test.geojson
+
+## check it in python:
+
+python3
+
+import get_spots, geojsonIO, json, argparse
+
+aa = geojsonIO.parseGeoJson('test.geojson')
+
+(petal, spots, 
+center, edge, throat, 
+spotEstimates,
+photoBB, scale) = geojsonIO.parseGeoJson('test.geojson')
+
+## looks okay. Do this for all of our geojsons?
+
+## are our archived geojsons uptodate?
+
+## nope. Let's fix our working directory geojs, then update
+
+addScale="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/addScale.py"
+geoJs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working"
+archives="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons"
+
+cd $geoJs
+
+for i in *; do
+    echo $i
+    grep "photoBB" $i
+    echo $csv
+    dn=$(find $archives -name $i -exec dirname {} \;)
+    csv=$(find $dn -name "*melted*")
+    $addScale $i $csv
+    grep "photoBB" $i
+done

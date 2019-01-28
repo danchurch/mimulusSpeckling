@@ -156,7 +156,7 @@ if __name__ == "__main__":
     print(gjName)
     aa = os.listdir()
 
-    petalMat, spotsMat, photoBB = parseDougMatrix(meltBaseName)
+    photoBB, petalMat, spotsMat = parseDougMatrix(meltBaseName)
     petPolRaw = digitizePols(petalMat) 
     petPol = cleanCollections(petPolRaw)
     spotPolRaw = digitizePols(spotsMat)
@@ -176,7 +176,7 @@ if __name__ == "__main__":
 
     ## define get a dictionary that resembles a geojson feature collection:
 
-    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, center, edge, throat, photoBB)
+    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, center, edge, throat, photoBB, scale)
 
     ## write it out
     with open(outFileName, 'w') as fp:

@@ -8690,3 +8690,12 @@ for i in *; do
     cd ../
 done
 
+## get this going on the mac... 
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped 
+
+find . -name "P*" -exec mv {} plate1/ \;
+
+find . -name "[^p]*"
+
+## 

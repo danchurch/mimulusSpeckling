@@ -8629,6 +8629,8 @@ photoBB, scale) = geojsonIO.parseGeoJson('test.geojson')
 
 ## are our archived geojsons uptodate?
 
+$addScale testMelted.csv exGeo.geojson -o test.geojson
+
 ## nope. Let's fix our working directory geojs, then update
 
 addScale="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/addScale.py"
@@ -8639,10 +8641,52 @@ cd $geoJs
 
 for i in *; do
     echo $i
-    grep "photoBB" $i
-    echo $csv
+    grep "scalingFactor" $i
     dn=$(find $archives -name $i -exec dirname {} \;)
     csv=$(find $dn -name "*melted*")
-    $addScale $i $csv
-    grep "photoBB" $i
+    echo $csv
+    $addScale $csv $i
+    grep "scalingFactor" $i
 done
+
+## now, we need to update our archives. Our working directory has the most uptodate files
+
+cd $geoJs
+
+for i in *; do 
+    echo $i
+    dn=$(find $archives -name $i -exec dirname {} \;)
+    cp $i $dn/$i
+done
+
+## while we're in there, clean out the old CSVs"
+
+cd $archives
+
+find $archives -name "*_petal.csv" -exec ls {} \;
+find $archives -name "*_spots.csv" -exec rm {} \;
+
+## okay, now what? we need to run our second plate of images through the automated pipeline.
+
+## how do we do this again?
+
+#!/usr/bin/env bash
+
+getSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_spots.py'
+getZones='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_zones.py'
+
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
+
+cd $wd
+
+for i in *; do
+    echo $i 
+    cd $i 
+    for j in *; do
+        fullN=$PWD/$j
+        $getSpots $fullN $fullN
+        find $fullN -name "*.geojson" -exec $getZones {} 0.5 \;
+    done
+    cd ../
+done
+

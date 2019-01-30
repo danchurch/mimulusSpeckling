@@ -150,7 +150,9 @@ if __name__ == "__main__":
         outFileName = args.geojson
 
     ## parse the geojson
-    petal,spots,center,edge,throat = gj.parseGeoJson(args.geojson)
+    (petal,spots,center,
+    edge,throat, spotEstimates, 
+    photoBB, scalingFactor) = gj.parseGeoJson(args.geojson)
 
     print(args.geojson)
     center = findCenter(petal, args.centerSize)
@@ -159,9 +161,12 @@ if __name__ == "__main__":
     ## outputs 
 
     ## write it back out to geojson 
-    featC = gj.writeGeoJ(petal,spots,center,edge,throat)
 
-    ## write it out
+    featC = gj.writeGeoJ(petal,spots,center,
+                         edge,throat, spotEstimates,
+                         photoBB, scalingFactor)
+
+
     with open(outFileName, 'w') as fp:
         json.dump(featC, fp)
 

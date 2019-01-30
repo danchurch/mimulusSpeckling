@@ -8670,25 +8670,6 @@ find $archives -name "*_spots.csv" -exec rm {} \;
 
 ## how do we do this again?
 
-#!/usr/bin/env bash
-
-getSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_spots.py'
-getZones='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_zones.py'
-
-wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
-
-cd $wd
-
-for i in *; do
-    echo $i 
-    cd $i 
-    for j in *; do
-        fullN=$PWD/$j
-        $getSpots $fullN $fullN
-        find $fullN -name "*.geojson" -exec $getZones {} 0.5 \;
-    done
-    cd ../
-done
 
 ## get this going on the mac... 
 
@@ -8698,4 +8679,264 @@ find . -name "P*" -exec mv {} plate1/ \;
 
 find . -name "[^p]*"
 
-## 
+## mac is gitted up. How can we get the automated pipeline going on the second plate?
+
+## all files in the 
+#!/usr/bin/env bash
+
+dellWD=''
+macWD='/Users/danthomas/Documents/speckling'
+WD=$macWD
+gSpots='make_polygons/get_spots.py'
+gZones='make_polygons/get_zones.py'
+gPlate2='dougRaster/Rotated_and_Cropped/plate2'
+
+getSpots=$WD"/"$gSpots
+getZones=$WD"/"$gZones
+plate2=$WD"/"$gPlate2
+
+
+## we need to run the files through matlab:
+
+matlab -nodesktop
+
+wd = '/Users/danthomas/Documents/speckling/make_polygons';
+dougRasterDir = '/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2';
+
+cd(dougRasterDir)
+
+
+for file = files';
+    im = file.name;
+    imName = regexprep(im,'\.mat', ''); 
+    %% go get our file, come back
+    cd(dougRasterDir);
+    rast=load(im);
+    cd(wd);
+    %% make a spot for our image, go to it:
+    mkdir(imName);
+    cd (imName);
+    %% get our petal names (left, right mid)
+    petNames = fieldnames(rast.Petals.Clusters);
+    %% split images into petal and spot, export, for each of the three petals:
+    for i = 1:length(petNames);
+        pet = rast.Petals.(petNames{i}).data; %petal at hand
+        mkdir(petNames{i});
+        cd(petNames{i});
+        %% for octave
+        %%fileNamePetal = [imName "_" char(petNames(i)) "_" 'melted.csv'];
+        %% for matlab, this may work better?
+        fileNamePetal = imName + "_" +  petNames(i) + "_" + 'melted.csv';
+        csvwrite(fileNamePetal,pet);
+        cd ..;
+    end;
+    cd(wd);
+end;
+
+
+
+
+#######################
+
+## huh, that generally worked, but there's some sort of descrepency between
+## output folders and the available JPGs...
+
+ls -d /Users/danthomas/Documents/speckling/make_polygons/P???F?/ | wc -l ## 173
+
+ls /Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/*.JPG | wc -l ## 192
+
+## what didn't digitize?
+
+
+
+for i in /Users/danthomas/Documents/speckling/make_polygons/P???F?/; do 
+    echo $(basename $i) >> made.txt
+done
+
+for i in /Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/*.JPG; do
+    j=$(basename $i)
+    echo ${j/.JPG/} >> jpgs.txt
+done
+
+cd /Users/danthomas/Documents/speckling/make_polygons
+
+diff jpgs.txt made.txt
+
+diff -u jpgs.txt made.txt | less
+
+## generally,
+diff -u jpgs.txt made.txt | grep '\-P[0-9]\{3\}'
+
+P702F3
+P703F3
+P705F3
+P707F3
+P708F3
+P709F3
+P710F2
+P711F3
+P713F3
+P714F2
+P715F3
+P716F3
+P717F3
+P719F3
+P720F3
+P721F3
+P735F1
+P735F3
+P735F4
+P739F2
+
+ls -d *F{3,4}/
+
+speck
+find . -name "P708F3*"
+## jpg, no mat
+
+speck
+find . -name "P???F4*.mat"
+
+find . -name "P???F3*.mat"
+
+## how to check to make sure there are two and only two files per plants?
+
+cd /Users/danthomas/Documents/speckling/make_polygons
+
+for i in /Users/danthomas/Documents/speckling/make_polygons/P???F?/; do 
+    j=$(basename $i)
+    echo ${j/F?/} >> addUp.txt
+done
+
+uniq -c addUp.txt 
+
+uniq -c addUp.txt | grep "[^2] P"
+
+## huh, there are some plants that have only one flower:
+
+P533
+P534
+P542
+P543
+P739
+P744
+P766
+
+aa=(P533 \
+P534 \
+P542 \
+P543 \
+P739 \
+P744 \
+P766)
+
+P533
+P534
+P542
+P543
+P744
+P766
+
+
+cd /Users/danthomas/Documents/speckling/make_polygons
+
+speck
+
+for i in ${aa[*]}; do
+echo $i
+find . -name $i*
+done
+
+## looks like everything that failed was an F3 or F4, though
+## not all F3 or F4s failed...
+
+## check on that failed:
+
+speck
+
+find . -name "P714F2*"
+## jpeg but no mat
+
+find . -name "P739F2*" | tr -d '[:space:]'
+
+find . -name "P739F2*" | tr -d '[:space:]'
+
+
+find . -name "P739F2*" -exec ls {} \;
+
+speck
+find . -name "P739F2*" 
+
+find . -name "P739F2*" -type d
+
+
+#######################
+ls /Users/danthomas/Documents/speckling/make_polygons/P739F2
+
+cd /Users/danthomas/Documents/speckling/make_polygons
+
+cd /Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2
+
+## so it seems like F3 and F4 were used when needed to make a pair of 
+## flowers. 
+
+## and a few flowers are missing their second image. Melia will work on 
+## these. 
+
+## let's move the rest of these through the pipeline
+
+## the folders were dropped into the make_polygon folder, move them to 
+## where they need to be, in archives?
+
+## maybe not yet, we don't want to overwrite our curated flowerPetals, 
+
+cd /Users/danthomas/Documents/speckling/make_polygons
+
+mkdir plate2
+
+ls -d P???F?/
+
+for i in  P???F?/; do
+    echo $i
+    mv $i /Users/danthomas/Documents/speckling/make_polygons/plate2/
+done
+
+cd /Users/danthomas/Documents/speckling/make_polygons/plate2
+
+## try applying our spot calling on these:
+
+#!/usr/bin/env bash
+
+cd /Users/danthomas/Documents/speckling/make_polygons/plate2
+for i in *; do
+    echo $i 
+    cd $i
+    for j in *; do
+        echo $j
+        cd $j
+            $getSpots *melted.csv
+        cd ..
+    done
+    cd ..
+    pwd
+done
+
+## first test the modules:
+
+$getSpots *melted.csv
+
+find $fullN -name "*.geojson" -exec $getZones {} 0.5 \;
+
+cd /Users/danthomas/Documents/speckling/make_polygons/plate2/P500F1/left
+
+$getZones *geojson 0.5 
+
+find $fullN -name "*.geojson" -exec $getZones {} 0.5 \;
+
+## looks okay. run the script
+
+./plate2digitize.sh | tee plate2_auto.log
+
+
+## okay, something funky happened, the script started trying to run our 
+## programs on directories...

@@ -18,10 +18,10 @@ from skimage import measure
 def parseDougMatrix(file):
     orig = np.genfromtxt(file, delimiter=',')
     orig = orig.astype(int)
-    Ymax=np.max(orig[:,1])
-    Ymin=np.min(orig[:,1])
-    Xmax=np.max(orig[:,0])
-    Xmin=np.min(orig[:,0])
+    Ymax=np.max(orig[:,1]).tolist()
+    Ymin=np.min(orig[:,1]).tolist()
+    Xmax=np.max(orig[:,0]).tolist()
+    Xmin=np.min(orig[:,0]).tolist()
     BB = [
         [Xmin,Ymin],
         [Xmax,Ymin],
@@ -45,6 +45,7 @@ def parseDougMatrix(file):
     spots[spots == 2] = 1
     spots[spots == 3] = 0
     return(BB,petal,spots)
+
 
 ## for the actual conversion of raster to polygon:
 def digitizePols(mat):
@@ -170,18 +171,19 @@ if __name__ == "__main__":
         standSpot = [stand(spotPol, scale, cent)]
     standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
     ## deal with the zones elsewhere
-    center, edge, throat = None, None, None
+    center, edge, throat, spotEstimates = None, None, None, None
 
     ## outputs ##
 
     ## define get a dictionary that resembles a geojson feature collection:
 
-    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, center, edge, throat, photoBB, scale)
+    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, 
+                                    center, edge, throat, 
+                                    spotEstimates, photoBB, scale)
 
     ## write it out
     with open(outFileName, 'w') as fp:
         json.dump(geoDict, fp)
 
-## buffer out silf-intersections when digitizing
 
 

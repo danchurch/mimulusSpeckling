@@ -8937,6 +8937,162 @@ find $fullN -name "*.geojson" -exec $getZones {} 0.5 \;
 
 ./plate2digitize.sh | tee plate2_auto.log
 
-
 ## okay, something funky happened, the script started trying to run our 
 ## programs on directories...
+
+## seems okay,
+
+## what do we need to do to make this happen...
+
+## some problems. In our previous trips into Doug's data, we made the generation 
+## of spot-only and petal-only CSVs part of our digitizing pipeline. I forgot that
+## we needed these to generate our PDF. Somewhere along the line I removed 
+## the scripts for making these, I think in the process of cleaning up the matlab
+## script...
+
+## these matrices are returned in our get_spots module:
+
+import get_spots 
+
+file="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2/P500F1/left/P500F1_left_melted.csv"
+
+_,petal,spots = get_spots.parseDougMatrix(file)
+
+## so we can use this in our pdfmaker...
+
+file="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2/P500F1/left"
+
+[ i for i in os.listdir(file) if "melted.csv" in i ][0]
+
+## okay, updated
+## run it
+
+makePDFs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/makePDFs.py"
+$makePDFs  |& tee makePDF_log_01.30.2019.txt
+
+## some descrepencies again, looks like we're at least one file short, one fewer pdfs
+
+ls /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2 > wds.txt
+
+cut -f 1 -d . <(ls /home/daniel/Documents/cooley_lab/bigPDF) > pdfs.txt
+
+diff wds.txt pdfs.txt
+
+diff -u wds.txt pdfs.txt
+
+## looks like P708F2 didn't get made... why not?
+
+ls /home/daniel/Documents/cooley_lab/bigPDF/P708F*
+
+cd /home/daniel/Documents/cooley_lab/bigPDF
+
+## not sure. Throw it on the pile to be redone...
+## actually, no, it seems like this image might be 
+## erroneously labeled, so we aren't going to use it
+## or the accompanying mat file
+
+find / -name "P708F2*"
+
+## get rid of the directory, mat file
+
+rm -R /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2/P708F2
+rm /home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P708F2.mat
+
+## ugh. need to rewrite that pdfmaker module to be actually useful. 
+## leaving soon, so let's get Melia the draft PDF:
+
+pdftk * output bigPDF_plate2_01.30.2019.pdf
+
+## okay, we got errors in the pdf, hunt them down. 
+
+## what else? Think about the inkdrop test and how we want 
+## to use this data.
+
+## some sort of spatial statistical description. 
+
+## today, hunt bugs, then run a sample petal with spotmarker, 
+## then try to quantify as a poisson process or something 
+## like it, in a way that accounts for the variable edges 
+## of petals. 
+
+## first, run melia's new mat files...reuse the code from the script:
+
+
+octave --no-gui
+
+wd = '/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2'
+dougRasterDir = '/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+
+cd(dougRasterDir)
+
+%files = dir('P542F2.mat');
+
+files = dir('P744F2.mat');
+file = files';
+im = file.name;
+
+imName = regexprep(im,'\.mat', ''); 
+%% go get our file, come back
+cd(dougRasterDir);
+rast=load(im);
+cd(wd);
+%% make a spot for our image, go to it:
+mkdir(imName);
+cd (imName);
+%% get our petal names (left, right mid)
+petNames = fieldnames(rast.Petals.Clusters);
+%% split images into petal and spot, export, for each of the three petals:
+for i = 1:length(petNames);
+    pet = rast.Petals.(petNames{i}).data; %petal at hand
+    mkdir(petNames{i});
+    cd(petNames{i});
+    %% for octave
+    fileNamePetal = [imName "_" char(petNames(i)) "_" 'melted.csv'];
+    %% for matlab, this may work better?
+    %%fileNamePetal = imName + "_" +  petNames(i) + "_" + 'melted.csv';
+    csvwrite(fileNamePetal,pet);
+    cd ..;
+end;
+cd(wd);
+
+
+## ' ## just because it's screwing up my syntax
+
+## think that worked...
+
+## now run these through our getspot and getzone scripts:
+
+getSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_spots.py'
+getZones='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_zones.py'
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2/'
+#flower='P542F2'
+flower='P744F2'
+
+cd $wd
+cd $flower
+pets=('left' 'mid' 'right')
+for i in ${pets[*]}; do
+    echo $i
+    $getSpots $i/*melted.csv
+    $getZones $i/*geojson 0.5
+done
+
+## go through the weird stuff in the pdf
+
+
+## the report:
+#P500F1 red spot doesn't appear
+#P517F1 one large red spot disappers (not all, weird)
+#P519F1 left and mid, spots lost 
+#P731F1 right petal all one spot
+#P748F1 mid spots fucked up
+#P748F2 mid spots fucked up
+#P753F2 right petal outline lost
+#P756F4 left petal random, incorrect
+
+## okay, what do we do about this? are they bugs in the pdfmaker or in the geojson?
+
+## let's start by improving  our pdfmake a bit 
+
+
+

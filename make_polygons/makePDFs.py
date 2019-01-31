@@ -2,41 +2,12 @@
 
 import os, json 
 import numpy as np
+from geojsonIO import parseGeoJson as parseGeoj
+from get_spots import parseDougMatrix as parseDougMatrix
 import shapely.geometry as sg
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from descartes import PolygonPatch
-
-def parseGeoj(file):
-    with open(file) as gjf:
-        aa = json.load(gjf)
-        listP = (aa['features'])
-        try:
-            petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry'] 
-            petalPoly = sg.shape(petalGJ)
-        except:
-            petalPoly = sg.polygon.Polygon()
-        try:
-            spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry'] 
-            spotsPoly = sg.shape(spotsGJ)
-        except:
-            spotsPoly = sg.polygon.Polygon()
-        try:
-            centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry'] 
-            centerPoly = sg.shape(centerGJ)
-        except:
-            centerPoly = sg.polygon.Polygon()
-        try:
-            edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry'] 
-            edgePoly = sg.shape(edgeGJ)
-        except:
-            edgePoly = sg.polygon.Polygon()
-        try:
-            throatGJ = [ i for i in listP if i['properties']['id'] == 'Throat' ][0]['geometry'] 
-            throatPoly = sg.shape(throatGJ)
-        except:
-            throatPoly = sg.polygon.Polygon()
-    return(petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly)
 
 def plotNoZone(petalPoly, spotsPoly, x, y):
     alp=1.0
@@ -94,9 +65,9 @@ if __name__ == "__main__":
 
     ## my comp
 
-    workingGeoJDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working'
-    polDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
-    dougDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
+    #workingGeoJDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working'
+    polDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2'
+    dougDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
     targetDir='/home/daniel/Documents/cooley_lab/bigPDF'
     
     ## labcomp
@@ -123,12 +94,12 @@ if __name__ == "__main__":
             counter = 0 ## for keeping track of the 6 plots, second row
             for n,j in enumerate(['left', 'mid', 'right']):
                 os.chdir(j)
-                print("We are on " + j)
-                spotsCSV = [ i for i in os.listdir() if 'spots' in i ][0]
-                petalCSV = [ i for i in os.listdir() if 'petal' in i ][0]
+                print("We are on " + flowerName + j)
+                meltCSV = [ i for i in os.listdir() if "melted.csv" in i ][0]
+                _, petalMat, spotsMat = parseDougMatrix(meltCSV)
                 ## get rasters as CSVs
-                petalMat = np.genfromtxt(petalCSV, delimiter=',')
-                spotsMat = np.genfromtxt(spotsCSV, delimiter=',')
+                #petalMat = np.genfromtxt(petalCSV, delimiter=',')
+                #spotsMat = np.genfromtxt(spotsCSV, delimiter=',')
                 ## plot these two rasters, petal outline and spots
                 ax = plt.subplot2grid((4,6), (1, counter))
                 ax.imshow(petalMat, cmap='gray')
@@ -139,13 +110,14 @@ if __name__ == "__main__":
                 ## get geojsons, turn them into polygons
                 try: 
                     ## originally, we used the geojsons in the polygon file tree
-                    #geoj = [ i for i in os.listdir() if 'geojson' in i ][0]
-                    ## but now let's use the working directory for geojsons
-                    geoj = [ i for i in os.listdir(workingGeoJDir) if j in i and flowerName in i ][0]
-                    geojFull = (workingGeoJDir + "/" +geoj)
-                    petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly = parseGeoj(geojFull)
-                    print('GeoJson found: ' + geojFull)
-                except: 
+                    geoj = [ i for i in os.listdir() if 'geojson' in i ][0]
+                    ## to use the working directory for geojsons instead, uncomment:
+                    #geoj = [ i for i in os.listdir(workingGeoJDir) if j in i and flowerName in i ][0]
+                    #geojFull = (workingGeoJDir + "/" +geoj)
+                    #petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, _,_,_ = parseGeoj(geojFull)
+                    petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, _,_,_ = parseGeoj(geoj)
+                    print('GeoJson found: ' + geoj)
+                except (IndexError, OSError, FileNotFoundError): 
                     print('Error - GeoJson not found.')
                 ## row 3 plot petal and spot geojsons if we have them. 
                 try:

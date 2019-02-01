@@ -9136,4 +9136,39 @@ done
 ## I have a feeling this will invole a LOT of debugging, gotta get 
 ## started....
 
+## on mac
 
+## try one file from plate2
+
+flower='P764F2'
+
+wd='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2'
+breakSpots='/Users/danthomas/Documents/speckling/make_polygons/breakSpots.py'
+dougRaster='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2'
+geojF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working'
+
+
+echo $wd"/"$flower
+
+ls $wd"/"$flower
+
+cd $wd"/"$flower
+
+for i in $wd"/"$flower"/"*; do
+    echo $i
+    geoJ=$(find $i -name "*geojson")
+    jpg=$(find $dougRaster -name $flower".JPG")
+    outFile=${geoJ/.geojson/_spBr.geojson}
+    $breakSpots $geoJ -j $jpg -o $outFile
+done
+
+    #$breakSpots $i 
+done
+
+find $dougRaster -name $flower".JPG"
+
+find . -name $flower".JPG"
+
+
+
+$breakSpots P297F2_mid_polys.geojson -o P297F2_mid_polys_edit.geojson -j $dougRaster"/"P297F2.JPG 

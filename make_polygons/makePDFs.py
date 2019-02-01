@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import os, json 
+import os, json, pathlib
 import numpy as np
-from geojsonIO import parseGeoJson as parseGeoj
+import geojsonIO 
 from get_spots import parseDougMatrix as parseDougMatrix
 import shapely.geometry as sg
 import matplotlib.pyplot as plt
@@ -59,21 +59,102 @@ def plotYesZone (petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, x ,y):
     except:
         ax1.set_xlabel('throat and edges failed')
 
+
+def plotRow1(jpgs, flower):
+    """ our first row is a plot using one of these jpegs:"""
+    pJpgs = pathlib.Path(jpgs)
+    jpg = [ i for i in os.listdir(pJpgs) if flower in i and ".JPG" in i][0]
+    fJpg = pJpgs / jpg 
+    ax1 = plt.subplot2grid((4,3), (0,0), colspan=3)
+    img=mpimg.imread(fJpg)
+    ax1.imshow(img)
+
+def plotRow2(wd, flower):
+    """ our second row is doug's pixel info, peeled apart"""
+    pWD=pathlib.Path(wd)
+    counter = 0 ## for keeping track of the 6 plots, second row
+    try:
+        assert flower in list(os.walk(pWD))[0][1], "Is this flower in your working directory?"
+        flowerHome = pWD / flower
+        for n,j in enumerate(list(os.walk(flowerHome))[0][1]):
+            meltcsv = [ i for i in os.listdir(flowerHome / j) if "melted.csv" in i][0]
+            meltCSV = flowerHome / j / meltcsv
+            photoBB, petalMat, spotsMat = parseDougMatrix(meltCSV)
+            return(photoBB, petalMat.shape, spotsMat.shape)
+            bb = list(zip(*photoBB))
+            lowerleft = [ min(i) for i in bb ]
+            upperRight = [ max(i) for i in bb ]
+            ## plot these two rasters, petal outline and spots
+            ax = plt.subplot2grid((4,6), (1, counter))
+            ax.imshow(petalMat, cmap='gray')
+            counter += 1
+            ax = plt.subplot2grid((4,6), (1, counter))
+            ax.imshow(spotsMat, cmap='gray')
+            counter += 1
+    except AssertionError as err:
+        print (err)
+
+
+def plotRow3(wd, flower):
+    ## row 3 plot petal and spot geojsons if we have them. 
+    pWD = pathlib.Path(wd, flower)
+    for n,petal in enumerate(os.listdir(pWD)):
+        print(petal)
+        geoJ = [ i for i in os.listdir(pWD / petal) if "geojson" in i ][0]
+        (petalPoly,spotsPoly,
+                _,_,_,_,_,_) = geojsonIO.parseGeoJson(pWD / petal / geoJ)
+        try:
+            plotNoZone(petalPoly, spotsPoly, 2, n)
+        except: 
+            ax=plt.subplot2grid((4,3),(2,n)) ## blank
+
+def plotRow4(wd, flower):
+    pWD = pathlib.Path(wd, flower)
+    for n,petal in enumerate(os.listdir(pWD)):
+        print(petal)
+        geoJ = [ i for i in os.listdir(pWD / petal) if "geojson" in i ][0]
+        (petalPoly,spotsPoly,
+         centerPoly,edgePoly,throatPoly,
+                      _,_,_) = geojsonIO.parseGeoJson(pWD / petal / geoJ)
+        try:
+            plotYesZone (petalPoly,spotsPoly,centerPoly,edgePoly,throatPoly,3,n)
+        except: 
+            ax=plt.subplot2grid((4,3),(3,n)) ## blank
+
+
+plt.ion()
+jpgs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2'
+flower='P739F1'
+petal='mid'
+
+plotRow1(jpgs, flower)
+
+plotRow2(wd, flower)
+
+plotRow3(wd, flower)
+plotRow4(wd, flower)
+
+
+n = 0
+
+## row 3 plot petal and spot geojsons if we have them. 
+try:
+    plotNoZone(petalPoly, spotsPoly, 2, n)
+except: 
+    ax=plt.subplot2grid((4,3),(2,n)) ## blank
+
+## row 4 plot these with zones, if we have them:
+try:
+        plotYesZone(petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, 3, n)
+except: 
+    ax=plt.subplot2grid((4,3),(3,n)) ## blank
+
+
+
+
 if __name__ == "__main__":
 
-    ## make these into command line args?
-
-    ## my comp
-
-    #workingGeoJDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working'
-    polDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2'
-    dougDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
-    targetDir='/home/daniel/Documents/cooley_lab/bigPDF'
-    
-    ## labcomp
-    #polDir='/Users/danthomas/Documents/speckling/make_polygons/polygons'
-    #dougDir='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped'
-    #targetDir='/Users/danthomas/Documents/bigPDF'
     
     os.chdir(dougDir)
     aa = os.listdir()
@@ -114,8 +195,8 @@ if __name__ == "__main__":
                     ## to use the working directory for geojsons instead, uncomment:
                     #geoj = [ i for i in os.listdir(workingGeoJDir) if j in i and flowerName in i ][0]
                     #geojFull = (workingGeoJDir + "/" +geoj)
-                    #petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, _,_,_ = parseGeoj(geojFull)
-                    petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, _,_,_ = parseGeoj(geoj)
+                    #petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, _,_,_ = geojsonIO.parseGeoJson(geojFull)
+                    petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, _,_,_ = geojsonIO.parseGeoJson(geoj)
                     print('GeoJson found: ' + geoj)
                 except (IndexError, OSError, FileNotFoundError): 
                     print('Error - GeoJson not found.')

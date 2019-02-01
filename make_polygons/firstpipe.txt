@@ -7875,6 +7875,7 @@ import spotMarker
 
 
 import os
+import makePDFs
 import pathlib
 import re
 import json
@@ -9094,5 +9095,45 @@ done
 
 ## let's start by improving  our pdfmake a bit 
 
+plt.ion()
+jpgs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2'
+flower='P739F1'
+petal='mid'
+makePDFs.plotRow1(jpgs, flower)
+makePDFs.plotRow2(wd, flower)
+makePDFs.plotRow3(wd, flower)
+makePDFs.plotRow4(wd, flower)
+
+## looks okay!
+
+## try the new module from the command line
+
+makePDFs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/makePDFs.py'
+flowerName='P771F1'
+workingDirectory='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2'
+jpgDirectory='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+outDir='/home/daniel/Documents/cooley_lab/bigPDF'
+
+$makePDFs $flowerName $workingDirectory $jpgDirectory -o $outDir
+
+## okay, how do we loop through our archives and get this?
+
+## we need Doug's melted csv, and the script assumes folders for each petal
+## also assumes a working directory with the flower folder in it.
+
+cd $workingDirectory
+
+for i in *; do
+echo $i
+$makePDFs $i $workingDirectory $jpgDirectory -o $outDir
+done
+
+## seems to be working. 
+
+## now what? haven't heard from Austun...
+## try the programs on the mac anyway. 
+## I have a feeling this will invole a LOT of debugging, gotta get 
+## started....
 
 

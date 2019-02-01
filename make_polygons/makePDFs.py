@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import os, json, pathlib
+import os, json, pathlib, argparse
 import numpy as np
 import geojsonIO 
 from get_spots import parseDougMatrix as parseDougMatrix
@@ -76,20 +76,22 @@ def plotRow2(wd, flower):
     try:
         assert flower in list(os.walk(pWD))[0][1], "Is this flower in your working directory?"
         flowerHome = pWD / flower
-        for n,j in enumerate(list(os.walk(flowerHome))[0][1]):
+        for n,j in enumerate(['left','mid','right']):
             meltcsv = [ i for i in os.listdir(flowerHome / j) if "melted.csv" in i][0]
             meltCSV = flowerHome / j / meltcsv
             photoBB, petalMat, spotsMat = parseDougMatrix(meltCSV)
-            return(photoBB, petalMat.shape, spotsMat.shape)
             bb = list(zip(*photoBB))
-            lowerleft = [ min(i) for i in bb ]
-            upperRight = [ max(i) for i in bb ]
+            lowerLeft = [ min(i)-2 for i in bb ]
+            upperRight = [ max(i)+2 for i in bb ]
             ## plot these two rasters, petal outline and spots
+            petalOutline = petalMat[lowerLeft[0]:upperRight[0],lowerLeft[1]:upperRight[1]]
+            spotsOutline = spotsMat[lowerLeft[0]:upperRight[0],lowerLeft[1]:upperRight[1]]
+            #return(photoBB, lowerLeft, upperRight,petalMat, spotsMat,petalOutline, spotsOutline)
             ax = plt.subplot2grid((4,6), (1, counter))
-            ax.imshow(petalMat, cmap='gray')
+            ax.imshow(petalOutline, cmap='gray')
             counter += 1
             ax = plt.subplot2grid((4,6), (1, counter))
-            ax.imshow(spotsMat, cmap='gray')
+            ax.imshow(spotsOutline, cmap='gray')
             counter += 1
     except AssertionError as err:
         print (err)
@@ -99,7 +101,6 @@ def plotRow3(wd, flower):
     ## row 3 plot petal and spot geojsons if we have them. 
     pWD = pathlib.Path(wd, flower)
     for n,petal in enumerate(os.listdir(pWD)):
-        print(petal)
         geoJ = [ i for i in os.listdir(pWD / petal) if "geojson" in i ][0]
         (petalPoly,spotsPoly,
                 _,_,_,_,_,_) = geojsonIO.parseGeoJson(pWD / petal / geoJ)
@@ -111,7 +112,6 @@ def plotRow3(wd, flower):
 def plotRow4(wd, flower):
     pWD = pathlib.Path(wd, flower)
     for n,petal in enumerate(os.listdir(pWD)):
-        print(petal)
         geoJ = [ i for i in os.listdir(pWD / petal) if "geojson" in i ][0]
         (petalPoly,spotsPoly,
          centerPoly,edgePoly,throatPoly,
@@ -122,101 +122,41 @@ def plotRow4(wd, flower):
             ax=plt.subplot2grid((4,3),(3,n)) ## blank
 
 
-plt.ion()
-jpgs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
-wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2'
-flower='P739F1'
-petal='mid'
-
-plotRow1(jpgs, flower)
-
-plotRow2(wd, flower)
-
-plotRow3(wd, flower)
-plotRow4(wd, flower)
-
-
-n = 0
-
-## row 3 plot petal and spot geojsons if we have them. 
-try:
-    plotNoZone(petalPoly, spotsPoly, 2, n)
-except: 
-    ax=plt.subplot2grid((4,3),(2,n)) ## blank
-
-## row 4 plot these with zones, if we have them:
-try:
-        plotYesZone(petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, 3, n)
-except: 
-    ax=plt.subplot2grid((4,3),(3,n)) ## blank
-
-
-
 
 if __name__ == "__main__":
 
-    
-    os.chdir(dougDir)
-    aa = os.listdir()
-    bb = [ i for i in aa if 'JPG' in i]
-    
-    for flowerJpg in bb:
-        flowerName = flowerJpg[0:-4] ##flower name
-        fig = plt.figure()
-        fig.suptitle(flowerName, fontsize=12)
-        ## our first row is a plot using one of these jpegs:
-        imgFullName=(dougDir + '/' + flowerJpg)
-        ax1 = plt.subplot2grid((4,3), (0,0), colspan=3)
-        img=mpimg.imread(imgFullName)
-        ax1.imshow(img)
-        ## second row is Doug's rasters
-        try:
-            os.chdir(polDir + "/" + flowerName) ## go to flower directory
-            counter = 0 ## for keeping track of the 6 plots, second row
-            for n,j in enumerate(['left', 'mid', 'right']):
-                os.chdir(j)
-                print("We are on " + flowerName + j)
-                meltCSV = [ i for i in os.listdir() if "melted.csv" in i ][0]
-                _, petalMat, spotsMat = parseDougMatrix(meltCSV)
-                ## get rasters as CSVs
-                #petalMat = np.genfromtxt(petalCSV, delimiter=',')
-                #spotsMat = np.genfromtxt(spotsCSV, delimiter=',')
-                ## plot these two rasters, petal outline and spots
-                ax = plt.subplot2grid((4,6), (1, counter))
-                ax.imshow(petalMat, cmap='gray')
-                counter += 1
-                ax = plt.subplot2grid((4,6), (1, counter))
-                ax.imshow(spotsMat, cmap='gray')
-                counter += 1
-                ## get geojsons, turn them into polygons
-                try: 
-                    ## originally, we used the geojsons in the polygon file tree
-                    geoj = [ i for i in os.listdir() if 'geojson' in i ][0]
-                    ## to use the working directory for geojsons instead, uncomment:
-                    #geoj = [ i for i in os.listdir(workingGeoJDir) if j in i and flowerName in i ][0]
-                    #geojFull = (workingGeoJDir + "/" +geoj)
-                    #petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, _,_,_ = geojsonIO.parseGeoJson(geojFull)
-                    petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, _,_,_ = geojsonIO.parseGeoJson(geoj)
-                    print('GeoJson found: ' + geoj)
-                except (IndexError, OSError, FileNotFoundError): 
-                    print('Error - GeoJson not found.')
-                ## row 3 plot petal and spot geojsons if we have them. 
-                try:
-                    plotNoZone(petalPoly, spotsPoly, 2, n)
-                except: 
-                    ax=plt.subplot2grid((4,3),(2,n)) ## blank
-                ## row 4 plot these with zones, if we have them:
-                try:
-                        plotYesZone(petalPoly, spotsPoly, centerPoly, edgePoly, throatPoly, 3, n)
-                except: 
-                    ax=plt.subplot2grid((4,3),(3,n)) ## blank
-                os.chdir(polDir + "/" + flowerName) ## go back to flower directory
-            plt.savefig(targetDir + "/" + flowerName + ".pdf")
-            plt.close('all')
-        except FileNotFoundError as eror:
-            print(eror)
-        finally:
-            os.chdir(dougDir)
+    ## arguments 
+    parser = argparse.ArgumentParser()
+    parser.add_argument('flowerName',
+                help=("""Give the name of the flower. In our project, this
+                        is generally in form of "P---F-" """),
+                default=None)
+    parser.add_argument('workingDirectory',
+                help=("""Give the location of the folder containing geojson 
+                        and "melted" csv from Doug's pipeline. Files will 
+                        output here.
+                       """))
+    parser.add_argument('jpgDirectory',
+                help=("""Give the location of the cropped and rotated JPG files
+                        of the flower."""),
+                default=None)
+    parser.add_argument('--outputDirectory','-o',
+                help=("""Give the name of the directory where you would like to 
+                        store finished pdf files."""),
+                default=None)
 
+    args = parser.parse_args()
+    flower = args.flowerName
+    wd = args.workingDirectory
+    jpgs = args.jpgDirectory
+    if args.outputDirectory: 
+        outDir = args.outputDirectory
+    else: outDir = wd + "/" + flower
 
+    plotRow1(jpgs, flower)
+    plotRow2(wd, flower)
+    plotRow3(wd, flower)
+    plotRow4(wd, flower)
 
+    outPDF=pathlib.Path(outDir + "/" + flower + ".pdf")
+    plt.savefig(outPDF)

@@ -9110,8 +9110,8 @@ makePDFs.plotRow4(wd, flower)
 ## try the new module from the command line
 
 makePDFs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/makePDFs.py'
-flowerName='P771F1'
-workingDirectory='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/plate2'
+#flowerName='P771F1'
+workingDirectory='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2'
 jpgDirectory='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
 outDir='/home/daniel/Documents/cooley_lab/bigPDF'
 

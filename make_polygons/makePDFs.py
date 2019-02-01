@@ -68,6 +68,7 @@ def plotRow1(jpgs, flower):
     ax1 = plt.subplot2grid((4,3), (0,0), colspan=3)
     img=mpimg.imread(fJpg)
     ax1.imshow(img)
+    plt.gcf().suptitle(flower, fontsize=12)
 
 def plotRow2(wd, flower):
     """ our second row is doug's pixel info, peeled apart"""

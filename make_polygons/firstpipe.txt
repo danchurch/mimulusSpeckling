@@ -9330,7 +9330,32 @@ jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_
 $spotMarker $geoj $jpeg
 
 ## okay, seems to work...
-
 ## so what does that leave? 
-
 ## update the mac and see how they believe?
+
+
+## now on mac. let's make a toy directory and try the programs out
+
+## let's do the 500's
+
+/Users/danthomas/Documents/speckling/make_polygons
+
+mkdir /Users/danthomas/Documents/speckling/make_polygons/toy
+
+toy='/Users/danthomas/Documents/speckling/make_polygons/toy'
+
+ls /Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P5??F*/
+
+ls -d /Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P5??F*
+
+
+for i in /Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P5??F*; do 
+    echo $i
+    cp -r $i $toy
+done
+
+## 
+
+## fuck, why do these have spot estimates? 
+
+## okay, back up. back to my comp...

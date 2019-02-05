@@ -9255,11 +9255,12 @@ flower='P504F2'
 #petal='left'
 #petal='mid'
 petal='right'
-
 jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P504F2.JPG'
 
 cd $wd
+
 cd $flower
+
 cd $petal
 
 $getSpots *melted.csv
@@ -9268,8 +9269,6 @@ $getZones *geojson 0.5
 $breakSpots *geojson $jpeg -o "test.geojson"
 
 grep scalingFactor *geojson 
-
-
 
 aa = geojsonIO.parseGeoJson("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/ex/P504F2/right/test.geojson")
 plt.ion()
@@ -9281,8 +9280,7 @@ geojsonIO.addOne(aa[1])
 
 ## try the manual zone caller:
 
-$manZoneCaller test.geojson 0.5 -o test3.geojson
-
+$manZoneCaller test.geojson 0.5 -o test2.geojson
 
 $manZoneCaller test2.geojson 0.5
 
@@ -9294,13 +9292,9 @@ python3
 geoJ=("/home/daniel/Documents/cooley_lab/"
         "mimulusSpeckling/make_polygons/polygons/"
         "plate2/P766F4/left/P766F4_left_polys.geojson")
-
 aa = geojsonIO.parseGeoJson(geoJ)
-
 plt.ion()
-
 geojsonIO.plotOne(aa[0])
-
 geojsonIO.addOne(aa[1])
 
 ## how to expand the axes? 
@@ -9312,8 +9306,6 @@ newYLim = [ i * 1.1 for i in list(ax.get_ylim()) ]
 newXLim = [ i * 1.1 for i in list(ax.get_xlim()) ] 
 ax.set_ylim(newYLim)
 ax.set_xlim(newXLim)
-
-
 
 cc[0]
 
@@ -9328,4 +9320,4 @@ cc[0]
 
 ## debug plate2 digitizing problems. 
 
- 
+

@@ -6,6 +6,8 @@ import numpy as np
 import shapely.geometry as sg
 import geojsonIO
 import get_zones as gz
+import matplotlib as mp
+import matplotlib.pyplot as plt
 
 def auto_call(geojson, centerSize, simp):
     (petal,spots,
@@ -21,6 +23,8 @@ def plotFlowerZones(petal,spots,center,edge,throat):
     geojsonIO.addOne(spots)
     geojsonIO.addOne(edge, col='white', a=0.5)
     geojsonIO.addOne(throat, col='white', a=0.5)
+    if mp.get_backend() == 'TkAgg':
+        plt.gcf().canvas.manager.window.wm_geometry("+900+0")
 
 def choice():
     try:
@@ -49,6 +53,23 @@ def getNewEdgeThroat(pol, petal, center):
     newEdge = marg.difference(newThroat)
     return(newEdge, newThroat)
 
+def saveOut ( petal,spots,center,edge,throat, 
+                spotEstimates, photoBB, 
+                scalingFactor, centerSize, geojson, outFileName):
+    print('Save new zones?')
+    newOK=choice()
+    if newOK == 'y':
+        ## write it out
+        print('Saving as ' + outFileName)
+        featC = geojsonIO.writeGeoJ(petal,spots,center,edge,throat, 
+                    spotEstimates, photoBB, scalingFactor)
+        with open(outFileName, 'w') as fp:
+            json.dump(featC, fp)
+        quit()
+    if newOK == 'n': 
+        print('Not saving...')
+        quit()
+
 class PolyMaker:
     def __init__(self, petal, center):
         geojsonIO.plotOne(petal)
@@ -59,6 +80,8 @@ class PolyMaker:
         newXLim = [ i * 1.1 for i in list(self.ax.get_xlim()) ]
         self.ax.set_ylim(newYLim)
         self.ax.set_xlim(newXLim)
+        if mp.get_backend() == 'TkAgg':
+            self.fig.canvas.manager.window.wm_geometry("+900+0")
         self.petal = petal
         self.center = center
         self.verts = []
@@ -116,69 +139,44 @@ def main( petal,spots,center,edge,throat,
 
     if ZonesOK == 'y': 
         ## write it out?
-        print("Save this?")
-        saveYN = choice()
-        if saveYN == 'y':
-            featC = geojsonIO.writeGeoJ(petal,spots,
-                center,edge,throat, 
+        saveOut( petal,spots,center,edge,throat, 
                 spotEstimates, photoBB, 
-                scalingFactor) 
-            with open(outFileName, 'w') as fp:
-                json.dump(featC, fp)
-        quit()
+                scalingFactor, centerSize, geojson, outFileName)
     elif ZonesOK == 'n': 
         print('Try automated zone call with another simplification level?', end ="")
         anotherSimp=choice()
 
-    if anotherSimp == 'y':
-        print('Enter simplification level. ', end ="")
-        simp=valNum()
-        plt.close('all')
-        petal,spots,center,edge,throat = auto_call( geojson, 
-                                                    centerSize, 
-                                                    simp)
-        main( petal,spots,center,edge,throat, 
+        if anotherSimp == 'y':
+            print('Enter simplification level. ', end ="")
+            simp=valNum()
+            plt.close('all')
+            petal,spots,center,edge,throat = auto_call( geojson, 
+                                                        centerSize, 
+                                                        simp)
+            main( petal,spots,center,edge,throat, 
+                            spotEstimates, photoBB, 
+                            scalingFactor, centerSize, geojson, outFileName)
+        elif anotherSimp == 'n':
+            print('Try manual zone call?', end ="")
+            manDraw=choice()
+            if manDraw == 'y':
+                plt.close('all')
+                print('Draw polygon to define the left and right boundaries of throat.'
+                    ' Tell us when done by typing y.')
+                pm = PolyMaker(petal, center)
+                choice()
+                edge, throat = getNewEdgeThroat(pm.poly, petal, center)
+                plotFlowerZones(petal,spots,center,edge,throat)
+                saveOut( petal,spots,center,edge,throat, 
                         spotEstimates, photoBB, 
                         scalingFactor, centerSize, geojson, outFileName)
+            elif manDraw == 'n':
+                print("Let's startover")
+                plt.close('all')
+                main( petal,spots,center,edge,throat, 
+                                spotEstimates, photoBB, 
+                                scalingFactor, centerSize, geojson, outFileName)
 
-    elif anotherSimp == 'n':
-        print('Try manual zone call?', end ="")
-        manDraw=choice()
-
-    if manDraw == 'y':
-        plt.close('all')
-        print('Draw polygon to define the left and right boundaries of throat')
-        pm = PolyMaker(petal, center)
-        print('Good?', end ="")
-        choice()
-
-    elif manDraw == 'n':
-        print("I'm confused....")
-        plt.close('all')
-        #main(geojson, centerSize, simp)
-
-    edge, throat = getNewEdgeThroat(pm.poly, petal, center)
-
-    plotFlowerZones(petal,spots,center,edge,throat)
-
-
-    print('Save new zones?')
-    newOK=choice()
-
-    if newOK == 'y':
-        ## write it out
-        featC = geojsonIO.writeGeoJ(petal,spots,center,edge,throat, 
-                    spotEstimates, photoBB, scalingFactor)
-        with open(outFileName, 'w') as fp:
-            json.dump(featC, fp)
-        quit()
-
-    if newOk == 'n': 
-        plt.close('all')
-        print('Starting over...')
-        main( petal,spots,center,edge,throat, 
-                    spotEstimates, photoBB, 
-                    scalingFactor, centerSize, geojson)
 
 ########################################
 

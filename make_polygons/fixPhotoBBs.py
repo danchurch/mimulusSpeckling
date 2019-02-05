@@ -25,11 +25,12 @@ def getBB(file):
         ]).tolist()
     return(BB)
 
-
 def addPhotoBB(geojson, csv):
-    petal,spots,center,edge,throat, spotEstimates, photoBB = geojsonIO.parseGeoJson(geojson)
+    (petal, spots, center, edge, throat, spotEstimates, 
+            photoBB, scalingFactor) = geojsonIO.parseGeoJson(geojson)
     photoBB = getBB(csv)
-    newGeo = geojsonIO.writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB)
+    newGeo = geojsonIO.writeGeoJ(petal, spots, center, edge, throat, 
+            spotEstimates, photoBB, scalingFactor)
     with open(geojson, 'w') as fp:
         json.dump(newGeo, fp)
 

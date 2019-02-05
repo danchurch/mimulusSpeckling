@@ -7876,6 +7876,7 @@ import spotMarker
 
 import os
 import makePDFs
+import geojsonIO
 import pathlib
 import re
 import json
@@ -8862,7 +8863,6 @@ find . -name "P739F2*" | tr -d '[:space:]'
 
 find . -name "P739F2*" | tr -d '[:space:]'
 
-
 find . -name "P739F2*" -exec ls {} \;
 
 speck
@@ -9004,7 +9004,7 @@ rm /home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cro
 
 pdftk * output bigPDF_plate2_01.30.2019.pdf
 
-## okay, we got errors in the pdf, hunt them down. 
+## okay, we got errors in the pdf, need to hunt them down. 
 
 ## what else? Think about the inkdrop test and how we want 
 ## to use this data.
@@ -9138,14 +9138,21 @@ done
 
 ## on mac
 
+rt='/Users/danthomas/Documents/speckling'
+
+## on dell:
+
+rt='/home/daniel/Documents/cooley_lab/mimulusSpeckling'
+
 ## try one file from plate2
+
 
 flower='P764F2'
 
-wd='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2'
-breakSpots='/Users/danthomas/Documents/speckling/make_polygons/breakSpots.py'
-dougRaster='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2'
-geojF='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working'
+wd=$rt"/make_polygons/polygons/plate2"
+breakSpots=$rt"/make_polygons/breakSpots.py"
+dougRaster=$rt"/dougRaster/Rotated_and_Cropped/plate2"
+geojF=$rt"/make_polygons/geojsons_working"
 
 
 echo $wd"/"$flower
@@ -9165,10 +9172,160 @@ done
     #$breakSpots $i 
 done
 
-find $dougRaster -name $flower".JPG"
+flower='P500F1'
+i='mid'
 
-find . -name $flower".JPG"
+cd $wd
+cd $flower
+geoJ=$(find $i -name "*geojson")
+jpg=$(find $dougRaster -name $flower".JPG")
+outFile=${geoJ/.geojson/_spBr.geojson}
+
+$breakSpots $geoJ -j $jpg -o $outFile
+
+## seems okay
+
+## a few minutes left, keep working on the manual correction programs
+
+## get them running here, then try on mac
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons
+
+## next up - manual zone caller:
+
+manZoneCaller='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/manZoneCaller.py'
+geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P770F2/left/P770F2_left_polys.geojson'
+
+$manZoneCaller $geoJ 0.5 -o "test.geojson"
+
+
+### 
+
+## monday:
+
+## modify geojsonIO so it doesn't overwrite existing data?
+## how?.. 
+
+## don't know, but the system as is overwrites all geojson info 
+## everytime it writes...
+
+## might not be worth the time. Just be careful - any call of 
+## geojsonIO parse or write functions need to keep all information.
+## check this in all modules
+
+## otherwise, next week... 
+
+## set up mac as work station
+## investigate bugs with plate2
+## run two other plates, 3 and 4
+
+## today, 
+
+## fix geojson issue just mentioned
+## debug spots
+## make workstation
+
+## geojson:
+
+grep geojsonIO.writeGeoJ * 
+
+## wherever we find this function, let's make sure that 
+## all data are imported completely imported, and 
+## unmodified structures are re-exported. 
+
+## getspots
+## breakspots
+## addScale
+## manzone 
+## fixPhotoBBs
+## FlowerPetal
+
+## now try all of these out and find the bugs
+
+## do a pipeline, from doug csv file to curated spots and zones
+
+## example csv and jpg:
+
+getSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_spots.py'
+getZones='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_zones.py'
+breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py'
+manZoneCaller='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/manZoneCaller.py'
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/ex'
+flower='P504F2'
+#petal='left'
+#petal='mid'
+petal='right'
+
+jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P504F2.JPG'
+
+cd $wd
+cd $flower
+cd $petal
+
+$getSpots *melted.csv
+$getZones *geojson 0.5
+
+$breakSpots *geojson $jpeg -o "test.geojson"
+
+grep scalingFactor *geojson 
 
 
 
-$breakSpots P297F2_mid_polys.geojson -o P297F2_mid_polys_edit.geojson -j $dougRaster"/"P297F2.JPG 
+aa = geojsonIO.parseGeoJson("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/ex/P504F2/right/test.geojson")
+plt.ion()
+geojsonIO.plotOne(aa[0])
+geojsonIO.addOne(aa[1])
+## yeah, looks good. 
+
+## so now what?
+
+## try the manual zone caller:
+
+$manZoneCaller test.geojson 0.5 -o test3.geojson
+
+
+$manZoneCaller test2.geojson 0.5
+
+## all seems okay...
+## can we fix the boundaries?
+
+python3 
+
+geoJ=("/home/daniel/Documents/cooley_lab/"
+        "mimulusSpeckling/make_polygons/polygons/"
+        "plate2/P766F4/left/P766F4_left_polys.geojson")
+
+aa = geojsonIO.parseGeoJson(geoJ)
+
+plt.ion()
+
+geojsonIO.plotOne(aa[0])
+
+geojsonIO.addOne(aa[1])
+
+## how to expand the axes? 
+
+fig = plt.gcf()
+ax = plt.gca()
+
+newYLim = [ i * 1.1 for i in list(ax.get_ylim()) ] 
+newXLim = [ i * 1.1 for i in list(ax.get_xlim()) ] 
+ax.set_ylim(newYLim)
+ax.set_xlim(newXLim)
+
+
+
+cc[0]
+
+## tomorrow:
+
+## man zone
+## deal with error of not saving new zones, "newOK", etc.
+## set popup plots to the right
+## check spotmarker
+
+## try everything out on the mac, get it working
+
+## debug plate2 digitizing problems. 
+
+ 

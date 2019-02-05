@@ -101,7 +101,7 @@ def plotRow2(wd, flower):
 def plotRow3(wd, flower):
     ## row 3 plot petal and spot geojsons if we have them. 
     pWD = pathlib.Path(wd, flower)
-    for n,petal in enumerate(os.listdir(pWD)):
+    for n,petal in enumerate(['left','mid','right']):
         geoJ = [ i for i in os.listdir(pWD / petal) if "geojson" in i ][0]
         (petalPoly,spotsPoly,
                 _,_,_,_,_,_) = geojsonIO.parseGeoJson(pWD / petal / geoJ)
@@ -112,7 +112,7 @@ def plotRow3(wd, flower):
 
 def plotRow4(wd, flower):
     pWD = pathlib.Path(wd, flower)
-    for n,petal in enumerate(os.listdir(pWD)):
+    for n,petal in enumerate(['left','mid','right']):
         geoJ = [ i for i in os.listdir(pWD / petal) if "geojson" in i ][0]
         (petalPoly,spotsPoly,
          centerPoly,edgePoly,throatPoly,

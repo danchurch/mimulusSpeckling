@@ -4,20 +4,23 @@ import os, argparse, json
 import matplotlib.pyplot as plt
 import numpy as np
 import shapely.geometry as sg
-import geojsonIO as gj
+import geojsonIO
 import get_zones as gz
 
 def auto_call(geojson, centerSize, simp):
-    petal,spots,center,edge,throat = gj.parseGeoJson(geojson)
+    (petal,spots,
+    center,edge,throat, 
+    spotEstimates, photoBB, 
+    scalingFactor) = geojsonIO.parseGeoJson(geojson)
     center = gz.findCenter(petal, centerSize)
     edge, throat = gz.findEdgeThroat(petal, center, simp=simp)
     return(petal,spots,center,edge,throat)
 
 def plotFlowerZones(petal,spots,center,edge,throat):
-    gj.plotOne(petal)
-    gj.addOne(spots)
-    gj.addOne(edge, col='white', a=0.5)
-    gj.addOne(throat, col='white', a=0.5)
+    geojsonIO.plotOne(petal)
+    geojsonIO.addOne(spots)
+    geojsonIO.addOne(edge, col='white', a=0.5)
+    geojsonIO.addOne(throat, col='white', a=0.5)
 
 def choice():
     try:
@@ -48,12 +51,16 @@ def getNewEdgeThroat(pol, petal, center):
 
 class PolyMaker:
     def __init__(self, petal, center):
-        gj.plotOne(petal)
-        gj.addOne(center, col='white', a=0.5)
-        self.petal = petal
-        self.center = center
+        geojsonIO.plotOne(petal)
+        geojsonIO.addOne(center, col='white', a=0.5)
         self.fig = plt.gcf()
         self.ax = plt.gca()
+        newYLim = [ i * 1.1 for i in list(self.ax.get_ylim()) ]
+        newXLim = [ i * 1.1 for i in list(self.ax.get_xlim()) ]
+        self.ax.set_ylim(newYLim)
+        self.ax.set_xlim(newXLim)
+        self.petal = petal
+        self.center = center
         self.verts = []
         self.poly = None
         self.mouseCID = self.fig.canvas.mpl_connect('button_press_event', self)
@@ -72,9 +79,9 @@ class PolyMaker:
                     print(err)
                     pass
             aa = np.array(self.verts).transpose()
-            gj.clearOne()
-            gj.addOne(self.petal, col='yellow')
-            gj.addOne(self.center, col='white', a=0.5)
+            geojsonIO.clearOne()
+            geojsonIO.addOne(self.petal, col='yellow')
+            geojsonIO.addOne(self.center, col='white', a=0.5)
             try:
                 assert(len(self.verts) > 0)
                 self.ax.plot(aa[0],aa[1],'o', color='red')
@@ -82,11 +89,11 @@ class PolyMaker:
                 pass
             ## plot poly
             try:
-                gj.clearOne()
-                gj.addOne(self.petal, col='yellow')
-                gj.addOne(self.center, col='white', a=0.5)
+                geojsonIO.clearOne()
+                geojsonIO.addOne(self.petal, col='yellow')
+                geojsonIO.addOne(self.center, col='white', a=0.5)
                 self.ax.plot(aa[0],aa[1],'o', color='red')
-                gj.addOne(sg.Polygon(self.verts), a= 0.3)
+                geojsonIO.addOne(sg.Polygon(self.verts), a= 0.3)
             except (ValueError, IndexError):
                 pass
         elif event.name == "key_press_event" and event.key == 'enter':
@@ -99,7 +106,9 @@ class PolyMaker:
             return
 
 
-def main( petal,spots,center,edge,throat, centerSize, geojson):
+def main( petal,spots,center,edge,throat, 
+                spotEstimates, photoBB, 
+                scalingFactor, centerSize, geojson, outFileName):
     plt.ion()
     plotFlowerZones(petal,spots,center,edge,throat)
     print("Here's the flower and zones. Look ok? ", end = "")
@@ -110,7 +119,10 @@ def main( petal,spots,center,edge,throat, centerSize, geojson):
         print("Save this?")
         saveYN = choice()
         if saveYN == 'y':
-            featC = gj.writeGeoJ(petal, spots, center, edge, throat)
+            featC = geojsonIO.writeGeoJ(petal,spots,
+                center,edge,throat, 
+                spotEstimates, photoBB, 
+                scalingFactor) 
             with open(outFileName, 'w') as fp:
                 json.dump(featC, fp)
         quit()
@@ -125,7 +137,9 @@ def main( petal,spots,center,edge,throat, centerSize, geojson):
         petal,spots,center,edge,throat = auto_call( geojson, 
                                                     centerSize, 
                                                     simp)
-        main( petal,spots,center,edge,throat, args.centerSize, args.geojson)
+        main( petal,spots,center,edge,throat, 
+                        spotEstimates, photoBB, 
+                        scalingFactor, centerSize, geojson, outFileName)
 
     elif anotherSimp == 'n':
         print('Try manual zone call?', end ="")
@@ -153,7 +167,8 @@ def main( petal,spots,center,edge,throat, centerSize, geojson):
 
     if newOK == 'y':
         ## write it out
-        featC = gj.writeGeoJ(petal, spots, center, edge, throat)
+        featC = geojsonIO.writeGeoJ(petal,spots,center,edge,throat, 
+                    spotEstimates, photoBB, scalingFactor)
         with open(outFileName, 'w') as fp:
             json.dump(featC, fp)
         quit()
@@ -161,8 +176,9 @@ def main( petal,spots,center,edge,throat, centerSize, geojson):
     if newOk == 'n': 
         plt.close('all')
         print('Starting over...')
-        main( petal,spots,center,edge,throat, args.centerSize, args.simp, args.geojson)
-
+        main( petal,spots,center,edge,throat, 
+                    spotEstimates, photoBB, 
+                    scalingFactor, centerSize, geojson)
 
 ########################################
 
@@ -196,16 +212,11 @@ if __name__ == '__main__':
     else:
         outFileName = args.geojson
 
-##############
+    (petal,spots,
+    center,edge,throat, 
+    spotEstimates, photoBB, 
+    scalingFactor) = geojsonIO.parseGeoJson(args.geojson)
 
-
-petal,spots,center,edge,throat = gj.parseGeoJson(args.geojson)
-main( petal,spots,center,edge,throat, args.centerSize, args.geojson)
-
-#############
-
-
-
-
-
-
+    main( petal,spots,center,edge,throat, 
+                spotEstimates, photoBB, 
+                scalingFactor, args.centerSize, args.geojson, outFileName )

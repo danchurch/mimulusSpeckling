@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import FlowerPetal
+import geojsonIO
 import os, copy, json, argparse
 import matplotlib as mp
 #import matplotlib.backend_bases
@@ -178,7 +179,6 @@ class BreakSpot:
         self.keyCid = self.fig.canvas.mpl_connect('key_press_event', self)
     def __call__(self,event):
         plt.ion()
-        print('made it here')
         if event.key in {'y','Y'}:
             self.fig.canvas.mpl_disconnect(self.keyCid)
             polyPicker = PolyPicker(self.flowerPetal, fig=self.fig, axs=self.axs)
@@ -195,21 +195,28 @@ class BreakSpot:
 ########### top level function ###########
 def top_level(args):
     plt.ion()
-    jpegFig=plt.figure()
-    img=mpimg.imread(args.jpeg)
-    plt.imshow(img, origin='lower')
-    if mp.get_backend() == 'TkAgg':
-        jpegFig.canvas.manager.window.wm_geometry("+900+0")
-        jpegFig.set_size_inches([6,3], forward = True)
-
-                
-    ## load flower geojson and plot cartoon of flower:
+    ## load up flowerpetal object:
     fl = FlowerPetal.FlowerPetal()
     fl.geojson = args.geoJ
     fl.parseGeoJson()
     fl.cleanFlowerPetal()
-    fl.plotOne(fl.petal)
-    fl.addOne(fl.spots, pick=True)
+
+    ## plot the original raster image:
+    bb = list(zip(*fl.photoBB))
+    lowerLeft = [ min(i)-2 for i in bb ]
+    upperRight = [ max(i)+2 for i in bb ]
+    img=mpimg.imread(args.jpeg)
+    justPetal = img[lowerLeft[1]:upperRight[1],lowerLeft[0]:upperRight[0]]
+    jpegFig = plt.Figure()
+    jpegAx = plt.axes()
+    jpegAx.imshow(justPetal, origin='lower')
+    if mp.get_backend() == 'TkAgg':
+        plt.gcf().canvas.manager.window.wm_geometry("+900+0")
+        plt.gcf().set_size_inches([6,3], forward = True)
+                
+    ## plot cartoon of flower:
+    geojsonIO.plotOne(fl.petal)
+    geojsonIO.addOne(fl.spots, pick=True)
     ## hold onto these for the other objects
     flf = plt.gcf()
     flf.suptitle(fl.geojson)
@@ -230,16 +237,14 @@ def top_level(args):
     plt.ioff()
     plt.show()
     ## the blocking by the plot is needed, to keep 
-    ## the script from ending before data is collected. 
+    ## the script from ending before data is collected?
 
     ## check to make sure new spots are good
-    fl.plotOne(fl.petal)
-    fl.addOne(fl.spots, pick=True)
+    geojsonIO.plotOne(fl.petal)
+    geojsonIO.addOne(fl.spots, pick=True)
     flf = plt.gcf()
     flf.suptitle(fl.geojson)
     fla = flf.gca()
-
-
     if mp.get_backend() == 'TkAgg':
         flf.canvas.manager.window.wm_geometry("+900+400")
         flf.set_size_inches([5,5], forward = True)
@@ -250,11 +255,14 @@ def top_level(args):
         top_level(args)
     elif reallyOK == 'y': 
         ## save new spots:
-        fl.saveOut(outFileName=args.outFileName)
-        print('Saving to: ' + args.outFileName)
-        print('and done!')
+        featC = geojsonIO.writeGeoJ(fl.petal, fl.spots, fl.center, 
+                                    fl.edge, fl.throat, fl.spotEstimates, 
+                                    fl.photoBB, fl.scalingFactor)
+        with open(args.outFileName, 'w') as fp:
+            json.dump(featC, fp)
         plt.close('all')
         quit()
+
 ########### top level function ###########
 
 
@@ -267,14 +275,13 @@ if __name__ == '__main__':
     parser.add_argument('geoJ',
                 help=('The geojson file of the petal.'),
                 type=str)
+    parser.add_argument('jpeg', 
+                help=('jpeg image of flower. '
+                      'Use entire path.'),
+                type=str)
     parser.add_argument('--outFileName','-o', 
                 help=('place to put edited geojson. '
-                      'If none, geojson will overwrite. '
-                      'Use quotes.'),
-                default=None, type=str)
-    parser.add_argument('--jpeg','-j', 
-                help=('Original jpeg image of flower. '
-                      'Use entire path. Use quotes.'),
+                      'If none, geojson will overwrite.'),
                 default=None, type=str)
     args = parser.parse_args()
 

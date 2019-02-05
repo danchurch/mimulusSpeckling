@@ -26,6 +26,8 @@ class FlowerPetal():
                 self.edge = None
                 self.throat = None
                 self.spotEstimates = None
+                self.photoBB = None
+                self.scalingFactor = None
                 self.biggestSpotArea = None
                 self.smallestSpotArea = None
                 self.avgSpotSize = None
@@ -74,7 +76,9 @@ class FlowerPetal():
                 self.quadIVCoveredbySpots = None
 
     def parseGeoJson(self):
-                self.petal, self.spots, self.center, self.edge, self.throat, self.spotEstimates = geojsonIO.parseGeoJson(self.geojson) 
+                (self.petal, self.spots, self.center, 
+                self.edge, self.throat, self.spotEstimates,
+                self.photoBB, self.scalingFactor) = geojsonIO.parseGeoJson(self.geojson) 
 
     ## function to clean (multi)polygons if self-intersecting 
     def cleanPolys(self, poly):

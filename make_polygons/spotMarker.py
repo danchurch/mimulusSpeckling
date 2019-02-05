@@ -90,12 +90,22 @@ def findJPG(geojson, jpgs):
     allJpgs = os.listdir(jpgs)
     aa = re.search('(P.*?)_', geojson.name)
     flowerName = aa.groups()[0]
-    jpgName = [ i for i in allJpgs if (flowerName in i and "JPG" in i) ][0]
-    jpg = pathlib.Path(jpgName)
-    return(jpg)
+    jpgList = [ i for i in allJpgs if (flowerName in i and "JPG" in i) ]
+    try:
+        assert jpgList
+        jpgName=jpgList[0]
+        jpg = pathlib.Path(jpgName)
+        return(jpg)
+    except AssertionError as err:
+        print("Can't find jpeg. Check geojson name or jpeg folder.")
+        quit()
+
+
 
 def photoAndPetal(geojson,jpgs,jpg):
-    petal,spots,center,edge,throat, spotEstimates, photoBB = geojsonIO.parseGeoJson(geojson)
+    (petal,spots,center,edge,throat, 
+        spotEstimates, photoBB, 
+                    scalingFactor) = geojsonIO.parseGeoJson(geojson)
     plt.ion()
     xxyy = list(zip(*photoBB))
     Xmin = min(xxyy[0])
@@ -121,13 +131,18 @@ def main(geojson, jpgs):
     geojson = pathlib.Path(geojson)
     jpgs = pathlib.Path(jpgs)
     plt.ion()
-    petal,spots,center,edge,throat,spotEstimates,photoBB = geojsonIO.parseGeoJson(geojson)
+    (petal,spots,center,edge,throat, 
+        spotEstimates, photoBB, 
+                    scalingFactor) = geojsonIO.parseGeoJson(geojson)
     jpg=findJPG(geojson, jpgs)
     photoAndPetal(geojson,jpgs,jpg)
     spotMarker = SpotMarker()
     choice()
     spotEstimates = sg.MultiPolygon(spotMarker.circs)
-    featC = geojsonIO.writeGeoJ(petal,spots,center,edge,throat,spotEstimates,photoBB)
+    featC = geojsonIO.writeGeoJ (petal,spots,center,edge,throat, 
+                                    spotEstimates, photoBB, 
+                                                scalingFactor)
+
     with open(outFileName, 'w') as fp:
         json.dump(featC, fp)
 
@@ -139,7 +154,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('geojson',
                 help=("""Name of the geojson file to which you want to
-                        estimate spots. """),
+                        add estimated spots. """),
                 type=str)
     parser.add_argument('jpgs',
                 help=("""Name of the folder of jpg images."""),

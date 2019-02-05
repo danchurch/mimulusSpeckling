@@ -9250,6 +9250,7 @@ getSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_s
 getZones='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_zones.py'
 breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py'
 manZoneCaller='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/manZoneCaller.py'
+spotMarker='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/spotMarker.py'
 wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/ex'
 flower='P504F2'
 #petal='left'
@@ -9258,9 +9259,7 @@ petal='right'
 jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P504F2.JPG'
 
 cd $wd
-
 cd $flower
-
 cd $petal
 
 $getSpots *melted.csv
@@ -9321,3 +9320,17 @@ cc[0]
 ## debug plate2 digitizing problems. 
 
 
+## check on spotmarker
+
+
+#geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/ex/P504F2/right/test2.geojson'
+
+geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/ex/P504F2/right/P504F2_right_polys.geojson'
+jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+$spotMarker $geoj $jpeg
+
+## okay, seems to work...
+
+## so what does that leave? 
+
+## update the mac and see how they believe?

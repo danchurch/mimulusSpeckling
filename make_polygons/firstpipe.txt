@@ -9263,9 +9263,10 @@ cd $flower
 cd $petal
 
 $getSpots *melted.csv
-$getZones *geojson 0.5
 
-$breakSpots *geojson $jpeg -o "test.geojson"
+$getZones P504F2_right_polys.geojson 0.5 -o "test.geojson"
+
+$breakSpots test.geojson $jpeg -o "test2.geojson"
 
 grep scalingFactor *geojson 
 
@@ -9359,3 +9360,58 @@ done
 ## fuck, why do these have spot estimates? 
 
 ## okay, back up. back to my comp...
+
+## where are these happening?
+
+## start over in the pipeline and see where this appears. 
+
+## it's at least happening in the zone calling script. Why?
+
+## ugh, typo in the geojsonIO module. 
+
+## what's the damage? We have to at least redo the plate2 geojsons, 
+## which is a good thing, some of the mysterious bugs might be due to
+## this...
+
+## was plate1 also affected by this?
+
+## shit, yes. 
+
+## so we need to go through and remove these...
+
+## best thing here would be to use our exist IO functions. For example:
+
+exGeo='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P768F3/right/P768F3_right_polys.geojson'
+cp $exGeo /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/
+
+python3
+
+import geojsonIO
+import os, pathlib, json
+import matplotlib.pyplot as plt
+
+file=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/P768F3_right_polys.geojson')
+ 
+(petal,spots,center,
+edge,throat, spotEstimates, 
+photoBB, scalingFactor) =  geojsonIO.parseGeoJson(file)
+
+
+plt.ion()
+geojsonIO.plotOne(petal)
+geojsonIO.addOne(spotEstimates)
+
+spotEstimates = None
+
+featC = geojsonIO.writeGeoJ(petal,spots,center,
+                            edge,throat, spotEstimates, 
+                            photoBB, scalingFactor) 
+
+with open("test.geojson", "w") as fp:
+    json.dump(featC, fp)
+
+
+## clear workspace, see if that worked.
+
+
+file=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/P768F3_right_polys.geojson')

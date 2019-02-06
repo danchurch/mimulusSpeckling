@@ -154,7 +154,6 @@ if __name__ == "__main__":
     edge,throat, spotEstimates, 
     photoBB, scalingFactor) = gj.parseGeoJson(args.geojson)
 
-    print(args.geojson)
     center = findCenter(petal, args.centerSize)
     edge, throat = findEdgeThroat(petal, center, simp=0.5)
 

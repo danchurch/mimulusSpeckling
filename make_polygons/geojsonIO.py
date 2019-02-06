@@ -34,7 +34,7 @@ def parseGeoJson(geojson):
             throat = sg.polygon.Polygon()
         try:
             spotEstimatesGJ = [ i for i in listP if i['properties']['id'] == 'spotEstimates' ][0]['geometry']
-            spotEstimates = sg.shape(spotsGJ)
+            spotEstimates = sg.shape(spotEstimatesGJ)
         except:
             spotEstimates = sg.polygon.Polygon()
         try:

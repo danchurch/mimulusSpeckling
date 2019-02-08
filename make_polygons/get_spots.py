@@ -87,14 +87,24 @@ def stand(pol, scale, cent):
     scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
     return(scaled)
 
+def testAndFixPoly(geo):
+    if not geo.is_valid: 
+        print('polygon invalid, buffering')
+        try:
+            assert(geo.buffer(0.0).is_valid)
+            geo = geo.buffer(0.0)
+        except AssertionError:
+            geo = geo.simplify(0.0)
+        finally:
+            if not geo.is_valid: print("Couldn't fix it, sorry.")
+    return(geo)
+
 ## clean up small polygons and points
-def cleanCollections(geo):
+def cleanPetal(geo):
+    geo = testAndFixPoly(geo)
     """sometimes our digitizing of petals creates smatterings of geometries instead
     of a single clean polygon. This attempts to prune down to the main polygon,
     which is usually the object we want."""
-    if not geo.is_valid: 
-        print('polygon invalid, buffering')
-        geo = geo.buffer(0.0)
     if isinstance(geo, sg.collection.BaseMultipartGeometry):
         onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]
         areas = [ i.area for i in onlyPolys ]
@@ -104,10 +114,8 @@ def cleanCollections(geo):
     return(biggestPoly)
 
 def cleanSpots(SpotsMultiPoly):
+    SpotsMultiPoly = testAndFixPoly(geo)
     """Tries to clean up spot collections, leaving them as a multipolygon"""
-    if not SpotsMultiPoly.is_valid: 
-        print('polygon invalid, buffering')
-        SpotsMultiPoly = SpotsMultiPoly.buffer(0.0)
     if isinstance(SpotsMultiPoly, sg.MultiPolygon):
         SpotsMultiPoly = sg.MultiPolygon([ i.buffer(0.0) for i in SpotsMultiPoly ])
     elif isinstance(SpotsMultiPoly, sg.Polygon):
@@ -159,7 +167,7 @@ if __name__ == "__main__":
 
     photoBB, petalMat, spotsMat = parseDougMatrix(meltBaseName)
     petPolRaw = digitizePols(petalMat) 
-    petPol = cleanCollections(petPolRaw)
+    petPol = cleanPetal(petPolRaw)
     spotPolRaw = digitizePols(spotsMat)
     spotPol = cleanSpots(spotPolRaw)
 

@@ -9390,12 +9390,12 @@ import geojsonIO
 import os, pathlib, json
 import matplotlib.pyplot as plt
 
-file=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/P768F3_right_polys.geojson')
+#file=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/P768F3_right_polys.geojson')
+#file=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/test.geojson')
  
 (petal,spots,center,
 edge,throat, spotEstimates, 
 photoBB, scalingFactor) =  geojsonIO.parseGeoJson(file)
-
 
 plt.ion()
 geojsonIO.plotOne(petal)
@@ -9410,8 +9410,100 @@ featC = geojsonIO.writeGeoJ(petal,spots,center,
 with open("test.geojson", "w") as fp:
     json.dump(featC, fp)
 
-
 ## clear workspace, see if that worked.
 
+## yeah, looks good, no spot estimates. 
+## So tomorrow, make a script that clears our geojsons of all spot estimates.
 
-file=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/P768F3_right_polys.geojson')
+## think it can be done in python:
+
+## we probably just want to redo the digitizing of plate2. But plate 1 is value-added 
+## at this point with the manual corrections.
+
+## so let's use plate2 as a toybox:
+
+
+import geojsonIO
+import os, pathlib, json
+import matplotlib.pyplot as plt
+
+
+def deleteSpotEstimates(plate):
+    errorPetals=[]
+    for i in os.listdir(plate):
+        flower = plate / i
+        for j in os.listdir(flower):
+            petalDir = plate / flower / j
+            aa = [ i for i in os.listdir(petalDir) if "polys.geojson" in i ]
+            try:
+                assert aa
+                print("-----------------" + aa[0] + "---------------------------")
+                geoJ = plate / flower / petalDir / aa[0]
+                (petal,spots,center,
+                edge,throat, spotEstimates, 
+                photoBB, scalingFactor) =  geojsonIO.parseGeoJson(geoJ)
+                spotEstimates = None
+                featC = geojsonIO.writeGeoJ(petal,spots,center,
+                                            edge,throat, spotEstimates, 
+                                            photoBB, scalingFactor) 
+                with open(geoJ, "w") as fp:
+                    json.dump(featC, fp)
+            except AssertionError as err:
+                print(flower.stem + petalDir.stem + " failed")
+                errorPetals.append(flower.stem + petalDir.stem)
+    return(errorPetals)
+
+
+
+plate=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2')
+
+deleteSpotEstimates(plate)
+
+## seems to work, put in a commit and try it on plate1
+
+plate=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate1')
+
+deleteSpotEstimates(plate)
+
+## seems okay...
+## so update git, 
+## then redo plate2 digitizing
+
+## redo pdf also
+## and while that is going on, try programs on mac?
+
+## redigitize plate2:
+
+
+getSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_spots.py'
+getZones='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_zones.py'
+makePDFs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/makePDFs.py'
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/'
+jpgDirectory='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+outDir='/home/daniel/Documents/cooley_lab/bigPDF'
+plate='plate2/'
+
+cd $wd$plate
+
+for flower in *; do 
+    echo $flower
+    find $flower -name "*.csv" -exec $getSpots {} \;
+done
+
+## add zones, make pdf plate
+for flower in *; do 
+    echo $flower
+    find $flower -name "*.geojson" -exec $getZones {} 0.5 \;
+    $makePDFs $flower $wd$plate $jpgDirectory -o $outDir
+done
+
+
+
+
+$makePDFs -h 
+
+for i in *; do
+    echo $i
+    $makePDFs $i $workingDirectory $jpgDirectory -o $outDir
+done
+

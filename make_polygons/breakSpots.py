@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
+import matplotlib as mp
+mp.use("TkAgg")
 import FlowerPetal
 import geojsonIO
 import os, copy, json, argparse
-import matplotlib as mp
 #import matplotlib.backend_bases
 from matplotlib import pyplot as plt
 import matplotlib.image as mpimg
@@ -193,11 +194,11 @@ class BreakSpot:
 ############ breakSpots ##################
 
 ########### top level function ###########
-def top_level(args):
+def top_level(geoJ, jpeg, outFileName=None):
     plt.ion()
     ## load up flowerpetal object:
     fl = FlowerPetal.FlowerPetal()
-    fl.geojson = args.geoJ
+    fl.geojson = geoJ
     fl.parseGeoJson()
     fl.cleanFlowerPetal()
 
@@ -205,7 +206,7 @@ def top_level(args):
     bb = list(zip(*fl.photoBB))
     lowerLeft = [ min(i)-2 for i in bb ]
     upperRight = [ max(i)+2 for i in bb ]
-    img=mpimg.imread(args.jpeg)
+    img=mpimg.imread(jpeg)
     justPetal = img[lowerLeft[1]:upperRight[1],lowerLeft[0]:upperRight[0]]
     jpegFig = plt.Figure()
     jpegAx = plt.axes()
@@ -252,13 +253,14 @@ def top_level(args):
     reallyOK = input("Revised spots okay? (y/n): ")
     if reallyOK == 'n':
         print("Shoot. Starting over.")
-        top_level(args)
+        plt.close('all')
+        top_level(geoJ,jpeg,outFileName)
     elif reallyOK == 'y': 
         ## save new spots:
         featC = geojsonIO.writeGeoJ(fl.petal, fl.spots, fl.center, 
                                     fl.edge, fl.throat, fl.spotEstimates, 
                                     fl.photoBB, fl.scalingFactor)
-        with open(args.outFileName, 'w') as fp:
+        with open(outFileName, 'w') as fp:
             json.dump(featC, fp)
         plt.close('all')
         quit()
@@ -285,6 +287,11 @@ if __name__ == '__main__':
                 default=None, type=str)
     args = parser.parse_args()
 
+    if args.outFileName: outFileName = args.outFileName
+    elif not args.outFileName: outFileName = args.geoJ
+
+    mp.use("TkAgg")
+
     ## load the original jpeg:
 
-    top_level(args)
+    top_level(args.geoJ, args.jpeg, outFileName)

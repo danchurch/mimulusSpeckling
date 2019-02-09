@@ -159,5 +159,9 @@ if __name__ == "__main__":
     plotRow3(wd, flower)
     plotRow4(wd, flower)
 
-    outPDF=pathlib.Path(outDir + "/" + flower + ".pdf")
+    outPDF=str(pathlib.Path(outDir + "/" + flower + ".pdf"))
+    
     plt.savefig(outPDF)
+
+
+

@@ -114,7 +114,7 @@ def cleanPetal(geo):
     return(biggestPoly)
 
 def cleanSpots(SpotsMultiPoly):
-    SpotsMultiPoly = testAndFixPoly(geo)
+    SpotsMultiPoly = testAndFixPoly(SpotsMultiPoly)
     """Tries to clean up spot collections, leaving them as a multipolygon"""
     if isinstance(SpotsMultiPoly, sg.MultiPolygon):
         SpotsMultiPoly = sg.MultiPolygon([ i.buffer(0.0) for i in SpotsMultiPoly ])

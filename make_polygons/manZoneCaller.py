@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
+import matplotlib as mp
+mp.use("TkAgg")
 import os, argparse, json
 import matplotlib.pyplot as plt
 import numpy as np
 import shapely.geometry as sg
 import geojsonIO
 import get_zones as gz
-import matplotlib as mp
 import matplotlib.pyplot as plt
 
 def auto_call(geojson, centerSize, simp):

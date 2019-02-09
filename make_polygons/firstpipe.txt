@@ -9248,6 +9248,7 @@ grep geojsonIO.writeGeoJ *
 
 getSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_spots.py'
 getZones='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/get_zones.py'
+
 breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/breakSpots.py'
 manZoneCaller='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/manZoneCaller.py'
 spotMarker='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/spotMarker.py'
@@ -9507,3 +9508,101 @@ for i in *; do
     $makePDFs $i $workingDirectory $jpgDirectory -o $outDir
 done
 
+
+## let's do this on the mac
+
+#####################################################
+
+
+#!/usr/bin/env bash
+
+getSpots='/Users/danthomas/Documents/speckling/make_polygons/get_spots.py'
+getZones='/Users/danthomas/Documents/speckling/make_polygons/get_zones.py'
+makePDFs='/Users/danthomas/Documents/speckling/make_polygons/makePDFs.py'
+wd='/Users/danthomas/Documents/speckling/make_polygons/polygons/'
+jpgDirectory='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2'
+outDir='/Users/danthomas/Documents/bigPDF/'
+plate='plate2/'
+
+cd $wd$plate
+
+echo $flower
+
+
+## debugging
+flower='P500F1'
+find $flower -name "*.csv" -exec $getSpots {} \;
+
+find $flower -name "*.geojson" -exec $getZones {} 0.5 \;
+
+$makePDFs $flower $wd$plate $jpgDirectory -o $outDir
+
+
+for flower in *; do 
+    echo $flower
+    find $flower -name "*.csv" -exec $getSpots {} \;
+    find $flower -name "*.geojson" -exec $getZones {} 0.5 \;
+    $makePDFs $flower $wd$plate $jpgDirectory -o $outDir
+done
+
+
+
+#####################################################
+
+
+## clean out the files 
+
+find /Users/danthomas/Documents/speckling/make_polygons/polygons/plate2 -name "*geojson" -exec rm {} \;
+
+## now try our script:
+
+./digOnmac.sh 2>&1 | tee diglog.txt
+
+## seems okay. Gonna run for a while. In the meantime, can we try out our various programs?
+
+breakSpots.py
+manZoneCaller.py
+spotMarker.py
+
+
+geoJ='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
+jpeg='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
+
+## try one:
+./breakSpots.py $geoJ $jpeg 
+
+## oops, will need to redigitize that, broke up spots on actual geojson 
+
+breakSpots='/Users/danthomas/Documents/speckling/make_polygons/breakSpots.py'
+
+$breakSpots $geoJ $jpeg -o "test.geojson"
+
+CSV='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_melted.csv'
+
+$getSpots $CSV
+$getZones $geoJ 0.5
+
+## changing the back end to tkagg helps portability a lot. 
+## remember to do this on all the matplotlib-based programs. 
+
+## maybe expand the plot a little?
+
+
+## otherwise, seems to work ok. 
+
+## test another...
+
+## zone caller is up
+
+manZoneCaller='/Users/danthomas/Documents/speckling/make_polygons/manZoneCaller.py'
+
+$manZoneCaller $geoJ 0.5 -o test.geojson
+
+$manZoneCaller test.geojson 0.5 
+
+
+spotMarker='/Users/danthomas/Documents/speckling/make_polygons/spotMarker.py'
+
+jpgs='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/'
+
+$spotMarker test.geojson $jpgs -o test2.geojson

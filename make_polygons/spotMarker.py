@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import matplotlib as mp
+mp.use("TkAgg")
 import argparse, json, pathlib, os, re
 import numpy as np
 import shapely.geometry as sg

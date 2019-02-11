@@ -9602,7 +9602,21 @@ $manZoneCaller test.geojson 0.5
 
 
 spotMarker='/Users/danthomas/Documents/speckling/make_polygons/spotMarker.py'
-
 jpgs='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/'
 
-$spotMarker test.geojson $jpgs -o test2.geojson
+mv test.geojson P500F1_left_test.geojson
+
+$spotMarker P500F1_left_test.geojson $jpgs -o test2.geojson
+
+## okay, something's fucked... 
+
+## do problems go away if we change backends?
+
+## seems much better now. 
+
+## ok, so for someone else, what would be the approach here:
+
+## set up a toy directory, and run through a few. Then a make a notebook about how 
+## to do this. 
+
+## do this on my comp.

@@ -9781,11 +9781,72 @@ source /home/daniel/Documents/learn/python/venv/bin/activate
 
 python3 -m pip install --index-url https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
 
-## can we run our scripts using this setup
+## can we run our scripts using this venv?
+
+pip3 install numpy pandas matplotlib shapely descartes Pillow scipy
+
 
 speck
 
-zoop!
+breakSpots.py
+flowerPetal.py
+geojsonIO.py
+get_spots.py
+get_zones.py
+makePDFs.py
+manZoneCaller.py
+spotMarker.py
+
+breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/breakSpots.py'
+
+geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
+
+jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
+
+$breakSpots -h
+
+## try one:
+$breakSpots $geoJ $jpeg -o test.geojson
+
+flowerPetal='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/flowerPetal.py'
+$flowerPetal
+
+geojsonIO='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/geojsonIO.py'
+
+find . -name "spotMarker.py"
+
+./make_polygons/package/makeFlowerPolygons/spotMarker.py -h
+
+./make_polygons/package/makeFlowerPolygons/spotMarker.py -
 
 
+## ugh, sleepy and sick. What am I trying to do here? 
 
+## get this working on Melia's computer. Update the package, consider placing on Pypi. 
+
+## how do we update? Just rerun our code for building the distro, etc?
+
+deactivate
+
+## update package  - how? just repeat?
+
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
+
+
+python3 setup.py sdist bdist_wheel
+
+python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
+
+## seems to have worked... now can we update in our venv?
+
+source /home/daniel/Documents/learn/python/venv/bin/activate
+
+pip install -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom==0.0.2
+
+
+## seems to work.
+
+## the goal today, design a loop that will work for melia
+
+## let's move to the mac. 

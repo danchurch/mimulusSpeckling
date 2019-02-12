@@ -6,6 +6,4 @@ For details, see associated jupyter notebook, "petals_to_polygons.ipynb" contain
 
 This notebook can also be read using the jupyter nbviewer website at:
 
-https://nbviewer.jupyter.org/github/danchurch/mimulusSpeckling/blob/master/make_polygons/petals_to_polygons.ipynb
-
-
+https://nbviewer.jupyter.org/github/danchurch/mimulusSpeckling/blob/master/make_polygons/notebooks/petals_to_polygons.ipynb

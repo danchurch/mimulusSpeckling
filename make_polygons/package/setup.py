@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="FlowerPetal-dcthom",
+    name="makeFlowerPolygons-dcthom",
     version="0.0.1",
     author="Daniel Thomas",
     author_email="thomasdc@whitman.edu",

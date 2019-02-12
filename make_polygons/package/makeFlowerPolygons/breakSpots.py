@@ -2,11 +2,11 @@
 
 import matplotlib as mp
 mp.use("TkAgg")
-import makeFlowerPolygons.flowerPetal
-import makeFlowerPolygons.geojsonIO
 import os, copy, json, argparse
+import makeFlowerPolygons.geojsonIO as geojsonIO
 #import matplotlib.backend_bases
 from matplotlib import pyplot as plt
+import makeFlowerPolygons.flowerPetal as flowerPetal
 import matplotlib.image as mpimg
 from shapely import geometry as sg
 from descartes import PolygonPatch
@@ -220,7 +220,7 @@ def top_level(geoJ, jpeg, outFileName=None):
     geojsonIO.addOne(fl.spots, pick=True)
     ## hold onto these for the other objects
     flf = plt.gcf()
-    flf.suptitle(fl.geojson)
+    flf.suptitle(os.path.basename(fl.geojson))
     fla = flf.gca()
     if mp.get_backend() == 'TkAgg':
         flf.canvas.manager.window.wm_geometry("+900+400")
@@ -244,13 +244,13 @@ def top_level(geoJ, jpeg, outFileName=None):
     geojsonIO.plotOne(fl.petal)
     geojsonIO.addOne(fl.spots, pick=True)
     flf = plt.gcf()
-    flf.suptitle(fl.geojson)
+    flf.suptitle(os.path.basename(fl.geojson))
     fla = flf.gca()
     if mp.get_backend() == 'TkAgg':
         flf.canvas.manager.window.wm_geometry("+900+400")
         flf.set_size_inches([5,5], forward = True)
-    fla.set_title("Revised spots okay? (y/n): ")
-    reallyOK = input("Revised spots okay? (y/n): ")
+    fla.set_title("Save revised spots? (y/n): ")
+    reallyOK = input("Save revised spots? (y/n): ")
     if reallyOK == 'n':
         print("Shoot. Starting over.")
         plt.close('all')

@@ -9662,8 +9662,7 @@ import geojsonIO.py
 
 https://packaging.python.org/tutorials/packaging-projects/
 
-## meh, worthless. Just a tutorial on how to upload to pypi
-
+## meh, Just a tutorial on how to upload to pypi
 
 ## how do structure our files for easy import, locally, as parts of 
 ## a package, with all of the namespace benefits?
@@ -9743,5 +9742,50 @@ import makeFlowerPolygons.get_zones
 import makeFlowerPolygons.makePDFs  
 import makeFlowerPolygons.manZoneCaller  
 import makeFlowerPolygons.spotMarker  
-
 import makeFlowerPolygons.updateCSVs
+
+## everything imports well
+## okay, but will everything run smoothly?
+
+breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/makeFlowerPolygons/breakSpots.py'
+geoJ='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
+jpeg='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
+
+## try one:
+$breakSpots $geoJ $jpeg 
+breakSpots.py 
+
+## nope, we really do need to make this installable
+
+## can we follow the above tutorial with our files?
+
+## add name:
+
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
+
+
+python3 setup.py sdist bdist_wheel
+
+python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+
+## check it with a virtual environment
+
+cd '/home/daniel/Documents/learn/python/venv'
+
+virtualenv '/home/daniel/Documents/learn/python/venv'
+
+source /home/daniel/Documents/learn/python/venv/bin/activate
+
+
+python3 -m pip install --index-url https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
+
+## can we run our scripts using this setup
+
+speck
+
+zoop!
+
+
+

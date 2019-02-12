@@ -2,8 +2,8 @@
 
 import matplotlib as mp
 mp.use("TkAgg")
-import FlowerPetal
-import geojsonIO
+from makeFlowerPolygons.phenotyping import flowerPetal
+from makeFlowerPolygons import geojsonIO
 import os, copy, json, argparse
 #import matplotlib.backend_bases
 from matplotlib import pyplot as plt
@@ -197,7 +197,7 @@ class BreakSpot:
 def top_level(geoJ, jpeg, outFileName=None):
     plt.ion()
     ## load up flowerpetal object:
-    fl = FlowerPetal.FlowerPetal()
+    fl = flowerPetal.FlowerPetal()
     fl.geojson = geoJ
     fl.parseGeoJson()
     fl.cleanFlowerPetal()

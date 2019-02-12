@@ -9682,7 +9682,7 @@ sys.path.append(str(wd / "/home/daniel/Documents/cooley_lab/mimulusSpeckling/mak
 
 import makeFlowerPolygons
 
-import makeFlowerPolygons.geojsonIO
+from makeFlowerPolygons.geojsonIO import plotOne
 
 ## did this work?
 
@@ -9700,3 +9700,22 @@ makeFlowerPolygons.geojsonIO.plotOne(petal)
 ## seems to work... all you need is an __init__.py file
 
 ## will it work on the jupyter notebook? the mac? let's see
+
+## remind me, how do we plot an image of just our petal?
+
+## we should probably make a function for this...
+
+## first, deal with the restructuring...
+
+## first check, can we import all modules?
+
+from makeFlowerPolygons.curation import breakSpots
+from makeFlowerPolygons.curation import spotMarker
+from makeFlowerPolygons.curation import spotMarker
+from makeFlowerPolygons import makePDFs
+from makeFlowerPolygons import geojsonIO
+from makeFlowerPolygons.phenotyping import flowerPetal
+
+makeFlowerPolygons.spotMarker.findJPG
+
+import makeFlowerPolygons.curation

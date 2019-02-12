@@ -7,13 +7,14 @@ Slots for throat, and edge will be created
 but left as empty polygon objects.
 """
 
-import argparse, os, json, shapely, geojsonIO
+import argparse, os, json, shapely
 import numpy as np
 import matplotlib.pyplot as plt
 import shapely.geometry as sg
 import shapely.affinity as sa
 import shapely.errors
 from skimage import measure
+from makeFlowerPolygons import geojsonIO
 
 def parseDougMatrix(file):
     orig = np.genfromtxt(file, delimiter=',')

@@ -2,8 +2,8 @@
 
 import os, json, pathlib, argparse
 import numpy as np
-import geojsonIO 
-from get_spots import parseDougMatrix as parseDougMatrix
+from makeFlowerPolygons import geojsonIO 
+from makeFlowerPolygons.makePolygons.get_spots import parseDougMatrix 
 import shapely.geometry as sg
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg

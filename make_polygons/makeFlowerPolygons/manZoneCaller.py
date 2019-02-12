@@ -6,8 +6,8 @@ import os, argparse, json
 import matplotlib.pyplot as plt
 import numpy as np
 import shapely.geometry as sg
-import geojsonIO
-import get_zones as gz
+import makeFlowerPolygons.geojsonIO
+import makeFlowerPolygons.get_zones as gz
 import matplotlib.pyplot as plt
 
 def auto_call(geojson, centerSize, simp):

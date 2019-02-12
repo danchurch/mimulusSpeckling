@@ -2,8 +2,8 @@
 
 import matplotlib as mp
 mp.use("TkAgg")
-from makeFlowerPolygons.phenotyping import flowerPetal
-from makeFlowerPolygons import geojsonIO
+import makeFlowerPolygons.flowerPetal
+import makeFlowerPolygons.geojsonIO
 import os, copy, json, argparse
 #import matplotlib.backend_bases
 from matplotlib import pyplot as plt

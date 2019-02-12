@@ -8,9 +8,9 @@ import shapely.geometry as sg
 import shapely.ops as so
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import makeFlowerPolygons.flowerPetal
 from descartes import PolygonPatch
 from makeFlowerPolygons import geojsonIO
-from makeFlowerPolygons.phenotyping import flowerPetal
 from scipy.spatial import distance
 
 

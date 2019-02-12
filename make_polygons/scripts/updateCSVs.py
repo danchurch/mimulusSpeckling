@@ -2,7 +2,7 @@
 
 import os, argparse
 import numpy as np
-from get_spots import parseDougMatrix
+from makeFlowerPolygons.get_spots import parseDougMatrix
 
 ## args
 parser = argparse.ArgumentParser()

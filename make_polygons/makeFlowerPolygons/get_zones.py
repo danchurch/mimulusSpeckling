@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse, os, json, shapely
-import geojsonIO as gj
+import makeFlowerPolygons.geojsonIO as gj
 import numpy as np
 import matplotlib.pyplot as plt
 import shapely.geometry as sg

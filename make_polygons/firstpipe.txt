@@ -9675,7 +9675,6 @@ python3
 
 import os, sys, pathlib
 import matplotlib.pyplot as plt
-
 wd=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/')
 os.chdir(wd)
 sys.path.append(str(wd / "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons"))
@@ -9719,3 +9718,30 @@ from makeFlowerPolygons.phenotyping import flowerPetal
 makeFlowerPolygons.spotMarker.findJPG
 
 import makeFlowerPolygons.curation
+
+## hmm, okay, where were we? 
+
+## in an hour or so Melia will try to install on her computer...
+
+## let's flatten the package a little, it's confusing right 
+## now with multiple folders
+
+## do the imports as a first pass at debugging:
+
+wd=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/')
+
+import os, sys, pathlib
+os.chdir(wd)
+sys.path.append(str(wd / "make_polygons"))
+
+
+import makeFlowerPolygons.breakSpots  
+import makeFlowerPolygons.flowerPetal  
+import makeFlowerPolygons.geojsonIO  
+import makeFlowerPolygons.get_spots  
+import makeFlowerPolygons.get_zones  
+import makeFlowerPolygons.makePDFs  
+import makeFlowerPolygons.manZoneCaller  
+import makeFlowerPolygons.spotMarker  
+
+import makeFlowerPolygons.updateCSVs

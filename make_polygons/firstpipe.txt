@@ -9503,13 +9503,13 @@ done
 
 $makePDFs -h 
 
-for i in *; do
-    echo $i
-    $makePDFs $i $workingDirectory $jpgDirectory -o $outDir
-done
+    for i in *; do
+        echo $i
+        $makePDFs $i $workingDirectory $jpgDirectory -o $outDir
+    done
 
 
-## let's do this on the mac
+    ## let's do this on the mac
 
 #####################################################
 
@@ -9774,18 +9774,134 @@ python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 cd '/home/daniel/Documents/learn/python/venv'
 
-virtualenv '/home/daniel/Documents/learn/python/venv'
 
+virtualenv '/home/daniel/Documents/learn/python/venv'
 source /home/daniel/Documents/learn/python/venv/bin/activate
 
+## on mac
+virtualenv '/Users/danthomas/Documents/spotVenv'
+source '/Users/danthomas/Documents/spotVenv/bin/activate'
 
-python3 -m pip install --index-url https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
 
-## can we run our scripts using this setup
+## can we run our scripts using this venv?
+
+pip3 install numpy pandas matplotlib shapely descartes Pillow scipy
+
 
 speck
 
-zoop!
+breakSpots.py
+flowerPetal.py
+geojsonIO.py
+get_spots.py
+get_zones.py
+makePDFs.py
+manZoneCaller.py
+spotMarker.py
 
+breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/breakSpots.py'
+
+geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
+
+jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
+
+$breakSpots -h
+
+## try one:
+$breakSpots $geoJ $jpeg -o test.geojson
+
+flowerPetal='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/flowerPetal.py'
+$flowerPetal
+
+geojsonIO='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/geojsonIO.py'
+
+find . -name "spotMarker.py"
+
+./make_polygons/package/makeFlowerPolygons/spotMarker.py -h
+
+./make_polygons/package/makeFlowerPolygons/spotMarker.py -
+
+
+## ugh, sleepy and sick. What am I trying to do here? 
+
+## get this working on Melia's computer. Update the package, consider placing on Pypi. 
+
+## how do we update? Just rerun our code for building the distro, etc?
+
+deactivate
+
+## update package  - how? just repeat?
+
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
+
+
+python3 setup.py sdist bdist_wheel
+
+python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
+
+## seems to have worked... now can we update in our venv?
+
+## my comp
+#source /home/daniel/Documents/learn/python/venv/bin/activate
+
+pip install -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom==0.0.2
+
+## seems to work.
+## the goal today, design a loop that will work for melia
+## let's move to the mac. 
+
+## mac
+source '/Users/danthomas/Documents/spotVenv/bin/activate'
+
+
+pip3 install numpy pandas matplotlib shapely descartes Pillow scipy scikit-image
+
+## does this get us the latest version?
+python3 -m pip install --index-url https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
+## yup
+
+## okay. so suppose we want curate a directory of geojsons?
+
+## make the directory
+
+cd /Users/danthomas/Documents/speckling/make_polygons
+mkdir toy
+toy='/Users/danthomas/Documents/speckling/make_polygons/toy'
+cp -r P50{0..4}* $toy/
+
+cd $toy
+
+    ## write a loop through these?
+
+##activate virtual env
+source '/Users/danthomas/Documents/spotVenv/bin/activate'
+
+toy='/Users/danthomas/Documents/speckling/make_polygons/toy'
+geoj="./make_polygons/toy/P500F1/left/P500F1_left_polys.geojson"
+jpegs="./dougRaster/Rotated_and_Cropped/plate2"
+breakSpots="./make_polygons/package/build/lib/makeFlowerPolygons/breakSpots.py"
+manZoneCaller="./make_polygons/package/build/lib/makeFlowerPolygons/manZoneCaller.py"
+spotMarker="./make_polygons/package/makeFlowerPolygons/spotMarker.py"
+
+speck
+
+for i in $(find $toy -name "*geojson"); do
+    echo $i
+    geoj=$(basename $i)
+    flower=${geoj%%_*geojson}
+    jpeg=$(find $jpegs -name $flower"*JPG")
+    $breakSpots $i $jpeg -o $toy"/test.geojson"
+    $manZoneCaller $toy"/test.geojson" 0.5 -o $toy"/test2.geojson"
+    #echo flower=$flower
+    #echo jpeg=$jpeg
+done
+
+echo $i
+
+
+## okay, so we got the geoj and the jpeg, is this enough to run all three programs?
+
+## order - breakspot, manzone, markspot
 
 

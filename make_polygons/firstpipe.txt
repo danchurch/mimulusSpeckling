@@ -9762,12 +9762,20 @@ breakSpots.py
 ## add name:
 
 
+## on my comp
 cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
 
+## on mac
+cd /Users/danthomas/Documents/speckling/make_polygons/package
+
+## update vers number in setup.py then:
 
 python3 setup.py sdist bdist_wheel
 
 python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+## or if updating:
+python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
 
 
 ## check it with a virtual environment
@@ -9777,6 +9785,9 @@ cd '/home/daniel/Documents/learn/python/venv'
 
 virtualenv '/home/daniel/Documents/learn/python/venv'
 source /home/daniel/Documents/learn/python/venv/bin/activate
+
+cd '/Users/danthomas/Documents/spotVenv/bin/'
+
 
 ## on mac
 virtualenv '/Users/danthomas/Documents/spotVenv'
@@ -9892,7 +9903,7 @@ for i in $(find $toy -name "*geojson"); do
     flower=${geoj%%_*geojson}
     jpeg=$(find $jpegs -name $flower"*JPG")
     $breakSpots $i $jpeg -o $toy"/test.geojson"
-    $manZoneCaller $toy"/test.geojson" 0.5 -o $toy"/test2.geojson"
+    $manZoneCaller $toy"/test.geojson" 0.5 -o $toy"/test.geojson"
     #echo flower=$flower
     #echo jpeg=$jpeg
 done

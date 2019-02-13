@@ -6,7 +6,7 @@ import os, argparse, json
 import matplotlib.pyplot as plt
 import numpy as np
 import shapely.geometry as sg
-import makeFlowerPolygons.geojsonIO
+import makeFlowerPolygons.geojsonIO as geojsonIO
 import makeFlowerPolygons.get_zones as gz
 import matplotlib.pyplot as plt
 

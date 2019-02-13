@@ -9503,350 +9503,395 @@ done
 
 $makePDFs -h 
 
-for i in *; do
-    echo $i
-    $makePDFs $i $workingDirectory $jpgDirectory -o $outDir
-done
+    for i in *; do
+        echo $i
+        $makePDFs $i $workingDirectory $jpgDirectory -o $outDir
+    done
 
 
-## let's do this on the mac
+    ## let's do this on the mac
 
-#####################################################
-
-
-#!/usr/bin/env bash
-
-getSpots='/Users/danthomas/Documents/speckling/make_polygons/get_spots.py'
-getZones='/Users/danthomas/Documents/speckling/make_polygons/get_zones.py'
-makePDFs='/Users/danthomas/Documents/speckling/make_polygons/makePDFs.py'
-wd='/Users/danthomas/Documents/speckling/make_polygons/polygons/'
-jpgDirectory='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2'
-outDir='/Users/danthomas/Documents/bigPDF/'
-plate='plate2/'
-
-cd $wd$plate
-
-echo $flower
+    #####################################################
 
 
-## debugging
-flower='P500F1'
-find $flower -name "*.csv" -exec $getSpots {} \;
+    #!/usr/bin/env bash
 
-find $flower -name "*.geojson" -exec $getZones {} 0.5 \;
+    getSpots='/Users/danthomas/Documents/speckling/make_polygons/get_spots.py'
+    getZones='/Users/danthomas/Documents/speckling/make_polygons/get_zones.py'
+    makePDFs='/Users/danthomas/Documents/speckling/make_polygons/makePDFs.py'
+    wd='/Users/danthomas/Documents/speckling/make_polygons/polygons/'
+    jpgDirectory='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2'
+    outDir='/Users/danthomas/Documents/bigPDF/'
+    plate='plate2/'
 
-$makePDFs $flower $wd$plate $jpgDirectory -o $outDir
+    cd $wd$plate
 
-
-for flower in *; do 
     echo $flower
+
+
+    ## debugging
+    flower='P500F1'
     find $flower -name "*.csv" -exec $getSpots {} \;
+
     find $flower -name "*.geojson" -exec $getZones {} 0.5 \;
+
     $makePDFs $flower $wd$plate $jpgDirectory -o $outDir
-done
 
 
+    for flower in *; do 
+        echo $flower
+        find $flower -name "*.csv" -exec $getSpots {} \;
+        find $flower -name "*.geojson" -exec $getZones {} 0.5 \;
+        $makePDFs $flower $wd$plate $jpgDirectory -o $outDir
+    done
 
-#####################################################
 
 
-## clean out the files 
+    #####################################################
 
-find /Users/danthomas/Documents/speckling/make_polygons/polygons/plate2 -name "*geojson" -exec rm {} \;
 
-## now try our script:
+    ## clean out the files 
 
-./digOnmac.sh 2>&1 | tee diglog.txt
+    find /Users/danthomas/Documents/speckling/make_polygons/polygons/plate2 -name "*geojson" -exec rm {} \;
 
-## seems okay. Gonna run for a while. In the meantime, can we try out our various programs?
+    ## now try our script:
 
-breakSpots.py
-manZoneCaller.py
-spotMarker.py
+    ./digOnmac.sh 2>&1 | tee diglog.txt
 
+    ## seems okay. Gonna run for a while. In the meantime, can we try out our various programs?
 
-geoJ='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
-jpeg='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
+    breakSpots.py
+    manZoneCaller.py
+    spotMarker.py
 
-## try one:
-./breakSpots.py $geoJ $jpeg 
 
-## oops, will need to redigitize that, broke up spots on actual geojson 
+    geoJ='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
+    jpeg='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
 
-breakSpots='/Users/danthomas/Documents/speckling/make_polygons/breakSpots.py'
+    ## try one:
+    ./breakSpots.py $geoJ $jpeg 
 
-$breakSpots $geoJ $jpeg -o "test.geojson"
+    ## oops, will need to redigitize that, broke up spots on actual geojson 
 
-CSV='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_melted.csv'
+    breakSpots='/Users/danthomas/Documents/speckling/make_polygons/breakSpots.py'
 
-$getSpots $CSV
-$getZones $geoJ 0.5
+    $breakSpots $geoJ $jpeg -o "test.geojson"
 
-## changing the back end to tkagg helps portability a lot. 
-## remember to do this on all the matplotlib-based programs. 
+    CSV='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_melted.csv'
 
-## maybe expand the plot a little?
+    $getSpots $CSV
+    $getZones $geoJ 0.5
 
+    ## changing the back end to tkagg helps portability a lot. 
+    ## remember to do this on all the matplotlib-based programs. 
 
-## otherwise, seems to work ok. 
+    ## maybe expand the plot a little?
 
-## test another...
 
-## zone caller is up
+    ## otherwise, seems to work ok. 
 
-manZoneCaller='/Users/danthomas/Documents/speckling/make_polygons/manZoneCaller.py'
+    ## test another...
 
-$manZoneCaller $geoJ 0.5 -o test.geojson
+    ## zone caller is up
 
-$manZoneCaller test.geojson 0.5 
+    manZoneCaller='/Users/danthomas/Documents/speckling/make_polygons/manZoneCaller.py'
 
+    $manZoneCaller $geoJ 0.5 -o test.geojson
 
-spotMarker='/Users/danthomas/Documents/speckling/make_polygons/spotMarker.py'
-jpgs='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/'
+    $manZoneCaller test.geojson 0.5 
 
-mv test.geojson P500F1_left_test.geojson
 
-$spotMarker P500F1_left_test.geojson $jpgs -o test2.geojson
+    spotMarker='/Users/danthomas/Documents/speckling/make_polygons/spotMarker.py'
+    jpgs='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/'
 
-## okay, something's fucked... 
+    mv test.geojson P500F1_left_test.geojson
 
-## do problems go away if we change backends?
+    $spotMarker P500F1_left_test.geojson $jpgs -o test2.geojson
 
-## seems much better now. 
+    ## okay, something's fucked... 
 
-## ok, so for someone else, what would be the approach here:
+    ## do problems go away if we change backends?
 
-## set up a toy directory, and run through a few. Then a make a notebook about how 
-## to do this. 
+    ## seems much better now. 
 
-## do this on my comp, keep a notebook as we go for a tutorial.
+    ## ok, so for someone else, what would be the approach here:
 
-## first, make a pdf of the latest stab at plate2:
+    ## set up a toy directory, and run through a few. Then a make a notebook about how 
+    ## to do this. 
 
-## does my address for the mac still work?
+    ## do this on my comp, keep a notebook as we go for a tutorial.
 
-labcomp
+    ## first, make a pdf of the latest stab at plate2:
 
-## yup
+    ## does my address for the mac still work?
 
+    labcomp
 
+    ## yup
 
-pdftk * output bigPDF_plate2_02.11.2019.pdf
 
-## reorganize a bit - notebooks get their own folder, and each notebook gets a subdirectory
 
-## now let's make a notebook for using the pipeline. 
+    pdftk * output bigPDF_plate2_02.11.2019.pdf
 
-## this is probably better done on mac, but let's start here, I'm way 
-## faster on my own machine
+    ## reorganize a bit - notebooks get their own folder, and each notebook gets a subdirectory
 
-## can we get our modules working now that they are in their own directory?
+    ## now let's make a notebook for using the pipeline. 
 
-## need to clean this all up as a package. 
-## Not today, that is a little bit of learning and futzing I don't have time 
-## for right now...
+    ## this is probably better done on mac, but let's start here, I'm way 
+    ## faster on my own machine
 
-import os, sys
+    ## can we get our modules working now that they are in their own directory?
 
-import geojsonIO.py
+    ## need to clean this all up as a package. 
+    ## Not today, that is a little bit of learning and futzing I don't have time 
+    ## for right now...
 
+    import os, sys
 
-## hmm, I think we need to add directory for our modules into all 
-## interdependent modules
+    import geojsonIO.py
 
-## should take the time to do this right...no no no resist the urge. 
 
-## okay, okay, let's do this. how do we make a package out of our modules?
+    ## hmm, I think we need to add directory for our modules into all 
+    ## interdependent modules
 
-## first, follow the online tutorial here:
+    ## should take the time to do this right...no no no resist the urge. 
 
-https://packaging.python.org/tutorials/packaging-projects/
+    ## okay, okay, let's do this. how do we make a package out of our modules?
 
-## meh, Just a tutorial on how to upload to pypi
+    ## first, follow the online tutorial here:
 
-## how do structure our files for easy import, locally, as parts of 
-## a package, with all of the namespace benefits?
+    https://packaging.python.org/tutorials/packaging-projects/
 
-## rearranged and added empty init files, did this work?
+    ## meh, Just a tutorial on how to upload to pypi
 
+    ## how do structure our files for easy import, locally, as parts of 
+    ## a package, with all of the namespace benefits?
 
-python3
+    ## rearranged and added empty init files, did this work?
 
-import os, sys, pathlib
-import matplotlib.pyplot as plt
-wd=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/')
-os.chdir(wd)
-sys.path.append(str(wd / "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons"))
 
-import makeFlowerPolygons
+    python3
 
-from makeFlowerPolygons.geojsonIO import plotOne
+    import os, sys, pathlib
+    import matplotlib.pyplot as plt
+    wd=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/')
+    os.chdir(wd)
+    sys.path.append(str(wd / "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons"))
 
-## did this work?
+    import makeFlowerPolygons
 
-geoJ=('/home/daniel/Documents/cooley_lab/mimulusSpeckling/'
-    'make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson')
+    from makeFlowerPolygons.geojsonIO import plotOne
 
-(petal,spots,center,
-edge,throat, spotEstimates, 
-photoBB, scalingFactor) = makeFlowerPolygons.geojsonIO.parseGeoJson(geoJ)
+    ## did this work?
 
-plt.ion()
+    geoJ=('/home/daniel/Documents/cooley_lab/mimulusSpeckling/'
+        'make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson')
 
-makeFlowerPolygons.geojsonIO.plotOne(petal)
+    (petal,spots,center,
+    edge,throat, spotEstimates, 
+    photoBB, scalingFactor) = makeFlowerPolygons.geojsonIO.parseGeoJson(geoJ)
 
-## seems to work... all you need is an __init__.py file
+    plt.ion()
 
-## will it work on the jupyter notebook? the mac? let's see
+    makeFlowerPolygons.geojsonIO.plotOne(petal)
 
-## remind me, how do we plot an image of just our petal?
+    ## seems to work... all you need is an __init__.py file
 
-## we should probably make a function for this...
+    ## will it work on the jupyter notebook? the mac? let's see
 
-## first, deal with the restructuring...
+    ## remind me, how do we plot an image of just our petal?
 
-## first check, can we import all modules?
+    ## we should probably make a function for this...
 
-from makeFlowerPolygons.curation import breakSpots
-from makeFlowerPolygons.curation import spotMarker
-from makeFlowerPolygons.curation import spotMarker
-from makeFlowerPolygons import makePDFs
-from makeFlowerPolygons import geojsonIO
-from makeFlowerPolygons.phenotyping import flowerPetal
+    ## first, deal with the restructuring...
 
-makeFlowerPolygons.spotMarker.findJPG
+    ## first check, can we import all modules?
 
-import makeFlowerPolygons.curation
+    from makeFlowerPolygons.curation import breakSpots
+    from makeFlowerPolygons.curation import spotMarker
+    from makeFlowerPolygons.curation import spotMarker
+    from makeFlowerPolygons import makePDFs
+    from makeFlowerPolygons import geojsonIO
+    from makeFlowerPolygons.phenotyping import flowerPetal
 
-## hmm, okay, where were we? 
+    makeFlowerPolygons.spotMarker.findJPG
 
-## in an hour or so Melia will try to install on her computer...
+    import makeFlowerPolygons.curation
 
-## let's flatten the package a little, it's confusing right 
-## now with multiple folders
+    ## hmm, okay, where were we? 
 
-## do the imports as a first pass at debugging:
+    ## in an hour or so Melia will try to install on her computer...
 
-wd=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/')
+    ## let's flatten the package a little, it's confusing right 
+    ## now with multiple folders
 
-import os, sys, pathlib
-os.chdir(wd)
-sys.path.append(str(wd / "make_polygons"))
+    ## do the imports as a first pass at debugging:
 
+    wd=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/')
 
-import makeFlowerPolygons.breakSpots  
-import makeFlowerPolygons.flowerPetal  
-import makeFlowerPolygons.geojsonIO  
-import makeFlowerPolygons.get_spots  
-import makeFlowerPolygons.get_zones  
-import makeFlowerPolygons.makePDFs  
-import makeFlowerPolygons.manZoneCaller  
-import makeFlowerPolygons.spotMarker  
-import makeFlowerPolygons.updateCSVs
+    import os, sys, pathlib
+    os.chdir(wd)
+    sys.path.append(str(wd / "make_polygons"))
 
-## everything imports well
-## okay, but will everything run smoothly?
 
-breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/makeFlowerPolygons/breakSpots.py'
-geoJ='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
-jpeg='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
+    import makeFlowerPolygons.breakSpots  
+    import makeFlowerPolygons.flowerPetal  
+    import makeFlowerPolygons.geojsonIO  
+    import makeFlowerPolygons.get_spots  
+    import makeFlowerPolygons.get_zones  
+    import makeFlowerPolygons.makePDFs  
+    import makeFlowerPolygons.manZoneCaller  
+    import makeFlowerPolygons.spotMarker  
+    import makeFlowerPolygons.updateCSVs
 
-## try one:
-$breakSpots $geoJ $jpeg 
-breakSpots.py 
+    ## everything imports well
+    ## okay, but will everything run smoothly?
 
-## nope, we really do need to make this installable
+    breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/makeFlowerPolygons/breakSpots.py'
+    geoJ='/Users/danthomas/Documents/speckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
+    jpeg='/Users/danthomas/Documents/speckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
 
-## can we follow the above tutorial with our files?
+    ## try one:
+    $breakSpots $geoJ $jpeg 
+    breakSpots.py 
 
-## add name:
+    ## nope, we really do need to make this installable
 
+    ## can we follow the above tutorial with our files?
 
-cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
+    ## add name:
 
 
-python3 setup.py sdist bdist_wheel
+    cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
 
-python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
+    python3 setup.py sdist bdist_wheel
 
-## check it with a virtual environment
+    python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
-cd '/home/daniel/Documents/learn/python/venv'
 
-virtualenv '/home/daniel/Documents/learn/python/venv'
+    ## check it with a virtual environment
 
-source /home/daniel/Documents/learn/python/venv/bin/activate
+    cd '/home/daniel/Documents/learn/python/venv'
 
 
-python3 -m pip install --index-url https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
+    virtualenv '/home/daniel/Documents/learn/python/venv'
+    source /home/daniel/Documents/learn/python/venv/bin/activate
 
-## can we run our scripts using this venv?
+    ## on mac
+    virtualenv '/Users/danthomas/Documents/spotVenv'
+    source '/Users/danthomas/Documents/spotVenv/bin/activate'
 
-pip3 install numpy pandas matplotlib shapely descartes Pillow scipy
 
+    ## can we run our scripts using this venv?
+
+    pip3 install numpy pandas matplotlib shapely descartes Pillow scipy
+
+
+    speck
+
+    breakSpots.py
+    flowerPetal.py
+    geojsonIO.py
+    get_spots.py
+    get_zones.py
+    makePDFs.py
+    manZoneCaller.py
+    spotMarker.py
+
+    breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/breakSpots.py'
+
+    geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
+
+    jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
+
+    $breakSpots -h
+
+    ## try one:
+    $breakSpots $geoJ $jpeg -o test.geojson
+
+    flowerPetal='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/flowerPetal.py'
+    $flowerPetal
+
+    geojsonIO='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/geojsonIO.py'
+
+    find . -name "spotMarker.py"
+
+    ./make_polygons/package/makeFlowerPolygons/spotMarker.py -h
+
+    ./make_polygons/package/makeFlowerPolygons/spotMarker.py -
+
+
+    ## ugh, sleepy and sick. What am I trying to do here? 
+
+    ## get this working on Melia's computer. Update the package, consider placing on Pypi. 
+
+    ## how do we update? Just rerun our code for building the distro, etc?
+
+    deactivate
+
+    ## update package  - how? just repeat?
+
+
+    cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
+
+
+    python3 setup.py sdist bdist_wheel
+
+    python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
+
+    ## seems to have worked... now can we update in our venv?
+
+    source /home/daniel/Documents/learn/python/venv/bin/activate
+
+    pip install -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom==0.0.2
+
+    ## seems to work.
+    ## the goal today, design a loop that will work for melia
+    ## let's move to the mac. 
+
+    source '/Users/danthomas/Documents/spotVenv/bin/activate'
+
+    pip3 install numpy pandas matplotlib shapely descartes Pillow scipy
+
+    ## does this get us the latest version?
+    python3 -m pip install --index-url https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
+    ## yup
+
+    ## okay. so suppose we want curate a directory of geojsons?
+
+    ## make the directory
+
+    cd /Users/danthomas/Documents/speckling/make_polygons
+
+    mkdir toy
+
+    toy='/Users/danthomas/Documents/speckling/make_polygons/toy'
+
+    cp -r P50{0..4}* $toy/
+
+cd $toy
+
+    ## write a loop through these?
 
 speck
+toy='/Users/danthomas/Documents/speckling/make_polygons/toy'
+breakSpots="./make_polygons/package/build/lib/makeFlowerPolygons/breakSpots.py"
+geoJ="./make_polygons/toy/P500F1/left/P500F1_left_polys.geojson"
+jpegs="./dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG"
 
-breakSpots.py
-flowerPetal.py
-geojsonIO.py
-get_spots.py
-get_zones.py
-makePDFs.py
-manZoneCaller.py
-spotMarker.py
+jpegs="./dougRaster/Rotated_and_Cropped/plate2"
 
-breakSpots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/breakSpots.py'
-
-geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
-
-jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
-
-$breakSpots -h
-
-## try one:
 $breakSpots $geoJ $jpeg -o test.geojson
 
-flowerPetal='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/flowerPetal.py'
-$flowerPetal
-
-geojsonIO='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/geojsonIO.py'
-
-find . -name "spotMarker.py"
-
-./make_polygons/package/makeFlowerPolygons/spotMarker.py -h
-
-./make_polygons/package/makeFlowerPolygons/spotMarker.py -
+for i in $(find $toy -name "*geojson"); do
+    echo $i
+    bn=$(basename $i)
+    flower=${bn%%_*geojson}
+    echo $flower
+    find $jpegs -name "$flower*JPG"
+done
 
 
-## ugh, sleepy and sick. What am I trying to do here? 
-
-## get this working on Melia's computer. Update the package, consider placing on Pypi. 
-
-## how do we update? Just rerun our code for building the distro, etc?
-
-deactivate
-
-## update package  - how? just repeat?
 
 
-cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
-
-
-python3 setup.py sdist bdist_wheel
-
-python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
-
-## seems to have worked... now can we update in our venv?
-
-source /home/daniel/Documents/learn/python/venv/bin/activate
-
-pip install -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom==0.0.2
-
-
-## seems to work.
-
-## the goal today, design a loop that will work for melia
-
-## let's move to the mac. 

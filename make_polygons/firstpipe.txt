@@ -10015,9 +10015,11 @@ $spotMarker $geojson $jpegs
 
 ## try it out mac
 
-cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
+speck
 
+vim ./make_polygons/package/setup.py ## change version
+cd ./make_polygons/package
 python3 setup.py sdist bdist_wheel
-
 python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
+
 

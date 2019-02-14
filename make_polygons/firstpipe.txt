@@ -9878,6 +9878,7 @@ python3 -m pip install --index-url https://test.pypi.org/simple/ makeFlowerPolyg
 
 cd /Users/danthomas/Documents/speckling/make_polygons
 mkdir toy
+
 toy='/Users/danthomas/Documents/speckling/make_polygons/toy'
 cp -r P50{0..4}* $toy/
 
@@ -9888,9 +9889,10 @@ cd $toy
 ##activate virtual env
 source '/Users/danthomas/Documents/spotVenv/bin/activate'
 
-toy='/Users/danthomas/Documents/speckling/make_polygons/toy'
+toy='./make_polygons/toy'
 geoj="./make_polygons/toy/P500F1/left/P500F1_left_polys.geojson"
 jpegs="./dougRaster/Rotated_and_Cropped/plate2"
+
 breakSpots="./make_polygons/package/build/lib/makeFlowerPolygons/breakSpots.py"
 manZoneCaller="./make_polygons/package/build/lib/makeFlowerPolygons/manZoneCaller.py"
 spotMarker="./make_polygons/package/makeFlowerPolygons/spotMarker.py"
@@ -9903,16 +9905,28 @@ for i in $(find $toy -name "*geojson"); do
     flower=${geoj%%_*geojson}
     jpeg=$(find $jpegs -name $flower"*JPG")
     $breakSpots $i $jpeg -o $toy"/test.geojson"
-    $manZoneCaller $toy"/test.geojson" 0.5 -o $toy"/test.geojson"
-    #echo flower=$flower
-    #echo jpeg=$jpeg
+    #$manZoneCaller $toy"/test.geojson" 0.5 -o $toy"/test.geojson"
 done
 
 echo $i
 
-
 ## okay, so we got the geoj and the jpeg, is this enough to run all three programs?
-
 ## order - breakspot, manzone, markspot
 
 
+## okay, I'm sufficiently confused. We may in some sort of infinite loop here 
+## with github and pypi...
+
+## to reduce confusion, I think I want to uninstall anaconda. And work from the 
+## the ground up..
+
+## plan: delete every trace of anaconda that I can find
+## ok, done. Now what? 
+
+## how much was destroyed by our removal of anaconda...?
+
+## python is totally gone... reinstall
+
+## this is fucking painful
+
+ 

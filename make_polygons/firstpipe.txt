@@ -9897,6 +9897,10 @@ breakSpots="./make_polygons/package/build/lib/makeFlowerPolygons/breakSpots.py"
 manZoneCaller="./make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
 spotMarker="./make_polygons/package/makeFlowerPolygons/spotMarker.py"
 
+chmod 744 $breakSpots
+chmod 744 $manZoneCaller
+chmod 744 $spotMarker
+
 speck
 
 for i in $(find $toy -name "*geojson"); do
@@ -9951,5 +9955,18 @@ jpegs="./dougRaster/Rotated_and_Cropped/plate2"
 spotMarker='/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/spotMarker.py'
 
 $spotMarker  $geoj $jpegs -o test.geojson
+
+## what now? build a loop.
+
+
+## seems to work, can we plot just the outline of the petal polygon?
+
+## also, can we run an initial show of spotEstimates, if they are
+## already present?
+
+## and give a final check before saving?
+
+## seems okay. But let's do that on my computer, way faster. 
+
 
 

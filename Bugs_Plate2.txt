@@ -1,0 +1,40 @@
+plate2/P741F2/right/P741F2_right_polys.geojson ##missing a spot
+
+plate2/P509F1/left/P509F1_left_polys.geojson ##missing some spots
+
+plate2/P509F1/mid/P509F1_mid_polys.geojson ##missing some spots
+
+plate2/P541F2/left/P541F2_left_polys.geojson ##missing some spots
+
+plate2/P711F2/mid/P711F2_mid_polys.geojson ##missing a spot
+
+plate2/P517F1/mid/P517F1_mid_polys.geojson ##missing a spot
+
+plate2/P513F1/left/P513F1_left_polys.geojson ##missing some spots
+
+plate2/P755F3/mid/P755F3_mid_polys.geojson ##missing a spot
+
+polygons/plate2/P519F1/left/P519F1_left_polys.geojson ##missing large spot
+
+polygons/plate2/P519F1/mid/P519F1_mid_polys.geojson ##missing large spot
+
+plate2/P740F2/mid/P740F2_mid_polys.geojson ##missing a spot
+
+plate2/P748F1/mid/P748F1_mid_polys.geojson ##missing a spot
+
+plate2/P533F1/mid/P533F1_mid_polys.geojson ##missing some spots
+
+plate2/P731F2/mid/P731F2_mid_polys.geojson ##missing some spots
+
+plate2/P755F1/left/P755F1_left_polys.geojson ##missing some spots
+
+plate2/P753F2/right/P753F2_right_polys.geojson ##all messed up
+
+
+
+Something nice to have would be like a stamp of yellow that could cover up multiple spots 
+that we often find with blush at the same time...
+
+Be able to move on to the next file as soon as you say no to 'wanna break another spot?'
+
+

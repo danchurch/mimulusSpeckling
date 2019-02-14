@@ -9875,11 +9875,19 @@ python3 -m pip install --index-url https://test.pypi.org/simple/ makeFlowerPolyg
 ## make the directory
 
 cd /Users/danthomas/Documents/speckling/make_polygons
+
 mkdir toy
 
+## mac
 toy='/Users/danthomas/Documents/speckling/make_polygons/toy'
-cp -r P50{0..4}* $toy/
 
+## dell
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
+
+mkdir $toy
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2
+cp -r P500* $toy/
 cd $toy
 
     ## write a loop through these?
@@ -9889,7 +9897,7 @@ source '/Users/danthomas/Documents/spotVenv/bin/activate'
 
 cd '/Users/danthomas/Documents/spotVenv/bin/'
 
-toy='./make_polygons/toy'
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
 geoj="./make_polygons/toy/P500F1/left/P500F1_left_polys.geojson"
 jpegs="./dougRaster/Rotated_and_Cropped/plate2"
 
@@ -9952,12 +9960,11 @@ from makeFlowerPolygons.geojsonIO import plotOne
 geoj='./make_polygons/toy/P500F2/left/P500F2_left_polys.geojson'
 toy='./make_polygons/toy'
 jpegs="./dougRaster/Rotated_and_Cropped/plate2"
-spotMarker='/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/spotMarker.py'
+spotMarker='./make_polygons/package/makeFlowerPolygons/spotMarker.py'
 
 $spotMarker  $geoj $jpegs -o test.geojson
 
 ## what now? build a loop.
-
 
 ## seems to work, can we plot just the outline of the petal polygon?
 
@@ -9968,5 +9975,42 @@ $spotMarker  $geoj $jpegs -o test.geojson
 
 ## seems okay. But let's do that on my computer, way faster. 
 
+## goals - preview spots, get just the polygon outline, maybe a final 
+## check
+
+## why are the packages not being picked up?
+
+## I guess I've only been working in the virtual env:
+
+source /home/daniel/Documents/learn/python/venv/bin/activate
+
+speck
+
+cd ./make_polygons/polygons/plate2
+
+find . -name "*geojson" -newermt "2019-02-10" 
+
+find . -name "*geojson" -newermt "2019-02-11" -exec ls -l {} \;
 
 
+## run one file through our spotMarker:
+
+jpegs="./dougRaster/Rotated_and_Cropped/plate2"
+geojson='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/left/P500F1_left_polys.geojson'
+spotMarker='./make_polygons/package/makeFlowerPolygons/spotMarker.py'
+
+speck
+
+$spotMarker -h 
+
+$spotMarker $geojson $jpegs 
+
+$spotMarker $geojson $jpegs 
+
+## okay, seems okay. does the loop work?
+
+## yup. 
+
+## now what? update package and github
+
+## try it out mac

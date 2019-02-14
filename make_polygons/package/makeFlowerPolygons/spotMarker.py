@@ -52,7 +52,7 @@ class SpotMarker:
                                     (event.xdata, event.ydata))
             circle = sg.Point(self.centerx, self.centery).buffer(circleRad)
             self.circs.append(circle)
-            circArt = geojsonIO.addOne(self.circs[-1], col = 'blue')
+            circArt = geojsonIO.addOne(self.circs[-1], col = 'blue', a=0.3)
             self.circArts.append(circArt)
 
         elif (self.event.name == 'button_press_event' 
@@ -108,9 +108,23 @@ def findJPG(geojson, jpgs):
         print("Can't find jpeg. Check geojson name or jpeg folder.")
         quit()
 
-
+def plotOutline(poly, ax=None, l=2, col='black'):
+    """Plot the outline of a polgon. Maybe move this 
+    to the geojsonIO module?"""
+    x,y = poly.exterior.xy
+    if not ax: 
+        fig = plt.figure(); ax=plt.axes()
+        ax.set_xlim(min(x), max(x))
+        ax.set_ylim(min(y), max(y))
+        ax.set_aspect('equal')
+    out=ax.plot(x, y, color=col, alpha=0.7,
+        linewidth=l, solid_capstyle='round', zorder=2)
+    return(out)
 
 def photoAndPetal(geojson,jpgs,jpg):
+    """plot the photo image of the petal that
+    corresponds to the geojson, along with 
+    an outline of our petal polygon"""
     (petal,spots,center,edge,throat, 
         spotEstimates, photoBB, 
                     scalingFactor) = geojsonIO.parseGeoJson(geojson)
@@ -122,18 +136,41 @@ def photoAndPetal(geojson,jpgs,jpg):
     Ymax = max(xxyy[1])
     img=mpimg.imread(jpgs / jpg)
     dd = img[Ymin:Ymax,Xmin:Xmax]
-    aa = geojsonIO.plotOne(petal, a=0.5)
+    aa = plotOutline(petal, col='blue')
     plt.gca().imshow(dd, extent=plt.gca().get_xlim() + plt.gca().get_ylim(),
                     origin = 'lower')
 
-def choice():
+def preview(spotEstimates, petal, ax=None):
+    """view the existing spotEstimates of 
+    a geojson"""
+    if not ax: 
+            x,y = petal.exterior.xy
+            plotOutline(petal, ax=None, col='black')
+            plt.gca().set_xlim(petal.bounds[0], petal.bounds[2])
+            plt.gca().set_ylim(petal.bounds[1], petal.bounds[3])
+            plt.gca().set_aspect('equal')
+            geojsonIO.addOne(spotEstimates, a=0.3)
+    elif ax: geojsonIO.addOne(spotEstimates, a=0.3)
+
+def finished():
     """ a way to keep the script running till user is done"""
     try:
         aa = input("Finished (y)? ")
         assert aa == "y"
     except AssertionError as err:
         print('Enter "y" when done.')
-        choice()
+        finished()
+
+def choice():
+    try:
+        aa = input("(y/n): ")
+        assert aa in {"y","n"}
+    except AssertionError as err:
+        print('Enter "y" or "n"')
+        aa = choice()
+    finally:
+        return(aa)
+
 
 def main(geojson, jpgs): 
     geojson = pathlib.Path(geojson)
@@ -144,15 +181,37 @@ def main(geojson, jpgs):
                     scalingFactor) = geojsonIO.parseGeoJson(geojson)
     jpg=findJPG(geojson, jpgs)
     photoAndPetal(geojson,jpgs,jpg)
-    spotMarker = SpotMarker()
-    choice()
-    spotEstimates = sg.MultiPolygon(spotMarker.circs)
-    featC = geojsonIO.writeGeoJ (petal,spots,center,edge,throat, 
-                                    spotEstimates, photoBB, 
-                                                scalingFactor)
-
-    with open(outFileName, 'w') as fp:
-        json.dump(featC, fp)
+    preview(spotEstimates, petal, ax=plt.gca())
+    plt.gcf().canvas.manager.window.wm_geometry("+900+0")
+    inkspot=input("Add/redo inkspots? (y/n) ")
+    try:
+        assert(inkspot in {'y','n'})
+    except AssertionError:
+        print("Enter 'y' or 'n'")
+        main(geojson, jpgs)
+    if inkspot == 'y':
+        plt.close('all')
+        photoAndPetal(geojson,jpgs,jpg)
+        plt.gcf().canvas.manager.window.wm_geometry("+900+0")
+        spotMarker = SpotMarker()
+        finished()
+        print("Save edited inkspots?")
+        saveSp=choice()
+        if saveSp == 'y':
+            spotEstimates = sg.MultiPolygon(spotMarker.circs)
+            featC = geojsonIO.writeGeoJ (petal,spots,center,edge,throat, 
+                                            spotEstimates, photoBB, 
+                                                        scalingFactor)
+            with open(outFileName, 'w') as fp:
+                json.dump(featC, fp)
+        elif saveSp == 'n':
+            print("Okay, no changes to {} spot "
+                    "estimates saved.".format(str(geojson.name)))
+            quit()
+    elif inkspot == 'n':
+        print('Bye for now from spotMarker!')
+        plt.close('all')
+        quit()
 
 ##########################
 

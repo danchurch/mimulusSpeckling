@@ -1,12 +1,11 @@
-Metadata-Version: 1.1
+Metadata-Version: 2.1
 Name: makeFlowerPolygons-dcthom
-Version: 0.0.3
+Version: 0.0.4
 Summary: Cooley lab tools for digitizing and analyzing Mimulus spotting patterns
 Home-page: https://github.com/danchurch/mimulusSpeckling
 Author: Daniel Thomas
 Author-email: thomasdc@whitman.edu
 License: UNKNOWN
-Description-Content-Type: text/markdown
 Description: # flowerPetal 
         
         This package is a very simple set up python modules that the Cooley lab
@@ -31,7 +30,8 @@ Description: # flowerPetal
         
         
 Platform: UNKNOWN
-Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
 Classifier: Development Status :: 3 - Alpha
 Classifier: Operating System :: POSIX :: Linux
+Description-Content-Type: text/markdown

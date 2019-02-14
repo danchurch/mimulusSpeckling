@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import matplotlib
+matplotlib.use('TkAgg')
 import argparse, os, json, shapely
 import makeFlowerPolygons.geojsonIO as gj
 import numpy as np

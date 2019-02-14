@@ -7,6 +7,8 @@ Slots for throat, and edge will be created
 but left as empty polygon objects.
 """
 
+import matplotlib
+matplotlib.use('TkAgg')
 import argparse, os, json, shapely
 import numpy as np
 import matplotlib.pyplot as plt

@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('TkAgg')
 import json
 import shapely.geometry as sg
 import matplotlib.pyplot as plt

@@ -9772,9 +9772,6 @@ cd /Users/danthomas/Documents/speckling/make_polygons/package
 
 python3 setup.py sdist bdist_wheel
 
-python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-
-## or if updating:
 python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
 
 
@@ -9846,7 +9843,6 @@ deactivate
 
 cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
 
-
 python3 setup.py sdist bdist_wheel
 
 python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
@@ -9855,6 +9851,8 @@ python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-ex
 
 ## my comp
 #source /home/daniel/Documents/learn/python/venv/bin/activate
+
+cd /home/daniel/Documents/learn/python/venv/bin/activate
 
 pip install -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom==0.0.2
 
@@ -9889,12 +9887,14 @@ cd $toy
 ##activate virtual env
 source '/Users/danthomas/Documents/spotVenv/bin/activate'
 
+cd '/Users/danthomas/Documents/spotVenv/bin/'
+
 toy='./make_polygons/toy'
 geoj="./make_polygons/toy/P500F1/left/P500F1_left_polys.geojson"
 jpegs="./dougRaster/Rotated_and_Cropped/plate2"
 
 breakSpots="./make_polygons/package/build/lib/makeFlowerPolygons/breakSpots.py"
-manZoneCaller="./make_polygons/package/build/lib/makeFlowerPolygons/manZoneCaller.py"
+manZoneCaller="./make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
 spotMarker="./make_polygons/package/makeFlowerPolygons/spotMarker.py"
 
 speck
@@ -9904,8 +9904,9 @@ for i in $(find $toy -name "*geojson"); do
     geoj=$(basename $i)
     flower=${geoj%%_*geojson}
     jpeg=$(find $jpegs -name $flower"*JPG")
-    $breakSpots $i $jpeg -o $toy"/test.geojson"
-    #$manZoneCaller $toy"/test.geojson" 0.5 -o $toy"/test.geojson"
+    $breakSpots $i $jpeg 
+    $manZoneCaller $i 0.5 
+    $spotMarker $i $jpegs
 done
 
 echo $i
@@ -9929,4 +9930,26 @@ echo $i
 
 ## this is fucking painful
 
+## start over, try programs over again: 
+
+## make our virtual env:
+
+source /Users/danthomas/venv/bin/activate
  
+$breakSpots -h
+
+$breakSpots $i $jpeg -o $toy"/test.geojson"
+
+## fix position of plot in spotMarker
+
+from makeFlowerPolygons.geojsonIO import addOne
+from makeFlowerPolygons.geojsonIO import plotOne
+
+geoj='./make_polygons/toy/P500F2/left/P500F2_left_polys.geojson'
+toy='./make_polygons/toy'
+jpegs="./dougRaster/Rotated_and_Cropped/plate2"
+spotMarker='/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/spotMarker.py'
+
+$spotMarker  $geoj $jpegs -o test.geojson
+
+

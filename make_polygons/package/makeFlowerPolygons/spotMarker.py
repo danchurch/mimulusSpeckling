@@ -28,6 +28,11 @@ class SpotMarker:
         self.markCID = self.fig.canvas.mpl_connect('button_press_event', self)
         self.releaseCID = self.fig.canvas.mpl_connect('button_release_event', self)
         self.keyCID = self.fig.canvas.mpl_connect('key_press_event', self)
+        self.fig.canvas.manager.window.wm_geometry("+900+0")
+        newYLim = [ i * 1.1 for i in list(self.ax.get_ylim()) ]
+        newXLim = [ i * 1.1 for i in list(self.ax.get_xlim()) ]
+        self.ax.set_ylim(newYLim)
+        self.ax.set_xlim(newXLim)
     def __call__(self, event):
         if plt.get_current_fig_manager().toolbar.mode != '': return
         self.event = event

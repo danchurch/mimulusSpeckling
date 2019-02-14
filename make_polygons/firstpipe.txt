@@ -10015,11 +10015,42 @@ $spotMarker $geojson $jpegs
 
 ## try it out mac
 
-speck
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
 
-vim ./make_polygons/package/setup.py ## change version
-cd ./make_polygons/package
 python3 setup.py sdist bdist_wheel
+
 python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
 
+## on mac. update package
+
+source /Users/danthomas/venv/bin/activate
+pip3 install -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom==0.0.5
+
+## try loop?
+
+toy='./make_polygons/toy'
+geoj="./make_polygons/toy/P500F1/left/P500F1_left_polys.geojson"
+jpegs="./dougRaster/Rotated_and_Cropped/plate2"
+
+breakSpots="./make_polygons/package/build/lib/makeFlowerPolygons/breakSpots.py"
+manZoneCaller="./make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
+spotMarker="./make_polygons/package/makeFlowerPolygons/spotMarker.py"
+
+mkdir $toy
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2
+cp -r P500* $toy/
+cd $toy
+
+speck
+
+for i in $(find $toy -name "*geojson"); do
+    echo $i
+    geoj=$(basename $i)
+    flower=${geoj%%_*geojson}
+    jpeg=$(find $jpegs -name $flower"*JPG")
+    $breakSpots $i $jpeg 
+    $manZoneCaller $i 0.5 
+    $spotMarker $i $jpegs
+done
 

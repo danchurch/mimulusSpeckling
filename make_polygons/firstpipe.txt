@@ -10057,7 +10057,20 @@ for i in $(find $toy -name "*geojson"); do
     $spotMarker $i $jpegs
 done
 
+manZoneCaller="./make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
+spotMarker="./make_polygons/package/makeFlowerPolygons/spotMarker.py"
+jpegs="./dougRaster/Rotated_and_Cropped/plate2"
 
+cd ./make_polygons/polygons/plate2
+
+for i in $(find . -name "*geojson"); do
+    echo $i
+    geoj=$(basename $i)
+    flower=${geoj%%_*geojson}
+    jpeg=$(find $jpegs -name $flower"*JPG")
+    $manZoneCaller $i 0.5 
+    $spotMarker $i $jpegs
+done
 ## can we make a nice interface out of this?
 
 ## or should we work on debugging the digitizing?
@@ -10112,8 +10125,28 @@ aa=newSpotBreaker.DrawYellow(ax=plt.gca(), fig=plt.gcf())
 from shapely import geometry as sg
 
 newSpotBreaker="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/newSpotBreaker.py"
+
 geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/left/P500F1_left_polys.geojson'
 jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
 
 $newSpotBreaker $geoJ $jpeg -o test.geojson
 
+## where were we? 
+
+exGeoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
+
+
+aa = geojsonIO.parseGeoJson(exGeoj)
+
+geojsonIO.plotOne(aa[0])
+
+geojsonIO.addOne(aa[1])
+
+geojsonIO.addOne(aa[2])
+
+geojsonIO.addOne(aa[2])
+
+geojsonIO.addOne(aa[6])
+
+plt.ion()
+plt.show()

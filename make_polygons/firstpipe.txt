@@ -10122,31 +10122,35 @@ fig, ax = plt.subplots(1,1)
 plt.gcf().canvas.manager.window.wm_geometry("+900+0")
 aa=newSpotBreaker.DrawYellow(ax=plt.gca(), fig=plt.gcf())
 
-from shapely import geometry as sg
-
 newSpotBreaker="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/newSpotBreaker.py"
-
 geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/left/P500F1_left_polys.geojson'
 jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
 
 $newSpotBreaker $geoJ $jpeg -o test.geojson
 
-## where were we? 
+## seems okay, try on a few other images
+## then add photo viewer
 
-exGeoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P500F1/left/P500F1_left_polys.geojson'
 
 
-aa = geojsonIO.parseGeoJson(exGeoj)
+geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P534F1/right/P534F1_right_polys.geojson'
+jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P534F1.JPG'
+$newSpotBreaker $geoj $jpeg -o test.geojson
 
-geojsonIO.plotOne(aa[0])
 
-geojsonIO.addOne(aa[1])
+geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P541F1/right/P541F1_right_polys.geojson'
+jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P541F1.JPG'
+$newSpotBreaker $geoj $jpeg -o test.geojson
 
-geojsonIO.addOne(aa[2])
+## photo veiwer added. Let's run some tests on a toy directory:
 
-geojsonIO.addOne(aa[2])
+speck
+toy='./make_polygons/toy'
 
-geojsonIO.addOne(aa[6])
+ls $toy
 
-plt.ion()
-plt.show()
+cd $toy
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2
+
+P514F1  P519F2  P533F1  P703F2  P709F2 P514F2  P520F1  P534F1  P704F1  P710F1 P515F1  P520F2  P541F1  P704F3  P710F3

@@ -6,6 +6,7 @@ where necessary.
 """
 import matplotlib as mp
 mp.use("TkAgg")
+import matplotlib.image as mpimg
 import os, copy, json, argparse
 import makeFlowerPolygons.geojsonIO as geojsonIO
 from matplotlib import pyplot as plt
@@ -18,7 +19,7 @@ class DrawYellow:
         if ax: self.ax = ax 
         elif not ax: self.ax = plt.gca() 
         self.petal=petal
-        self.petal=spots
+        self.spots=spots
         self.xVerts=[]
         self.yVerts=[]
         self.xyVerts = []
@@ -39,16 +40,9 @@ class DrawYellow:
                 del(self.xyVerts[-1])
             except IndexError:
                 return
-        self.redraw()
+        redraw(self.petal, self.spots)
         self.drawVerts()
         self.drawPol()
-
-    def redraw(self):
-        aa=self.ax.get_xlim(); bb=self.ax.get_ylim()
-        self.ax.cla()
-        self.ax.set_xlim(aa); self.ax.set_ylim(bb)
-        geojsonIO.addOne(petal, col='yellow')
-        geojsonIO.addOne(spots, col='red')
 
     def drawVerts(self):
         self.ax.plot(self.xVerts,
@@ -56,7 +50,6 @@ class DrawYellow:
                         marker='o',
                         markersize=3,
                         color="black")
-
     def drawPol(self):
         try:
             poly=sg.Polygon(self.xyVerts)
@@ -64,6 +57,12 @@ class DrawYellow:
         except ValueError:
             return
 
+def redraw(petal, spots):
+    aa=plt.gca().get_xlim(); bb=plt.gca().get_ylim()
+    plt.gca().cla()
+    plt.gca().set_xlim(aa); plt.gca().set_ylim(bb)
+    geojsonIO.addOne(petal, col='yellow')
+    geojsonIO.addOne(spots, col='red')
 
 def choice():
     try:
@@ -84,25 +83,61 @@ def finished():
         print("Enter 'y' when finished.")
         finished()
 
-  
+def showJpeg(jpeg, photoBB):
+    print('Zoop!')
+    plt.ion()
+    bb = list(zip(*photoBB))
+    lowerLeft = [ min(i)-2 for i in bb ]
+    upperRight = [ max(i)+2 for i in bb ]
+    img=mpimg.imread(jpeg)
+    justPetal = img[lowerLeft[1]:upperRight[1],lowerLeft[0]:upperRight[0]]
+    jpegFig, jpegAx = plt.subplots(1,1)
+    jpegAx.imshow(justPetal, origin='lower')
+    jpegFig.canvas.manager.window.wm_geometry("+900+0")
+    jpegFig.set_size_inches([6,3], forward = True)
+
+
+def saveOut ( petal,spots,center,edge,throat,
+                spotEstimates, photoBB,
+                scalingFactor, outFileName ):
+    print('Save new spots?')
+    newOK=choice()
+    if newOK == 'y':
+        ## write it out
+        print('Saving as ' + outFileName)
+        featC = geojsonIO.writeGeoJ(petal,spots,center,edge,throat,
+                    spotEstimates, photoBB, scalingFactor)
+        with open(outFileName, 'w') as fp:
+            json.dump(featC, fp)
+        quit()
+    if newOK == 'n':
+        print('Not saving...')
+        quit()
+
 def breakup(petal, spots):
+    newSpots=spots
     plt.ion()
     geojsonIO.plotOne(petal)
-    geojsonIO.addOne(spots)
+    geojsonIO.addOne(newSpots)
+    plt.gcf().canvas.manager.window.wm_geometry("+900+350")
     print("Look okay?")
     ok=choice()
-    if ok=='y': return(spots)
+    if ok=='y': return(newSpots)
     if ok=='n': 
         geojsonIO.plotOne(petal)
-        geojsonIO.addOne(spots)
+        geojsonIO.addOne(newSpots)
+        plt.gcf().canvas.manager.window.wm_geometry("+900+0")
         print('Draw in some yellow space.')
-        breakPatch=DrawYellow(petal, spots, fig=plt.gcf(),)
+        breakPatch=DrawYellow(petal, newSpots, fig=plt.gcf(),)
         finished()
-        spots=spots.difference(sg.Polygon(breakPatch.xyVerts))
-        breakPatch.redraw()
-        breakup(petal, spots)
+        newSpots=newSpots.difference(sg.Polygon(breakPatch.xyVerts))
+        if isinstance(newSpots, sg.polygon.Polygon):
+            newSpots = sg.multipolygon.MultiPolygon([newSpots])
+        redraw(petal, newSpots)
+        newSpots=breakup(petal, newSpots)
+        return(newSpots)
 
-#######################################################
+######################################################
 
 if __name__ == '__main__':
     ## deal with arguments
@@ -128,18 +163,11 @@ if __name__ == '__main__':
         spotEstimates, photoBB,
                     scalingFactor) = geojsonIO.parseGeoJson(args.geoJ)
 
+    showJpeg(args.jpeg, photoBB)
 
     newSpots=breakup(petal,spots)
 
-    geojsonIO.plotOne(petal)
-    geojsonIO.addOne(newSpots)
-    finished()
-
-#plot petal
-#plot spots
-#draw poly
-#take difference 
-#update
-#keepgoing?
-
+    saveOut ( petal, newSpots, center, edge, throat,
+                spotEstimates, photoBB,
+                scalingFactor, outFileName )
 

@@ -9916,12 +9916,14 @@ for i in $(find $toy -name "*geojson"); do
     geoj=$(basename $i)
     flower=${geoj%%_*geojson}
     jpeg=$(find $jpegs -name $flower"*JPG")
-    $breakSpots $i $jpeg 
+    #$breakSpots $i $jpeg 
     $manZoneCaller $i 0.5 
     $spotMarker $i $jpegs
 done
 
 echo $i
+
+for i in $(find $toy -name "*geojson"); do
 
 ## okay, so we got the geoj and the jpeg, is this enough to run all three programs?
 ## order - breakspot, manzone, markspot
@@ -9994,7 +9996,6 @@ find . -name "*geojson" -newermt "2019-02-11" -exec ls -l {} \;
 
 
 ## run one file through our spotMarker:
-
 jpegs="./dougRaster/Rotated_and_Cropped/plate2"
 geojson='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/left/P500F1_left_polys.geojson'
 spotMarker='./make_polygons/package/makeFlowerPolygons/spotMarker.py'
@@ -10024,6 +10025,7 @@ python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-ex
 ## on mac. update package
 
 source /Users/danthomas/venv/bin/activate
+
 pip3 install -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom==0.0.5
 
 ## try loop?
@@ -10040,6 +10042,7 @@ mkdir $toy
 
 cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2
 cp -r P500* $toy/
+
 cd $toy
 
 speck
@@ -10054,3 +10057,122 @@ for i in $(find $toy -name "*geojson"); do
     $spotMarker $i $jpegs
 done
 
+manZoneCaller="./make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
+spotMarker="./make_polygons/package/makeFlowerPolygons/spotMarker.py"
+jpegs="./dougRaster/Rotated_and_Cropped/plate2"
+
+cd ./make_polygons/polygons/plate2
+
+for i in $(find . -name "*geojson"); do
+    echo $i
+    geoj=$(basename $i)
+    flower=${geoj%%_*geojson}
+    jpeg=$(find $jpegs -name $flower"*JPG")
+    $manZoneCaller $i 0.5 
+    $spotMarker $i $jpegs
+done
+## can we make a nice interface out of this?
+
+## or should we work on debugging the digitizing?
+
+## the next step waiting is to let melia work on 
+## the manualzonecalling and spotmarking
+
+touch curationLog.$(date +%F).txt
+ 
+for i in $(find $toy -name "*geojson"); do
+    echo $i
+    geoj=$(basename $i)
+    flower=${geoj%%_*geojson}
+    jpeg=$(find $jpegs -name $flower"*JPG")
+    #$breakSpots $i $jpeg 
+    #$manZoneCaller $i 0.5 
+    #$spotMarker $i $jpegs
+done
+
+
+## should we do this properly, using python? or stay with the 
+## the shell
+
+##############################
+
+## okay, so we want to rewrite the the spot breaker to work 
+## without selecting spots. 
+
+## that shit needs to be cleaned up anyway...
+
+## this is a little bit of a project, so let's branch. 
+
+import matplotlib as mp
+mp.use("TkAgg")
+import os, copy, json, argparse
+import makeFlowerPolygons.geojsonIO as geojsonIO
+#import matplotlib.backend_bases
+from matplotlib import pyplot as plt
+import makeFlowerPolygons.flowerPetal as flowerPetal
+import matplotlib.image as mpimg
+from shapely import geometry as sg
+from descartes import PolygonPatch
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+import newSpotBreaker
+
+plt.ion()
+fig, ax = plt.subplots(1,1)
+plt.gcf().canvas.manager.window.wm_geometry("+900+0")
+aa=newSpotBreaker.DrawYellow(ax=plt.gca(), fig=plt.gcf())
+
+newSpotBreaker="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/newSpotBreaker.py"
+geoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/left/P500F1_left_polys.geojson'
+jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P500F1.JPG'
+
+$newSpotBreaker $geoJ $jpeg -o test.geojson
+
+## seems okay, try on a few other images
+## then add photo viewer
+
+
+
+geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P534F1/right/P534F1_right_polys.geojson'
+jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P534F1.JPG'
+$newSpotBreaker $geoj $jpeg -o test.geojson
+
+
+geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P541F1/right/P541F1_right_polys.geojson'
+jpeg='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P541F1.JPG'
+$newSpotBreaker $geoj $jpeg -o test.geojson
+
+## photo veiwer added. Let's run some tests on a toy directory:
+
+speck
+
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
+
+ls $toy
+
+cd $toy
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2
+
+cp -r {P514F1,P519F2,P533F1,P703F2,P709F2,P514F2,P520F1,P534F1,P704F1,P710F1,P515F1,P520F2,P541F1,P704F3,P710F3} $toy/
+
+## run through this, try our 
+
+cd $toy
+
+jpegs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/'
+newSpotBreaker="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/newSpotBreaker.py"
+
+for i in $(find $toy -name "*geojson"); do
+    echo $i
+    geoj=$(basename $i)
+    flower=${geoj%%_*geojson}
+    jpeg=$(find $jpegs -name $flower"*JPG")
+    $newSpotBreaker $i $jpeg 
+    #$manZoneCaller $i 0.5 
+    #$spotMarker $i $jpegs
+done
+
+$newSpotBreaker $i $jpeg 
+
+## seems good enough to merge the branches...

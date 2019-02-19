@@ -92,7 +92,6 @@ def finished():
         finished()
 
 def showJpeg(jpeg, photoBB):
-    print('Zoop!')
     plt.ion()
     bb = list(zip(*photoBB))
     lowerLeft = [ min(i)-2 for i in bb ]

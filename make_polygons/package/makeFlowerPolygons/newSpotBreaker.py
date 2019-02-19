@@ -50,12 +50,20 @@ class DrawYellow:
                         marker='o',
                         markersize=3,
                         color="black")
+
     def drawPol(self):
         try:
             poly=sg.Polygon(self.xyVerts)
+            assert(poly.is_valid)
             geojsonIO.addOne(poly, a=0.8, col='yellow')
         except ValueError:
             return
+        except AssertionError:
+            print('Invalid polygon. New spots' 
+                    'will fail unless you fix this.')
+            return
+
+
 
 def redraw(petal, spots):
     aa=plt.gca().get_xlim(); bb=plt.gca().get_ylim()
@@ -120,13 +128,15 @@ def breakup(petal, spots):
     geojsonIO.plotOne(petal)
     geojsonIO.addOne(newSpots)
     plt.gcf().canvas.manager.window.wm_geometry("+900+350")
+    firstView=plt.gcf()
     print("Look okay?")
     ok=choice()
     if ok=='y': return(newSpots)
     if ok=='n': 
+        plt.close(firstView)
         geojsonIO.plotOne(petal)
         geojsonIO.addOne(newSpots)
-        plt.gcf().canvas.manager.window.wm_geometry("+900+0")
+        plt.gcf().canvas.manager.window.wm_geometry("+900+350")
         print('Draw in some yellow space.')
         breakPatch=DrawYellow(petal, newSpots, fig=plt.gcf(),)
         finished()

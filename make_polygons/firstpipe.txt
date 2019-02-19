@@ -10145,7 +10145,8 @@ $newSpotBreaker $geoj $jpeg -o test.geojson
 ## photo veiwer added. Let's run some tests on a toy directory:
 
 speck
-toy='./make_polygons/toy'
+
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
 
 ls $toy
 
@@ -10153,4 +10154,25 @@ cd $toy
 
 cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2
 
-P514F1  P519F2  P533F1  P703F2  P709F2 P514F2  P520F1  P534F1  P704F1  P710F1 P515F1  P520F2  P541F1  P704F3  P710F3
+cp -r {P514F1,P519F2,P533F1,P703F2,P709F2,P514F2,P520F1,P534F1,P704F1,P710F1,P515F1,P520F2,P541F1,P704F3,P710F3} $toy/
+
+## run through this, try our 
+
+cd $toy
+
+jpegs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/'
+newSpotBreaker="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/newSpotBreaker.py"
+
+for i in $(find $toy -name "*geojson"); do
+    echo $i
+    geoj=$(basename $i)
+    flower=${geoj%%_*geojson}
+    jpeg=$(find $jpegs -name $flower"*JPG")
+    $newSpotBreaker $i $jpeg 
+    #$manZoneCaller $i 0.5 
+    #$spotMarker $i $jpegs
+done
+
+$newSpotBreaker $i $jpeg 
+
+## seems good enough to merge the branches...

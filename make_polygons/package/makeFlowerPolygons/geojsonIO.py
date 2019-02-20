@@ -55,9 +55,8 @@ def writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB, scalin
     featC = {
             "type" : "FeatureCollection",
             "features" : [],
-            "properties" : [],
+            "metadata" : {},
             }
-
     ## fill it with features
     partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat', 'spotEstimates']
     ## each geometry needs a feature wrapper
@@ -71,18 +70,17 @@ def writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB, scalin
                   "geometry": gj_i,
                   "properties": {"id":(partNames[i])}}
             featC['features'].append(feature_i)
-    ## add photo bounding box
-    feature_i = {"type": "Feature",
-          "geometry": {"type": "Polygon",
-                       "coordinates": [photoBB]},
-          "properties": {"id":'photoBB'}}
-    featC['features'].append(feature_i)
-    ## add scalingFactor
+    ## add scalingFactor and bounding box
     try:
-        featC['properties'] = {"scalingFactor": scalingFactor}
+        featC['metadata']["scalingFactor"] = scalingFactor
     except (NameError, AttributeError):
-        featC['properties'] = {"scalingFactor": None}
+        featC['metadata']["scalingFactor"] = None
+    try:
+        featC['metadata']["photoBB"] = photoBB
+    except (NameError, AttributeError):
+        featC['metadata']["photoBB"] = None
     return(featC)
+
 
 def plotOne(poly, l=2, a=1.0, col='yellow', pick=None):
     fig = plt.figure()

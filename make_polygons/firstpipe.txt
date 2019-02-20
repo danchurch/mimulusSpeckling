@@ -10161,7 +10161,8 @@ cp -r {P514F1,P519F2,P533F1,P703F2,P709F2,P514F2,P520F1,P534F1,P704F1,P710F1,P51
 cd $toy
 
 jpegs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/'
-newSpotBreaker="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/newSpotBreaker.py"
+newSpotBreaker="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/breakSpots.py"
+manZoneCaller="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
 
 for i in $(find $toy -name "*geojson"); do
     echo $i
@@ -10169,10 +10170,330 @@ for i in $(find $toy -name "*geojson"); do
     flower=${geoj%%_*geojson}
     jpeg=$(find $jpegs -name $flower"*JPG")
     $newSpotBreaker $i $jpeg 
-    #$manZoneCaller $i 0.5 
-    #$spotMarker $i $jpegs
+    $manZoneCaller $i 
+    $spotMarker $i $jpegs
 done
 
 $newSpotBreaker $i $jpeg 
 
 ## seems good enough to merge the branches...
+
+## okay, so what about the bug in the manzone save process?
+
+## I think that the image is only saved if enter is hit and detected by 
+## the event handler in matplotlib:
+
+$manZoneCaller $i -o test.geojson -j $jpeg
+
+## one thing that can happen here is that you can erase the throat, 
+## are we worried about that?
+
+## nope. move on...
+
+## what else... 
+
+## oh yeah, the hard one - bounding box is off on some photos...
+
+## need a break. update pypi, then github, then take a walk for a minute...
+
+## update pypi test index:
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
+
+python3 setup.py sdist bdist_wheel
+
+python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
+
+## upgrade our virtual environment to this.
+pip3 install -U -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
+
+## next up - why are some raster images showing up weird on the spotMarker?
+
+## Melia showed me this one:
+
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P714F1/left/P714F1_left_polys.geojson
+
+ls /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P714F1/left/P714F1_left_polys.geojson
+
+
+## let's copy this into the toy directory:
+
+cp /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P714F1/left/P714F1_left_polys.geojson $toy
+
+cd $toy
+
+spotMarker="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/spotMarker.py"
+geoj="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P714F1_left_polys.geojson"
+
+$spotMarker $geoj $jpegs
+
+## hmm, looks like the bounding box is off. How can this be? we lifted these from doug's 
+## matrices...
+
+## I'm betting that this is a result of some random off color pixels from 
+## dougs pipeline...
+
+## ugh, I wish I had time to redo that part...
+
+## anyway, what is our bounding box, and does it properly clip
+## the jpeg?
+
+import pathlib
+from makeFlowerPolygons.spotMarker import photoAndPetal, plotOutline
+from makeFlowerPolygons import geojsonIO
+import argparse, json, pathlib, os, re
+import numpy as np
+import shapely.geometry as sg
+import shapely.ops as so
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import makeFlowerPolygons.flowerPetal
+from descartes import PolygonPatch
+from makeFlowerPolygons import geojsonIO
+from makeFlowerPolygons.get_spots import parseDougMatrix, digitizePols, cleanPetal
+from scipy.spatial import distance
+
+
+geoj=pathlib.Path("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P714F1_left_polys.geojson")
+jpg=pathlib.Path('P714F1.JPG')
+jpgs=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/')
+photoAndPetal(geoj, jpgs, jpg)
+
+
+
+(petal,spots,center,edge,throat,
+    spotEstimates, photoBB,
+                scalingFactor) = geojsonIO.parseGeoJson(geoj)
+
+plt.ion()
+
+xxyy = list(zip(*photoBB))
+
+Xmin = min(xxyy[0])
+Xmax = max(xxyy[0])
+Ymin = min(xxyy[1])
+Ymax = max(xxyy[1])
+
+Xmin
+
+Xmax
+
+Ymin
+Ymax
+
+img=mpimg.imread(jpgs / jpg)
+
+dd = img[Ymin:Ymax,Xmin:Xmax]
+
+aa = plotOutline(petal, col='blue')
+
+fig, ax = plt.subplots(1,1)
+
+plt.gca().imshow(dd, extent=plt.gca().get_xlim() + plt.gca().get_ylim(),
+                origin = 'lower')
+
+
+## hmmm, does the original matrix support this?
+
+
+## also predicting this problem for:
+P702F1
+P703F2
+P709F1
+P716F1
+
+## and others. You can see the bounding box error originate in 
+## doug's pipeline, his bounding boxes have extra white space in them
+## in these petals. 
+
+geoj=pathlib.Path("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P702F1/mid/P702F1_mid_polys.geojson")
+csv=pathlib.Path("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P702F1/mid/P702F1_mid_melted.csv")
+jpg=pathlib.Path('P702F1.JPG')
+jpgs=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/')
+
+photoAndPetal(geoj, jpgs, jpg)
+
+## yep, same deal. In doug's original "melted" matrix, do I recapture this incorrect boundry?
+
+aa=parseDougMatrix(csv)
+
+## this returns a BB, a petal and a spots matrix
+
+## there is a boundary available in the shapely polygon methods:
+
+petal.bounds
+
+## but this doesn't do us much good, because of the tranformations. We
+## can't use this info easily on the jpegs. The
+## original centroid of each petal wasn't preserved, and I don't think 
+## it really should be, if a reliable bounding box is made available.
+
+## we may have to go back to the original digitizing of the petal:
+
+_, petalCSV, _ = parseDougMatrix(csv)
+
+## redigitize:
+
+aa = digitizePols(petalCSV)
+
+bb = cleanPetal(aa)
+
+geojsonIO.plotOne(bb)
+
+bb.bounds
+
+## that's what we need, I think, to clip from the jpeg. 
+
+## this might be the time to fix our geojsons to spec a little.
+
+## apparently, we can't put a properties member in our top-level 
+## feature collection:
+
+https://tools.ietf.org/html/rfc7946#section-7.1
+
+## weird, seems like you'd want somewhere to store metadata. 
+
+## but I guess one solution is to name it something besides
+## properties, like "metadata". 
+
+## so can we change the of this member in our geojsons?
+## and put our bounding box info in there? o
+## so this new script will:
+
+## 1 - change the highest level "properties" member to "metadata"
+## 2 - move the bounding box member to the new "metadata" slot
+## 3 - create new bounding box info
+
+## this means edits to the geojsonIO module, also. 
+
+## what order to do this in? First let's see if we've really 
+## solved the bounding box problem:
+
+bb.bounds 
+
+plt.ion()
+
+xmin = int(bb.bounds[0])
+xmax = int(bb.bounds[2])
+ymin = int(bb.bounds[1])
+ymax = int(bb.bounds[3])
+
+print(Xmin, Xmax, Ymin, Ymax)
+
+img=mpimg.imread(jpgs / jpg)
+
+## all mixed up. but 
+#dd = img[Xmin:Xmax,Ymin:Ymax]
+
+## or is it:
+dd = img[Ymin:Ymax,Xmin:Xmax]
+## yup
+
+
+fig = plt.Figure()
+ax = plt.axes()
+ax.set_ylim(ymin,ymax)
+ax.set_xlim(xmin,xmax)
+
+
+plt.gca().imshow(dd, extent=plt.gca().get_xlim() + plt.gca().get_ylim(),
+                origin = 'lower')
+
+## looks good. 
+
+## a script for this?
+
+## fixBB.py
+#################################
+
+#!/usr/bin/env python3
+import argparse 
+from makeFlowerPolygons import geojsonIO
+from makeFlowerPolygons.get_spots import parseDougMatrix, digitizePols, cleanPetal
+
+## deal with args:
+parser = argparse.ArgumentParser()
+parser.add_argument('geojson')
+parser.add_argument('csv')
+parser.add_argument('jpeg')
+args = parser.parse_args()
+
+## script
+
+(petal,spots,center,edge,throat,
+    spotEstimates, photoBB,
+                scalingFactor) = geojsonIO.parseGeoJson(geojson)
+ 
+_, petalCSV, _ = parseDougMatrix(csv)
+rawPetal = digitizePols(petalCSV)
+clePetal = cleanPetal(rawPetal)
+## get our new photoBB
+photoBB = list(cleanPetal.bounds)
+
+## write it out
+geoDict = geojsonIO.writeGeoJ(standPet, standSpots,
+                                center, edge, throat,
+                                spotEstimates, photoBB, scale)
+
+with open(outFileName, 'w') as fp:
+    json.dump(geoDict, fp)
+
+
+
+
+
+
+##############################################
+
+
+## once this patch is applied, all of our jpeg viewers will have to 
+## be modified to accomodate the new photoBB format 
+
+## I think this means the spot breaker, spot marker, manzonecaller
+
+## for the digital pipeline, we need to change "parseDougMatrix()" in
+## get_spots.py
+
+fixBB='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/fixBB.py'
+
+
+## clean out and refill toybox
+
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
+dougdir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+
+cp -r /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P50*/ $toy
+
+## try our script on one file:
+
+geoj=$toy/P500F1/left/P500F1_left_polys.geojson
+csv=$toy/P500F1/left/P500F1_left_melted.csv
+jpeg=$dougdir/P500F1.JPG
+
+## make a copy of the geojson for comparison later:
+cd $toy
+cp $geoj "old_"$(basename $geoj)
+
+## run it
+
+$fixBB $geoj $csv -o test.geojson
+
+## seems to work okay, but we have to fix how geojsonIO parses
+## this
+
+## should we generally fix the architecture of the geojson while 
+## we're in there?
+
+## I think I have to...
+
+## seems like we have to do this one function at a time. 
+
+## first, keep our geojson parser intact, but the writeout function 
+## changed to create the new structure.
+
+## then loop over all files with a parse/new-writeout cycle that 
+## updates all geojsons. 
+
+## then update the parse function to handle the new style of geojson. 
+
+

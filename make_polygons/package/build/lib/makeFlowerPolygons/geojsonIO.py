@@ -40,11 +40,12 @@ def parseGeoJson(geojson):
         except:
             spotEstimates = sg.polygon.Polygon()
         try:
-            photoBB = [ i for i in listP if i['properties']['id'] == 'photoBB' ][0]['geometry']['coordinates'][0]
+            photoBB = aa['metadata']["photoBB"]
         except:
+            print("can't find BB")
             photoBB = None
         try:
-            scalingFactor = aa['properties']["scalingFactor"]
+            scalingFactor = aa['metadata']["scalingFactor"]
         except:
             scalingFactor = None
     return(petal,spots,center,edge,throat, spotEstimates, photoBB, scalingFactor)

@@ -24,13 +24,12 @@ def showJpeg(jpeg, photoBB):
     plt.ion()
     img=mpimg.imread(jpeg)
     photoBB = [ int(i) for i in photoBB ]
-    print(photoBB)
     justPetal = img[photoBB[1]:photoBB[3],photoBB[0]:photoBB[2]]
     jpegFig, jpegAx = plt.subplots(1,1)
     jpegAx.imshow(justPetal, origin='lower')
     jpegFig.canvas.manager.window.wm_geometry("+900+0")
     jpegFig.set_size_inches([6,3], forward = True)
-
+    return(jpegFig, jpegAx)
 
 
 def choice():

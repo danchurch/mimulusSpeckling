@@ -10496,4 +10496,287 @@ $fixBB $geoj $csv -o test.geojson
 
 ## then update the parse function to handle the new style of geojson. 
 
+## this would look something like:
 
+geojson=('/home/daniel/Documents/cooley_lab/mimulusSpeckling/'
+            'make_polygons/toy/old_P500F1_left_polys.geojson')
+
+(petal,spots,center,edge,throat,
+    spotEstimates, photoBB,
+                scalingFactor) = geojsonIO.parseGeoJson(geojson)
+
+
+def writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB, scalingFactor):
+    """Function for putting polygons into a dictionary that can be written out \
+    to json format, = geojson."""
+    featC = {
+            "type" : "FeatureCollection",
+            "features" : [],
+            "metadata" : {},
+            }
+    ## fill it with features
+    partNames = ['Petal', 'Spots', 'Center', 'Edge', 'Throat', 'spotEstimates']
+    ## each geometry needs a feature wrapper
+    for i,part in enumerate([petal, spots, center, edge, throat, spotEstimates]):
+        try:
+            gj_i = sg.mapping(part)
+        except (NameError, AttributeError):
+            gj_i = {"type": "Polygon", "coordinates": []}
+        finally:
+            feature_i = {"type": "Feature",
+                  "geometry": gj_i,
+                  "properties": {"id":(partNames[i])}}
+            featC['features'].append(feature_i)
+    ## add scalingFactor and bounding box
+    try:
+        featC['metadata']["scalingFactor"] = scalingFactor
+    except (NameError, AttributeError):
+        featC['metadata']["scalingFactor"] = None
+    try:
+        featC['metadata']["photoBB"] = photoBB
+    except (NameError, AttributeError):
+        featC['metadata']["photoBB"] = None
+    return(featC)
+
+
+outFileName='test.geojson'
+
+## write it out
+geoDict = writeGeoJ(petal, spots,
+                      center, edge, throat,
+                      spotEstimates, photoBB, scalingFactor)
+
+with open(outFileName, 'w') as fp:
+    json.dump(geoDict, fp)
+
+## that seems to work. Sub that new function back in.
+
+## so...
+## update python index and github
+## write a script to readin/writeout this new format
+## try this on a loop, in a toy directory
+## if it works, readin/writeout all geojs, 
+## then apply the new bounding box patch to all geojs
+## then fix the digitizing pipeline for the next plates
+
+
+deactivate ## get rid of VE
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
+
+vim setup.py ## change version
+
+python3 setup.py sdist bdist_wheel
+
+python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
+
+## upgrade our virtual environment to this.
+
+VE ## go back to virtual environment
+pip3 install -U -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
+
+
+
+## restructGeoJ.py
+##################################
+
+#!/usr/bin/python3 env
+
+import argparse, json
+from makeFlowerPolygons import geojsonIO
+
+parser = argparse.ArgumentParser()
+parser.add_argument('geojson')
+parser.add_argument('-o', '--outFileName', default=None)
+args = parser.parse_args()
+
+if not args.outFileName:
+    outFileName=args.geojson
+else:
+    outFileName=args.outFileName
+
+## reading old format
+(petal,spots,center,edge,throat,
+    spotEstimates, photoBB,
+                scalingFactor) = geojsonIO.parseGeoJson(geojson)
+
+geoDict = geojsonIO.writeGeoJ(petal, spots,
+                                center, edge, throat,
+                                spotEstimates, photoBB, scalingFactor)
+
+with open(outFileName, 'w') as fp:
+    json.dump(geoDict, fp)
+~
+
+## okay, try out a loop to update the geojsons of the toy directory
+
+cd $toy
+
+restructGeoJ='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/restructGeoJ.py'
+
+$restructGeoJ
+
+for i in $(find . -name "*.geojson"); do
+    echo $i
+    $restructGeoJ $i 
+done
+
+## looks ok
+
+## make a commit, then apply to all geojsons, plate1 and 2
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate1
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2
+
+for i in $(find . -name "*.geojson"); do
+    echo $i
+    $restructGeoJ $i 
+done
+
+## spot checks okay. we'll see if anything funny pops as we use these files...
+
+
+## we need to change to geojsonIO parse function ...
+
+import json
+import shapely.geometry as sg
+
+geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/left/P500F1_left_polys.geojson'
+
+def parseGeoJson(geojson):
+    with open(geojson) as gjf:
+        aa = json.load(gjf)
+        listP = (aa['features'])
+        try:
+            petalGJ = [ i for i in listP if i['properties']['id'] == 'Petal' ][0]['geometry']
+            petal = sg.shape(petalGJ)
+        except:
+            petal = sg.polygon.Polygon()
+        try:
+            spotsGJ = [ i for i in listP if i['properties']['id'] == 'Spots' ][0]['geometry']
+            spots= sg.shape(spotsGJ)
+        except:
+            spots = sg.polygon.Polygon()
+        try:
+            centerGJ = [ i for i in listP if i['properties']['id'] == 'Center' ][0]['geometry']
+            center = sg.shape(centerGJ)
+        except:
+            center = sg.polygon.Polygon()
+        try:
+            edgeGJ = [ i for i in listP if i['properties']['id'] == 'Edge' ][0]['geometry']
+            edge = sg.shape(edgeGJ)
+        except:
+            edge = sg.polygon.Polygon()
+        try:
+            throatGJ = [ i for i in listP if i['properties']['id'] == 'Throat' ][0]['geometry']
+            throat = sg.shape(throatGJ)
+        except:
+            throat = sg.polygon.Polygon()
+        try:
+            spotEstimatesGJ = [ i for i in listP if i['properties']['id'] == 'spotEstimates' ][0]['geometry']
+            spotEstimates = sg.shape(spotEstimatesGJ)
+        except:
+            spotEstimates = sg.polygon.Polygon()
+        try:
+            photoBB = aa['metadata']["photoBB"]
+        except:
+            print("can't find BB")
+            photoBB = None
+        try:
+            scalingFactor = aa['metadata']["scalingFactor"]
+        except:
+            scalingFactor = None
+    return(petal,spots,center,edge,throat, spotEstimates, photoBB, scalingFactor)
+
+aa = parseGeoJson(geoj)
+
+
+## update the pypi, see if this works:
+
+python3
+
+from makeFlowerPolygons import geojsonIO
+
+geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/left/P500F1_left_polys.geojson'
+
+geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P508F2/left/P508F2_left_polys.geojson'
+
+geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate1/P406F3/mid/P406F3_mid_polys.geojson'
+
+aa = geojsonIO.parseGeoJson(geoj)
+
+## seems okay
+
+## try our patch for correcting bounding boxes
+
+fixBB='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/fixBB.py'
+
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
+
+## try our script on one file:
+
+geoj=$toy/P500F1/left/P500F1_left_polys.geojson
+csv=$toy/P500F1/left/P500F1_left_melted.csv
+
+## make a copy of the geojson for comparison later:
+cd $toy
+cp $geoj "old_"$(basename $geoj)
+
+$fixBB $geoj $csv -o 'test.geojson'
+
+## a loop would look like this:
+
+cd $toy
+
+for i in $(find . -name "*geojson"); do
+    echo $i
+    csv=${i%_*}"_melted.csv"
+    $fixBB $i $csv 
+done
+
+## this should turn all bounding boxes into 4-number tuples
+
+## looks good. Let's apply this to plate1 and plate2?
+
+#cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate1
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2
+
+
+for i in $(find . -name "*geojson"); do
+    echo $i
+    csv=${i%_*}"_melted.csv"
+    $fixBB $i $csv 
+done
+
+## and then?
+
+## rewrite the breakspot, manzone, spotMarker modules to accept this new format. 
+
+## start with breakspot
+
+
+
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
+dougdir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+
+cd $toy
+
+breakSpots="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/breakSpots.py"
+
+manZoneCaller="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
+
+geoj="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P507F1/right/P507F1_right_polys.geojson"
+jpeg=$dougdir"/P507F1.JPG"
+
+$breakSpots 
+
+$breakSpots $geoj $jpeg -o test.geojson
+
+## think that works. 
+
+## onto manzone
+
+$manZoneCaller
+
+$manZoneCaller $geoj -j $jpeg -o test.geojson

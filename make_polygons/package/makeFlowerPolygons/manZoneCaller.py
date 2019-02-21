@@ -22,16 +22,15 @@ def plotFlowerZones(petal,spots,center,edge,throat):
 
 def showJpeg(jpeg, photoBB):
     plt.ion()
-    bb = list(zip(*photoBB))
-    lowerLeft = [ min(i)-2 for i in bb ]
-    upperRight = [ max(i)+2 for i in bb ]
     img=mpimg.imread(jpeg)
-    justPetal = img[lowerLeft[1]:upperRight[1],lowerLeft[0]:upperRight[0]]
+    photoBB = [ int(i) for i in photoBB ]
+    print(photoBB)
+    justPetal = img[photoBB[1]:photoBB[3],photoBB[0]:photoBB[2]]
     jpegFig, jpegAx = plt.subplots(1,1)
     jpegAx.imshow(justPetal, origin='lower')
     jpegFig.canvas.manager.window.wm_geometry("+900+0")
     jpegFig.set_size_inches([6,3], forward = True)
-    return(jpegFig,jpegAx)
+
 
 
 def choice():

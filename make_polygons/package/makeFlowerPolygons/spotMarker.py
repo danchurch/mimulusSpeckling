@@ -90,9 +90,6 @@ class SpotMarker:
 
 ######### helper functions #################
 
-#geojson='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/geojsons_working/P423F2_right_polys.geojson'
-#jpgs='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped'
-#findJPG(geojson, jpgs)
 
 def findJPG(geojson, jpgs):
     allJpgs = os.listdir(jpgs)
@@ -129,15 +126,11 @@ def photoAndPetal(geojson,jpgs,jpg):
         spotEstimates, photoBB, 
                     scalingFactor) = geojsonIO.parseGeoJson(geojson)
     plt.ion()
-    xxyy = list(zip(*photoBB))
-    Xmin = min(xxyy[0])
-    Xmax = max(xxyy[0])
-    Ymin = min(xxyy[1])
-    Ymax = max(xxyy[1])
     img=mpimg.imread(jpgs / jpg)
-    dd = img[Ymin:Ymax,Xmin:Xmax]
+    photoBB = [ int(i) for i in photoBB ]
+    justPetal = img[photoBB[1]:photoBB[3],photoBB[0]:photoBB[2]]
     aa = plotOutline(petal, col='blue')
-    plt.gca().imshow(dd, extent=plt.gca().get_xlim() + plt.gca().get_ylim(),
+    plt.gca().imshow(justPetal, extent=plt.gca().get_xlim() + plt.gca().get_ylim(),
                     origin = 'lower')
 
 def preview(spotEstimates, petal, ax=None):

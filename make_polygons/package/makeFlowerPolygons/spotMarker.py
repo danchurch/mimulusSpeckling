@@ -50,10 +50,19 @@ class SpotMarker:
             and self.event.button == 1):
             circleRad = distance.euclidean((self.centerx, self.centery),
                                     (event.xdata, event.ydata))
-            circle = sg.Point(self.centerx, self.centery).buffer(circleRad)
-            self.circs.append(circle)
-            circArt = geojsonIO.addOne(self.circs[-1], col = 'blue', a=0.3)
-            self.circArts.append(circArt)
+            try:
+                assert(circleRad > 0)
+                circle = sg.Point(self.centerx, self.centery).buffer(circleRad)
+                self.circs.append(circle)
+                circArt = geojsonIO.addOne(self.circs[-1], col = 'blue', a=0.3)
+                self.circArts.append(circArt)
+            except AssertionError:
+                ## if button released too quickly, cleanup
+                print("zero radius spot")
+                self.centerpt.remove()
+                self.centerpt = None
+                self.centerx = None; self.centery = None
+                del(self.centerpts[-1])
 
         elif (self.event.name == 'button_press_event' 
             and self.event.button != 1):
@@ -90,21 +99,6 @@ class SpotMarker:
 
 ######### helper functions #################
 
-
-def findJPG(geojson, jpgs):
-    allJpgs = os.listdir(jpgs)
-    aa = re.search('(P.*?)_', geojson.name)
-    flowerName = aa.groups()[0]
-    jpgList = [ i for i in allJpgs if (flowerName in i and "JPG" in i) ]
-    try:
-        assert jpgList
-        jpgName=jpgList[0]
-        jpg = pathlib.Path(jpgName)
-        return(jpg)
-    except AssertionError as err:
-        print("Can't find jpeg. Check geojson name or jpeg folder.")
-        quit()
-
 def plotOutline(poly, ax=None, l=2, col='black'):
     """Plot the outline of a polgon. Maybe move this 
     to the geojsonIO module?"""
@@ -118,7 +112,7 @@ def plotOutline(poly, ax=None, l=2, col='black'):
         linewidth=l, solid_capstyle='round', zorder=2)
     return(out)
 
-def photoAndPetal(geojson,jpgs,jpg):
+def photoAndPetal(geojson,jpg):
     """plot the photo image of the petal that
     corresponds to the geojson, along with 
     an outline of our petal polygon"""
@@ -126,7 +120,7 @@ def photoAndPetal(geojson,jpgs,jpg):
         spotEstimates, photoBB, 
                     scalingFactor) = geojsonIO.parseGeoJson(geojson)
     plt.ion()
-    img=mpimg.imread(jpgs / jpg)
+    img=mpimg.imread(jpg)
     photoBB = [ int(i) for i in photoBB ]
     justPetal = img[photoBB[1]:photoBB[3],photoBB[0]:photoBB[2]]
     aa = plotOutline(petal, col='blue')
@@ -165,26 +159,25 @@ def choice():
         return(aa)
 
 
-def main(geojson, jpgs, outFileName=None): 
+def main(geojson, jpg, outFileName=None): 
     geojson = pathlib.Path(geojson)
-    jpgs = pathlib.Path(jpgs)
+    jpg = pathlib.Path(jpg)
     plt.ion()
     (petal,spots,center,edge,throat, 
         spotEstimates, photoBB, 
                     scalingFactor) = geojsonIO.parseGeoJson(geojson)
-    jpg=findJPG(geojson, jpgs)
-    photoAndPetal(geojson,jpgs,jpg)
+    photoAndPetal(geojson,jpg)
     preview(spotEstimates, petal, ax=plt.gca())
     plt.gcf().canvas.manager.window.wm_geometry("+900+0")
-    inkspot=input("Add/redo inkspots? (y/n) ")
+    inkspot=input("Redo inkspots? (y/n) ")
     try:
         assert(inkspot in {'y','n'})
     except AssertionError:
         print("Enter 'y' or 'n'")
-        main(geojson, jpgs, outFileName)
+        main(geojson, jpg, outFileName)
     if inkspot == 'y':
         plt.close('all')
-        photoAndPetal(geojson,jpgs,jpg)
+        photoAndPetal(geojson,jpg)
         plt.gcf().canvas.manager.window.wm_geometry("+900+0")
         spotMarker = SpotMarker()
         finished()
@@ -216,8 +209,9 @@ if __name__ == "__main__":
                 help=("""Name of the geojson file to which you want to
                         add estimated spots. """),
                 type=str)
-    parser.add_argument('jpgs',
-                help=("""Name of the folder of jpg images."""),
+    parser.add_argument('jpg',
+                help=("""Name of the jpeg image that corresponds
+                        to the geojson of petal."""),
                 type=str)
     parser.add_argument('-o', '--out',
                 help=("Name for outfile. If none given, modified in place."),
@@ -231,5 +225,5 @@ if __name__ == "__main__":
     else:
         outFileName = args.geojson
 
-    main(args.geojson,args.jpgs, outFileName)
+    main(args.geojson,args.jpg, outFileName)
 

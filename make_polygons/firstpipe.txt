@@ -10569,12 +10569,13 @@ python3 setup.py sdist bdist_wheel
 
 python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
 
+git ##etc
+
 ## upgrade our virtual environment to this.
 
 VE ## go back to virtual environment
+
 pip3 install -U -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
-
-
 
 ## restructGeoJ.py
 ##################################
@@ -10847,4 +10848,52 @@ $spotMarker $toy"/P714F1_left_polys.geojson" $dougdir -o test.geojson
 ## files
 
 ## and compile a list of files 
+
+###################
+
+## yesterday cleaned up the modules to be able to run
+## them as scripts from within a python program. Theoretically.
+## So now, update packages with new edits, see if they run okay 
+## from command line and then within the python interface 
+## I'm building.
+
+## try programs from the command line:
+
+
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
+dougdir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+
+cd $toy
+
+breakSpots="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/breakSpots.py"
+manZoneCaller="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
+spotMarker='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/spotMarker.py'
+
+cd $toy
+
+for geoj in $(find $toy -name "*geojson"); do
+    echo $geoj
+    bn=$(basename $geoj)
+    flower=${bn%%_*}
+    jpeg=$(find $dougdir -name $flower".JPG")
+    $breakSpots $geoj $jpeg
+    $manZoneCaller $geoj -j $jpeg 
+    $spotMarker $geoj $jpeg
+done
+
+## add in labels for the file we're working on
+## in mother script on terminal
+
+## It think we gotta code in the ability to find the jpeg either into the script 
+## or the modules themselves. 
+
+## I think the best option here is to remove the jpeg search from spotMarker for
+## uniformity, and put it into the mother script. 
+
+geoj="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P702F1/right/P702F1_right_polys.geojson"
+jpg="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P702F1.JPG"
+
+pack
+
+./spotMarker.py $geoj $jpg -o test.geojson
 

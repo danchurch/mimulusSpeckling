@@ -95,7 +95,6 @@ def showJpeg(jpeg, photoBB):
     plt.ion()
     img=mpimg.imread(jpeg)
     photoBB = [ int(i) for i in photoBB ]
-    print(photoBB)
     justPetal = img[photoBB[1]:photoBB[3],photoBB[0]:photoBB[2]]
     jpegFig, jpegAx = plt.subplots(1,1)
     jpegAx.imshow(justPetal, origin='lower')

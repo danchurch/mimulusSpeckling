@@ -10780,3 +10780,71 @@ $breakSpots $geoj $jpeg -o test.geojson
 $manZoneCaller
 
 $manZoneCaller $geoj -j $jpeg -o test.geojson
+
+## check on some of the problem files:
+
+plate2='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2'
+
+a=(P702F1 P703F2 P709F1 P716F1)
+
+cd $toy
+for i in echo ${a[@]}; do
+    cp -r $(find $plate2 -name $i) $toy
+done
+
+for i in ${a[@]}; do
+    for j in $(find $plate2 -name $i*geojson); do
+            echo $j
+            jpeg=$(find $dougdir -name $i*JPG)
+            echo $jpeg
+            $manZoneCaller $j -j $jpeg 
+        done
+done
+
+find $toy -name "*geojson"
+
+for geoj in $(find $toy -name "*geojson"); do
+    echo $geoj
+    bn=$(basename $geoj)
+    flower=${bn%%_*}
+    jpeg=$(find $dougdir -name $flower".JPG")
+    $manZoneCaller $geoj -j $jpeg 
+done
+
+$manZoneCaller $geoj -j $jpeg -o test.geojson
+
+
+## check the specific example of from melia:
+aa='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2/P714F1/left/P714F1_left_polys.geojson'
+
+cp $aa $toy"/P714F1_left_polys.geojson"
+
+jpeg="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2/P714F1.JPG"
+
+$manZoneCaller $toy"/P714F1_left_polys.geojson" -j $jpeg -o test.geojson
+## looks okay
+
+## onto the inkdrop marker:
+
+spotMarker='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/spotMarker.py'
+
+cd $toy
+
+$spotMarker $toy"/P714F1_left_polys.geojson" $dougdir -o test.geojson
+
+## seems okay...
+
+## updated... work on loop:
+
+## we need a loop that records the work done
+
+## hmm, maybe a python script is a better option here. 
+
+## this script should ask if one, two or three programs are to 
+## be used? Or not...
+
+## it should accept a target directory, build a list of todo
+## files
+
+## and compile a list of files 
+

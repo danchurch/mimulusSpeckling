@@ -165,7 +165,7 @@ def choice():
         return(aa)
 
 
-def main(geojson, jpgs): 
+def main(geojson, jpgs, outFileName=None): 
     geojson = pathlib.Path(geojson)
     jpgs = pathlib.Path(jpgs)
     plt.ion()
@@ -181,7 +181,7 @@ def main(geojson, jpgs):
         assert(inkspot in {'y','n'})
     except AssertionError:
         print("Enter 'y' or 'n'")
-        main(geojson, jpgs)
+        main(geojson, jpgs, outFileName)
     if inkspot == 'y':
         plt.close('all')
         photoAndPetal(geojson,jpgs,jpg)
@@ -231,5 +231,5 @@ if __name__ == "__main__":
     else:
         outFileName = args.geojson
 
-    main(args.geojson,args.jpgs)
+    main(args.geojson,args.jpgs, outFileName)
 

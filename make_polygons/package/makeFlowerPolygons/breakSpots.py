@@ -145,6 +145,16 @@ def breakup(petal, spots):
         newSpots=breakup(petal, newSpots)
         return(newSpots)
 
+def main(geoJ,jpeg,outFileName):
+    (petal,spots,center,edge,throat,
+        spotEstimates, photoBB,
+                    scalingFactor) = geojsonIO.parseGeoJson(geoJ)
+    showJpeg(jpeg, photoBB)
+    newSpots=breakup(petal,spots)
+    saveOut ( petal, newSpots, center, edge, throat,
+                spotEstimates, photoBB,
+                scalingFactor, outFileName )
+
 ######################################################
 
 if __name__ == '__main__':
@@ -167,15 +177,6 @@ if __name__ == '__main__':
         outFileName = args.geoJ
     else: outFileName = args.outFileName
 
-    (petal,spots,center,edge,throat,
-        spotEstimates, photoBB,
-                    scalingFactor) = geojsonIO.parseGeoJson(args.geoJ)
+    main(args.geoJ,args.jpeg,outFileName)
 
-    showJpeg(args.jpeg, photoBB)
-
-    newSpots=breakup(petal,spots)
-
-    saveOut ( petal, newSpots, center, edge, throat,
-                spotEstimates, photoBB,
-                scalingFactor, outFileName )
 

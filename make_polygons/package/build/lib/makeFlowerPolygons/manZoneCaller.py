@@ -142,9 +142,11 @@ class PolyMaker:
                         'will fail unless you fix this.')
                 return
 
-def main( petal,spots,center,edge,throat, 
-                spotEstimates, photoBB, 
-                scalingFactor, geojson, outFileName, jpeg=None):
+def main(geojson, outFileName, jpeg=None):
+    (petal,spots,
+    center,edge,throat, 
+    spotEstimates, photoBB, 
+    scalingFactor) = geojsonIO.parseGeoJson(geojson)
     try:
         assert(center)
     except AssertionError:
@@ -211,11 +213,4 @@ if __name__ == '__main__':
     else:
         outFileName = args.geojson
 
-    (petal,spots,
-    center,edge,throat, 
-    spotEstimates, photoBB, 
-    scalingFactor) = geojsonIO.parseGeoJson(args.geojson)
-
-    main( petal,spots,center,edge,throat, 
-                spotEstimates, photoBB, 
-                scalingFactor, args.geojson, outFileName, jpeg=args.jpeg )
+    main(args.geojson, outFileName, jpeg=args.jpeg )

@@ -10561,6 +10561,7 @@ with open(outFileName, 'w') as fp:
 
 
 deactivate ## get rid of VE
+
 cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
 
 vim setup.py ## change version
@@ -10574,7 +10575,6 @@ git ##etc
 ## upgrade our virtual environment to this.
 
 VE ## go back to virtual environment
-
 pip3 install -U -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
 
 ## restructGeoJ.py
@@ -10896,4 +10896,21 @@ jpg="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_C
 pack
 
 ./spotMarker.py $geoj $jpg -o test.geojson
+
+## now finish the raw script, start debugging. 
+
+## try it out:
+
+VE
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
+dougdir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+
+cd $toy
+
+$runCuration -h
+
+$runCuration . $dougdir
+
+
 

@@ -1,34 +1,14 @@
 #!/usr/bin/env python3
 
 ## for build
-wd=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy')
-jpegs=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2')
-plate2='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2'
+#wd=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy')
+#jpgs=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2')
+#plate2=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2')
+#exGeoj=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P716F1/mid/P716F1_mid_polys.geojson')
 
-import os, argparse, pathlib, json
-import makeFlowerPolygons
-
-## deal with args:
-parser = argparse.ArgumentParser()
-parser.add_argument('folder',
-        help=("Enter the working directory that has the geojsons"
-            " that you are curating"))
-parser.add_argument('jpgFolder',
-        help=("Enter the folder that contains the jpeg files"
-            " corresponding to the geojsons in your working folder."))
-#parser.add_argument('-l', '--log',
-#        help=("The name of the log that keep track of your progress"))
-
-args = parser.parse_args()
-wd=pathlib.Path(args.folder)
-jpegs=pathlib.Path(args.jpgFolder)
-
-if not wd.is_dir():
-    print("Can't find the working directory: {}.".format(str(wd)))
-    quit()
-if not jpegs.is_dir():
-    print("Can't find the jpeg directory: {}.".format(str(jpegs)))
-    quit()
+import os, argparse, pathlib, json, re
+import pandas as pd
+from makeFlowerPolygons import breakSpots, manZoneCaller, spotMarker
 
 
 def choice():
@@ -46,8 +26,7 @@ def progChoice():
             'SpotMarker': None}
     for i in progs.keys():
         print("Do you want to run {}"
-                        " on all files in working directory?"
-                        " (y/n):".format(i))
+                    " on all files in working directory?".format(i))
         yn=choice()
         progs[i]=yn
     return(progs)
@@ -55,7 +34,7 @@ def progChoice():
 
 def findLog(dir=os.getcwd()):
     try:
-        oldLog=[i for i in os.listdir(dir) if "LOG" in i][0]
+        oldLog=[i for i in os.listdir(dir) if "log.json" in i][0]
     except IndexError:
         print('No log found, starting new.')
         return
@@ -72,9 +51,13 @@ def findGeojs(dir):
     listGeojs=[]
     bb = os.walk(dir, topdown=True)
     for i in bb:
-        _,_,files = i
-        [ listGeojs.append(i) for i in files if('geojson' in i)]
+        di,_,fi = i
+        pathDi=pathlib.Path(di)
+        for i in fi:
+            if('geojson' in i):
+                listGeojs.append(str(pathDi / i))
     return(listGeojs)
+
 
 def makeNewLog(listGeojs):
     """make a empty log"""
@@ -83,38 +66,90 @@ def makeNewLog(listGeojs):
     log=dict(list(zip(listGeojs, emptylogs)))
     return(log)
 
+def findJPG(geojson, jpgs):
+    """
+    given a directory, find our flower jpeg in it. Use pathlib.Path objects
+    """
+    allJpgs = os.listdir(jpgs)
+    aa = re.search('(P.*?)_', geojson.name)
+    flowerName = aa.groups()[0]
+    jpgList = [ i for i in allJpgs if (flowerName in i and "JPG" in i) ]
+    try:
+        assert jpgList
+        jpgName=jpgList[0]
+        jpg = pathlib.Path(jpgName)
+        return(jpgs / jpg)
+    except AssertionError as err:
+        print("Can't find jpeg. Check geojson name or jpeg folder.")
+        quit()
 
-os.chdir(wd)
-allGeojs=findGeojs(wd)
-logfile=findLog(wd)
-if not logfile:
-    log=makeNewLog(allGeojs)
-with open(logfile, 'r') as f:
-    log=json.load(f)
-pc=progChoice()
+def updateLog(logfile, log):
+    ## save out log
+    with open(logfile, 'w') as f:
+        json.dump(log)
 
-## todo lists:
-sbDone={k:v['Spotbreaker'] for (k,v) in log.items()}
-mzDone={k:v['ManualZoneCaller'] for (k,v) in log.items()}
-smDone={k:v['SpotMarker'] for (k,v) in log.items()}
+def textLog(log):
+    ## write out a text version for user to read if they like
+    pdLog = pd.DataFrame.from_dict(log,orient='index')
+    pdLog.to_csv('log.csv')
 
-for i in allGeojs:
-    if pc['Spotbreaker']=='y':
-        if not sbDone[i]:
-            makeFlowerPolygons.breakSpots.main(i,
-            sbDone[i] = True
-    if pc['ManualZoneCaller']=='y':
-        if not mzDone[i]:
-            makeFlowerPolygons.manZoneCaller.main(i,
-            mzDone[i] == True
-    if pc['SpotMarker']=='y':
-        if not smDone[i]:
-            makeFlowerPolygons.spotMarker.main(i,
-            smDone[i] == True
+def main(wd, jpgs):
+    os.chdir(wd)
+    allGeojs=findGeojs(wd)
+    if not allGeojs: 
+        print("No geojsons found in this folder.")
+        quit()
+    logfile=findLog(wd)
+    if logfile:
+        with open(logfile, 'r') as f:
+            log=json.load(f)
+    elif not logfile:
+        log=makeNewLog(allGeojs)
+    pc=progChoice()
+    print(allGeojs)
+    for i in allGeojs:
+        jpg=findJPG(pathlib.Path(i), jpgs)
+        if pc['Spotbreaker']=='y':
+            if not log[i]['Spotbreaker']:
+                print("Breaking spots in {}".format(i))
+                breakSpots.main(i, jpg, i)
+                log[i]['Spotbreaker'] = True
 
-## test modifications on individual programs, update pypi and comp
-## clean up some of the above 
-## sort list of geojs alphabetically
-## figure out finding jpegs
-## write out changes to log
-## make a way to quit?
+        print('made it here')
+        if pc['ManualZoneCaller']=='y':
+            if not log[i]['ManualZoneCaller']:
+                print("Calling zones in {}".format(i))
+                manZoneCaller.main(i,i,jpg)
+                log[i]['ManualZoneCaller'] = True
+
+        if pc['SpotMarker']=='y':
+            if not log[i]['SpotMarker']:
+                print("Estimating spot events in {}".format(i))
+                spotMarker.main(i, jpg, i)
+                log[i]['SpotMarker'] = True
+
+    updateLog(logfile, log)
+    textLog(log)
+
+## deal with args:
+if __name__=='__main__':
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('folder',
+            help=("Enter the working directory that has the geojsons"
+                " that you are curating"))
+    parser.add_argument('jpgFolder',
+            help=("Enter the folder that contains the jpeg files"
+                " corresponding to the geojsons in your working folder."))
+
+    args = parser.parse_args()
+    wd=pathlib.Path(args.folder)
+    jpgs=pathlib.Path(args.jpgFolder)
+    if not wd.is_dir():
+        print("Can't find the working directory: {}.".format(str(wd)))
+        quit()
+    if not jpgs.is_dir():
+        print("Can't find the jpeg directory: {}.".format(str(jpgs)))
+        quit()
+
+    main(wd, jpgs)

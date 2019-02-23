@@ -81,10 +81,10 @@ def saveOut ( petal,spots,center,edge,throat,
                     spotEstimates, photoBB, scalingFactor)
         with open(outFileName, 'w') as fp:
             json.dump(featC, fp)
-        quit()
+        return
     if newOK == 'n': 
         print('Not saving...')
-        quit()
+        return
 
 class PolyMaker:
     def __init__(self, petal, center):
@@ -152,7 +152,7 @@ def main(geojson, outFileName, jpeg=None):
     except AssertionError:
         print ('Center zone not found. Have you run this geojson'
         ' through our automated zone calling steps?')
-        quit()
+        return
     plt.ion()
     jpegFig, jpegAx = showJpeg(jpeg, photoBB)
     petalFig, petalAx = plotFlowerZones(petal,spots,center,edge,throat)

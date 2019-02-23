@@ -114,10 +114,10 @@ def saveOut ( petal,spots,center,edge,throat,
                     spotEstimates, photoBB, scalingFactor)
         with open(outFileName, 'w') as fp:
             json.dump(featC, fp)
-        quit()
+        return
     if newOK == 'n':
         print('Not saving...')
-        quit()
+        return
 
 def breakup(petal, spots):
     newSpots=spots

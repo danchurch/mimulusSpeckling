@@ -193,11 +193,11 @@ def main(geojson, jpg, outFileName=None):
         elif saveSp == 'n':
             print("Okay, no changes to {} spot "
                     "estimates saved.".format(str(geojson.name)))
-            quit()
+            return
     elif inkspot == 'n':
         print('Bye for now from spotMarker!')
         plt.close('all')
-        quit()
+        return
 
 ##########################
 

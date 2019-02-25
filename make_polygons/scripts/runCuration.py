@@ -8,8 +8,14 @@
 
 import os, argparse, pathlib, json, re
 import pandas as pd
-from makeFlowerPolygons import breakSpots, manZoneCaller, spotMarker
+#from makeFlowerPolygons import breakSpots, manZoneCaller, spotMarker
+from makeFlowerPolygons import  spotMarker
 
+## while working without internet, for updating packages
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+import breakSpots
+import manZoneCaller 
 
 def choice():
     ch=input('(y/n)')
@@ -53,15 +59,17 @@ def findGeojs(dir):
     for i in bb:
         di,_,fi = i
         pathDi=pathlib.Path(di)
-        for i in fi:
-            if('geojson' in i):
-                listGeojs.append(str(pathDi / i))
+        #for i in fi:
+        #    if('geojson' in i):
+        #        listGeojs.append(str(pathDi / i))
+        [ listGeojs.append(str(pathDi / i)) for i in fi if('geojson' in i)]
     return(listGeojs)
 
 
 def makeNewLog(listGeojs):
     """make a empty log"""
-    onefile={'Spotbreaker':False, 'ManualZoneCaller': False, 'SpotMarker': False}
+    onefile={'Spotbreaker':False, 'ManualZoneCaller': False, 
+                'SpotMarker': False}
     emptylogs = [onefile] * len(listGeojs)
     log=dict(list(zip(listGeojs, emptylogs)))
     return(log)
@@ -98,7 +106,7 @@ def main(wd, jpgs):
     allGeojs=findGeojs(wd)
     if not allGeojs: 
         print("No geojsons found in this folder.")
-        quit()
+        return
     logfile=findLog(wd)
     if logfile:
         with open(logfile, 'r') as f:
@@ -106,7 +114,6 @@ def main(wd, jpgs):
     elif not logfile:
         log=makeNewLog(allGeojs)
     pc=progChoice()
-    print(allGeojs)
     for i in allGeojs:
         jpg=findJPG(pathlib.Path(i), jpgs)
         if pc['Spotbreaker']=='y':
@@ -115,7 +122,6 @@ def main(wd, jpgs):
                 breakSpots.main(i, jpg, i)
                 log[i]['Spotbreaker'] = True
 
-        print('made it here')
         if pc['ManualZoneCaller']=='y':
             if not log[i]['ManualZoneCaller']:
                 print("Calling zones in {}".format(i))

@@ -160,10 +160,12 @@ def main(geojson, outFileName, jpeg=None):
     ZonesOK=choice()
 
     if ZonesOK == 'y': 
-        ## write it out?
-        saveOut( petal,spots,center,edge,throat, 
-                spotEstimates, photoBB, 
-                scalingFactor, geojson, outFileName)
+        print("Okay! moving on...")
+        plt.close('all')
+        return
+        #saveOut( petal,spots,center,edge,throat, 
+        #        spotEstimates, photoBB, 
+        #        scalingFactor, geojson, outFileName)
 
     if ZonesOK == 'n': 
         plt.close(petalFig)
@@ -183,10 +185,7 @@ def main(geojson, outFileName, jpeg=None):
 
     print("Let's startover.")
     plt.close('all')
-    main( petal,spots,center,edge,throat, 
-                    spotEstimates, photoBB, 
-                    scalingFactor, geojson, outFileName, jpeg=jpeg)
-
+    main(geojson, outFileName, jpeg)
 
 ########################################
 

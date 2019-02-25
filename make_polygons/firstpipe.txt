@@ -10912,5 +10912,22 @@ $runCuration -h
 
 $runCuration . $dougdir
 
+## breakspot is deleting spots, regardless of actual fix. 
+## breakspot is also not resetting the breakspot polygon
+## problem one - why is it deleting spots?
 
+## don't have internet. To fix, let's move a copy of it to this directory and work on it. 
 
+#ln -s /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/manZoneCaller.py
+
+## actually better to do...
+## comment out the pythonpath import of manZoneCaller and:
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+import manZoneCaller
+
+plate2="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2"
+
+cd $toy
+original=$(find $plate2 -name "P703F2*mid*geojson")
+ls $original
+cp $original ./

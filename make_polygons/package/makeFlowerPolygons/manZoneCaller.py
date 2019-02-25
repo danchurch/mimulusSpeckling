@@ -103,7 +103,6 @@ class PolyMaker:
         self.verts = []
         self.poly = None
         self.mouseCID = self.fig.canvas.mpl_connect('button_press_event', self)
-#        self.keyCID = self.fig.canvas.mpl_connect('key_press_event', self)
     def __call__(self,event):
         if plt.get_current_fig_manager().toolbar.mode != '': return
         self.event = event
@@ -181,11 +180,13 @@ def main(geojson, outFileName, jpeg=None):
             saveOut( petal,spots,center,edge,throat, 
                     spotEstimates, photoBB, 
                     scalingFactor, geojson, outFileName)
-        elif saveY=='n': pass
-
-    print("Let's startover.")
-    plt.close('all')
-    main(geojson, outFileName, jpeg)
+            pm.fig.canvas.mpl_disconnect(pm.mouseCID)
+            plt.close('all')
+            return
+        elif saveY=='n':
+            print("Let's start over.")
+            plt.close('all')
+            main(geojson, outFileName, jpeg)
 
 ########################################
 

@@ -1,21 +1,17 @@
 #!/usr/bin/env python3
 
-## for build
-#wd=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy')
-#jpgs=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2')
-#plate2=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2')
-#exGeoj=pathlib.Path('/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P716F1/mid/P716F1_mid_polys.geojson')
-
-import os, argparse, pathlib, json, re
+import os, argparse, pathlib, json, re, copy
 import pandas as pd
-#from makeFlowerPolygons import breakSpots, manZoneCaller, spotMarker
-from makeFlowerPolygons import  spotMarker
+from makeFlowerPolygons import breakSpots, manZoneCaller, spotMarker
 
 ## while working without internet, for updating packages
-import sys
-sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
-import breakSpots
-import manZoneCaller 
+#import sys
+#sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+#import breakSpots
+#import manZoneCaller 
+#import  spotMarker
+
+## debug variables:
 
 def choice():
     ch=input('(y/n)')
@@ -40,7 +36,7 @@ def progChoice():
 
 def findLog(dir=os.getcwd()):
     try:
-        oldLog=[i for i in os.listdir(dir) if "log.json" in i][0]
+        oldLog=[i for i in os.listdir(dir) if "log" in i][0]
     except IndexError:
         print('No log found, starting new.')
         return
@@ -59,20 +55,16 @@ def findGeojs(dir):
     for i in bb:
         di,_,fi = i
         pathDi=pathlib.Path(di)
-        #for i in fi:
-        #    if('geojson' in i):
-        #        listGeojs.append(str(pathDi / i))
         [ listGeojs.append(str(pathDi / i)) for i in fi if('geojson' in i)]
     return(listGeojs)
 
-
 def makeNewLog(listGeojs):
     """make a empty log"""
-    onefile={'Spotbreaker':False, 'ManualZoneCaller': False, 
-                'SpotMarker': False}
-    emptylogs = [onefile] * len(listGeojs)
+    emptylogs = [ {'Spotbreaker':False, 'ManualZoneCaller': False,
+                'SpotMarker': False} for i in listGeojs ]
     log=dict(list(zip(listGeojs, emptylogs)))
     return(log)
+
 
 def findJPG(geojson, jpgs):
     """
@@ -94,7 +86,7 @@ def findJPG(geojson, jpgs):
 def updateLog(logfile, log):
     ## save out log
     with open(logfile, 'w') as f:
-        json.dump(log)
+        json.dump(log, f)
 
 def textLog(log):
     ## write out a text version for user to read if they like
@@ -104,6 +96,7 @@ def textLog(log):
 def main(wd, jpgs):
     os.chdir(wd)
     allGeojs=findGeojs(wd)
+    allGeojs.sort()
     if not allGeojs: 
         print("No geojsons found in this folder.")
         return
@@ -113,27 +106,38 @@ def main(wd, jpgs):
             log=json.load(f)
     elif not logfile:
         log=makeNewLog(allGeojs)
+        logfile="log.json"
     pc=progChoice()
+
+
     for i in allGeojs:
+        print(i)
         jpg=findJPG(pathlib.Path(i), jpgs)
         if pc['Spotbreaker']=='y':
             if not log[i]['Spotbreaker']:
                 print("Breaking spots in {}".format(i))
                 breakSpots.main(i, jpg, i)
                 log[i]['Spotbreaker'] = True
+                updateLog(logfile, log)
+                textLog(log)
 
         if pc['ManualZoneCaller']=='y':
             if not log[i]['ManualZoneCaller']:
                 print("Calling zones in {}".format(i))
                 manZoneCaller.main(i,i,jpg)
                 log[i]['ManualZoneCaller'] = True
+                updateLog(logfile, log)
+                textLog(log)
 
         if pc['SpotMarker']=='y':
             if not log[i]['SpotMarker']:
                 print("Estimating spot events in {}".format(i))
                 spotMarker.main(i, jpg, i)
                 log[i]['SpotMarker'] = True
+                updateLog(logfile, log)
+                textLog(log)
 
+    
     updateLog(logfile, log)
     textLog(log)
 

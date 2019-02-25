@@ -48,15 +48,15 @@ class SpotMarker:
 
         elif (self.event.name == 'button_release_event'
             and self.event.button == 1):
-            circleRad = distance.euclidean((self.centerx, self.centery),
-                                    (event.xdata, event.ydata))
             try:
+                circleRad = distance.euclidean((self.centerx, self.centery),
+                                    (event.xdata, event.ydata))
                 assert(circleRad > 0)
                 circle = sg.Point(self.centerx, self.centery).buffer(circleRad)
                 self.circs.append(circle)
                 circArt = geojsonIO.addOne(self.circs[-1], col = 'blue', a=0.3)
                 self.circArts.append(circArt)
-            except AssertionError:
+            except (AssertionError, TypeError, AttributeError):
                 ## if button released too quickly, cleanup
                 print("zero radius spot")
                 self.centerpt.remove()
@@ -169,13 +169,13 @@ def main(geojson, jpg, outFileName=None):
     photoAndPetal(geojson,jpg)
     preview(spotEstimates, petal, ax=plt.gca())
     plt.gcf().canvas.manager.window.wm_geometry("+900+0")
-    inkspot=input("Redo inkspots? (y/n) ")
+    inkspot=input("Spots estimates look okay? (y/n) ")
     try:
         assert(inkspot in {'y','n'})
     except AssertionError:
         print("Enter 'y' or 'n'")
         main(geojson, jpg, outFileName)
-    if inkspot == 'y':
+    if inkspot == 'n':
         plt.close('all')
         photoAndPetal(geojson,jpg)
         plt.gcf().canvas.manager.window.wm_geometry("+900+0")
@@ -188,13 +188,19 @@ def main(geojson, jpg, outFileName=None):
             featC = geojsonIO.writeGeoJ (petal,spots,center,edge,throat, 
                                             spotEstimates, photoBB, 
                                                         scalingFactor)
+            plt.close('all')
+            spotMarker.fig.canvas.mpl_disconnect(spotMarker.markCID)
+            spotMarker.fig.canvas.mpl_disconnect(spotMarker.releaseCID)
             with open(outFileName, 'w') as fp:
                 json.dump(featC, fp)
         elif saveSp == 'n':
             print("Okay, no changes to {} spot "
                     "estimates saved.".format(str(geojson.name)))
+            plt.close('all')
+            spotMarker.fig.canvas.mpl_disconnect(spotMarker.markCID)
+            spotMarker.fig.canvas.mpl_disconnect(spotMarker.releaseCID)
             return
-    elif inkspot == 'n':
+    elif inkspot == 'y':
         print('Bye for now from spotMarker!')
         plt.close('all')
         return

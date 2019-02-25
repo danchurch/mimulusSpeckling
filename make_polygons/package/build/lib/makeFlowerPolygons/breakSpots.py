@@ -63,8 +63,6 @@ class DrawYellow:
                     'will fail unless you fix this.')
             return
 
-
-
 def redraw(petal, spots):
     aa=plt.gca().get_xlim(); bb=plt.gca().get_ylim()
     plt.gca().cla()
@@ -106,6 +104,9 @@ def saveOut ( petal,spots,center,edge,throat,
                 spotEstimates, photoBB,
                 scalingFactor, outFileName ):
     print('Save new spots?')
+    geojsonIO.plotOne(petal)
+    geojsonIO.addOne(spots)
+    plt.gcf().canvas.manager.window.wm_geometry("+900+350")
     newOK=choice()
     if newOK == 'y':
         ## write it out
@@ -114,45 +115,58 @@ def saveOut ( petal,spots,center,edge,throat,
                     spotEstimates, photoBB, scalingFactor)
         with open(outFileName, 'w') as fp:
             json.dump(featC, fp)
+        plt.close('all')
         return
     if newOK == 'n':
         print('Not saving...')
         return
 
 def breakup(petal, spots):
-    newSpots=spots
-    plt.ion()
     geojsonIO.plotOne(petal)
-    geojsonIO.addOne(newSpots)
+    geojsonIO.addOne(spots)
     plt.gcf().canvas.manager.window.wm_geometry("+900+350")
-    firstView=plt.gcf()
-    print("Look okay?")
-    ok=choice()
-    if ok=='y': return(newSpots)
-    if ok=='n': 
-        plt.close(firstView)
-        geojsonIO.plotOne(petal)
-        geojsonIO.addOne(newSpots)
-        plt.gcf().canvas.manager.window.wm_geometry("+900+350")
-        print('Draw in some yellow space.')
-        breakPatch=DrawYellow(petal, newSpots, fig=plt.gcf(),)
-        finished()
-        newSpots=newSpots.difference(sg.Polygon(breakPatch.xyVerts))
-        if isinstance(newSpots, sg.polygon.Polygon):
-            newSpots = sg.multipolygon.MultiPolygon([newSpots])
-        redraw(petal, newSpots)
-        newSpots=breakup(petal, newSpots)
+    print('Draw in some yellow space.')
+    breakPatch=DrawYellow(petal, spots, fig=plt.gcf(),)
+    finished()
+    newSpots=spots.difference(sg.Polygon(breakPatch.xyVerts))
+    if isinstance(newSpots, sg.polygon.Polygon):
+        newSpots = sg.multipolygon.MultiPolygon([newSpots])
+    breakPatch.fig.canvas.mpl_disconnect(breakPatch.mouseCid)
+    del(breakPatch)
+    redraw(petal, newSpots)
+    print("Break up more spots?")
+    more=choice()
+    plt.close('all')
+    print(more)
+    if more=='n': 
         return(newSpots)
+    elif more=='y': 
+        newSpots=breakup(petal, newSpots)
+    return(newSpots)
 
 def main(geoJ,jpeg,outFileName):
     (petal,spots,center,edge,throat,
         spotEstimates, photoBB,
                     scalingFactor) = geojsonIO.parseGeoJson(geoJ)
+    plt.ion()
+    geojsonIO.plotOne(petal)
+    geojsonIO.addOne(spots)
+    firstView=plt.gcf()
+    firstView.canvas.manager.window.wm_geometry("+900+350")
     showJpeg(jpeg, photoBB)
-    newSpots=breakup(petal,spots)
-    saveOut ( petal, newSpots, center, edge, throat,
-                spotEstimates, photoBB,
-                scalingFactor, outFileName )
+    plt.gcf().canvas.manager.window.wm_geometry("+900+0")
+    print("Look okay?")
+    ok=choice()
+    plt.close('all')
+    if ok=='y': 
+        return
+    if ok=='n': 
+        showJpeg(jpeg, photoBB)
+        newSpots=breakup(petal,spots)
+        print(type(newSpots))
+        saveOut ( petal, newSpots, center, edge, throat,
+                    spotEstimates, photoBB,
+                    scalingFactor, outFileName )
 
 ######################################################
 

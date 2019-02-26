@@ -11056,4 +11056,4 @@ dir(log[i])
 ## melia needs to be able to backup from the zonecaller 
 ## before saving.
 
-
+## okay, take a break, then debug plate2 digitizing

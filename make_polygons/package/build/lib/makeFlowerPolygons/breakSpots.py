@@ -98,7 +98,7 @@ def showJpeg(jpeg, photoBB):
     jpegAx.imshow(justPetal, origin='lower')
     jpegFig.canvas.manager.window.wm_geometry("+900+0")
     jpegFig.set_size_inches([6,3], forward = True)
-
+    return(jpegFig, jpegAx)
 
 def saveOut ( petal,spots,center,edge,throat,
                 spotEstimates, photoBB,
@@ -124,9 +124,10 @@ def saveOut ( petal,spots,center,edge,throat,
 def breakup(petal, spots):
     geojsonIO.plotOne(petal)
     geojsonIO.addOne(spots)
-    plt.gcf().canvas.manager.window.wm_geometry("+900+350")
+    fig=plt.gcf()
+    fig.canvas.manager.window.wm_geometry("+900+350")
     print('Draw in some yellow space.')
-    breakPatch=DrawYellow(petal, spots, fig=plt.gcf(),)
+    breakPatch=DrawYellow(petal, spots, fig=fig)
     finished()
     newSpots=spots.difference(sg.Polygon(breakPatch.xyVerts))
     if isinstance(newSpots, sg.polygon.Polygon):
@@ -136,7 +137,7 @@ def breakup(petal, spots):
     redraw(petal, newSpots)
     print("Break up more spots?")
     more=choice()
-    plt.close('all')
+    plt.close(fig)
     print(more)
     if more=='n': 
         return(newSpots)
@@ -153,11 +154,11 @@ def main(geoJ,jpeg,outFileName):
     geojsonIO.addOne(spots)
     firstView=plt.gcf()
     firstView.canvas.manager.window.wm_geometry("+900+350")
-    showJpeg(jpeg, photoBB)
-    plt.gcf().canvas.manager.window.wm_geometry("+900+0")
+    jpegFig, jpegAx = showJpeg(jpeg, photoBB)
+    jpegFig.canvas.manager.window.wm_geometry("+900+0")
     print("Look okay?")
     ok=choice()
-    plt.close('all')
+    plt.close(firstView)
     if ok=='y': 
         return
     if ok=='n': 

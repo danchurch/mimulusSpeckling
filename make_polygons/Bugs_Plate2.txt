@@ -37,6 +37,5 @@ plate2/P753F2/right/P753F2_right_polys.geojson ##all messed up
 Something nice to have would be like a stamp of yellow that could cover up multiple spots 
 that we often find with blush at the same time...
 
-Be able to move on to the next file as soon as you say no to 'wanna break another spot?'
 
 

@@ -36,7 +36,7 @@ def progChoice():
 
 def findLog(dir=os.getcwd()):
     try:
-        oldLog=[i for i in os.listdir(dir) if "log" in i][0]
+        oldLog=[i for i in os.listdir(dir) if "log.json" in i][0]
     except IndexError:
         print('No log found, starting new.')
         return

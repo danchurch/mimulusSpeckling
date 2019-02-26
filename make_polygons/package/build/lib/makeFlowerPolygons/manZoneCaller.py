@@ -71,7 +71,8 @@ def getNewEdgeThroat(pol, petal, center):
 
 def saveOut ( petal,spots,center,edge,throat, 
                 spotEstimates, photoBB, 
-                scalingFactor, geojson, outFileName):
+                scalingFactor, outFileName):
+    fig,ax = plotFlowerZones(petal,spots,center,edge,throat)
     print('Save new zones?')
     newOK=choice()
     if newOK == 'y':
@@ -81,10 +82,11 @@ def saveOut ( petal,spots,center,edge,throat,
                     spotEstimates, photoBB, scalingFactor)
         with open(outFileName, 'w') as fp:
             json.dump(featC, fp)
-        return
     if newOK == 'n': 
         print('Not saving...')
-        return
+        print('Back to editing')
+    plt.close(fig)
+    return (newOK)
 
 class PolyMaker:
     def __init__(self, petal, center):
@@ -114,8 +116,8 @@ class PolyMaker:
                 try:
                     self.verts.pop()
                 except IndexError as err:
-                    print(err)
-                    pass
+                    #print(err)
+                    return
             aa = np.array(self.verts).transpose()
             geojsonIO.clearOne()
             geojsonIO.addOne(self.petal, col='yellow')
@@ -125,7 +127,7 @@ class PolyMaker:
                 assert(len(self.verts) > 0)
                 self.ax.plot(aa[0],aa[1],'o', color='red')
             except (IndexError, AssertionError) as err:
-                pass
+                return
             ## plot poly
             try:
                 self.poly = sg.Polygon(self.verts)
@@ -138,7 +140,7 @@ class PolyMaker:
             except (ValueError): return
             except (AssertionError):
                 print('Invalid polygon. New spots'
-                        'will fail unless you fix this.')
+                        ' will fail unless you fix this.')
                 return
 
 def main(geojson, outFileName, jpeg=None):
@@ -162,31 +164,43 @@ def main(geojson, outFileName, jpeg=None):
         print("Okay! moving on...")
         plt.close('all')
         return
-        #saveOut( petal,spots,center,edge,throat, 
-        #        spotEstimates, photoBB, 
-        #        scalingFactor, geojson, outFileName)
 
     if ZonesOK == 'n': 
         plt.close(petalFig)
-        print('Draw polygon to define the left'
-                ' and right boundaries of throat.')
-        print('Save new throat polygon by typing "y"...'
-            'or discard changes by typing "n".')
         pm = PolyMaker(petal, center)
-        saveY=choice()
-        if saveY=='y':
-            edge, throat = getNewEdgeThroat(pm.poly, petal, center)
-            plotFlowerZones(petal,spots,center,edge,throat)
-            saveOut( petal,spots,center,edge,throat, 
-                    spotEstimates, photoBB, 
-                    scalingFactor, geojson, outFileName)
-            pm.fig.canvas.mpl_disconnect(pm.mouseCID)
-            plt.close('all')
-            return
-        elif saveY=='n':
-            print("Let's start over.")
-            plt.close('all')
-            main(geojson, outFileName, jpeg)
+        whileDrawing(pm, 
+            petal,spots,center,edge,throat, 
+            spotEstimates, photoBB, 
+            scalingFactor, geojson, outFileName)
+
+def whileDrawing (polymaker, 
+            petal,spots,center,edge,throat, 
+            spotEstimates, photoBB, 
+            scalingFactor, geojson, outFileName):
+    """ 
+    this should keep the zone editing alive as long as the user needs.
+    """ 
+    print("Draw polygon to define the left"
+            " and right boundaries of throat.")
+    print('Press "y" when finished.')
+    finished()
+    newEdge, newThroat = getNewEdgeThroat(polymaker.poly, petal, center)
+    saveYN=saveOut( petal,spots,center,newEdge, newThroat, 
+            spotEstimates, photoBB, 
+            scalingFactor, outFileName)
+    if saveYN=='y':
+        polymaker.fig.canvas.mpl_disconnect(polymaker.mouseCID)
+        plt.close('all')
+        return
+    elif saveYN=='n':
+        print('Back to editing zones.')
+        whileDrawing(polymaker, 
+            petal,spots,center,newEdge,newThroat, 
+            spotEstimates, photoBB, 
+            scalingFactor, geojson, outFileName)
+        return
+
+
 
 ########################################
 

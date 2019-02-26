@@ -10575,6 +10575,7 @@ git ##etc
 ## upgrade our virtual environment to this.
 
 VE ## go back to virtual environment
+
 pip3 install -U -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
 
 ## restructGeoJ.py
@@ -10905,7 +10906,6 @@ VE
 toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
 dougdir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
 runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
-
 cd $toy
 
 $runCuration -h
@@ -10925,9 +10925,135 @@ $runCuration . $dougdir
 sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
 import manZoneCaller
 
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
+dougdir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
 plate2="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2"
+original=$(find $plate2 -name "P703F2*mid*geojson")
+
+ls $original
+cd $toy
+
+cp $original ./P703F2/mid/
+
+## okay, seems like spot breaker working okay for the moment
 
 cd $toy
-original=$(find $plate2 -name "P703F2*mid*geojson")
-ls $original
-cp $original ./
+
+$runCuration . $dougdir
+
+
+## something's fucked. The first round of our loop 
+## autofills the log
+
+python3
+
+import json, os, pathlib
+
+di='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
+
+def choice():
+    ch=input('(y/n)')
+    try:
+        assert(ch in {'y','n'})
+        return(ch)
+    except AssertionError:
+        print("Respond with 'y' or 'n'.")
+        return(choice())
+
+def progChoice():
+    progs={'Spotbreaker':None,
+            'ManualZoneCaller': None,
+            'SpotMarker': None}
+    for i in progs.keys():
+        print("Do you want to run {}"
+                    " on all files in working directory?".format(i))
+        yn=choice()
+        progs[i]=yn
+    return(progs)
+
+def findGeojs(dir):
+    """ make our todo list"""
+    listGeojs=[]
+    bb = os.walk(dir, topdown=True)
+    for i in bb:
+        di,_,fi = i
+        pathDi=pathlib.Path(di)
+        #for i in fi:
+        #    if('geojson' in i):
+        #        listGeojs.append(str(pathDi / i))
+        [ listGeojs.append(str(pathDi / i)) for i in fi if('geojson' in i)]
+    return(listGeojs)
+
+
+def makeNewLog(listGeojs):
+    """make a empty log"""
+    emptylogs = [ {'Spotbreaker':False, 'ManualZoneCaller': False,
+                'SpotMarker': False} for i in listGeojs ]
+    log=dict(list(zip(listGeojs, emptylogs)))
+    return(log)
+
+
+allGeojs = findGeojs(di)
+
+allGeojs.sort()
+
+pc=progChoice()
+
+log=makeNewLog(allGeojs)
+
+for i in allGeojs:
+    print('i is {}'.format(i))
+    #jpg=findJPG(pathlib.Path(i), jpgs)
+    if pc['Spotbreaker']=='y':
+        if not log[i]['Spotbreaker']:
+            print("Breaking spots in {}".format(i))
+    #        breakSpots.main(i, jpg, i)
+            log[i]['Spotbreaker'] = True
+    if pc['ManualZoneCaller']=='y':
+        if not log[i]['ManualZoneCaller']:
+            print("Calling zones in {}".format(i))
+    #        manZoneCaller.main(i,i,jpg)
+            log[i]['ManualZoneCaller'] = True
+    if pc['SpotMarker']=='y':
+        if not log[i]['SpotMarker']:
+            print("Estimating spot events in {}".format(i))
+    #        spotMarker.main(i, jpg, i)
+            log[i]['SpotMarker'] = True
+
+i='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P703F2/mid/P703F2_mid_polys.geojson'
+
+log
+
+if pc['Spotbreaker']=='y':
+    if not log[i]['Spotbreaker']:
+        #print("Breaking spots in {}".format(i))
+        log[i]['Spotbreaker'] = True
+
+log=makeNewLog(allGeojs)
+
+log
+
+aa=log['/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P703F2/mid/P703F2_mid_polys.geojson']
+bb=log['/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P709F1/right/P709F1_right_polys.geojson']
+
+log[i] is log['/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P709F1/left/P709F1_left_polys.geojson']
+
+log[i]['Spotbreaker'] = True
+
+type(log[i])
+
+log[i]['Spotbreaker']
+
+dir(log[i])
+
+## okay, seens to be working sorta okay. 
+
+## what do we need to do here so Melia can get on it?
+
+## update pypi modules, see if it works using them. 
+
+## melia needs to be able to backup from the zonecaller 
+## before saving.
+
+

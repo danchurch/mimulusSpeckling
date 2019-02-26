@@ -28,6 +28,8 @@ plate2/P731F2/mid/P731F2_mid_polys.geojson ##missing some spots
 
 plate2/P755F1/left/P755F1_left_polys.geojson ##missing some spots
 
+Plate2?500F1/right/P500F1_right_polys.gepjson ##missing large spot
+
 plate2/P753F2/right/P753F2_right_polys.geojson ##all messed up
 
 

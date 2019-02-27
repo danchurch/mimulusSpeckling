@@ -10570,7 +10570,7 @@ python3 setup.py sdist bdist_wheel
 
 python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
 
-git ##etc
+git status ##etc
 
 ## upgrade our virtual environment to this.
 
@@ -11056,4 +11056,160 @@ dir(log[i])
 ## melia needs to be able to backup from the zonecaller 
 ## before saving.
 
+
 ## okay, take a break, then debug plate2 digitizing
+
+## spotbreaker "want to break more spots?" no jpeg
+
+
+toy='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy'
+dougdir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2'
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+plate2="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2"
+original=$(find $plate2 -name "P703F2*mid*geojson")
+
+ls $original
+cd $toy
+
+cp $original ./P703F2/mid/
+
+## okay, seems like spot breaker working okay for the moment
+
+cd $toy
+
+$runCuration . $dougdir
+
+#############
+
+## kay, can we hunt down some of the digitizing efforts?
+
+## how to do this...
+
+plate2='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2'
+
+## this 
+
+aa=$(find $plate2 -name "*geojson" -exec basename {} \;)
+
+## for existing geojson
+for i in $aa; do
+    echo ${i/_*/} >> geojList.txt
+done
+
+mv geojList.txt ../../
+
+sort geojList.txt | uniq > gjList.txt
+
+
+
+cd /home/daniel/Documents/cooley_lab/bigPDF
+for i in *pdf; do
+    echo ${i/.pdf/} >> pdfList.txt
+done
+
+wc -l gjList.txt ## 174
+
+wc -l pdfList.txt ## 170
+
+## so we lost some files
+diff gjList.txt pdfList.txt
+
+## we are missing:
+
+P738F1
+P749F1
+P756F4
+P766F4
+
+## P738F1 left petal failed it's digitizing, so the pdf failed
+## P749F1 mid, same 
+## P756F4 left, same
+## P766F4 mid, same
+
+## as far as debugging, we need to go through some of these 
+## manually 
+
+## so a plan - make a toy directory of the problem files,
+## and run our pipeline over them, watch close. 
+
+## should we learn about logging while we're at it?
+
+## ugh. 
+
+## so sick of this fucking project. 
+
+## okay - toy directory of problem files:
+
+## first let's check on the missing spot problem.
+## the following had spots lost:
+
+P500F1_right_polys.geojson 
+P513F1_left_polys.geojson 
+P517F1_mid_polys.geojson 
+P519F1_left_polys.geojson 
+P519F1_mid_polys.geojson 
+P541F2_left_polys.geojson 
+P710F1_right_polys.geojson 
+P711F2_mid_polys.geojson 
+P731F1_right_polys.geojson 
+P741F2_right_polys.geojson 
+P748F1_mid_polys.geojson 
+P748F2_mid_polys.geojson 
+P753F2_right_polys.geojson 
+P755F1_left_polys.geojson 
+
+## P533F1_mid_polys.geojson also has loss but seems to be due the color simplification 
+## so not dealing with that here
+
+plate2gj="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2"
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+
+aa=(\
+P500F1 \
+P513F1 \
+P517F1 \
+P519F1 \
+P519F1 \
+P541F2 \
+P710F1 \
+P711F2 \
+P731F1 \
+P741F2 \
+P748F1 \
+P748F2 \
+P753F2 \
+P755F1 \
+)
+
+for i in ${aa[@]}; do
+    echo $i
+    find $plate2gj -type d -name $i -exec cp -r {} $toy \;
+done
+
+## how do we run our digitizing process on these?
+
+
+## the four programs are get_pols, get zones, makePDFs, and flowerPetal
+
+VE
+
+packages="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/"
+get_spots="get_spots.py"
+get_zones="get_zones.py"
+makePDFs="makePDFs.py"
+flowerPetal="flowerPetal.py"
+
+exMat="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/right/P500F1_right_melted.csv"
+exGJ="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/right/P500F1_right_polys.geojson"
+
+$packages$get_spots -h
+
+$packages$get_spots $exMat --d $toy
+
+cd $toy
+
+## yup, the get_spots module is dropping that huge central spot...
+## can we figure out why?
+
+## first step, let's build in logging
+

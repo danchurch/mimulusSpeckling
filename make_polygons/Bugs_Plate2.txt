@@ -1,41 +1,32 @@
-plate2/P741F2/right/P741F2_right_polys.geojson ##missing a spot
-
-plate2/P509F1/left/P509F1_left_polys.geojson ##missing some spots
-
-plate2/P509F1/mid/P509F1_mid_polys.geojson ##missing some spots
-
-plate2/P541F2/left/P541F2_left_polys.geojson ##missing some spots
-
-plate2/P711F2/mid/P711F2_mid_polys.geojson ##missing a spot
-
-plate2/P517F1/mid/P517F1_mid_polys.geojson ##missing a spot
-
-plate2/P513F1/left/P513F1_left_polys.geojson ##missing some spots
-
-plate2/P755F3/mid/P755F3_mid_polys.geojson ##missing a spot
-
-polygons/plate2/P519F1/left/P519F1_left_polys.geojson ##missing large spot
-
-polygons/plate2/P519F1/mid/P519F1_mid_polys.geojson ##missing large spot
-
-plate2/P740F2/mid/P740F2_mid_polys.geojson ##missing a spot
-
-plate2/P748F1/mid/P748F1_mid_polys.geojson ##missing a spot
-
-plate2/P533F1/mid/P533F1_mid_polys.geojson ##missing some spots
-
-plate2/P731F2/mid/P731F2_mid_polys.geojson ##missing some spots
-
-plate2/P755F1/left/P755F1_left_polys.geojson ##missing some spots
-
-Plate2?500F1/right/P500F1_right_polys.gepjson ##missing large spot
-
-plate2/P753F2/right/P753F2_right_polys.geojson ##all messed up
+P500F1_right_polys.gepjson ##missing large spot
+P513F1_left_polys.geojson ##missing some spots
+P517F1_mid_polys.geojson ##missing a spot
+P519F1_left_polys.geojson ##missing large spot
+P519F1_mid_polys.geojson ##missing large spot
+P533F1_mid_polys.geojson ##missing some spots, seems to be from Doug's pipeline
+P541F2_left_polys.geojson ##missing some spots, edge polygons lost
+P710F1_right_polys.geojson ##missing a spot
+P711F2_mid_polys.geojson ##missing a spot
+P731F1_right_polys.geojson ##missing some spots
+P741F2_right_polys.geojson ##missing a spot
+P542F2_left_polys.geojson ## jpeg still squished
+P748F1_mid_polys.geojson ##missing a spot
+P748F2_mid_polys.geojson ##missing a spot
+P753F2_right_polys.geojson ##all messed up
+P755F1_left_polys.geojson ##missing some spots
+P769F4_left_polys.geojson ## petal lost
 
 
+## missing files, not in pdfs:
 
-Something nice to have would be like a stamp of yellow that could cover up multiple spots 
-that we often find with blush at the same time...
+P738F1 ## left petal failed it's digitizing, so the pdf failed
+P749F1 ## mid, same
+P756F4 ## left, same
+P766F4 ## mid, same
 
+
+## fix pdfmaker error handling for missing petals, allow 
+## flowers with failed digitizations to report other petals 
+## in the final pdf
 
 

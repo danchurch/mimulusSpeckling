@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 plate2/P741F2/right/P741F2_right_polys.geojson ##missing a spot
 
 plate2/P509F1/left/P509F1_left_polys.geojson ##missing some spots
@@ -50,5 +51,37 @@ Plate2/P732F2/mid/P732F2_mid_polys.geojson ##missing some spots
 Something nice to have would be like a stamp of yellow that could cover up multiple spots 
 that we often find with blush at the same time...
 
+=======
+P500F1_right_polys.gepjson ##missing large spot
+P513F1_left_polys.geojson ##missing some spots
+P517F1_mid_polys.geojson ##missing a spot
+P519F1_left_polys.geojson ##missing large spot
+P519F1_mid_polys.geojson ##missing large spot
+P533F1_mid_polys.geojson ##missing some spots, seems to be from Doug's pipeline
+P541F2_left_polys.geojson ##missing some spots, edge polygons lost
+P710F1_right_polys.geojson ##missing a spot
+P711F2_mid_polys.geojson ##missing a spot
+P731F1_right_polys.geojson ##missing some spots
+P741F2_right_polys.geojson ##missing a spot
+P542F2_left_polys.geojson ## jpeg still squished
+P748F1_mid_polys.geojson ##missing a spot
+P748F2_mid_polys.geojson ##missing a spot
+P753F2_right_polys.geojson ##all messed up
+P755F1_left_polys.geojson ##missing some spots
+P769F4_left_polys.geojson ## petal lost
+
+
+## missing files, not in pdfs:
+
+P738F1 ## left petal failed it's digitizing, so the pdf failed
+P749F1 ## mid, same
+P756F4 ## left, same
+P766F4 ## mid, same
+
+
+## fix pdfmaker error handling for missing petals, allow 
+## flowers with failed digitizations to report other petals 
+## in the final pdf
+>>>>>>> 0bcd4394493ccbf9bf7fa5423472daa4a38d6977
 
 

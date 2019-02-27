@@ -12,6 +12,7 @@ matplotlib.use('TkAgg')
 import argparse, os, json, shapely
 import numpy as np
 import matplotlib.pyplot as plt
+import shapely.validation as sv
 import shapely.geometry as sg
 import shapely.affinity as sa
 import shapely.errors
@@ -90,41 +91,93 @@ def stand(pol, scale, cent):
     scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
     return(scaled)
 
-def testAndFixPoly(geo):
-    if not geo.is_valid: 
-        print('polygon invalid, buffering')
-        try:
-            assert(geo.buffer(0.0).is_valid)
-            geo = geo.buffer(0.0)
-        except AssertionError:
-            geo = geo.simplify(0.0)
-        finally:
-            if not geo.is_valid: print("Couldn't fix it, sorry.")
-    return(geo)
+def testAndFixPoly(pol,gjName,objtype=None):
+    """
+    an attempt to fix invalid polygons.
+    Multipolygons are not accepted here.
+    """
+    ## try buffering.
+    try:
+        newPoly=pol.buffer(0.0)
+        assert(newPoly.is_valid)
+        assert(newPoly.is_empty is False)
+        return(newPoly)
+    except AssertionError:
+        print("Buffering doesn't help.")
+    try:
+        newPoly=pol.simplify(0.0)
+        assert(newPoly.is_valid)
+        assert(newPoly.is_empty is False)
+        return(newPoly)
+    except AssertionError:
+        print("Simplifying polygon doesn't help either. Returning original.")
+        print("Careful. {} {} object is invalid because:".format(gjName,objtype))
+        print(sv.explain_validity(pol))
+        return(pol)
+
 
 ## clean up small polygons and points
-def cleanPetal(geo):
-    geo = testAndFixPoly(geo)
+def cleanPetal(geo, gjName, objtype=None):
     """sometimes our digitizing of petals creates smatterings of geometries instead
     of a single clean polygon. This attempts to prune down to the main polygon,
     which is usually the object we want."""
+    objtype="petal"
     if isinstance(geo, sg.collection.BaseMultipartGeometry):
         onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]
         areas = [ i.area for i in onlyPolys ]
         biggestPoly = [ i for i in onlyPolys if i.area == max(areas) ][0]
     elif isinstance(geo, sg.Polygon):
         biggestPoly = geo
-    return(biggestPoly)
+    try:
+        newGeo = testAndFixPoly(biggestPoly, gjName, objtype)
+    except TypeError:
+        print("Are you sure this petal object?")
+        return(Geo)
+    return(newGeo)
 
-def cleanSpots(SpotsMultiPoly):
-    SpotsMultiPoly = testAndFixPoly(SpotsMultiPoly)
+def cleanSpots(SpotsMultiPoly, gjName, objtype=None):
     """Tries to clean up spot collections, leaving them as a multipolygon"""
-    if isinstance(SpotsMultiPoly, sg.MultiPolygon):
-        SpotsMultiPoly = sg.MultiPolygon([ i.buffer(0.0) for i in SpotsMultiPoly ])
-    elif isinstance(SpotsMultiPoly, sg.Polygon):
-        SpotsMultiPoly = SpotsMultiPoly.buffer(0)
-    return(SpotsMultiPoly)
+    objtype="spots"
+    if isinstance(SpotsMultiPoly, sg.Polygon):
+        cleanPoly = testAndFixPoly(SpotsMultiPoly, gjName, objtype)
+        cleanMultPoly = sg.MultiPolygon([cleanPoly])
+    elif isinstance(SpotsMultiPoly, sg.MultiPolygon):
+        polyList= [testAndFixPoly(i, gjName, objtype) for i in SpotsMultiPoly]
+        cleanMultPoly = sg.MultiPolygon(polyList)
+    else:
+        raise TypeError('Are you sure you have a [multi]polygon?')
+    return(cleanMultPoly)
 
+
+def main(pdir, gjName, meltName, outFileName):
+    ## run through digitizing, standardizing
+    os.chdir(pdir)
+    print(gjName)
+    aa = os.listdir()
+
+    photoBB, petalMat, spotsMat = parseDougMatrix(meltName)
+    petPolRaw = digitizePols(petalMat) 
+    petPol = cleanPetal(petPolRaw, gjName)
+    spotPolRaw = digitizePols(spotsMat)
+    spotPol = cleanSpots(spotPolRaw, gjName)
+
+    scale, cent = getPetGeoInfo(petPol)
+    standPet = stand(petPol, scale, cent)
+    if isinstance(spotPol, sg.MultiPolygon): 
+        standSpot = [ stand(i, scale, cent) for i in spotPol ]
+    elif isinstance(spotPol, sg.Polygon): 
+        standSpot = [stand(spotPol, scale, cent)]
+    standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
+    ## deal with the zones elsewhere
+    center, edge, throat, spotEstimates = None, None, None, None
+    ## write it out
+    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, 
+                                    center, edge, throat, 
+                                    spotEstimates, photoBB, scale)
+
+    with open(outFileName, 'w') as fp:
+        json.dump(geoDict, fp)
+    return
 
 if __name__ == "__main__":
 
@@ -161,40 +214,4 @@ if __name__ == "__main__":
                         + gjName
                         + ".geojson")
 
-
-
-    ## run through digitizing, standardizing
-    os.chdir(meltParentDir)
-    print(gjName)
-    aa = os.listdir()
-
-    photoBB, petalMat, spotsMat = parseDougMatrix(meltBaseName)
-    petPolRaw = digitizePols(petalMat) 
-    petPol = cleanPetal(petPolRaw)
-    spotPolRaw = digitizePols(spotsMat)
-    spotPol = cleanSpots(spotPolRaw)
-
-    scale, cent = getPetGeoInfo(petPol)
-    standPet = stand(petPol, scale, cent)
-    if isinstance(spotPol, sg.MultiPolygon): 
-        standSpot = [ stand(i, scale, cent) for i in spotPol ]
-    elif isinstance(spotPol, sg.Polygon): 
-        standSpot = [stand(spotPol, scale, cent)]
-    standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
-    ## deal with the zones elsewhere
-    center, edge, throat, spotEstimates = None, None, None, None
-
-    ## outputs ##
-
-    ## define get a dictionary that resembles a geojson feature collection:
-
-    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, 
-                                    center, edge, throat, 
-                                    spotEstimates, photoBB, scale)
-
-    ## write it out
-    with open(outFileName, 'w') as fp:
-        json.dump(geoDict, fp)
-
-
-
+    main(meltParentDir, gjName, meltBaseName, outFileName)

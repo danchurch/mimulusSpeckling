@@ -11193,12 +11193,13 @@ done
 
 VE
 
+plate2gj="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2"
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
 packages="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/"
 get_spots="get_spots.py"
 get_zones="get_zones.py"
 makePDFs="makePDFs.py"
 flowerPetal="flowerPetal.py"
-
 exMat="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/right/P500F1_right_melted.csv"
 exGJ="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/right/P500F1_right_polys.geojson"
 
@@ -11211,5 +11212,176 @@ cd $toy
 ## yup, the get_spots module is dropping that huge central spot...
 ## can we figure out why?
 
-## first step, let's build in logging
+## first step, update the module with a main function, we might 
+## want to wrap this in something else some day
+
+## just checking, can we look at this with pdb?
+
+python3 -m pdb $packages$get_spots $exMat --d $toy
+
+## in the debug program
+
+p spotPolRaw[0].is_valid
+
+p spotPolRaw[1].is_valid
+
+## both spots are invalid
+p sv.explain_validity(spotPolRaw[0])
+p sv.explain_validity(spotPolRaw[1])
+
+## does our cleanup fix them?
+## spotPol, our cleaned spot polygons, has only one polygon, that is valid
+
+## so we tried to clean it, and failed. 
+
+## let's get a closer look
+
+file.close()
+file=open('fuckedSpots.pickle', 'wb')
+pickle.dump(spotPolRaw,file)
+file.close()
+
+with open('fuckedSpots.pickle','r') as f:
+    fs=pickle.load(f)
+
+python3
+
+import pickle
+import matplotlib
+matplotlib.use('TkAgg')
+import argparse, os, json, shapely
+import numpy as np
+import matplotlib.pyplot as plt
+import shapely.validation as sv
+import shapely.geometry as sg
+import shapely.affinity as sa
+import shapely.errors
+from skimage import measure
+from makeFlowerPolygons import geojsonIO
+from makeFlowerPolygons import get_spots
+from makeFlowerPolygons.geojsonIO import plotOne, addOne
+
+with open('fuckedSpots.pickle','rb') as f:
+    fs=pickle.load(f)
+
+
+exGJ=("/home/daniel/Documents/cooley_lab/"
+        "mimulusSpeckling/make_polygons/"
+        "toy/P500F1/right/P500F1_right_polys.geojson")
+
+(petal,spots,
+center,edge,throat,
+spotEstimates, photoBB,
+scalingFactor) = geojsonIO.parseGeoJson(exGJ)
+
+plt.ion()
+
+plotOne(petal)
+
+addOne(fs)
+
+plotOne(fs[0], col='red')
+## this is one getting dropped. Looks fine
+
+fs[0].is_valid
+
+sv.explain_validity(fs[0])
+
+## just one intersection, our cleaner can't beat this?
+
+aa=get_spots.cleanSpots(fs[0])
+
+aa.is_valid
+
+plotOne(petal)
+addOne(aa) ## shit...:
+
+aa.is_empty ## yup
+
+## back up. are neither of our cleaning methods working here?
+
+def testAndFixPoly(pol,gjName,objtype=None):
+    """
+    an attempt to fix invalid polygons.
+    Multipolygons are not accepted here.
+    """
+    ## try buffering. 
+    try:
+        newPoly=pol.buffer(0.0)
+        assert(newPoly.is_valid)
+        assert(newPoly.is_empty is False)
+        return(newPoly)
+    except AssertionError:
+        print("Buffering doesn't help.")
+    try:
+        newPoly=pol.simplify(0.0)
+        assert(newPoly.is_valid)
+        assert(newPoly.is_empty is False)
+        return(newPoly)
+    except AssertionError:
+        print("Simplifying polygon doesn't help either. Returning original.")
+        print("Careful. {} {} object is invalid because:".format(gjName,objtype))
+        print(sv.explain_validity(pol))
+        return(pol)
+
+gjName="P500F1_right_polys"
+aa=testAndFixPoly(fs[0], gjName, "spots")
+
+bb=cleanSpots(fs,gjName,"spots")
+
+def cleanSpots(SpotsMultiPoly, gjName, objtype=None):
+    """Tries to clean up spot collections, leaving them as a multipolygon"""
+    if isinstance(SpotsMultiPoly, sg.Polygon):
+        cleanPoly = testAndFixPoly(SpotsMultiPoly, objtype)
+        cleanMultPoly = sg.MultiPolygon([cleanPoly])
+    elif isinstance(SpotsMultiPoly, sg.MultiPolygon):
+        polyList= [testAndFixPoly(i, gjName, objtype) for i in SpotsMultiPoly]
+        cleanMultPoly = sg.MultiPolygon(polyList)
+    else:
+        raise TypeError('Are you sure you have a [multi]polygon?')
+    return(cleanMultPoly)
+
+
+
+
+bb = testAndFixPoly(fs[0])
+
+## this empties this polygon
+
+cc = fs[0].buffer(0)
+
+dd = fs[0].simplify(0) ## this works better. 
+
+plotOne(cc)
+
+## functions rewritten
+## did that help?
+
+VE
+
+plate2gj="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate2"
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+packages="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/"
+get_spots="get_spots.py"
+get_zones="get_zones.py"
+makePDFs="makePDFs.py"
+flowerPetal="flowerPetal.py"
+exMat="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/right/P500F1_right_melted.csv"
+exGJ="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P500F1/right/P500F1_right_polys.geojson"
+
+$packages$get_spots -h
+
+$packages$get_spots $exMat --d $toy
+
+cd $toy
+
+## well, it's an improvement, gives the spot a fighting chance. 
+
+## have a feeling errors are waiting for us downstream...
+
+## okay, so what now?
+
+## see if the autozonecaller and pdf make will handle all this?
+
+## best thing here is get mac up to date...
 

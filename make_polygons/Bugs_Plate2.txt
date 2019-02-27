@@ -14,9 +14,9 @@ plate2/P513F1/left/P513F1_left_polys.geojson ##missing some spots
 
 plate2/P755F3/mid/P755F3_mid_polys.geojson ##missing a spot
 
-polygons/plate2/P519F1/left/P519F1_left_polys.geojson ##missing large spot
+plate2/P519F1/left/P519F1_left_polys.geojson ##missing large spot
 
-polygons/plate2/P519F1/mid/P519F1_mid_polys.geojson ##missing large spot
+plate2/P519F1/mid/P519F1_mid_polys.geojson ##missing large spot
 
 plate2/P740F2/mid/P740F2_mid_polys.geojson ##missing a spot
 
@@ -28,9 +28,22 @@ plate2/P731F2/mid/P731F2_mid_polys.geojson ##missing some spots
 
 plate2/P755F1/left/P755F1_left_polys.geojson ##missing some spots
 
-Plate2?500F1/right/P500F1_right_polys.gepjson ##missing large spot
+Plate2/500F1/right/P500F1_right_polys.gepjson ##missing large spot
 
 plate2/P753F2/right/P753F2_right_polys.geojson ##all messed up
+
+Plate2/P542F2/left/P542F2_left_polys.geojson ##squished...not same as outline
+
+Plate2/P542F2/mid/P542F2_mid_polys.geojson ##missing some spots, squished
+
+Plate2/P542F2/right/P542F2_right_polys.geojson ##squished
+
+Plate2/P710F1/right/P710F1_right_polys.geojson ##missing spots
+
+Plate2/P731F1/right/P731F1_right_polys.geojson ##all red
+
+Plate2/P732F2/mid/P732F2_mid_polys.geojson ##missing some spots
+
 
 
 

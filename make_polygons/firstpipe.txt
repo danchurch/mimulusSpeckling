@@ -11383,5 +11383,62 @@ cd $toy
 
 ## see if the autozonecaller and pdf make will handle all this?
 
-## best thing here is get mac up to date...
+## keep rolling over the files in the toy directory with these
+
+$packages$get_zones -h
+
+$packages$get_zones P500F1_right_polys.geojson 0.5 
+
+
+## seems to work. run it over the whole directory:
+
+## digitize28.02.2019.sh
+#####################################################
+
+#!/usr/bin/env bash
+
+## change repo for mac
+repo="/home/daniel/Documents/cooley_lab/mimulusSpeckling/" ## 
+wd=$repo"make_polygons/toy/" ## change to wd
+packages=$repo"make_polygons/package/makeFlowerPolygons/"
+get_spots=$packages"get_spots.py"
+get_zones=$packages"get_zones.py"
+
+cd $wd
+
+touch digitizeLogPlate_.txt
+
+aa=$(find . -name "*melted.csv")
+
+for i in ${aa[@]}; do
+    echo $i
+    $packages$get_spots $i 
+    j=${i/_melted.csv/_polys.geojson}
+    echo $j
+    $packages$get_zones $j 0.5 
+done
+
+########################################################
+
+## further edits made in file in folder
+
+## time to update the mac and run these on all
+
+./digitize28.02.2019.sh 2>&1 | tee -a digitizeLogPlate_.txt
+
+## seems to work. update and git the old mac monster fired up...
+
+## checking melia's oct8 folder...
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/Oct_8
+
+plate3="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3"
+
+for i in *; do
+    echo $i
+    find $plate3 -name $i
+done
+
+## seems like these are all in plate3
+## removing this folder.
 

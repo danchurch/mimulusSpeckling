@@ -11442,3 +11442,22 @@ done
 ## seems like these are all in plate3
 ## removing this folder.
 
+## on mac:
+
+## did I install a virtual env on the mac? don't think so...
+
+python3 -m venv /Users/danthomas/Documents/speckVenv
+
+## modify our bashprof for ## on mac:
+
+## did I install a virtual env on the mac? don't think so...
+
+python3 -m venv //Users/danthomas/Documents/speckVenv
+
+## start it, using an alias
+
+VE
+
+pip3 install -U -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
+
+

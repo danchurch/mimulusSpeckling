@@ -11461,3 +11461,50 @@ VE
 pip3 install -U -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
 
 
+## oops, forgot about converting doug's mat files to CSVs...back to my comp
+
+## how do I do this again?
+
+## with prepDougRasters.m
+
+## pasting here, then see if we can do this with octave:
+
+
+wd = '/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3'
+dougRasterDir = '/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3';
+cd(dougRasterDir)
+
+files = dir('P*.mat');
+
+for file = files';
+    im = file.name;
+    imName = regexprep(im,'\.mat', ''); 
+    %% go get our file, come back
+    cd(dougRasterDir);
+    rast=load(im);
+    cd(wd);
+    %% make a spot for our image, go to it:
+    mkdir(imName);
+    cd (imName);
+    %% get our petal names (left, right mid)
+    petNames = fieldnames(rast.Petals.Clusters);
+    %% split images into petal and spot, export, for each of the three petals:
+    for i = 1:length(petNames);
+        pet = rast.Petals.(petNames{i}).data; %petal at hand
+        mkdir(petNames{i});
+        cd(petNames{i});
+        %% for octave
+        fileNamePetal = [imName "_" char(petNames(i)) "_" 'melted.csv'];
+        %% for matlab, this may work better?
+        %%fileNamePetal = imName + "_" +  petNames(i) + "_" + 'melted.csv';
+        csvwrite(fileNamePetal,pet);
+        cd ..;
+    end;
+    cd(wd);
+end;
+
+## ' ## just because it's screwing up my syntax
+
+## seems like that worked okay. 
+
+## now back to mac?

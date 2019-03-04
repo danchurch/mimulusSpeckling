@@ -1,0 +1,3889 @@
+./P773F1/left/P773F1_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F1/left/P773F1_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F1/mid/P773F1_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F1/mid/P773F1_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F1/right/P773F1_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F1/right/P773F1_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F2/left/P773F2_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F2/left/P773F2_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F2/mid/P773F2_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F2/mid/P773F2_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F2/right/P773F2_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P773F2/right/P773F2_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F2/left/P774F2_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F2/left/P774F2_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F2/mid/P774F2_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F2/mid/P774F2_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F2/right/P774F2_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F2/right/P774F2_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F3/left/P774F3_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F3/left/P774F3_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F3/mid/P774F3_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F3/mid/P774F3_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F3/right/P774F3_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P774F3/right/P774F3_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F2/left/P775F2_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F2/left/P775F2_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F2/mid/P775F2_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F2/mid/P775F2_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F2/right/P775F2_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F2/right/P775F2_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F3/left/P775F3_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F3/left/P775F3_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F3/mid/P775F3_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F3/mid/P775F3_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F3/right/P775F3_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P775F3/right/P775F3_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F1/left/P776F1_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F1/left/P776F1_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F1/mid/P776F1_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F1/mid/P776F1_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F1/right/P776F1_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F1/right/P776F1_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F2/left/P776F2_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F2/left/P776F2_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F2/mid/P776F2_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F2/mid/P776F2_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F2/right/P776F2_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P776F2/right/P776F2_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F3/left/P777F3_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F3/left/P777F3_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F3/mid/P777F3_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F3/mid/P777F3_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F3/right/P777F3_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F3/right/P777F3_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F4/left/P777F4_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F4/left/P777F4_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F4/mid/P777F4_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F4/mid/P777F4_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F4/right/P777F4_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P777F4/right/P777F4_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F1/left/P778F1_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F1/left/P778F1_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F1/mid/P778F1_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F1/mid/P778F1_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F1/right/P778F1_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F1/right/P778F1_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F2/left/P778F2_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F2/left/P778F2_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F2/mid/P778F2_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F2/mid/P778F2_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F2/right/P778F2_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P778F2/right/P778F2_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F2/left/P779F2_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F2/left/P779F2_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F2/mid/P779F2_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F2/mid/P779F2_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F2/right/P779F2_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F2/right/P779F2_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F3/left/P779F3_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F3/left/P779F3_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F3/mid/P779F3_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F3/mid/P779F3_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F3/right/P779F3_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P779F3/right/P779F3_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F1/left/P782F1_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F1/left/P782F1_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F1/mid/P782F1_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F1/mid/P782F1_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F1/right/P782F1_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F1/right/P782F1_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F2/left/P782F2_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F2/left/P782F2_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F2/mid/P782F2_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F2/mid/P782F2_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F2/right/P782F2_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P782F2/right/P782F2_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F1/left/P783F1_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F1/left/P783F1_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F1/mid/P783F1_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F1/mid/P783F1_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F1/right/P783F1_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F1/right/P783F1_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F2/left/P783F2_left_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F2/left/P783F2_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F2/mid/P783F2_mid_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F2/mid/P783F2_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F2/right/P783F2_right_melted.csv
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 10, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P783F2/right/P783F2_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 3, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+./P784F1/left/P784F1_left_melted.csv
+./P773F1/left/P773F1_left_melted.csv
+P773F1_left_polys
+./P773F1/left/P773F1_left_polys.geojson
+./P773F1/mid/P773F1_mid_melted.csv
+P773F1_mid_polys
+./P773F1/mid/P773F1_mid_polys.geojson
+./P773F1/right/P773F1_right_melted.csv
+P773F1_right_polys
+./P773F1/right/P773F1_right_polys.geojson
+./P773F2/left/P773F2_left_melted.csv
+P773F2_left_polys
+./P773F2/left/P773F2_left_polys.geojson
+./P773F2/mid/P773F2_mid_melted.csv
+P773F2_mid_polys
+./P773F2/mid/P773F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P773F2/right/P773F2_right_melted.csv
+P773F2_right_polys
+./P773F2/right/P773F2_right_polys.geojson
+./P774F2/left/P774F2_left_melted.csv
+P774F2_left_polys
+./P774F2/left/P774F2_left_polys.geojson
+./P774F2/mid/P774F2_mid_melted.csv
+P774F2_mid_polys
+./P774F2/mid/P774F2_mid_polys.geojson
+./P774F2/right/P774F2_right_melted.csv
+P774F2_right_polys
+./P774F2/right/P774F2_right_polys.geojson
+./P774F3/left/P774F3_left_melted.csv
+P774F3_left_polys
+./P774F3/left/P774F3_left_polys.geojson
+./P774F3/mid/P774F3_mid_melted.csv
+P774F3_mid_polys
+./P774F3/mid/P774F3_mid_polys.geojson
+./P774F3/right/P774F3_right_melted.csv
+P774F3_right_polys
+./P774F3/right/P774F3_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P775F2/left/P775F2_left_melted.csv
+P775F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P775F2_left_polys spots object is invalid because:
+Self-intersection[296 857]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P775F2_left_polys spots object is invalid because:
+Self-intersection[431 773]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P775F2_left_polys spots object is invalid because:
+Self-intersection[434 819]
+./P775F2/left/P775F2_left_polys.geojson
+./P775F2/mid/P775F2_mid_melted.csv
+P775F2_mid_polys
+./P775F2/mid/P775F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P775F2/right/P775F2_right_melted.csv
+P775F2_right_polys
+./P775F2/right/P775F2_right_polys.geojson
+./P775F3/left/P775F3_left_melted.csv
+P775F3_left_polys
+./P775F3/left/P775F3_left_polys.geojson
+./P775F3/mid/P775F3_mid_melted.csv
+P775F3_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P775F3_mid_polys spots object is invalid because:
+Self-intersection[1560 979]
+./P775F3/mid/P775F3_mid_polys.geojson
+./P775F3/right/P775F3_right_melted.csv
+P775F3_right_polys
+./P775F3/right/P775F3_right_polys.geojson
+./P776F1/left/P776F1_left_melted.csv
+P776F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P776F1_left_polys spots object is invalid because:
+Valid Geometry
+./P776F1/left/P776F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P776F1/mid/P776F1_mid_melted.csv
+P776F1_mid_polys
+./P776F1/mid/P776F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P776F1/right/P776F1_right_melted.csv
+P776F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P776F1_right_polys spots object is invalid because:
+Valid Geometry
+./P776F1/right/P776F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P776F2/left/P776F2_left_melted.csv
+P776F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P776F2_left_polys spots object is invalid because:
+Self-intersection[484 732]
+./P776F2/left/P776F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P776F2/mid/P776F2_mid_melted.csv
+P776F2_mid_polys
+./P776F2/mid/P776F2_mid_polys.geojson
+./P776F2/right/P776F2_right_melted.csv
+P776F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P776F2_right_polys spots object is invalid because:
+Valid Geometry
+./P776F2/right/P776F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P777F3/left/P777F3_left_melted.csv
+P777F3_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P777F3_left_polys spots object is invalid because:
+Self-intersection[217 641]
+./P777F3/left/P777F3_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P777F3/mid/P777F3_mid_melted.csv
+P777F3_mid_polys
+./P777F3/mid/P777F3_mid_polys.geojson
+./P777F3/right/P777F3_right_melted.csv
+P777F3_right_polys
+./P777F3/right/P777F3_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P777F4/left/P777F4_left_melted.csv
+P777F4_left_polys
+./P777F4/left/P777F4_left_polys.geojson
+./P777F4/mid/P777F4_mid_melted.csv
+P777F4_mid_polys
+./P777F4/mid/P777F4_mid_polys.geojson
+./P777F4/right/P777F4_right_melted.csv
+P777F4_right_polys
+./P777F4/right/P777F4_right_polys.geojson
+./P778F1/left/P778F1_left_melted.csv
+P778F1_left_polys
+./P778F1/left/P778F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P778F1/mid/P778F1_mid_melted.csv
+P778F1_mid_polys
+./P778F1/mid/P778F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P778F1/right/P778F1_right_melted.csv
+P778F1_right_polys
+./P778F1/right/P778F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P778F2/left/P778F2_left_melted.csv
+P778F2_left_polys
+./P778F2/left/P778F2_left_polys.geojson
+./P778F2/mid/P778F2_mid_melted.csv
+P778F2_mid_polys
+./P778F2/mid/P778F2_mid_polys.geojson
+./P778F2/right/P778F2_right_melted.csv
+P778F2_right_polys
+./P778F2/right/P778F2_right_polys.geojson
+./P779F2/left/P779F2_left_melted.csv
+P779F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P779F2_left_polys spots object is invalid because:
+Valid Geometry
+./P779F2/left/P779F2_left_polys.geojson
+./P779F2/mid/P779F2_mid_melted.csv
+P779F2_mid_polys
+./P779F2/mid/P779F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P779F2/right/P779F2_right_melted.csv
+P779F2_right_polys
+./P779F2/right/P779F2_right_polys.geojson
+./P779F3/left/P779F3_left_melted.csv
+P779F3_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P779F3_left_polys spots object is invalid because:
+Valid Geometry
+./P779F3/left/P779F3_left_polys.geojson
+./P779F3/mid/P779F3_mid_melted.csv
+P779F3_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P779F3_mid_polys spots object is invalid because:
+Valid Geometry
+./P779F3/mid/P779F3_mid_polys.geojson
+./P779F3/right/P779F3_right_melted.csv
+P779F3_right_polys
+./P779F3/right/P779F3_right_polys.geojson
+./P782F1/left/P782F1_left_melted.csv
+P782F1_left_polys
+./P782F1/left/P782F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P782F1/mid/P782F1_mid_melted.csv
+P782F1_mid_polys
+./P782F1/mid/P782F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P782F1/right/P782F1_right_melted.csv
+P782F1_right_polys
+./P782F1/right/P782F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P782F2/left/P782F2_left_melted.csv
+P782F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P782F2_left_polys spots object is invalid because:
+Self-intersection[231 915]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P782F2_left_polys spots object is invalid because:
+Self-intersection[758 422]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P782F2_left_polys spots object is invalid because:
+Self-intersection[759 425]
+./P782F2/left/P782F2_left_polys.geojson
+./P782F2/mid/P782F2_mid_melted.csv
+P782F2_mid_polys
+./P782F2/mid/P782F2_mid_polys.geojson
+./P782F2/right/P782F2_right_melted.csv
+P782F2_right_polys
+./P782F2/right/P782F2_right_polys.geojson
+./P783F1/left/P783F1_left_melted.csv
+P783F1_left_polys
+./P783F1/left/P783F1_left_polys.geojson
+./P783F1/mid/P783F1_mid_melted.csv
+P783F1_mid_polys
+./P783F1/mid/P783F1_mid_polys.geojson
+./P783F1/right/P783F1_right_melted.csv
+P783F1_right_polys
+./P783F1/right/P783F1_right_polys.geojson
+./P783F2/left/P783F2_left_melted.csv
+P783F2_left_polys
+./P783F2/left/P783F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P783F2/mid/P783F2_mid_melted.csv
+P783F2_mid_polys
+./P783F2/mid/P783F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P783F2/right/P783F2_right_melted.csv
+P783F2_right_polys
+./P783F2/right/P783F2_right_polys.geojson
+./P784F1/left/P784F1_left_melted.csv
+P784F1_left_polys
+./P784F1/left/P784F1_left_polys.geojson
+./P784F1/mid/P784F1_mid_melted.csv
+P784F1_mid_polys
+./P784F1/mid/P784F1_mid_polys.geojson
+./P784F1/right/P784F1_right_melted.csv
+P784F1_right_polys
+./P784F1/right/P784F1_right_polys.geojson
+./P784F2/left/P784F2_left_melted.csv
+P784F2_left_polys
+./P784F2/left/P784F2_left_polys.geojson
+./P784F2/mid/P784F2_mid_melted.csv
+P784F2_mid_polys
+./P784F2/mid/P784F2_mid_polys.geojson
+./P784F2/right/P784F2_right_melted.csv
+P784F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P784F2_right_polys spots object is invalid because:
+Self-intersection[1885 622]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P784F2_right_polys spots object is invalid because:
+Self-intersection[2367 664]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P784F2_right_polys spots object is invalid because:
+Self-intersection[2383 659]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P784F2_right_polys spots object is invalid because:
+Self-intersection[2418 606]
+./P784F2/right/P784F2_right_polys.geojson
+./P785F1/left/P785F1_left_melted.csv
+P785F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P785F1_left_polys spots object is invalid because:
+Self-intersection[284 229]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P785F1_left_polys spots object is invalid because:
+Self-intersection[880 474]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P785F1_left_polys spots object is invalid because:
+Self-intersection[883 462]
+./P785F1/left/P785F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P785F1/mid/P785F1_mid_melted.csv
+P785F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P785F1_mid_polys spots object is invalid because:
+Self-intersection[1404 789]
+./P785F1/mid/P785F1_mid_polys.geojson
+./P785F1/right/P785F1_right_melted.csv
+P785F1_right_polys
+./P785F1/right/P785F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P785F2/left/P785F2_left_melted.csv
+P785F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P785F2_left_polys spots object is invalid because:
+Self-intersection[96 371]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P785F2_left_polys spots object is invalid because:
+Self-intersection[236 220]
+./P785F2/left/P785F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P785F2/mid/P785F2_mid_melted.csv
+P785F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P785F2_mid_polys spots object is invalid because:
+Self-intersection[1525 140]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P785F2_mid_polys spots object is invalid because:
+Self-intersection[2148 487]
+./P785F2/mid/P785F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P785F2/right/P785F2_right_melted.csv
+P785F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P785F2_right_polys spots object is invalid because:
+Self-intersection[3170 941]
+./P785F2/right/P785F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P786F1/left/P786F1_left_melted.csv
+P786F1_left_polys
+./P786F1/left/P786F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P786F1/mid/P786F1_mid_melted.csv
+P786F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P786F1_mid_polys spots object is invalid because:
+Self-intersection[1302 770]
+./P786F1/mid/P786F1_mid_polys.geojson
+./P786F1/right/P786F1_right_melted.csv
+P786F1_right_polys
+./P786F1/right/P786F1_right_polys.geojson
+./P786F2/left/P786F2_left_melted.csv
+P786F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P786F2_left_polys spots object is invalid because:
+Self-intersection[816 282]
+./P786F2/left/P786F2_left_polys.geojson
+./P786F2/mid/P786F2_mid_melted.csv
+P786F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P786F2_mid_polys spots object is invalid because:
+Self-intersection[2047 470]
+./P786F2/mid/P786F2_mid_polys.geojson
+./P786F2/right/P786F2_right_melted.csv
+P786F2_right_polys
+./P786F2/right/P786F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P787F2/left/P787F2_left_melted.csv
+P787F2_left_polys
+./P787F2/left/P787F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P787F2/mid/P787F2_mid_melted.csv
+P787F2_mid_polys
+./P787F2/mid/P787F2_mid_polys.geojson
+./P787F2/right/P787F2_right_melted.csv
+P787F2_right_polys
+./P787F2/right/P787F2_right_polys.geojson
+./P787F3/left/P787F3_left_melted.csv
+P787F3_left_polys
+./P787F3/left/P787F3_left_polys.geojson
+./P787F3/mid/P787F3_mid_melted.csv
+P787F3_mid_polys
+./P787F3/mid/P787F3_mid_polys.geojson
+./P787F3/right/P787F3_right_melted.csv
+P787F3_right_polys
+./P787F3/right/P787F3_right_polys.geojson
+./P788F1/left/P788F1_left_melted.csv
+P788F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P788F1_left_polys spots object is invalid because:
+Valid Geometry
+./P788F1/left/P788F1_left_polys.geojson
+./P788F1/mid/P788F1_mid_melted.csv
+P788F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P788F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P788F1/mid/P788F1_mid_polys.geojson
+./P788F1/right/P788F1_right_melted.csv
+P788F1_right_polys
+./P788F1/right/P788F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P788F2/left/P788F2_left_melted.csv
+P788F2_left_polys
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 217, in <module>
+    main(meltParentDir, gjName, meltBaseName, outFileName)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 161, in main
+    spotPolRaw = digitizePols(spotsMat)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 77, in digitizePols
+    return(shapelyPoly)
+UnboundLocalError: local variable 'shapelyPoly' referenced before assignment
+./P788F2/left/P788F2_left_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 157, in <module>
+    photoBB, scalingFactor) = gj.parseGeoJson(args.geojson)
+  File "/Users/danthomas/Documents/speckVenv/lib/python3.7/site-packages/makeFlowerPolygons/geojsonIO.py", line 9, in parseGeoJson
+    with open(geojson) as gjf:
+FileNotFoundError: [Errno 2] No such file or directory: './P788F2/left/P788F2_left_polys.geojson'
+./P788F2/mid/P788F2_mid_melted.csv
+P788F2_mid_polys
+./P788F2/mid/P788F2_mid_polys.geojson
+./P788F2/right/P788F2_right_melted.csv
+P788F2_right_polys
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 217, in <module>
+    main(meltParentDir, gjName, meltBaseName, outFileName)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 161, in main
+    spotPolRaw = digitizePols(spotsMat)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 77, in digitizePols
+    return(shapelyPoly)
+UnboundLocalError: local variable 'shapelyPoly' referenced before assignment
+./P788F2/right/P788F2_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 157, in <module>
+    photoBB, scalingFactor) = gj.parseGeoJson(args.geojson)
+  File "/Users/danthomas/Documents/speckVenv/lib/python3.7/site-packages/makeFlowerPolygons/geojsonIO.py", line 9, in parseGeoJson
+    with open(geojson) as gjf:
+FileNotFoundError: [Errno 2] No such file or directory: './P788F2/right/P788F2_right_polys.geojson'
+./P789F1/left/P789F1_left_melted.csv
+P789F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P789F1_left_polys spots object is invalid because:
+Self-intersection[487 491]
+./P789F1/left/P789F1_left_polys.geojson
+./P789F1/mid/P789F1_mid_melted.csv
+P789F1_mid_polys
+./P789F1/mid/P789F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P789F1/right/P789F1_right_melted.csv
+P789F1_right_polys
+./P789F1/right/P789F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P789F2/left/P789F2_left_melted.csv
+P789F2_left_polys
+./P789F2/left/P789F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P789F2/mid/P789F2_mid_melted.csv
+P789F2_mid_polys
+./P789F2/mid/P789F2_mid_polys.geojson
+./P789F2/right/P789F2_right_melted.csv
+P789F2_right_polys
+./P789F2/right/P789F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P791F1/left/P791F1_left_melted.csv
+P791F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P791F1_left_polys spots object is invalid because:
+Valid Geometry
+./P791F1/left/P791F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P791F1/mid/P791F1_mid_melted.csv
+P791F1_mid_polys
+./P791F1/mid/P791F1_mid_polys.geojson
+./P791F1/right/P791F1_right_melted.csv
+P791F1_right_polys
+./P791F1/right/P791F1_right_polys.geojson
+./P791F2/left/P791F2_left_melted.csv
+P791F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P791F2_left_polys spots object is invalid because:
+Valid Geometry
+./P791F2/left/P791F2_left_polys.geojson
+./P791F2/mid/P791F2_mid_melted.csv
+P791F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P791F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P791F2/mid/P791F2_mid_polys.geojson
+./P791F2/right/P791F2_right_melted.csv
+P791F2_right_polys
+./P791F2/right/P791F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P792F4/left/P792F4_left_melted.csv
+P792F4_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P792F4_left_polys spots object is invalid because:
+Valid Geometry
+./P792F4/left/P792F4_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P792F4/mid/P792F4_mid_melted.csv
+P792F4_mid_polys
+./P792F4/mid/P792F4_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P792F4/right/P792F4_right_melted.csv
+P792F4_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P792F4_right_polys spots object is invalid because:
+Valid Geometry
+./P792F4/right/P792F4_right_polys.geojson
+./P793F1/left/P793F1_left_melted.csv
+P793F1_left_polys
+./P793F1/left/P793F1_left_polys.geojson
+./P793F1/mid/P793F1_mid_melted.csv
+P793F1_mid_polys
+./P793F1/mid/P793F1_mid_polys.geojson
+./P793F1/right/P793F1_right_melted.csv
+P793F1_right_polys
+./P793F1/right/P793F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P793F2/left/P793F2_left_melted.csv
+P793F2_left_polys
+./P793F2/left/P793F2_left_polys.geojson
+./P793F2/mid/P793F2_mid_melted.csv
+P793F2_mid_polys
+./P793F2/mid/P793F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P793F2/right/P793F2_right_melted.csv
+P793F2_right_polys
+./P793F2/right/P793F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P804F1/left/P804F1_left_melted.csv
+P804F1_left_polys
+./P804F1/left/P804F1_left_polys.geojson
+./P804F1/mid/P804F1_mid_melted.csv
+P804F1_mid_polys
+./P804F1/mid/P804F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P804F1/right/P804F1_right_melted.csv
+P804F1_right_polys
+./P804F1/right/P804F1_right_polys.geojson
+./P804F2/left/P804F2_left_melted.csv
+P804F2_left_polys
+./P804F2/left/P804F2_left_polys.geojson
+./P804F2/mid/P804F2_mid_melted.csv
+P804F2_mid_polys
+./P804F2/mid/P804F2_mid_polys.geojson
+./P804F2/right/P804F2_right_melted.csv
+P804F2_right_polys
+./P804F2/right/P804F2_right_polys.geojson
+./P805F1/left/P805F1_left_melted.csv
+P805F1_left_polys
+./P805F1/left/P805F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P805F1/mid/P805F1_mid_melted.csv
+P805F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P805F1_mid_polys spots object is invalid because:
+Self-intersection[1279 517]
+./P805F1/mid/P805F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P805F1/right/P805F1_right_melted.csv
+P805F1_right_polys
+./P805F1/right/P805F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P805F3/left/P805F3_left_melted.csv
+P805F3_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P805F3_left_polys spots object is invalid because:
+Self-intersection[364 933]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P805F3_left_polys spots object is invalid because:
+Self-intersection[368 920]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P805F3_left_polys spots object is invalid because:
+Self-intersection[572 651]
+./P805F3/left/P805F3_left_polys.geojson
+./P805F3/mid/P805F3_mid_melted.csv
+P805F3_mid_polys
+./P805F3/mid/P805F3_mid_polys.geojson
+./P805F3/right/P805F3_right_melted.csv
+P805F3_right_polys
+./P805F3/right/P805F3_right_polys.geojson
+./P806F1/left/P806F1_left_melted.csv
+P806F1_left_polys
+./P806F1/left/P806F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P806F1/mid/P806F1_mid_melted.csv
+P806F1_mid_polys
+./P806F1/mid/P806F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P806F1/right/P806F1_right_melted.csv
+P806F1_right_polys
+./P806F1/right/P806F1_right_polys.geojson
+./P806F2/left/P806F2_left_melted.csv
+P806F2_left_polys
+./P806F2/left/P806F2_left_polys.geojson
+./P806F2/mid/P806F2_mid_melted.csv
+P806F2_mid_polys
+./P806F2/mid/P806F2_mid_polys.geojson
+./P806F2/right/P806F2_right_melted.csv
+P806F2_right_polys
+./P806F2/right/P806F2_right_polys.geojson
+./P807F1/left/P807F1_left_melted.csv
+P807F1_left_polys
+./P807F1/left/P807F1_left_polys.geojson
+./P807F1/mid/P807F1_mid_melted.csv
+P807F1_mid_polys
+./P807F1/mid/P807F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P807F1/right/P807F1_right_melted.csv
+P807F1_right_polys
+./P807F1/right/P807F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P807F2/left/P807F2_left_melted.csv
+P807F2_left_polys
+./P807F2/left/P807F2_left_polys.geojson
+./P807F2/mid/P807F2_mid_melted.csv
+P807F2_mid_polys
+./P807F2/mid/P807F2_mid_polys.geojson
+./P807F2/right/P807F2_right_melted.csv
+P807F2_right_polys
+./P807F2/right/P807F2_right_polys.geojson
+./P808F1/left/P808F1_left_melted.csv
+P808F1_left_polys
+./P808F1/left/P808F1_left_polys.geojson
+./P808F1/mid/P808F1_mid_melted.csv
+P808F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P808F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P808F1/mid/P808F1_mid_polys.geojson
+./P808F1/right/P808F1_right_melted.csv
+P808F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P808F1_right_polys spots object is invalid because:
+Valid Geometry
+./P808F1/right/P808F1_right_polys.geojson
+./P808F2/left/P808F2_left_melted.csv
+P808F2_left_polys
+./P808F2/left/P808F2_left_polys.geojson
+./P808F2/mid/P808F2_mid_melted.csv
+P808F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P808F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P808F2/mid/P808F2_mid_polys.geojson
+./P808F2/right/P808F2_right_melted.csv
+P808F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P808F2_right_polys spots object is invalid because:
+Valid Geometry
+./P808F2/right/P808F2_right_polys.geojson
+./P810F1/left/P810F1_left_melted.csv
+P810F1_left_polys
+./P810F1/left/P810F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P810F1/mid/P810F1_mid_melted.csv
+P810F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P810F1_mid_polys spots object is invalid because:
+Self-intersection[1055 589]
+./P810F1/mid/P810F1_mid_polys.geojson
+./P810F1/right/P810F1_right_melted.csv
+P810F1_right_polys
+./P810F1/right/P810F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P810F2/left/P810F2_left_melted.csv
+P810F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P810F2_left_polys spots object is invalid because:
+Self-intersection[127 298]
+./P810F2/left/P810F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P810F2/mid/P810F2_mid_melted.csv
+P810F2_mid_polys
+./P810F2/mid/P810F2_mid_polys.geojson
+./P810F2/right/P810F2_right_melted.csv
+P810F2_right_polys
+./P810F2/right/P810F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P811F1/left/P811F1_left_melted.csv
+P811F1_left_polys
+./P811F1/left/P811F1_left_polys.geojson
+./P811F1/mid/P811F1_mid_melted.csv
+P811F1_mid_polys
+./P811F1/mid/P811F1_mid_polys.geojson
+./P811F1/right/P811F1_right_melted.csv
+P811F1_right_polys
+./P811F1/right/P811F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P811F2/left/P811F2_left_melted.csv
+P811F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P811F2_left_polys spots object is invalid because:
+Self-intersection[545 407]
+./P811F2/left/P811F2_left_polys.geojson
+./P811F2/mid/P811F2_mid_melted.csv
+P811F2_mid_polys
+./P811F2/mid/P811F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P811F2/right/P811F2_right_melted.csv
+P811F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P811F2_right_polys petal object is invalid because:
+Self-intersection[1740 610]
+./P811F2/right/P811F2_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 159, in <module>
+    center = findCenter(petal, args.centerSize)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 22, in findCenter
+    cent = sg.polygon.Polygon(center.exterior.coords)
+AttributeError: 'NoneType' object has no attribute 'coords'
+./P812F1/left/P812F1_left_melted.csv
+P812F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P812F1_left_polys spots object is invalid because:
+Self-intersection[383 637]
+./P812F1/left/P812F1_left_polys.geojson
+./P812F1/mid/P812F1_mid_melted.csv
+P812F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P812F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P812F1/mid/P812F1_mid_polys.geojson
+./P812F1/right/P812F1_right_melted.csv
+P812F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P812F1_right_polys spots object is invalid because:
+Valid Geometry
+./P812F1/right/P812F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P812F2/left/P812F2_left_melted.csv
+P812F2_left_polys
+./P812F2/left/P812F2_left_polys.geojson
+./P812F2/mid/P812F2_mid_melted.csv
+P812F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P812F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P812F2/mid/P812F2_mid_polys.geojson
+./P812F2/right/P812F2_right_melted.csv
+P812F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P812F2_right_polys spots object is invalid because:
+Valid Geometry
+./P812F2/right/P812F2_right_polys.geojson
+./P813F1/left/P813F1_left_melted.csv
+P813F1_left_polys
+./P813F1/left/P813F1_left_polys.geojson
+./P813F1/mid/P813F1_mid_melted.csv
+P813F1_mid_polys
+./P813F1/mid/P813F1_mid_polys.geojson
+./P813F1/right/P813F1_right_melted.csv
+P813F1_right_polys
+./P813F1/right/P813F1_right_polys.geojson
+./P813F2/left/P813F2_left_melted.csv
+P813F2_left_polys
+./P813F2/left/P813F2_left_polys.geojson
+./P813F2/mid/P813F2_mid_melted.csv
+P813F2_mid_polys
+./P813F2/mid/P813F2_mid_polys.geojson
+./P813F2/right/P813F2_right_melted.csv
+P813F2_right_polys
+./P813F2/right/P813F2_right_polys.geojson
+./P814F2/left/P814F2_left_melted.csv
+P814F2_left_polys
+./P814F2/left/P814F2_left_polys.geojson
+./P814F2/mid/P814F2_mid_melted.csv
+P814F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P814F2_mid_polys spots object is invalid because:
+Self-intersection[1079 257]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P814F2_mid_polys spots object is invalid because:
+Self-intersection[1088 243]
+./P814F2/mid/P814F2_mid_polys.geojson
+./P814F2/right/P814F2_right_melted.csv
+P814F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P814F2_right_polys spots object is invalid because:
+Self-intersection[2055 656]
+./P814F2/right/P814F2_right_polys.geojson
+./P814F3/left/P814F3_left_melted.csv
+P814F3_left_polys
+./P814F3/left/P814F3_left_polys.geojson
+./P814F3/mid/P814F3_mid_melted.csv
+P814F3_mid_polys
+./P814F3/mid/P814F3_mid_polys.geojson
+./P814F3/right/P814F3_right_melted.csv
+P814F3_right_polys
+./P814F3/right/P814F3_right_polys.geojson
+./P815F2/left/P815F2_left_melted.csv
+P815F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P815F2_left_polys spots object is invalid because:
+Valid Geometry
+./P815F2/left/P815F2_left_polys.geojson
+./P815F2/mid/P815F2_mid_melted.csv
+P815F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P815F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P815F2/mid/P815F2_mid_polys.geojson
+./P815F2/right/P815F2_right_melted.csv
+P815F2_right_polys
+./P815F2/right/P815F2_right_polys.geojson
+./P815F3/left/P815F3_left_melted.csv
+P815F3_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P815F3_left_polys spots object is invalid because:
+Valid Geometry
+./P815F3/left/P815F3_left_polys.geojson
+./P815F3/mid/P815F3_mid_melted.csv
+P815F3_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P815F3_mid_polys spots object is invalid because:
+Valid Geometry
+./P815F3/mid/P815F3_mid_polys.geojson
+./P815F3/right/P815F3_right_melted.csv
+P815F3_right_polys
+./P815F3/right/P815F3_right_polys.geojson
+./P816F1/left/P816F1_left_melted.csv
+P816F1_left_polys
+./P816F1/left/P816F1_left_polys.geojson
+./P816F1/mid/P816F1_mid_melted.csv
+P816F1_mid_polys
+./P816F1/mid/P816F1_mid_polys.geojson
+./P816F1/right/P816F1_right_melted.csv
+P816F1_right_polys
+./P816F1/right/P816F1_right_polys.geojson
+./P816F2/left/P816F2_left_melted.csv
+P816F2_left_polys
+./P816F2/left/P816F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P816F2/mid/P816F2_mid_melted.csv
+P816F2_mid_polys
+./P816F2/mid/P816F2_mid_polys.geojson
+./P816F2/right/P816F2_right_melted.csv
+P816F2_right_polys
+./P816F2/right/P816F2_right_polys.geojson
+./P817F1/left/P817F1_left_melted.csv
+P817F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F1_left_polys spots object is invalid because:
+Self-intersection[287 681]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F1_left_polys spots object is invalid because:
+Self-intersection[290 665]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F1_left_polys spots object is invalid because:
+Self-intersection[590 480]
+./P817F1/left/P817F1_left_polys.geojson
+./P817F1/mid/P817F1_mid_melted.csv
+P817F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F1_mid_polys spots object is invalid because:
+Self-intersection[1074 402]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F1_mid_polys spots object is invalid because:
+Self-intersection[1103 297]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F1_mid_polys spots object is invalid because:
+Self-intersection[1151 509]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F1_mid_polys spots object is invalid because:
+Self-intersection[1377 722]
+./P817F1/mid/P817F1_mid_polys.geojson
+./P817F1/right/P817F1_right_melted.csv
+P817F1_right_polys
+./P817F1/right/P817F1_right_polys.geojson
+./P817F2/left/P817F2_left_melted.csv
+P817F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_left_polys spots object is invalid because:
+Self-intersection[508 786]
+./P817F2/left/P817F2_left_polys.geojson
+./P817F2/mid/P817F2_mid_melted.csv
+P817F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1040 474]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1059 834]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1055 411]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1052 447]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1057 871]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1058 470]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1058 838]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1073 534]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1087 913]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1103 505]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P817F2_mid_polys spots object is invalid because:
+Self-intersection[1106 497]
+./P817F2/mid/P817F2_mid_polys.geojson
+./P817F2/right/P817F2_right_melted.csv
+P817F2_right_polys
+./P817F2/right/P817F2_right_polys.geojson
+./P818F1/left/P818F1_left_melted.csv
+P818F1_left_polys
+./P818F1/left/P818F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P818F1/mid/P818F1_mid_melted.csv
+P818F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P818F1_mid_polys petal object is invalid because:
+Self-intersection[976 719]
+./P818F1/mid/P818F1_mid_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 159, in <module>
+    center = findCenter(petal, args.centerSize)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 22, in findCenter
+    cent = sg.polygon.Polygon(center.exterior.coords)
+AttributeError: 'NoneType' object has no attribute 'coords'
+./P818F1/right/P818F1_right_melted.csv
+P818F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P818F1_right_polys spots object is invalid because:
+Self-intersection[2041 774]
+./P818F1/right/P818F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P818F2/left/P818F2_left_melted.csv
+P818F2_left_polys
+./P818F2/left/P818F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P818F2/mid/P818F2_mid_melted.csv
+P818F2_mid_polys
+./P818F2/mid/P818F2_mid_polys.geojson
+./P818F2/right/P818F2_right_melted.csv
+P818F2_right_polys
+./P818F2/right/P818F2_right_polys.geojson
+./P819F1/left/P819F1_left_melted.csv
+P819F1_left_polys
+./P819F1/left/P819F1_left_polys.geojson
+./P819F1/mid/P819F1_mid_melted.csv
+P819F1_mid_polys
+./P819F1/mid/P819F1_mid_polys.geojson
+./P819F1/right/P819F1_right_melted.csv
+P819F1_right_polys
+./P819F1/right/P819F1_right_polys.geojson
+./P819F2/left/P819F2_left_melted.csv
+P819F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P819F2_left_polys spots object is invalid because:
+Self-intersection[439 775]
+./P819F2/left/P819F2_left_polys.geojson
+./P819F2/mid/P819F2_mid_melted.csv
+P819F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P819F2_mid_polys spots object is invalid because:
+Self-intersection[1076 138]
+./P819F2/mid/P819F2_mid_polys.geojson
+./P819F2/right/P819F2_right_melted.csv
+P819F2_right_polys
+./P819F2/right/P819F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P820F1/left/P820F1_left_melted.csv
+P820F1_left_polys
+./P820F1/left/P820F1_left_polys.geojson
+./P820F1/mid/P820F1_mid_melted.csv
+P820F1_mid_polys
+./P820F1/mid/P820F1_mid_polys.geojson
+./P820F1/right/P820F1_right_melted.csv
+P820F1_right_polys
+./P820F1/right/P820F1_right_polys.geojson
+./P820F2/left/P820F2_left_melted.csv
+P820F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P820F2_left_polys spots object is invalid because:
+Self-intersection[554 868]
+./P820F2/left/P820F2_left_polys.geojson
+./P820F2/mid/P820F2_mid_melted.csv
+P820F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P820F2_mid_polys spots object is invalid because:
+Self-intersection[1045 498]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P820F2_mid_polys spots object is invalid because:
+Self-intersection[1551 880]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P820F2_mid_polys spots object is invalid because:
+Self-intersection[1553 866]
+./P820F2/mid/P820F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P820F2/right/P820F2_right_melted.csv
+P820F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P820F2_right_polys spots object is invalid because:
+Self-intersection[2584 256]
+./P820F2/right/P820F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P821F1/left/P821F1_left_melted.csv
+P821F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P821F1_left_polys spots object is invalid because:
+Self-intersection[431 816]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P821F1_left_polys spots object is invalid because:
+Self-intersection[472 808]
+./P821F1/left/P821F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P821F1/mid/P821F1_mid_melted.csv
+P821F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P821F1_mid_polys spots object is invalid because:
+Self-intersection[1216 902]
+./P821F1/mid/P821F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P821F1/right/P821F1_right_melted.csv
+P821F1_right_polys
+./P821F1/right/P821F1_right_polys.geojson
+./P821F2/left/P821F2_left_melted.csv
+P821F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P821F2_left_polys spots object is invalid because:
+Self-intersection[415 765]
+./P821F2/left/P821F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P821F2/mid/P821F2_mid_melted.csv
+P821F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P821F2_mid_polys spots object is invalid because:
+Self-intersection[1167 733]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P821F2_mid_polys spots object is invalid because:
+Self-intersection[1184 741]
+./P821F2/mid/P821F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P821F2/right/P821F2_right_melted.csv
+P821F2_right_polys
+./P821F2/right/P821F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P822F1/left/P822F1_left_melted.csv
+P822F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F1_left_polys spots object is invalid because:
+Self-intersection[71 619]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F1_left_polys spots object is invalid because:
+Self-intersection[655 449]
+./P822F1/left/P822F1_left_polys.geojson
+./P822F1/mid/P822F1_mid_melted.csv
+P822F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F1_mid_polys spots object is invalid because:
+Self-intersection[931 246]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F1_mid_polys spots object is invalid because:
+Self-intersection[996 149]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F1_mid_polys spots object is invalid because:
+Self-intersection[1059 549]
+./P822F1/mid/P822F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P822F1/right/P822F1_right_melted.csv
+P822F1_right_polys
+./P822F1/right/P822F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P822F2/left/P822F2_left_melted.csv
+P822F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F2_left_polys spots object is invalid because:
+Self-intersection[347 643]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F2_left_polys spots object is invalid because:
+Self-intersection[434 574]
+./P822F2/left/P822F2_left_polys.geojson
+./P822F2/mid/P822F2_mid_melted.csv
+P822F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F2_mid_polys spots object is invalid because:
+Self-intersection[1103 436]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F2_mid_polys spots object is invalid because:
+Self-intersection[1123 142]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F2_mid_polys spots object is invalid because:
+Self-intersection[1647 770]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P822F2_mid_polys spots object is invalid because:
+Self-intersection[1655 754]
+./P822F2/mid/P822F2_mid_polys.geojson
+./P822F2/right/P822F2_right_melted.csv
+P822F2_right_polys
+./P822F2/right/P822F2_right_polys.geojson
+./P823F1/left/P823F1_left_melted.csv
+P823F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P823F1_left_polys spots object is invalid because:
+Valid Geometry
+./P823F1/left/P823F1_left_polys.geojson
+./P823F1/mid/P823F1_mid_melted.csv
+P823F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P823F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P823F1/mid/P823F1_mid_polys.geojson
+./P823F1/right/P823F1_right_melted.csv
+P823F1_right_polys
+./P823F1/right/P823F1_right_polys.geojson
+./P823F2/left/P823F2_left_melted.csv
+P823F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P823F2_left_polys spots object is invalid because:
+Valid Geometry
+./P823F2/left/P823F2_left_polys.geojson
+./P823F2/mid/P823F2_mid_melted.csv
+P823F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P823F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P823F2/mid/P823F2_mid_polys.geojson
+./P823F2/right/P823F2_right_melted.csv
+P823F2_right_polys
+./P823F2/right/P823F2_right_polys.geojson
+./P824F1/left/P824F1_left_melted.csv
+P824F1_left_polys
+./P824F1/left/P824F1_left_polys.geojson
+./P824F1/mid/P824F1_mid_melted.csv
+P824F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P824F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P824F1/mid/P824F1_mid_polys.geojson
+./P824F1/right/P824F1_right_melted.csv
+P824F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P824F1_right_polys spots object is invalid because:
+Valid Geometry
+./P824F1/right/P824F1_right_polys.geojson
+./P824F2/left/P824F2_left_melted.csv
+P824F2_left_polys
+./P824F2/left/P824F2_left_polys.geojson
+./P824F2/mid/P824F2_mid_melted.csv
+P824F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P824F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P824F2/mid/P824F2_mid_polys.geojson
+./P824F2/right/P824F2_right_melted.csv
+P824F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P824F2_right_polys spots object is invalid because:
+Valid Geometry
+./P824F2/right/P824F2_right_polys.geojson
+./P825F1/left/P825F1_left_melted.csv
+P825F1_left_polys
+./P825F1/left/P825F1_left_polys.geojson
+./P825F1/mid/P825F1_mid_melted.csv
+P825F1_mid_polys
+./P825F1/mid/P825F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P825F1/right/P825F1_right_melted.csv
+P825F1_right_polys
+./P825F1/right/P825F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P825F2/left/P825F2_left_melted.csv
+P825F2_left_polys
+./P825F2/left/P825F2_left_polys.geojson
+./P825F2/mid/P825F2_mid_melted.csv
+P825F2_mid_polys
+./P825F2/mid/P825F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P825F2/right/P825F2_right_melted.csv
+P825F2_right_polys
+./P825F2/right/P825F2_right_polys.geojson
+./P826F1/left/P826F1_left_melted.csv
+P826F1_left_polys
+./P826F1/left/P826F1_left_polys.geojson
+./P826F1/mid/P826F1_mid_melted.csv
+P826F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P826F1_mid_polys spots object is invalid because:
+Self-intersection[1073 519]
+./P826F1/mid/P826F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P826F1/right/P826F1_right_melted.csv
+P826F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P826F1_right_polys spots object is invalid because:
+Self-intersection[2719 430]
+./P826F1/right/P826F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P826F2/left/P826F2_left_melted.csv
+P826F2_left_polys
+./P826F2/left/P826F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P826F2/mid/P826F2_mid_melted.csv
+P826F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P826F2_mid_polys spots object is invalid because:
+Self-intersection[1171 383]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P826F2_mid_polys spots object is invalid because:
+Self-intersection[1215 599]
+./P826F2/mid/P826F2_mid_polys.geojson
+./P826F2/right/P826F2_right_melted.csv
+P826F2_right_polys
+./P826F2/right/P826F2_right_polys.geojson
+./P827F1/left/P827F1_left_melted.csv
+P827F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P827F1_left_polys spots object is invalid because:
+Valid Geometry
+./P827F1/left/P827F1_left_polys.geojson
+./P827F1/mid/P827F1_mid_melted.csv
+P827F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P827F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P827F1/mid/P827F1_mid_polys.geojson
+./P827F1/right/P827F1_right_melted.csv
+P827F1_right_polys
+./P827F1/right/P827F1_right_polys.geojson
+./P827F2/left/P827F2_left_melted.csv
+P827F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P827F2_left_polys spots object is invalid because:
+Valid Geometry
+./P827F2/left/P827F2_left_polys.geojson
+./P827F2/mid/P827F2_mid_melted.csv
+P827F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P827F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P827F2/mid/P827F2_mid_polys.geojson
+./P827F2/right/P827F2_right_melted.csv
+P827F2_right_polys
+./P827F2/right/P827F2_right_polys.geojson
+./P828F1/left/P828F1_left_melted.csv
+P828F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P828F1_left_polys spots object is invalid because:
+Valid Geometry
+./P828F1/left/P828F1_left_polys.geojson
+./P828F1/mid/P828F1_mid_melted.csv
+P828F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P828F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P828F1/mid/P828F1_mid_polys.geojson
+./P828F1/right/P828F1_right_melted.csv
+P828F1_right_polys
+./P828F1/right/P828F1_right_polys.geojson
+./P828F2/left/P828F2_left_melted.csv
+P828F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P828F2_left_polys spots object is invalid because:
+Valid Geometry
+./P828F2/left/P828F2_left_polys.geojson
+./P828F2/mid/P828F2_mid_melted.csv
+P828F2_mid_polys
+./P828F2/mid/P828F2_mid_polys.geojson
+./P828F2/right/P828F2_right_melted.csv
+P828F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P828F2_right_polys spots object is invalid because:
+Valid Geometry
+./P828F2/right/P828F2_right_polys.geojson
+./P829F1/left/P829F1_left_melted.csv
+P829F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F1_left_polys spots object is invalid because:
+Self-intersection[383 676]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F1_left_polys spots object is invalid because:
+Self-intersection[440 589]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F1_left_polys spots object is invalid because:
+Self-intersection[449 762]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F1_left_polys spots object is invalid because:
+Self-intersection[471 641]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F1_left_polys spots object is invalid because:
+Self-intersection[479 660]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F1_left_polys spots object is invalid because:
+Self-intersection[527 667]
+./P829F1/left/P829F1_left_polys.geojson
+./P829F1/mid/P829F1_mid_melted.csv
+P829F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F1_mid_polys spots object is invalid because:
+Self-intersection[953 750]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F1_mid_polys spots object is invalid because:
+Self-intersection[959 750]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F1_mid_polys spots object is invalid because:
+Self-intersection[1055 669]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F1_mid_polys spots object is invalid because:
+Self-intersection[1263 814]
+./P829F1/mid/P829F1_mid_polys.geojson
+./P829F1/right/P829F1_right_melted.csv
+P829F1_right_polys
+./P829F1/right/P829F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P829F2/left/P829F2_left_melted.csv
+P829F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P829F2_left_polys spots object is invalid because:
+Self-intersection[347 332]
+./P829F2/left/P829F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P829F2/mid/P829F2_mid_melted.csv
+P829F2_mid_polys
+./P829F2/mid/P829F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P829F2/right/P829F2_right_melted.csv
+P829F2_right_polys
+./P829F2/right/P829F2_right_polys.geojson
+Zones failed...
+./P830F1/left/P830F1_left_melted.csv
+P830F1_left_polys
+./P830F1/left/P830F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P830F1/mid/P830F1_mid_melted.csv
+P830F1_mid_polys
+./P830F1/mid/P830F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P830F1/right/P830F1_right_melted.csv
+P830F1_right_polys
+./P830F1/right/P830F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P830F2/left/P830F2_left_melted.csv
+P830F2_left_polys
+./P830F2/left/P830F2_left_polys.geojson
+./P830F2/mid/P830F2_mid_melted.csv
+P830F2_mid_polys
+./P830F2/mid/P830F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P830F2/right/P830F2_right_melted.csv
+P830F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P830F2_right_polys spots object is invalid because:
+Self-intersection[1843 234]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P830F2_right_polys spots object is invalid because:
+Self-intersection[1871 249]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P830F2_right_polys spots object is invalid because:
+Self-intersection[1901 248]
+./P830F2/right/P830F2_right_polys.geojson
+./P831F1/left/P831F1_left_melted.csv
+P831F1_left_polys
+./P831F1/left/P831F1_left_polys.geojson
+./P831F1/mid/P831F1_mid_melted.csv
+P831F1_mid_polys
+./P831F1/mid/P831F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P831F1/right/P831F1_right_melted.csv
+P831F1_right_polys
+./P831F1/right/P831F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P831F2/left/P831F2_left_melted.csv
+P831F2_left_polys
+./P831F2/left/P831F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P831F2/mid/P831F2_mid_melted.csv
+P831F2_mid_polys
+./P831F2/mid/P831F2_mid_polys.geojson
+./P831F2/right/P831F2_right_melted.csv
+P831F2_right_polys
+./P831F2/right/P831F2_right_polys.geojson
+./P832F1/left/P832F1_left_melted.csv
+P832F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P832F1_left_polys spots object is invalid because:
+Valid Geometry
+./P832F1/left/P832F1_left_polys.geojson
+./P832F1/mid/P832F1_mid_melted.csv
+P832F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P832F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P832F1/mid/P832F1_mid_polys.geojson
+./P832F1/right/P832F1_right_melted.csv
+P832F1_right_polys
+./P832F1/right/P832F1_right_polys.geojson
+./P832F2/left/P832F2_left_melted.csv
+P832F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P832F2_left_polys spots object is invalid because:
+Valid Geometry
+./P832F2/left/P832F2_left_polys.geojson
+./P832F2/mid/P832F2_mid_melted.csv
+P832F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P832F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P832F2/mid/P832F2_mid_polys.geojson
+./P832F2/right/P832F2_right_melted.csv
+P832F2_right_polys
+./P832F2/right/P832F2_right_polys.geojson
+./P833F1/left/P833F1_left_melted.csv
+P833F1_left_polys
+./P833F1/left/P833F1_left_polys.geojson
+./P833F1/mid/P833F1_mid_melted.csv
+P833F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P833F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P833F1/mid/P833F1_mid_polys.geojson
+./P833F1/right/P833F1_right_melted.csv
+P833F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P833F1_right_polys spots object is invalid because:
+Valid Geometry
+./P833F1/right/P833F1_right_polys.geojson
+./P833F2/left/P833F2_left_melted.csv
+P833F2_left_polys
+./P833F2/left/P833F2_left_polys.geojson
+./P833F2/mid/P833F2_mid_melted.csv
+P833F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P833F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P833F2/mid/P833F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P833F2/right/P833F2_right_melted.csv
+P833F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P833F2_right_polys spots object is invalid because:
+Valid Geometry
+./P833F2/right/P833F2_right_polys.geojson
+./P834F1/left/P834F1_left_melted.csv
+P834F1_left_polys
+./P834F1/left/P834F1_left_polys.geojson
+./P834F1/mid/P834F1_mid_melted.csv
+P834F1_mid_polys
+./P834F1/mid/P834F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P834F1/right/P834F1_right_melted.csv
+P834F1_right_polys
+./P834F1/right/P834F1_right_polys.geojson
+./P834F2/left/P834F2_left_melted.csv
+P834F2_left_polys
+./P834F2/left/P834F2_left_polys.geojson
+./P834F2/mid/P834F2_mid_melted.csv
+P834F2_mid_polys
+./P834F2/mid/P834F2_mid_polys.geojson
+./P834F2/right/P834F2_right_melted.csv
+P834F2_right_polys
+./P834F2/right/P834F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P835F1/left/P835F1_left_melted.csv
+P835F1_left_polys
+./P835F1/left/P835F1_left_polys.geojson
+./P835F1/mid/P835F1_mid_melted.csv
+P835F1_mid_polys
+./P835F1/mid/P835F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P835F1/right/P835F1_right_melted.csv
+P835F1_right_polys
+./P835F1/right/P835F1_right_polys.geojson
+./P835F2/left/P835F2_left_melted.csv
+P835F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P835F2_left_polys spots object is invalid because:
+Self-intersection[361 972]
+./P835F2/left/P835F2_left_polys.geojson
+./P835F2/mid/P835F2_mid_melted.csv
+P835F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P835F2_mid_polys spots object is invalid because:
+Self-intersection[1017 443]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P835F2_mid_polys spots object is invalid because:
+Self-intersection[1138 685]
+./P835F2/mid/P835F2_mid_polys.geojson
+./P835F2/right/P835F2_right_melted.csv
+P835F2_right_polys
+./P835F2/right/P835F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P836F1/left/P836F1_left_melted.csv
+P836F1_left_polys
+./P836F1/left/P836F1_left_polys.geojson
+./P836F1/mid/P836F1_mid_melted.csv
+P836F1_mid_polys
+./P836F1/mid/P836F1_mid_polys.geojson
+./P836F1/right/P836F1_right_melted.csv
+P836F1_right_polys
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 217, in <module>
+    main(meltParentDir, gjName, meltBaseName, outFileName)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 161, in main
+    spotPolRaw = digitizePols(spotsMat)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 77, in digitizePols
+    return(shapelyPoly)
+UnboundLocalError: local variable 'shapelyPoly' referenced before assignment
+./P836F1/right/P836F1_right_polys.geojson
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 157, in <module>
+    photoBB, scalingFactor) = gj.parseGeoJson(args.geojson)
+  File "/Users/danthomas/Documents/speckVenv/lib/python3.7/site-packages/makeFlowerPolygons/geojsonIO.py", line 9, in parseGeoJson
+    with open(geojson) as gjf:
+FileNotFoundError: [Errno 2] No such file or directory: './P836F1/right/P836F1_right_polys.geojson'
+./P836F2/left/P836F2_left_melted.csv
+P836F2_left_polys
+./P836F2/left/P836F2_left_polys.geojson
+./P836F2/mid/P836F2_mid_melted.csv
+P836F2_mid_polys
+./P836F2/mid/P836F2_mid_polys.geojson
+./P836F2/right/P836F2_right_melted.csv
+P836F2_right_polys
+./P836F2/right/P836F2_right_polys.geojson
+./P837F1/left/P837F1_left_melted.csv
+P837F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P837F1_left_polys spots object is invalid because:
+Valid Geometry
+./P837F1/left/P837F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P837F1/mid/P837F1_mid_melted.csv
+P837F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P837F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P837F1/mid/P837F1_mid_polys.geojson
+./P837F1/right/P837F1_right_melted.csv
+P837F1_right_polys
+./P837F1/right/P837F1_right_polys.geojson
+./P837F2/left/P837F2_left_melted.csv
+P837F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P837F2_left_polys spots object is invalid because:
+Valid Geometry
+./P837F2/left/P837F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P837F2/mid/P837F2_mid_melted.csv
+P837F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P837F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P837F2/mid/P837F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P837F2/right/P837F2_right_melted.csv
+P837F2_right_polys
+./P837F2/right/P837F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P838F1/left/P838F1_left_melted.csv
+P838F1_left_polys
+./P838F1/left/P838F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P838F1/mid/P838F1_mid_melted.csv
+P838F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P838F1_mid_polys spots object is invalid because:
+Self-intersection[1496 1087]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P838F1_mid_polys spots object is invalid because:
+Self-intersection[1498 1085]
+./P838F1/mid/P838F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P838F1/right/P838F1_right_melted.csv
+P838F1_right_polys
+./P838F1/right/P838F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P838F2/left/P838F2_left_melted.csv
+P838F2_left_polys
+./P838F2/left/P838F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P838F2/mid/P838F2_mid_melted.csv
+P838F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P838F2_mid_polys spots object is invalid because:
+Self-intersection[1151 620]
+./P838F2/mid/P838F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P838F2/right/P838F2_right_melted.csv
+P838F2_right_polys
+./P838F2/right/P838F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P839F1/left/P839F1_left_melted.csv
+P839F1_left_polys
+./P839F1/left/P839F1_left_polys.geojson
+./P839F1/mid/P839F1_mid_melted.csv
+P839F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P839F1_mid_polys spots object is invalid because:
+Self-intersection[1099 854]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P839F1_mid_polys spots object is invalid because:
+Self-intersection[1119 695]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P839F1_mid_polys spots object is invalid because:
+Self-intersection[1167 713]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P839F1_mid_polys spots object is invalid because:
+Self-intersection[1254 753]
+./P839F1/mid/P839F1_mid_polys.geojson
+./P839F1/right/P839F1_right_melted.csv
+P839F1_right_polys
+./P839F1/right/P839F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P839F2/left/P839F2_left_melted.csv
+P839F2_left_polys
+./P839F2/left/P839F2_left_polys.geojson
+./P839F2/mid/P839F2_mid_melted.csv
+P839F2_mid_polys
+./P839F2/mid/P839F2_mid_polys.geojson
+./P839F2/right/P839F2_right_melted.csv
+P839F2_right_polys
+./P839F2/right/P839F2_right_polys.geojson
+./P840F1/left/P840F1_left_melted.csv
+P840F1_left_polys
+./P840F1/left/P840F1_left_polys.geojson
+./P840F1/mid/P840F1_mid_melted.csv
+P840F1_mid_polys
+./P840F1/mid/P840F1_mid_polys.geojson
+./P840F1/right/P840F1_right_melted.csv
+P840F1_right_polys
+./P840F1/right/P840F1_right_polys.geojson
+./P841F1/left/P841F1_left_melted.csv
+P841F1_left_polys
+./P841F1/left/P841F1_left_polys.geojson
+./P841F1/mid/P841F1_mid_melted.csv
+P841F1_mid_polys
+./P841F1/mid/P841F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P841F1/right/P841F1_right_melted.csv
+P841F1_right_polys
+./P841F1/right/P841F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P841F2/left/P841F2_left_melted.csv
+P841F2_left_polys
+./P841F2/left/P841F2_left_polys.geojson
+./P841F2/mid/P841F2_mid_melted.csv
+P841F2_mid_polys
+./P841F2/mid/P841F2_mid_polys.geojson
+./P841F2/right/P841F2_right_melted.csv
+P841F2_right_polys
+./P841F2/right/P841F2_right_polys.geojson
+./P842F1/left/P842F1_left_melted.csv
+P842F1_left_polys
+./P842F1/left/P842F1_left_polys.geojson
+./P842F1/mid/P842F1_mid_melted.csv
+P842F1_mid_polys
+./P842F1/mid/P842F1_mid_polys.geojson
+./P842F1/right/P842F1_right_melted.csv
+P842F1_right_polys
+./P842F1/right/P842F1_right_polys.geojson
+./P842F2/left/P842F2_left_melted.csv
+P842F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P842F2_left_polys spots object is invalid because:
+Self-intersection[479 719]
+./P842F2/left/P842F2_left_polys.geojson
+./P842F2/mid/P842F2_mid_melted.csv
+P842F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P842F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P842F2/mid/P842F2_mid_polys.geojson
+./P842F2/right/P842F2_right_melted.csv
+P842F2_right_polys
+./P842F2/right/P842F2_right_polys.geojson
+./P843F1/left/P843F1_left_melted.csv
+P843F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P843F1_left_polys spots object is invalid because:
+Valid Geometry
+./P843F1/left/P843F1_left_polys.geojson
+./P843F1/mid/P843F1_mid_melted.csv
+P843F1_mid_polys
+./P843F1/mid/P843F1_mid_polys.geojson
+./P843F1/right/P843F1_right_melted.csv
+P843F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P843F1_right_polys spots object is invalid because:
+Valid Geometry
+./P843F1/right/P843F1_right_polys.geojson
+./P843F2/left/P843F2_left_melted.csv
+P843F2_left_polys
+./P843F2/left/P843F2_left_polys.geojson
+./P843F2/mid/P843F2_mid_melted.csv
+P843F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P843F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P843F2/mid/P843F2_mid_polys.geojson
+./P843F2/right/P843F2_right_melted.csv
+P843F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P843F2_right_polys spots object is invalid because:
+Valid Geometry
+./P843F2/right/P843F2_right_polys.geojson
+./P844F1/left/P844F1_left_melted.csv
+P844F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F1_left_polys spots object is invalid because:
+Self-intersection[322 483]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F1_left_polys spots object is invalid because:
+Self-intersection[351 466]
+./P844F1/left/P844F1_left_polys.geojson
+./P844F1/mid/P844F1_mid_melted.csv
+P844F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F1_mid_polys spots object is invalid because:
+Self-intersection[1269 629]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F1_mid_polys spots object is invalid because:
+Self-intersection[1287 685]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F1_mid_polys spots object is invalid because:
+Self-intersection[1295 654]
+./P844F1/mid/P844F1_mid_polys.geojson
+./P844F1/right/P844F1_right_melted.csv
+P844F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F1_right_polys spots object is invalid because:
+Valid Geometry
+./P844F1/right/P844F1_right_polys.geojson
+./P844F2/left/P844F2_left_melted.csv
+P844F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F2_left_polys spots object is invalid because:
+Self-intersection[135 610]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F2_left_polys spots object is invalid because:
+Self-intersection[335 547]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F2_left_polys spots object is invalid because:
+Self-intersection[351 546]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F2_left_polys spots object is invalid because:
+Self-intersection[463 549]
+./P844F2/left/P844F2_left_polys.geojson
+./P844F2/mid/P844F2_mid_melted.csv
+P844F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F2_mid_polys spots object is invalid because:
+Self-intersection[1529 508]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P844F2_mid_polys spots object is invalid because:
+Self-intersection[1527 512]
+./P844F2/mid/P844F2_mid_polys.geojson
+./P844F2/right/P844F2_right_melted.csv
+P844F2_right_polys
+./P844F2/right/P844F2_right_polys.geojson
+./P845F1/left/P845F1_left_melted.csv
+P845F1_left_polys
+./P845F1/left/P845F1_left_polys.geojson
+./P845F1/mid/P845F1_mid_melted.csv
+P845F1_mid_polys
+./P845F1/mid/P845F1_mid_polys.geojson
+./P845F1/right/P845F1_right_melted.csv
+P845F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P845F1_right_polys spots object is invalid because:
+Self-intersection[1866 672]
+./P845F1/right/P845F1_right_polys.geojson
+./P845F2/left/P845F2_left_melted.csv
+P845F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P845F2_left_polys spots object is invalid because:
+Self-intersection[175 163]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P845F2_left_polys spots object is invalid because:
+Self-intersection[498 594]
+./P845F2/left/P845F2_left_polys.geojson
+./P845F2/mid/P845F2_mid_melted.csv
+P845F2_mid_polys
+./P845F2/mid/P845F2_mid_polys.geojson
+./P845F2/right/P845F2_right_melted.csv
+P845F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P845F2_right_polys spots object is invalid because:
+Self-intersection[1551 301]
+./P845F2/right/P845F2_right_polys.geojson
+./P846F1/left/P846F1_left_melted.csv
+P846F1_left_polys
+./P846F1/left/P846F1_left_polys.geojson
+./P846F1/mid/P846F1_mid_melted.csv
+P846F1_mid_polys
+./P846F1/mid/P846F1_mid_polys.geojson
+./P846F1/right/P846F1_right_melted.csv
+P846F1_right_polys
+./P846F1/right/P846F1_right_polys.geojson
+./P846F2/left/P846F2_left_melted.csv
+P846F2_left_polys
+./P846F2/left/P846F2_left_polys.geojson
+./P846F2/mid/P846F2_mid_melted.csv
+P846F2_mid_polys
+./P846F2/mid/P846F2_mid_polys.geojson
+./P846F2/right/P846F2_right_melted.csv
+P846F2_right_polys
+./P846F2/right/P846F2_right_polys.geojson
+./P847F1/left/P847F1_left_melted.csv
+P847F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P847F1_left_polys spots object is invalid because:
+Valid Geometry
+./P847F1/left/P847F1_left_polys.geojson
+./P847F1/mid/P847F1_mid_melted.csv
+P847F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P847F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P847F1/mid/P847F1_mid_polys.geojson
+./P847F1/right/P847F1_right_melted.csv
+P847F1_right_polys
+./P847F1/right/P847F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P847F2/left/P847F2_left_melted.csv
+P847F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P847F2_left_polys spots object is invalid because:
+Valid Geometry
+./P847F2/left/P847F2_left_polys.geojson
+./P847F2/mid/P847F2_mid_melted.csv
+P847F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P847F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P847F2/mid/P847F2_mid_polys.geojson
+./P847F2/right/P847F2_right_melted.csv
+P847F2_right_polys
+./P847F2/right/P847F2_right_polys.geojson
+./P848F1/left/P848F1_left_melted.csv
+P848F1_left_polys
+./P848F1/left/P848F1_left_polys.geojson
+./P848F1/mid/P848F1_mid_melted.csv
+P848F1_mid_polys
+./P848F1/mid/P848F1_mid_polys.geojson
+./P848F1/right/P848F1_right_melted.csv
+P848F1_right_polys
+./P848F1/right/P848F1_right_polys.geojson
+./P848F2/left/P848F2_left_melted.csv
+P848F2_left_polys
+./P848F2/left/P848F2_left_polys.geojson
+./P848F2/mid/P848F2_mid_melted.csv
+P848F2_mid_polys
+./P848F2/mid/P848F2_mid_polys.geojson
+./P848F2/right/P848F2_right_melted.csv
+P848F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P848F2_right_polys spots object is invalid because:
+Self-intersection[2325 211]
+./P848F2/right/P848F2_right_polys.geojson
+./P849F1/left/P849F1_left_melted.csv
+P849F1_left_polys
+./P849F1/left/P849F1_left_polys.geojson
+./P849F1/mid/P849F1_mid_melted.csv
+P849F1_mid_polys
+./P849F1/mid/P849F1_mid_polys.geojson
+./P849F1/right/P849F1_right_melted.csv
+P849F1_right_polys
+./P849F1/right/P849F1_right_polys.geojson
+./P849F2/left/P849F2_left_melted.csv
+P849F2_left_polys
+./P849F2/left/P849F2_left_polys.geojson
+./P849F2/mid/P849F2_mid_melted.csv
+P849F2_mid_polys
+./P849F2/mid/P849F2_mid_polys.geojson
+./P849F2/right/P849F2_right_melted.csv
+P849F2_right_polys
+./P849F2/right/P849F2_right_polys.geojson
+./P850F1/left/P850F1_left_melted.csv
+P850F1_left_polys
+./P850F1/left/P850F1_left_polys.geojson
+./P850F1/mid/P850F1_mid_melted.csv
+P850F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P850F1_mid_polys spots object is invalid because:
+Self-intersection[1458 381]
+./P850F1/mid/P850F1_mid_polys.geojson
+./P850F1/right/P850F1_right_melted.csv
+P850F1_right_polys
+./P850F1/right/P850F1_right_polys.geojson
+./P850F2/left/P850F2_left_melted.csv
+P850F2_left_polys
+./P850F2/left/P850F2_left_polys.geojson
+./P850F2/mid/P850F2_mid_melted.csv
+P850F2_mid_polys
+./P850F2/mid/P850F2_mid_polys.geojson
+./P850F2/right/P850F2_right_melted.csv
+P850F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P850F2_right_polys spots object is invalid because:
+Self-intersection[2196 215]
+./P850F2/right/P850F2_right_polys.geojson
+./P852F1/left/P852F1_left_melted.csv
+P852F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P852F1_left_polys spots object is invalid because:
+Self-intersection[401 483]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P852F1_left_polys spots object is invalid because:
+Self-intersection[479 479]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P852F1_left_polys spots object is invalid because:
+Self-intersection[607 269]
+./P852F1/left/P852F1_left_polys.geojson
+./P852F1/mid/P852F1_mid_melted.csv
+P852F1_mid_polys
+./P852F1/mid/P852F1_mid_polys.geojson
+./P852F1/right/P852F1_right_melted.csv
+P852F1_right_polys
+./P852F1/right/P852F1_right_polys.geojson
+./P852F2/left/P852F2_left_melted.csv
+P852F2_left_polys
+./P852F2/left/P852F2_left_polys.geojson
+./P852F2/mid/P852F2_mid_melted.csv
+P852F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P852F2_mid_polys spots object is invalid because:
+Self-intersection[909 451]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P852F2_mid_polys spots object is invalid because:
+Self-intersection[943 547]
+./P852F2/mid/P852F2_mid_polys.geojson
+./P852F2/right/P852F2_right_melted.csv
+P852F2_right_polys
+./P852F2/right/P852F2_right_polys.geojson
+./P853F1/left/P853F1_left_melted.csv
+P853F1_left_polys
+./P853F1/left/P853F1_left_polys.geojson
+./P853F1/mid/P853F1_mid_melted.csv
+P853F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P853F1_mid_polys spots object is invalid because:
+Self-intersection[1119 581]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P853F1_mid_polys spots object is invalid because:
+Self-intersection[1416 725]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P853F1_mid_polys spots object is invalid because:
+Self-intersection[1447 691]
+./P853F1/mid/P853F1_mid_polys.geojson
+./P853F1/right/P853F1_right_melted.csv
+P853F1_right_polys
+./P853F1/right/P853F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P859F1/left/P859F1_left_melted.csv
+P859F1_left_polys
+./P859F1/left/P859F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P859F1/mid/P859F1_mid_melted.csv
+P859F1_mid_polys
+./P859F1/mid/P859F1_mid_polys.geojson
+./P859F1/right/P859F1_right_melted.csv
+P859F1_right_polys
+./P859F1/right/P859F1_right_polys.geojson
+./P859F2/left/P859F2_left_melted.csv
+P859F2_left_polys
+./P859F2/left/P859F2_left_polys.geojson
+./P859F2/mid/P859F2_mid_melted.csv
+P859F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P859F2_mid_polys spots object is invalid because:
+Self-intersection[999 577]
+./P859F2/mid/P859F2_mid_polys.geojson
+./P859F2/right/P859F2_right_melted.csv
+P859F2_right_polys
+./P859F2/right/P859F2_right_polys.geojson
+./P860F1/left/P860F1_left_melted.csv
+P860F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P860F1_left_polys spots object is invalid because:
+Self-intersection[585 610]
+./P860F1/left/P860F1_left_polys.geojson
+./P860F1/mid/P860F1_mid_melted.csv
+P860F1_mid_polys
+./P860F1/mid/P860F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P860F1/right/P860F1_right_melted.csv
+P860F1_right_polys
+./P860F1/right/P860F1_right_polys.geojson
+./P860F2/left/P860F2_left_melted.csv
+P860F2_left_polys
+./P860F2/left/P860F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P860F2/mid/P860F2_mid_melted.csv
+P860F2_mid_polys
+./P860F2/mid/P860F2_mid_polys.geojson
+./P860F2/right/P860F2_right_melted.csv
+P860F2_right_polys
+./P860F2/right/P860F2_right_polys.geojson
+./P861F1/left/P861F1_left_melted.csv
+P861F1_left_polys
+./P861F1/left/P861F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P861F1/mid/P861F1_mid_melted.csv
+P861F1_mid_polys
+./P861F1/mid/P861F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P861F1/right/P861F1_right_melted.csv
+P861F1_right_polys
+./P861F1/right/P861F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P863F1/left/P863F1_left_melted.csv
+P863F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P863F1_left_polys spots object is invalid because:
+Self-intersection[226 751]
+./P863F1/left/P863F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P863F1/mid/P863F1_mid_melted.csv
+P863F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P863F1_mid_polys spots object is invalid because:
+Self-intersection[959 650]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P863F1_mid_polys spots object is invalid because:
+Self-intersection[1055 643]
+./P863F1/mid/P863F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P863F1/right/P863F1_right_melted.csv
+P863F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P863F1_right_polys spots object is invalid because:
+Self-intersection[2279 589]
+./P863F1/right/P863F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P863F2/left/P863F2_left_melted.csv
+P863F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P863F2_left_polys spots object is invalid because:
+Self-intersection[489 701]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P863F2_left_polys spots object is invalid because:
+Self-intersection[550 567]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P863F2_left_polys spots object is invalid because:
+Self-intersection[643 450]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P863F2_left_polys spots object is invalid because:
+Self-intersection[645 450]
+./P863F2/left/P863F2_left_polys.geojson
+./P863F2/mid/P863F2_mid_melted.csv
+P863F2_mid_polys
+./P863F2/mid/P863F2_mid_polys.geojson
+./P863F2/right/P863F2_right_melted.csv
+P863F2_right_polys
+./P863F2/right/P863F2_right_polys.geojson
+./P865F1/left/P865F1_left_melted.csv
+P865F1_left_polys
+./P865F1/left/P865F1_left_polys.geojson
+./P865F1/mid/P865F1_mid_melted.csv
+P865F1_mid_polys
+./P865F1/mid/P865F1_mid_polys.geojson
+./P865F1/right/P865F1_right_melted.csv
+P865F1_right_polys
+./P865F1/right/P865F1_right_polys.geojson
+./P865F2/left/P865F2_left_melted.csv
+P865F2_left_polys
+./P865F2/left/P865F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P865F2/mid/P865F2_mid_melted.csv
+P865F2_mid_polys
+./P865F2/mid/P865F2_mid_polys.geojson
+./P865F2/right/P865F2_right_melted.csv
+P865F2_right_polys
+./P865F2/right/P865F2_right_polys.geojson
+./P866F1/left/P866F1_left_melted.csv
+P866F1_left_polys
+./P866F1/left/P866F1_left_polys.geojson
+./P866F1/mid/P866F1_mid_melted.csv
+P866F1_mid_polys
+./P866F1/mid/P866F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P866F1/right/P866F1_right_melted.csv
+P866F1_right_polys
+./P866F1/right/P866F1_right_polys.geojson
+./P866F2/left/P866F2_left_melted.csv
+P866F2_left_polys
+./P866F2/left/P866F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P866F2/mid/P866F2_mid_melted.csv
+P866F2_mid_polys
+./P866F2/mid/P866F2_mid_polys.geojson
+./P866F2/right/P866F2_right_melted.csv
+P866F2_right_polys
+./P866F2/right/P866F2_right_polys.geojson
+./P867F1/left/P867F1_left_melted.csv
+P867F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P867F1_left_polys spots object is invalid because:
+Valid Geometry
+./P867F1/left/P867F1_left_polys.geojson
+./P867F1/mid/P867F1_mid_melted.csv
+P867F1_mid_polys
+./P867F1/mid/P867F1_mid_polys.geojson
+./P867F1/right/P867F1_right_melted.csv
+P867F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P867F1_right_polys spots object is invalid because:
+Valid Geometry
+./P867F1/right/P867F1_right_polys.geojson
+./P867F2/left/P867F2_left_melted.csv
+P867F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P867F2_left_polys spots object is invalid because:
+Valid Geometry
+./P867F2/left/P867F2_left_polys.geojson
+./P867F2/mid/P867F2_mid_melted.csv
+P867F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P867F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P867F2/mid/P867F2_mid_polys.geojson
+./P867F2/right/P867F2_right_melted.csv
+P867F2_right_polys
+./P867F2/right/P867F2_right_polys.geojson
+./P868F1/left/P868F1_left_melted.csv
+P868F1_left_polys
+./P868F1/left/P868F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P868F1/mid/P868F1_mid_melted.csv
+P868F1_mid_polys
+./P868F1/mid/P868F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P868F1/right/P868F1_right_melted.csv
+P868F1_right_polys
+./P868F1/right/P868F1_right_polys.geojson
+./P868F2/left/P868F2_left_melted.csv
+P868F2_left_polys
+./P868F2/left/P868F2_left_polys.geojson
+./P868F2/mid/P868F2_mid_melted.csv
+P868F2_mid_polys
+./P868F2/mid/P868F2_mid_polys.geojson
+./P868F2/right/P868F2_right_melted.csv
+P868F2_right_polys
+./P868F2/right/P868F2_right_polys.geojson
+./P869F1/left/P869F1_left_melted.csv
+P869F1_left_polys
+./P869F1/left/P869F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P869F1/mid/P869F1_mid_melted.csv
+P869F1_mid_polys
+./P869F1/mid/P869F1_mid_polys.geojson
+./P869F1/right/P869F1_right_melted.csv
+P869F1_right_polys
+./P869F1/right/P869F1_right_polys.geojson
+./P869F2/left/P869F2_left_melted.csv
+P869F2_left_polys
+./P869F2/left/P869F2_left_polys.geojson
+./P869F2/mid/P869F2_mid_melted.csv
+P869F2_mid_polys
+./P869F2/mid/P869F2_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P869F2/right/P869F2_right_melted.csv
+P869F2_right_polys
+./P869F2/right/P869F2_right_polys.geojson
+./P870F1/left/P870F1_left_melted.csv
+P870F1_left_polys
+./P870F1/left/P870F1_left_polys.geojson
+./P870F1/mid/P870F1_mid_melted.csv
+P870F1_mid_polys
+./P870F1/mid/P870F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P870F1/right/P870F1_right_melted.csv
+P870F1_right_polys
+./P870F1/right/P870F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P870F2/left/P870F2_left_melted.csv
+P870F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P870F2_left_polys spots object is invalid because:
+Self-intersection[571 171]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P870F2_left_polys spots object is invalid because:
+Self-intersection[582 201]
+./P870F2/left/P870F2_left_polys.geojson
+./P870F2/mid/P870F2_mid_melted.csv
+P870F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P870F2_mid_polys spots object is invalid because:
+Self-intersection[1501 532]
+./P870F2/mid/P870F2_mid_polys.geojson
+./P870F2/right/P870F2_right_melted.csv
+P870F2_right_polys
+./P870F2/right/P870F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P871F1/left/P871F1_left_melted.csv
+P871F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P871F1_left_polys spots object is invalid because:
+Valid Geometry
+./P871F1/left/P871F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P871F1/mid/P871F1_mid_melted.csv
+P871F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P871F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P871F1/mid/P871F1_mid_polys.geojson
+./P871F1/right/P871F1_right_melted.csv
+P871F1_right_polys
+./P871F1/right/P871F1_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P871F2/left/P871F2_left_melted.csv
+P871F2_left_polys
+./P871F2/left/P871F2_left_polys.geojson
+./P871F2/mid/P871F2_mid_melted.csv
+P871F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P871F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P871F2/mid/P871F2_mid_polys.geojson
+./P871F2/right/P871F2_right_melted.csv
+P871F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P871F2_right_polys spots object is invalid because:
+Valid Geometry
+./P871F2/right/P871F2_right_polys.geojson
+./P873F1/left/P873F1_left_melted.csv
+P873F1_left_polys
+./P873F1/left/P873F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P873F1/mid/P873F1_mid_melted.csv
+P873F1_mid_polys
+./P873F1/mid/P873F1_mid_polys.geojson
+./P873F1/right/P873F1_right_melted.csv
+P873F1_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P873F1_right_polys spots object is invalid because:
+Self-intersection[1506 239]
+./P873F1/right/P873F1_right_polys.geojson
+./P873F2/left/P873F2_left_melted.csv
+P873F2_left_polys
+./P873F2/left/P873F2_left_polys.geojson
+./P873F2/mid/P873F2_mid_melted.csv
+P873F2_mid_polys
+./P873F2/mid/P873F2_mid_polys.geojson
+./P873F2/right/P873F2_right_melted.csv
+P873F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P873F2_right_polys spots object is invalid because:
+Self-intersection[1957 248]
+./P873F2/right/P873F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P875F1/left/P875F1_left_melted.csv
+P875F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F1_left_polys spots object is invalid because:
+Self-intersection[127 520]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F1_left_polys spots object is invalid because:
+Self-intersection[136 501]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F1_left_polys spots object is invalid because:
+Self-intersection[415 194]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F1_left_polys spots object is invalid because:
+Self-intersection[605 164]
+./P875F1/left/P875F1_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P875F1/mid/P875F1_mid_melted.csv
+P875F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F1_mid_polys spots object is invalid because:
+Self-intersection[975 530]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F1_mid_polys spots object is invalid because:
+Self-intersection[976 146]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F1_mid_polys spots object is invalid because:
+Self-intersection[1007 491]
+./P875F1/mid/P875F1_mid_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P875F1/right/P875F1_right_melted.csv
+P875F1_right_polys
+./P875F1/right/P875F1_right_polys.geojson
+./P875F2/left/P875F2_left_melted.csv
+P875F2_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F2_left_polys spots object is invalid because:
+Self-intersection[44 390]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F2_left_polys spots object is invalid because:
+Self-intersection[281 686]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F2_left_polys spots object is invalid because:
+Self-intersection[304 668]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F2_left_polys spots object is invalid because:
+Self-intersection[378 509]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F2_left_polys spots object is invalid because:
+Self-intersection[449 509]
+./P875F2/left/P875F2_left_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P875F2/mid/P875F2_mid_melted.csv
+P875F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F2_mid_polys spots object is invalid because:
+Self-intersection[1046 466]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F2_mid_polys spots object is invalid because:
+Self-intersection[1135 697]
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P875F2_mid_polys spots object is invalid because:
+Self-intersection[1247 584]
+./P875F2/mid/P875F2_mid_polys.geojson
+./P875F2/right/P875F2_right_melted.csv
+P875F2_right_polys
+./P875F2/right/P875F2_right_polys.geojson
+not a polygon
+Traceback (most recent call last):
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 160, in <module>
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+  File "/Users/danthomas/Documents/speckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 82, in findEdgeThroat
+    petal.exterior,
+AttributeError: 'NoneType' object has no attribute 'exterior'
+./P877F1/left/P877F1_left_melted.csv
+P877F1_left_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P877F1_left_polys spots object is invalid because:
+Valid Geometry
+./P877F1/left/P877F1_left_polys.geojson
+./P877F1/mid/P877F1_mid_melted.csv
+P877F1_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P877F1_mid_polys spots object is invalid because:
+Valid Geometry
+./P877F1/mid/P877F1_mid_polys.geojson
+./P877F1/right/P877F1_right_melted.csv
+P877F1_right_polys
+./P877F1/right/P877F1_right_polys.geojson
+./P877F2/left/P877F2_left_melted.csv
+P877F2_left_polys
+./P877F2/left/P877F2_left_polys.geojson
+./P877F2/mid/P877F2_mid_melted.csv
+P877F2_mid_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P877F2_mid_polys spots object is invalid because:
+Valid Geometry
+./P877F2/mid/P877F2_mid_polys.geojson
+./P877F2/right/P877F2_right_melted.csv
+P877F2_right_polys
+Buffering doesn't help.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P877F2_right_polys spots object is invalid because:
+Valid Geometry
+./P877F2/right/P877F2_right_polys.geojson

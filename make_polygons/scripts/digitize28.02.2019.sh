@@ -2,7 +2,7 @@
 
 #repo="/home/daniel/Documents/cooley_lab/mimulusSpeckling/" ## my comp
 repo="/Users/danthomas/Documents/speckling/" ## mac
-wd=$repo"make_polygons/toy/" ## change to wd
+wd=$repo"make_polygons/polygons/plate3"
 packages=$repo"make_polygons/package/makeFlowerPolygons/"
 get_spots=$packages"get_spots.py"
 get_zones=$packages"get_zones.py"

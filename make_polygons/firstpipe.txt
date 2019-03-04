@@ -11424,6 +11424,9 @@ done
 
 ## time to update the mac and run these on all
 
+## on mac
+cd /Users/danthomas/Documents/speckling/make_polygons/scripts
+
 ./digitize28.02.2019.sh 2>&1 | tee -a digitizeLogPlate_.txt
 
 ## seems to work. update and git the old mac monster fired up...
@@ -11508,3 +11511,18 @@ end;
 ## seems like that worked okay. 
 
 ## now back to mac?
+
+## gotta setup the environment in our new virtual env
+
+VE
+
+pip3 install numpy pandas matplotlib shapely descartes Pillow scipy scikit-image
+
+
+
+cd /Users/danthomas/Documents/speckling/make_polygons/scripts
+
+
+./digitize28.02.2019.sh 2>&1 | tee -a digitizeLogPlate_plate3.txt
+
+./digitize28.02.2019.sh 2>&1 | tee -a digitizeLogPlate_plate3.txt

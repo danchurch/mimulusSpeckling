@@ -125,6 +125,13 @@ def plotRow4(wd, flower):
             ax=plt.subplot2grid((4,3),(3,n)) ## blank
 
 
+def main(flower, wd, jpgs, outDir):
+    plotRow1(jpgs, flower)
+    plotRow2(wd, flower)
+    plotRow3(wd, flower)
+    plotRow4(wd, flower)
+    outPDF=str(pathlib.Path(outDir + "/" + flower + ".pdf"))
+    plt.savefig(outPDF)
 
 if __name__ == "__main__":
 
@@ -135,9 +142,8 @@ if __name__ == "__main__":
                         is generally in form of "P---F-" """),
                 default=None)
     parser.add_argument('workingDirectory',
-                help=("""Give the location of the folder containing geojson 
-                        and "melted" csv from Doug's pipeline. Files will 
-                        output here.
+                help=("""Give the location of the folder containing 
+                         the various flower directories. 
                        """))
     parser.add_argument('jpgDirectory',
                 help=("""Give the location of the cropped and rotated JPG files
@@ -156,14 +162,9 @@ if __name__ == "__main__":
         outDir = args.outputDirectory
     else: outDir = wd + "/" + flower
 
-    plotRow1(jpgs, flower)
-    plotRow2(wd, flower)
-    plotRow3(wd, flower)
-    plotRow4(wd, flower)
 
-    outPDF=str(pathlib.Path(outDir + "/" + flower + ".pdf"))
-    
-    plt.savefig(outPDF)
+    main(flower, wd, jpgs, outDir)
+ 
 
 
 

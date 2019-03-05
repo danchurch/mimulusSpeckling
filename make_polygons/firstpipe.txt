@@ -11707,11 +11707,61 @@ center,edge,throat,
 spotEstimates, photoBB,
 scalingFactor) = geojsonIO.parseGeoJson(exGj)
 aa = geojsonIO.parseGeoJson(exGj)
-
-## seems okay...not sure why the json editor is picking up multiple polygons...
-
+## seems okay...not sure why the json editor is picking up multiple polygons...  
 ## let's rerun our loop
 
 ## check out the problem geojsons with above code...
 
 ## seems okay. Get some lunch, tinker with the zonecalling. 
+
+## back...
+
+
+find $toy -name "*geojson"
+
+aa=$(find $toy -name "*geojson")
+
+for i in ${aa[@]}; do
+    echo $i
+    $get_zones $i 0.5
+done
+
+## seems to be working. Can we run our pdf maker on this?
+
+makePDFs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py"
+outDir='/home/daniel/Documents/cooley_lab/bigPDF'
+jpgDirectory="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3"
+
+cd $toy
+
+for flower in *; do 
+    echo $flower
+    $makePDFs $flower $toy $jpgDirectory -o $outDir
+done
+
+cd $outDir
+
+pdftk * output bigPDF_test.pdf
+
+## well, that looks good
+
+## zones failed in P773F1 and P776F1, 
+
+## in both cases, all three fail to show up in the pdf...
+## are all 3 actually not there? 
+
+## any idea why?
+
+i="./P773F1/mid/P773F1_mid_polys.geojson"
+
+$get_zones $i 0.5
+python3 -m pdb $get_zones $i 0.5
+
+## huh, that worked...
+## well, ok. Let's just hope that all this works.
+
+
+## switch over to mac and sic it on the plates...
+
+
+

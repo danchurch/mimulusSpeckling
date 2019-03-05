@@ -49,29 +49,6 @@ def cleanCollections(geo):
         return(geo)
 
 
-###### Throat - underdevelopment ###################################
-#def redrawThroat(marg, standPet):
-#    def onclick(event):
-#        print('Point at x=%d y=%d' %(event.x, event.y))
-#        xc, yc = event.xdata, event.ydata
-#        global points
-#        points.append([xc,yc])
-#
-#    print('Okay, click the four points pf the throat.')
-#    print("Start with one corner and click counterclockwise.")
-#    points=[]
-#    cid = plt.gcf().canvas.mpl_connect('button_press_event', onclick)
-#    plt.gcf().canvas.mpl_disconnect(cid)
-#    print('made it here')
-#    print(cid)
-#    polA = sg.polygon.Polygon(points)
-#    return(polA)
-
-
-
-    """ often the zone-finding algorithm failes, so we need to help it """
-
-
 ## define our zones
 def findEdgeThroat(petal, center, simp=0.5):
     #simp=0.5
@@ -116,6 +93,25 @@ def findEdgeThroat(petal, center, simp=0.5):
     finally:
         return(edge, throat)
 
+def main(geojson, centerSize, outFileName):
+    ## parse the geojson
+    (petal,spots,center,
+    edge,throat, spotEstimates, 
+    photoBB, scalingFactor) = gj.parseGeoJson(geojson)
+
+    center = findCenter(petal, centerSize)
+    edge, throat = findEdgeThroat(petal, center, simp=0.5)
+
+
+    ## write it back out to geojson 
+    featC = gj.writeGeoJ(petal,spots,center,
+                         edge,throat, spotEstimates,
+                         photoBB, scalingFactor)
+
+
+    with open(outFileName, 'w') as fp:
+        json.dump(featC, fp)
+
 ###### Throat - underdevelopment ###################################
 
 
@@ -145,31 +141,13 @@ if __name__ == "__main__":
 #                type=float)
 
     args = parser.parse_args()
-
+    geojson=args.geojson
+    centerSize=args.centerSize
     if args.out is not None:
         outFileName = args.out
     else:
         outFileName = args.geojson
 
-    ## parse the geojson
-    (petal,spots,center,
-    edge,throat, spotEstimates, 
-    photoBB, scalingFactor) = gj.parseGeoJson(args.geojson)
+    main(geojson, centerSize, outFileName)
 
-    center = findCenter(petal, args.centerSize)
-    edge, throat = findEdgeThroat(petal, center, simp=0.5)
-
-    ## outputs 
-
-    ## write it back out to geojson 
-
-    featC = gj.writeGeoJ(petal,spots,center,
-                         edge,throat, spotEstimates,
-                         photoBB, scalingFactor)
-
-
-    with open(outFileName, 'w') as fp:
-        json.dump(featC, fp)
-
-#####################
 

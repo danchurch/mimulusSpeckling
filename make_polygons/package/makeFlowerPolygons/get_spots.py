@@ -96,36 +96,62 @@ def testAndFixPoly(pol,gjName,objtype=None):
     an attempt to fix invalid polygons.
     Multipolygons are not accepted here.
     """
-    ## try buffering.
+    if pol.is_valid and not pol.is_empty:
+        return(pol)
+        ## try buffering.
+    elif  pol.is_empty:
+        print("{} {} is empty!".format(gjName,objtype))
+        return(pol)
+        ## try buffering.
+    elif not pol.is_valid:
+        print("{} {} is invalid! Opening bag of tricks".format(gjName,objtype))
     try:
+        print("Trying buffering")
         newPoly=pol.buffer(0.0)
+        ## sometimes this creates multiplte polygons...
+        if isinstance(newPoly, sg.collection.BaseMultipartGeometry):
+            print("multiple polygons detected where there should only be one")
+            newPoly=getBiggest(newPoly)
         assert(newPoly.is_valid)
         assert(newPoly.is_empty is False)
+        print("Buffering complete. {} {} seems better.".format(gjName,objtype))
         return(newPoly)
     except AssertionError:
         print("Buffering doesn't help.")
     try:
+        print("Trying simplification.")
         newPoly=pol.simplify(0.0)
+        ## not sure, but this may also create new polygons. To be safe:
+        if isinstance(newPoly, sg.collection.BaseMultipartGeometry):
+            print("multiple polygons detected where there should only be one")
+            newPoly=getBiggest(newPoly)
         assert(newPoly.is_valid)
         assert(newPoly.is_empty is False)
+        print("Simplification complete. {} {} seems better.".format(gjName,objtype))
         return(newPoly)
     except AssertionError:
         print("Simplifying polygon doesn't help either. Returning original.")
-        print("Careful. {} {} object is invalid because:".format(gjName,objtype))
-        print(sv.explain_validity(pol))
+        if not newPoly.is_valid:
+            print("Careful. {} {} object is invalid because:".format(gjName,objtype))
+            print(sv.explain_validity(pol))
+        if newPoly.is_empty:
+            print("Careful. {} {} object is empty!")
         return(pol)
 
+def getBiggest(multipol):
+    onlyPolys = [ i for i in multipol if type(i) == sg.polygon.Polygon ]
+    areas = [ i.area for i in onlyPolys ]
+    biggestPoly = [ i for i in onlyPolys if i.area == max(areas) ][0]
+    return(biggestPoly)
 
 ## clean up small polygons and points
-def cleanPetal(geo, gjName, objtype=None):
+def cleanPetal(geo, gjName):
     """sometimes our digitizing of petals creates smatterings of geometries instead
     of a single clean polygon. This attempts to prune down to the main polygon,
     which is usually the object we want."""
     objtype="petal"
     if isinstance(geo, sg.collection.BaseMultipartGeometry):
-        onlyPolys = [ i for i in geo if type(i) == sg.polygon.Polygon ]
-        areas = [ i.area for i in onlyPolys ]
-        biggestPoly = [ i for i in onlyPolys if i.area == max(areas) ][0]
+        biggestPoly = getBiggest(geo)
     elif isinstance(geo, sg.Polygon):
         biggestPoly = geo
     try:
@@ -135,7 +161,7 @@ def cleanPetal(geo, gjName, objtype=None):
         return(Geo)
     return(newGeo)
 
-def cleanSpots(SpotsMultiPoly, gjName, objtype=None):
+def cleanSpots(SpotsMultiPoly, gjName):
     """Tries to clean up spot collections, leaving them as a multipolygon"""
     objtype="spots"
     if isinstance(SpotsMultiPoly, sg.Polygon):

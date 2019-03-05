@@ -11526,3 +11526,192 @@ cd /Users/danthomas/Documents/speckling/make_polygons/scripts
 ./digitize28.02.2019.sh 2>&1 | tee -a digitizeLogPlate_plate3.txt
 
 ./digitize28.02.2019.sh 2>&1 | tee -a digitizeLogPlate_plate3.txt
+
+
+find . -name "digitizeLogPlate_plate3.txt"
+
+less ./make_polygons/scripts/digitizeLogPlate_plate3.txt
+
+## at least one bug - the log is showing error messages on geometries that 
+## are corrected. 
+
+## check one:
+
+P776F1_left_polys.geojson
+
+python3  
+
+exGJ=("/home/daniel/Documents/cooley_lab/"
+    "mimulusSpeckling/make_polygons/polygons/"
+    "plate3/P776F1/left/P776F1_left_polys.geojson")
+
+(petal,spots,
+center,edge,throat,
+spotEstimates, photoBB,
+scalingFactor) = geojsonIO.parseGeoJson(exGJ)
+aa = geojsonIO.parseGeoJson(exGJ)
+
+for i in aa:
+    try: 
+        i.is_valid 
+    except AttributeError as er:
+        print("{}: {}".format(i,er))
+        
+## huh. looks fine. 
+## looks like the zones failed
+
+plt.ion()
+
+plotOne(petal[0])
+
+plotOne(petal[1])
+
+addOne(spots)
+
+addOne(center, col='blue')
+
+
+[ i.is_valid for i in aa ]
+
+## doesn't look like polygons got cleaned
+
+## is this the case in general? everywhere we got an error?
+
+P788F1_mid_polys.geojson
+find . -name "P788F1_mid_polys.geojson"
+./make_polygons/polygons/plate3/P788F1/mid/P788F1_mid_polys.geojson
+
+exGJ=("/home/daniel/Documents/cooley_lab/"
+    "mimulusSpeckling/make_polygons/polygons/"
+    "plate3/P788F1/mid/P788F1_mid_polys.geojson")
+
+## it looks like zones fail
+
+plotOne(petal)
+
+addOne(spots)
+
+addOne(center, col ='blue')
+
+addOne(edge, col ='blue')
+
+addOne(throat, col ='blue')
+
+## when zones failed they usually report "not a polygon"
+
+exGJ=("/home/daniel/Documents/cooley_lab/"
+    "mimulusSpeckling/make_polygons/polygons/"
+    "plate3/P773F2/mid/P773F2_mid_polys.geojson")
+
+## as above, small polygon wasn't removed... 
+
+## look at another zone failure:
+exGJ=("/home/daniel/Documents/cooley_lab/"
+    "mimulusSpeckling/make_polygons/polygons/"
+    "plate3/P775F2/mid/P775F2_mid_polys.geojson")
+
+## yeah, same. Why isn't our petal cleaner cleaning these 
+## bits out?
+
+
+sg.collection.BaseMultipartGeometry
+
+isinstance(petal, sg.collection.BaseMultipartGeometry)
+
+isinstance(geo, sg.collection.BaseMultipartGeometry)  
+
+## ugh. Let's get a toy directory going, figure out what's not working...
+
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+
+## we need some succesfully digitized files and some failures:
+
+## failures:
+
+P775F2 
+P774F3
+P776F1
+P875F2
+
+## some ones that worked:
+
+P773F1
+P774F2
+P868F2
+
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+plate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3'
+
+aa=(P775F2 P774F3 P776F1 P875F2 P773F1 P774F2 P868F2) 
+
+for i in ${aa[@]}; do
+    echo $i
+    find $plate3 -name  $i -exec cp -r {} $toy \;
+done
+
+## try some fixes on our find_spot cleaning scripts:
+
+#repo="/home/daniel/Documents/cooley_lab/mimulusSpeckling/" ## my comp
+packages="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/"
+get_spots=$packages"get_spots.py"
+get_zones=$packages"get_zones.py"
+
+cd $toy
+
+find $toy -name "*geojson*" -exec rm {} \;
+
+aa=$(find $toy -name "*melted.csv")
+
+for i in ${aa[@]}; do
+    echo $i
+    $get_spots $i
+    #j=${i/_melted.csv/_polys.geojson}
+    #echo $j
+    #$get_zones $j 0.5
+done
+
+## still fucked. check P776F1_right_polys:
+
+find $toy -name "P776F1_right_polys*"
+
+exGJ="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P776F1/right/P776F1_right_melted.csv"
+
+
+$get_spots $exGJ --destination $toy
+
+## so still failing to remove the smaller polygons. Why? back to python
+
+
+python3 -m pdb $get_spots $exGJ 
+
+python3 -m pdb $get_spots $exGJ --destination $toy
+
+## weird, our petal cleanup is definitely picking out the largest polygon and sending it
+## along. So what's wrong?
+## ah, our buffering is creating two polygons, each part of the bow-tie intersections
+
+## so when this happens, we just need to export the larger of the two. 
+
+python3 -m pdb $get_spots $exGJ 
+
+python3
+
+## imports above
+
+exGj="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P776F1/right/P776F1_right_polys.geojson"
+
+plt.ion()
+
+(petal,spots,
+center,edge,throat,
+spotEstimates, photoBB,
+scalingFactor) = geojsonIO.parseGeoJson(exGj)
+aa = geojsonIO.parseGeoJson(exGj)
+
+## seems okay...not sure why the json editor is picking up multiple polygons...
+
+## let's rerun our loop
+
+## check out the problem geojsons with above code...
+
+## seems okay. Get some lunch, tinker with the zonecalling. 

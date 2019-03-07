@@ -91,7 +91,7 @@ def stand(pol, scale, cent):
     scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
     return(scaled)
 
-def testAndFixPoly(pol,gjName,objtype=None):
+def testAndFixPoly(pol,gjName=None,objtype=None):
     """
     an attempt to fix invalid polygons.
     Multipolygons are not accepted here.
@@ -145,7 +145,7 @@ def getBiggest(multipol):
     return(biggestPoly)
 
 ## clean up small polygons and points
-def cleanPetal(geo, gjName):
+def cleanPetal(geo, gjName=None):
     """sometimes our digitizing of petals creates smatterings of geometries instead
     of a single clean polygon. This attempts to prune down to the main polygon,
     which is usually the object we want."""
@@ -161,7 +161,7 @@ def cleanPetal(geo, gjName):
         return(Geo)
     return(newGeo)
 
-def cleanSpots(SpotsMultiPoly, gjName):
+def cleanSpots(SpotsMultiPoly, gjName=None):
     """Tries to clean up spot collections, leaving them as a multipolygon"""
     objtype="spots"
     if isinstance(SpotsMultiPoly, sg.Polygon):
@@ -181,9 +181,10 @@ def main(pdir, gjName, meltName, outFileName):
     print(gjName)
     aa = os.listdir()
 
-    photoBB, petalMat, spotsMat = parseDougMatrix(meltName)
+    _, petalMat, spotsMat = parseDougMatrix(meltName)
     petPolRaw = digitizePols(petalMat) 
     petPol = cleanPetal(petPolRaw, gjName)
+    photoBB = list(petPetal.bounds)
     spotPolRaw = digitizePols(spotsMat)
     spotPol = cleanSpots(spotPolRaw, gjName)
 

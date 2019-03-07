@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 import argparse, json 
 from makeFlowerPolygons import geojsonIO
-from makeFlowerPolygons.get_spots import parseDougMatrix, digitizePols, cleanPetal
+#from makeFlowerPolygons.get_spots import parseDougMatrix, digitizePols, cleanPetal
+
+## while working without internet, for updating packages
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+from get_spots import parseDougMatrix, digitizePols, cleanPetal
+
+
 
 ## deal with args:
 parser = argparse.ArgumentParser()

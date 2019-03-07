@@ -11789,4 +11789,41 @@ $digPlate3 2>&1 | tee -a digitizeLogPlate3.txt
 
 ## we should be able to adopt the scripts for digitizing plate3 just fine...
 
+## okay, we need to give Arielle a tour...
 
+## not 502 
+
+
+VE
+
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+jpgFolder="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2"
+
+clear
+$runCuration $toy $jpgFolder
+
+## what's with plate 4?
+
+## there is a large folder of "unedited" jpg
+
+## hmmm, start by downloading as instructed, just the "edited" folder
+
+
+
+
+############################
+
+wd="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3"
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+dougDir="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3"
+
+$runCuration $wd $dougDir
+
+python3 -m pdb $runCuration $wd $dougDir
+
+## for some reason, in line 95 of breakSpots, we tried to get to run "int()" on a list....
+
+## if I remove that, do we knock down a house of cards?
+
+## let's see...

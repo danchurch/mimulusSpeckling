@@ -11764,4 +11764,29 @@ python3 -m pdb $get_zones $i 0.5
 ## switch over to mac and sic it on the plates...
 
 
+## and try again:
+
+
+plate3="/Users/danthomas/Documents/speckling/make_polygons/polygons/plate3"
+
+## clear geojs
+
+find $plate3 -name "*geojson" 
+
+find $plate3 -name "*geojson" -exec rm {} \;
+
+digPlate3="/Users/danthomas/Documents/speckling/make_polygons/scripts/digitize28.02.2019.sh"
+
+VE ## start virtual environment 
+
+$digPlate3 2>&1 | tee -a digitizeLogPlate3.txt
+
+## huh, not sure, but it looks like the cleaning 
+
+## well, check it in the morning.
+
+## in the meantime, I don't have a lot of reasons not to keep on with plate4. 
+
+## we should be able to adopt the scripts for digitizing plate3 just fine...
+
 

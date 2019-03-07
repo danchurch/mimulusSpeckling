@@ -11810,8 +11810,6 @@ $runCuration $toy $jpgFolder
 ## hmmm, start by downloading as instructed, just the "edited" folder
 
 
-
-
 ############################
 
 wd="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3"
@@ -11827,3 +11825,20 @@ python3 -m pdb $runCuration $wd $dougDir
 ## if I remove that, do we knock down a house of cards?
 
 ## let's see...
+
+## huh, it looks like we are using the old bounding box format. How did that happen?
+
+## looks like I never updated the get_spots
+
+## so can we use our old script for fixing 
+
+fixBB="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/fixBB.py"
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3
+
+for i in $(find . -name "*geojson"); do
+    echo $i
+    csv=${i%_*}"_melted.csv"
+    echo $csv
+    #$fixBB $i $csv 
+done

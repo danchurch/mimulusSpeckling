@@ -11839,6 +11839,68 @@ cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/pla
 for i in $(find . -name "*geojson"); do
     echo $i
     csv=${i%_*}"_melted.csv"
-    echo $csv
-    #$fixBB $i $csv 
+    #echo $csv
+    $fixBB $i $csv 
 done
+
+## if this works - update github with improved geojsons
+
+## then track this down - we need our digitizing pipeline 
+## to use this form of BB to start with...
+
+## so graft the BB method from fixBB into our fix_spots.py.
+## also remember to update the python index with the 
+## slightly modified petalcleaner code
+
+
+## make sure to try the new make_spots on a toy directory...
+
+################################
+
+## plate3 spots are causing the spotbreaker to fail, fuck...
+
+## so we need some exception handling buily into our curation script
+
+## and then figure out how to deal with these weird edge polygons
+
+## what is the error that is thrown?:
+
+shapely.errors.TopologicalError
+
+## so build this into the 
+
+
+## ugh. how common is this?
+
+
+wd="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3"
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+dougDir="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3"
+
+$runCuration $wd $dougDir
+
+python3 -m pdb $runCuration $wd $dougDir
+
+## okay, calling it for today. 
+
+## tomorrow:
+
+## 1) look into correcting the invalid polygons with a bigger buffer or qgis
+## 2) think about the holes in the polygons 
+## 3) check to make sure the photoBB debug on get_spots worked
+
+## to start, try digitizing plate 4 as is?
+
+## find a way to log all invalid polygons.
+
+## this would be a script that runs through, checks all shapely objects
+## validity, kicks out a list of invalid polygons
+
+## pretty do-able. Then wrestle with these polygons
+
+## about the holes being digitized as spots - if a spot is entirely 
+## enclosed by another, make it a hole in the larger spot?
+
+
+
+

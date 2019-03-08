@@ -3,6 +3,7 @@
 import os, argparse, pathlib, json, re, copy
 import pandas as pd
 from makeFlowerPolygons import breakSpots, manZoneCaller, spotMarker
+import shapely.errors
 
 ## while working without internet, for updating packages
 #import sys
@@ -116,8 +117,12 @@ def main(wd, jpgs):
         if pc['Spotbreaker']=='y':
             if not log[i]['Spotbreaker']:
                 print("Breaking spots in {}".format(i))
-                breakSpots.main(i, jpg, i)
-                log[i]['Spotbreaker'] = True
+                try:
+                    breakSpots.main(i, jpg, i)
+                    log[i]['Spotbreaker'] = True
+                except shapely.errors.TopologicalError:
+                    print('That failed due to invalid polygons. Skipping.')
+                    log[i]['Spotbreaker'] = False
                 updateLog(logfile, log)
                 textLog(log)
 

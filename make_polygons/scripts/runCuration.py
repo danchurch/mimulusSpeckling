@@ -119,10 +119,9 @@ def main(wd, jpgs):
                 print("Breaking spots in {}".format(i))
                 try:
                     breakSpots.main(i, jpg, i)
-                    log[i]['Spotbreaker'] = True
                 except shapely.errors.TopologicalError:
                     print('That failed due to invalid polygons. Skipping.')
-                    log[i]['Spotbreaker'] = False
+                log[i]['Spotbreaker'] = True
                 updateLog(logfile, log)
                 textLog(log)
 

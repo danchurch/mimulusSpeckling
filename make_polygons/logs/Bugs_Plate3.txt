@@ -1,0 +1,1 @@
+P775F2/left/P775F2_left_polys.geojson ##spots within spots

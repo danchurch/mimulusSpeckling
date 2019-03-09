@@ -11839,6 +11839,286 @@ cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/pla
 for i in $(find . -name "*geojson"); do
     echo $i
     csv=${i%_*}"_melted.csv"
-    echo $csv
-    #$fixBB $i $csv 
+    #echo $csv
+    $fixBB $i $csv 
 done
+
+## if this works - update github with improved geojsons
+
+## then track this down - we need our digitizing pipeline 
+## to use this form of BB to start with...
+
+## so graft the BB method from fixBB into our fix_spots.py.
+## also remember to update the python index with the 
+## slightly modified petalcleaner code
+
+
+## make sure to try the new make_spots on a toy directory...
+
+################################
+
+## plate3 spots are causing the spotbreaker to fail, fuck...
+
+## so we need some exception handling buily into our curation script
+
+## and then figure out how to deal with these weird edge polygons
+
+## what is the error that is thrown?:
+
+shapely.errors.TopologicalError
+
+## so build this into the 
+
+
+## ugh. how common is this?
+
+
+wd="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3"
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+dougDir="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3"
+
+$runCuration $wd $dougDir
+
+python3 -m pdb $runCuration $wd $dougDir
+
+## okay, calling it for today. 
+
+## tomorrow:
+
+## 1) look into correcting the invalid polygons with a bigger buffer or qgis
+## 2) think about the holes in the polygons 
+## 3) check to make sure the photoBB debug on get_spots worked
+
+## to start, try digitizing plate 4 as is?
+
+## find a way to log all invalid polygons.
+
+## this would be a script that runs through, checks all shapely objects
+## validity, kicks out a list of invalid polygons
+
+## pretty do-able. Then wrestle with these polygons
+
+## about the holes being digitized as spots - if a spot is entirely 
+## enclosed by another, make it a hole in the larger spot?
+
+
+
+## so write a cleanup module. 
+## it will have the functions already written.
+## but will try to find adjoining polygons in 
+## multipolygons, stubborn bowties, etc. 
+
+
+## mucking around with the first error, which had polygons 
+## inside the same multipolygon sharing a side, causing an error.
+
+VE
+python3
+
+## imports above 11249
+
+
+with open ("messedUpSpots.pickle", "rb") as f:
+    msp = pickle.load(f)
+
+plt.ion()
+
+geojsonIO.addOne(msp)
+
+
+## I think we need a way to test if a polygon is inside of 
+## another. 
+
+## for this set of spots - how do we identify the offending 
+## polygons?
+
+sv.explain_validity(msp)
+
+msp.is_valid
+
+msp.is_simple
+
+[ i.is_valid for i in msp ]
+
+all([ i.is_valid for i in msp ])
+
+[ i.is_valid for i in msp ]
+
+
+## in this case, I'm pretty sure that one
+## of the offending polygons is our biggest one:
+
+aa = [ i.area for i in msp ]
+bb = max(aa)
+[ i.area == bb for i in msp ] ## bigspot is our first
+bigspot = [ i for i in msp if i.area == bb ][0]
+
+## to find our offending little spot - 
+
+sv.explain_validity(msp) ## gives us the site of self intersection
+
+pt=sg.Point(0.219863520291822, -0.0686753043550336)
+
+[ i.intersects(pt) for i in msp ]
+
+[ i for i in msp if i.contains(pt) ] ## didnt work:
+[ i for i in msp if i.contains(pt) ][0].equals(bigspot) ## yup
+
+## so is the issue really this spot?
+
+plotOne(bigspot)
+## gotta be. Alone, bigspot is valid
+
+bigspot.is_valid
+
+## now how to check if any other polygons are in this:
+
+for i in msp:
+    i.intersects(bigspot)
+
+[ i.intersects(bigspot) for i in msp ] 
+## this may help us with the spots inside spots, but
+## we need more info
+
+[ i.touches(bigspot) for i in msp ]
+
+[ i.within(bigspot) for i in msp ]
+
+[ geojsonIO.addOne(i, col = 'blue') for i in msp if i.within(bigspot) and not i.equals(bigspot) ]
+
+[ geojsonIO.addOne(i, col = 'green') for i in msp if i.equals(bigspot) ]
+
+
+## I think we'll want to go from largest to smallest, to determine 
+## nested holes and spots...
+
+## the base case is the largest spot. 
+
+
+## let's make a set of nested circles:
+
+center=sg.Point(0, 0)
+small = pt.buffer(1)
+medium = pt.buffer(2)
+large = pt.buffer(3)
+
+plotOne(large, col='r', a=1)
+addOne(medium, col='y', a=1)
+addOne(small, col='r', a=1)
+
+allpols = sg.MultiPolygon( [large, medium, small] )
+
+addOne(allpols)
+
+
+## okay. The assignment here is to assign either spot or hole 
+## values to these:
+
+allpols[0].equals(large)
+allpols[1].equals(medium)
+allpols[2].equals(small)
+
+allpols[0].contains(allpols[2]) ## true
+
+
+## find largest polygon
+
+class SpotHole:
+    def __init__(self):
+        self.poly=None
+        self.level=None
+        self.isSpot=None
+        self.isHole=None
+        self.parentSpot=None
+        self.childHoles=[]
+    def __call__(self):
+        if self.level and self.level % 2 == 0:
+            self.isSpot=True
+            self.isHole=False
+            self.parentSpot=None
+        if self.level and self.level % 2 == 1:
+            self.isSpot=False
+            self.isHole=True
+            self.childHoles=[]
+
+def findBiggest(multipol):
+    if not multipol:
+        return
+    else:
+        aa = [ i.area for i in multipol ]
+        bb = max(aa)
+        bigspot = [ i for i in multipol if i.area == bb ][0]
+        return bigspot
+
+def dig2bottom(pol,l,level=0,spotHole=None):
+    print(level)
+    bottom=SpotHole()
+    if not l:
+        #print("found the bottom?")
+        bottom = spotHole
+        bottom.poly=pol
+        bottom.level=level
+        bottom()
+        return(bottom)
+    else:
+        parent=pol
+        bottom.parentSpot = parent
+        bigSmall = findBiggest(l)
+        newl = [ i for i in l if not i.equals(bigSmall) ]
+        level+=1
+        nextlev=dig2bottom(bigSmall,newl,level,bottom)
+        return(nextlev)
+
+## find all polygons within this big polygon
+## for now, just deal with polygons entirely within.
+## we'll work on other cases later
+
+## look for polygons within polygons, ad naseum, until there are not polygons
+## in 
+
+## step zero - make a list of polys from multi
+
+todo = list(allpols)
+
+## find biggest polygon, knock it off the list
+
+big = findBiggest(allpols)
+todo = [ i for i in todo if not i.equals(big) ]
+bottom =dig2bottom(big,todo)
+
+## knock off this bottom polygon and
+## run again:
+todo = [ i for i in todo if not i.equals(bottom.poly) ]
+
+bottom =dig2bottom(big,todo)
+
+vars(bottom)
+
+
+bottom.poly.equals(small)
+bottom.poly.equals(medium)
+bottom.poly.equals(large)
+
+bottom.parentSpot.equals(small)
+bottom.parentSpot.equals(medium)
+bottom.parentSpot.equals(large)
+
+## find the bottom, recording the level as we go:
+
+plotOne(large, col='r', a=1)
+addOne(bottom, col='y', a=1)
+
+## so what do we do with this?
+
+## if the level is even, it should be another spot. 
+## if the level is odd, it should be a hole to the 
+## polygon above it. 
+
+## once we identify a polygon, it should be knocked off
+## the todo list. and it should get it's own object, 
+## with it's level, ultimately whether it's a spot or
+## a hole, and who it's parent is if it's a hole, or 
+## it's child holes if it is a spot.  
+
+## then when it is all done, stitch the image back 
+## together, 

@@ -11996,7 +11996,6 @@ for i in msp:
 
 
 ## let's make a set of nested circles:
-
 center=sg.Point(0, 0)
 small = pt.buffer(1)
 medium = pt.buffer(2)
@@ -12010,6 +12009,32 @@ allpols = sg.MultiPolygon( [large, medium, small] )
 
 addOne(allpols)
 
+sv.explain_validity(allpols) 
+
+## if we dig out the middle, does this become valid?
+
+#medHole=list(medium.exterior.coords)[:-1] ## don't need reverse order, though it works
+
+medHole=list(medium.exterior.coords)
+largeSpot=list(large.exterior.coords)
+bigSpot=sg.Polygon(largeSpot, [medHole])
+
+bigSpot.area ## yup works
+
+plotOne(bigSpot, col='r')
+
+## so we may need to change our plotOne function and addOne functions to 
+## handle this. ugh.
+
+## anyway, is a multipolygon with nested spots now valid?
+
+multi=sg.MultiPolygon([bigSpot, small])
+
+multi.is_valid
+
+allpols.is_valid
+
+## yup, seems ok
 
 ## okay. The assignment here is to assign either spot or hole 
 ## values to these:
@@ -12021,25 +12046,39 @@ allpols[2].equals(small)
 allpols[0].contains(allpols[2]) ## true
 
 
-## find largest polygon
+## define our basic class. 
 
-class SpotHole:
-    def __init__(self):
-        self.poly=None
-        self.level=None
+class SpotHole():
+    def __init__(self, 
+                poly=None, 
+                level=None, 
+                parentSpot=None, 
+                holez=[]):
+        self.poly=poly
+        self.level=level
         self.isSpot=None
         self.isHole=None
-        self.parentSpot=None
-        self.childHoles=[]
-    def __call__(self):
-        if self.level and self.level % 2 == 0:
+        self.parentSpot=parentSpot
+        self.holez=holez
+    def update(self):
+        if self.level is not None and self.level % 2 == 0:
             self.isSpot=True
             self.isHole=False
             self.parentSpot=None
-        if self.level and self.level % 2 == 1:
+        elif self.level is not None and self.level % 2 == 1:
             self.isSpot=False
             self.isHole=True
-            self.childHoles=[]
+        return
+    def __call__(self):
+        listHoleCoords=[]
+        outsideCoords=list(self.poly.exterior.coords)
+        if self.holez:
+            for i in self.holez:
+                listHoleCoords.append(list(i.exterior.coords))
+        finalDonut=sg.Polygon(outsideCoords, listHoleCoords)
+        return(finalDonut)
+
+
 
 def findBiggest(multipol):
     if not multipol:
@@ -12054,20 +12093,24 @@ def dig2bottom(pol,l,level=0,spotHole=None):
     print(level)
     bottom=SpotHole()
     if not l:
-        #print("found the bottom?")
+        print("found the bottom?")
         bottom = spotHole
         bottom.poly=pol
         bottom.level=level
-        bottom()
+        bottom.update()
         return(bottom)
     else:
         parent=pol
         bottom.parentSpot = parent
         bigSmall = findBiggest(l)
-        newl = [ i for i in l if not i.equals(bigSmall) ]
+        newl = [ i for i in l if not i.equals(bigSmall) and i.within(bigSmall) ]
         level+=1
         nextlev=dig2bottom(bigSmall,newl,level,bottom)
         return(nextlev)
+
+def tickOff(l, pol):
+    newl = [ i for i in l if not i.equals(pol.poly) ]
+    return(newl)
 
 ## find all polygons within this big polygon
 ## for now, just deal with polygons entirely within.
@@ -12076,49 +12119,62 @@ def dig2bottom(pol,l,level=0,spotHole=None):
 ## look for polygons within polygons, ad naseum, until there are not polygons
 ## in 
 
-## step zero - make a list of polys from multi
-
+## step zero - make a list of polys from multi and a done list for petal:
 todo = list(allpols)
-
-## find biggest polygon, knock it off the list
-
+done = []
+## find biggest polygon
 big = findBiggest(allpols)
-todo = [ i for i in todo if not i.equals(big) ]
-bottom =dig2bottom(big,todo)
+## make a SpotHole object for it:
+bigSpot=SpotHole(
+                poly=big, 
+                level=0, 
+                parentSpot=None, 
+                holez=[])
+bigSpot.update()
+## knock this original spot off the list
+todo = tickOff(todo, bigSpot)
+## add it to our done pile:
+done.append(bigSpot)
 
-## knock off this bottom polygon and
-## run again:
-todo = [ i for i in todo if not i.equals(bottom.poly) ]
+## get all the polygons within this. this will be a tick-off type list
+## this is so we can keep track of progress inside each base, zero-level 
+## spot
 
-bottom =dig2bottom(big,todo)
+subTodo = [ i for i in todo if bigSpot.poly.contains(i) ] 
+## start classifying these polygons:
+while subTodo:
+    bottom =dig2bottom(big,subTodo)
+    ## knock off this bottom polygon 
+    todo = tickOff(todo, bottom)
+    subTodo = tickOff(subTodo, bottom)
+    ## add to done:
+    done.append(bottom)
 
-vars(bottom)
+
+def whichOne(poly):
+    print("small = {}".format(poly.equals(small)))
+    print("medium = {}".format(poly.equals(medium)))
+    print("large =  {}".format(poly.equals(large)))
+    print("")
 
 
-bottom.poly.equals(small)
-bottom.poly.equals(medium)
-bottom.poly.equals(large)
+for i in done: whichOne(i.poly)
 
-bottom.parentSpot.equals(small)
-bottom.parentSpot.equals(medium)
-bottom.parentSpot.equals(large)
+for i in done:
+    print(vars(i))
 
-## find the bottom, recording the level as we go:
 
-plotOne(large, col='r', a=1)
-addOne(bottom, col='y', a=1)
 
-## so what do we do with this?
+## built a new, valid multipolygon out of it. 
 
-## if the level is even, it should be another spot. 
-## if the level is odd, it should be a hole to the 
-## polygon above it. 
+## assign in the holes:
 
-## once we identify a polygon, it should be knocked off
-## the todo list. and it should get it's own object, 
-## with it's level, ultimately whether it's a spot or
-## a hole, and who it's parent is if it's a hole, or 
-## it's child holes if it is a spot.  
+for i in done:
+    if i.isHole:
+        parent, = [ j for j in done if j.poly.equals(i.parentSpot) ]
+        parent.holez.append(i.poly)
 
-## then when it is all done, stitch the image back 
-## together, 
+## so now it should be pretty simple to make our multipolygon:
+
+
+[ i for i in done if i.isSpot 

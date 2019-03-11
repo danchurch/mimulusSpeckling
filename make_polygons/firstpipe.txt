@@ -12176,5 +12176,24 @@ for i in done:
 
 ## so now it should be pretty simple to make our multipolygon:
 
+spotz = [ i() for i in done if i.isSpot ]
 
-[ i for i in done if i.isSpot 
+
+plotOne(spotz[0], col='r')
+aa=spotz[0].interiors[0]
+bb=[ sg.Polygon(i) for i in spotz[0].interiors ]
+addOne(bb[0], col='y')
+addOne(spotz[1], col = 'r')
+
+
+
+spots=sg.MultiPolygon(spotz)
+
+spots.is_valid
+
+## seems okay.  try other scenarios. 
+## then try on some problem petals,
+## and normal petals
+
+## also have to change our plotting functions, which 
+## probably means changing our pdf 

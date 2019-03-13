@@ -174,6 +174,118 @@ def cleanSpots(SpotsMultiPoly, gjName=None):
         raise TypeError('Are you sure you have a [multi]polygon?')
     return(cleanMultPoly)
 
+################## holes in spots #########################
+
+class SpotHole():
+    def __init__(self,
+                poly=None,
+                level=None,
+                parentPoly=None,
+                holez=[]):
+        self.poly=poly
+        self.level=level
+        self.isSpot=None
+        self.isHole=None
+        self.parentPoly=parentPoly
+        self.holez=holez
+
+    def update(self):
+        if self.level is not None and self.level % 2 == 0:
+            self.isSpot=True
+            self.isHole=False
+        elif self.level is not None and self.level % 2 == 1:
+            self.isSpot=False
+            self.isHole=True
+        return
+
+    def __call__(self):
+        listHoleCoords=[]
+        outsideCoords=list(self.poly.exterior.coords)
+        if self.holez:
+            for i in self.holez:
+                listHoleCoords.append(list(i.exterior.coords))
+        finalDonut=sg.Polygon(outsideCoords, listHoleCoords)
+        self.poly=finalDonut
+
+def findBiggest(l):
+    aa = [ i.area for i in l ]
+    try:
+        bb = max(aa)
+        bigspot = [ i for i in l if i.area == bb ][0]
+    except (ValueError, IndexError):
+        bigspot = None
+    return bigspot
+
+def dig2bottom(startPol=None,l=[],level=0,parentSpotHole=None):
+    print(level)
+    if not l:
+        print("found the bottom?")
+        bottom = parentSpotHole
+        bottom.update()
+        return(bottom)
+    else:
+        bottom=SpotHole()
+        bottom.poly=startPol
+        if parentSpotHole:
+            bottom.parentPoly = parentSpotHole.poly
+        bottom.level = level
+        nextl = [ i for i in l if not i.equals(bottom.poly) and i.within(bottom.poly) ]
+        nextPoly = findBiggest(nextl)
+        level+=1
+        nextSpotHole=dig2bottom(nextPoly,nextl,level,bottom)
+        return(nextSpotHole)
+
+def tickOff(l, pol):
+    newl = [ i for i in l if not i.equals(pol.poly) ]
+    return(newl)
+
+def organizeSpots(multipol):
+    todo = list(multipol)
+    done = []
+
+    while todo:
+        ## find biggest polygon
+        big = findBiggest(todo)
+        ## make a SpotHole object for it:
+        bigSpot=SpotHole(
+                        poly=big,
+                        level=0,
+                        parentPoly=None,
+                        holez=[])
+
+        bigSpot.update()
+        ## knock this original spot off the list
+        todo = tickOff(todo, bigSpot)
+        ## add it to our done pile:
+        done.append(bigSpot)
+        ## find out what polygons are in it:
+        subTodo = [ i for i in todo if bigSpot.poly.contains(i) ]
+        ## start classifying these polygons:
+
+        while subTodo:
+            bottom = dig2bottom(startPol=big,l=subTodo,level=0,parentSpotHole=None)
+            ## knock off this bottom polygon
+            todo = tickOff(todo, bottom)
+            subTodo = tickOff(subTodo, bottom)
+            ## add to done:
+            done.append(bottom)
+
+        import pdb; pdb.set_trace()
+        for i in done:
+            if i.isHole:
+                parent, = [ j for j in done if j.poly.equals(i.parentPoly) ]
+                parent.holez.append(i.poly)
+
+    for i in done:
+        if i.isSpot: i()
+    spotz = [ i.poly for i in done if i.isSpot ]
+    spots=sg.MultiPolygon(spotz)
+    return(spots)
+
+################## holes in spots #########################
+
+################ main ##########################################
+
 
 def main(pdir, gjName, meltName, outFileName):
     ## run through digitizing, standardizing

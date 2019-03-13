@@ -11246,6 +11246,9 @@ with open('fuckedSpots.pickle','r') as f:
 
 python3
 
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/")
+from makeFlowerPolygons.geojsonIO import plotOne, addOne
 import pickle
 import matplotlib
 matplotlib.use('TkAgg')
@@ -11257,9 +11260,11 @@ import shapely.geometry as sg
 import shapely.affinity as sa
 import shapely.errors
 from skimage import measure
+from descartes import PolygonPatch
 from makeFlowerPolygons import geojsonIO
 from makeFlowerPolygons import get_spots
 from makeFlowerPolygons.geojsonIO import plotOne, addOne
+
 
 with open('fuckedSpots.pickle','rb') as f:
     fs=pickle.load(f)
@@ -12117,7 +12122,6 @@ def tickOff(l, pol):
 ## we'll work on other cases later
 
 ## look for polygons within polygons, ad naseum, until there are not polygons
-## in 
 
 ## step zero - make a list of polys from multi and a done list for petal:
 todo = list(allpols)
@@ -12178,16 +12182,69 @@ for i in done:
 
 spotz = [ i() for i in done if i.isSpot ]
 
-
-plotOne(spotz[0], col='r')
-aa=spotz[0].interiors[0]
-bb=[ sg.Polygon(i) for i in spotz[0].interiors ]
-addOne(bb[0], col='y')
-addOne(spotz[1], col = 'r')
-
-
-
 spots=sg.MultiPolygon(spotz)
+
+spots.is_valid
+
+sv.explain_validity(spots)
+
+##################################
+
+def organizeSpots(multipol):
+    todo = list(allpols)
+    done = []
+
+    while todo:
+        ## find biggest polygon
+        big = findBiggest(allpols)
+        ## make a SpotHole object for it:
+        bigSpot=SpotHole(
+                        poly=big, 
+                        level=0, 
+                        parentSpot=None, 
+                        holez=[])
+
+        bigSpot.update()
+        ## knock this original spot off the list
+        todo = tickOff(todo, bigSpot)
+        ## add it to our done pile:
+        done.append(bigSpot)
+        ## find out what polygons are in it:
+        subTodo = [ i for i in todo if bigSpot.poly.contains(i) ] 
+        ## start classifying these polygons:
+
+        while subTodo:
+            bottom =dig2bottom(big,subTodo)
+            ## knock off this bottom polygon 
+            todo = tickOff(todo, bottom)
+            subTodo = tickOff(subTodo, bottom)
+            ## add to done:
+            done.append(bottom)
+
+        for i in done:
+            if i.isHole:
+                parent, = [ j for j in done if j.poly.equals(i.parentSpot) ]
+                parent.holez.append(i.poly)
+
+    spotz = [ i() for i in done if i.isSpot ]
+    spots=sg.MultiPolygon(spotz)
+    return(spots)
+
+############################
+
+i.poly.equals(todo[0])
+
+for j in done:
+    i.poly.equals(j.poly)
+
+## we need plotting functions that can 
+## handle holes. 
+
+## our plotting functions should take a 
+## bkg color for the holes. 
+
+for i in spots:
+    i.is_valid
 
 spots.is_valid
 
@@ -12195,5 +12252,173 @@ spots.is_valid
 ## then try on some problem petals,
 ## and normal petals
 
+plotOne(spots[0], col='r')
+
+
+addOne(spots, col='r', bkgcol = 'y')
+
 ## also have to change our plotting functions, which 
 ## probably means changing our pdf 
+
+## let's adapt our plotting functions, first. 
+
+## time to branch?
+## yup 
+
+## expand this test case:
+
+
+plotOne(large, col='r', a=1)
+addOne(medium, col='y', a=1)
+addOne(small, col='r', a=1)
+addOne(offLarge, col='r', a=1)
+plt.gca().set_xlim(-4,15)
+plt.gca().set_ylim(-4,15)
+plt.ion()
+
+
+
+Rect=sg.box(-3.5, -3.5, 15.0, 15.0)
+center=sg.Point(0, 0)
+small = center.buffer(1)
+medium = center.buffer(2)
+large = center.buffer(3)
+offCenter=sg.Point(10, 10)
+offLarge = offCenter.buffer(3)
+offLargeHole1 = sg.Point(9.5, 10).buffer(0.5)
+offLargeHole2 = sg.Point(11.5, 10).buffer(0.5)
+allpols = sg.MultiPolygon( [Rect, large, medium, small, offLarge, offLargeHole1, offLargeHole2 ] )
+
+plt.ion()
+addOne(allpols)
+plt.gca().set_xlim(-4,15)
+plt.gca().set_ylim(-4,15)
+
+
+## how do our functions work?
+aa=get_spots.organizeSpots(allpols)
+
+plt.ion()
+addOne(aa)
+plt.gca().set_xlim(-4,15)
+plt.gca().set_ylim(-4,15)
+
+sv.explain_validity(aa)
+
+aa[0]
+
+fig, axes = plt.subplots(2,2)
+
+plotOne(aa[0])
+plotOne(aa[1])
+
+addOne(aa)
+
+for i in aa:
+    i.is_valid
+    sv.explain_validity(i)
+
+## holes outside shell for aa[2] and aa[3]
+
+plotOne(aa)
+len(aa[2].interiors)
+
+xx, yy = aa[2].interiors[0].xy
+fig, ax = plt.subplots(1,1)
+
+addOne(aa[2])
+
+plt.plot(xx,yy, c='blue')
+
+len(aa[3].interiors)
+
+## huh, for some reason the function interpreted 
+## the 0,0 poly as inside 
+
+plt.close('all')
+
+fig, ax = plt.subplots(1,1)
+addOne(aa)
+
+fig, ax = plt.subplots(1,1)
+addOne(aa[0])
+
+fig, ax = plt.subplots(1,1)
+addOne(aa[1])
+
+aa[0].intersects(aa[1])
+
+## not sure why. Let's run pdb on this
+
+
+## debug_spotdigger.py
+########################################
+#!/usr/bin/env python3
+
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/")
+import matplotlib.pyplot as plt
+import shapely.validation as sv
+import shapely.geometry as sg
+from makeFlowerPolygons import geojsonIO
+from makeFlowerPolygons import get_spots
+from makeFlowerPolygons.geojsonIO import plotOne, addOne
+plt.ion()
+
+Rect=sg.box(-3.5, -3.5, 15.0, 15.0)
+center=sg.Point(0, 0)
+small = center.buffer(1)
+medium = center.buffer(2)
+large = center.buffer(3)
+offCenter=sg.Point(10, 10)
+offLarge = offCenter.buffer(3)
+offLargeHole1 = sg.Point(9.5, 10).buffer(0.5)
+offLargeHole2 = sg.Point(11.5, 10).buffer(0.5)
+allpols = sg.MultiPolygon( [Rect, large, medium, small, offLarge, offLargeHole1, offLargeHole2 ] )
+#import pdb; pdb.set_trace()
+aa=get_spots.organizeSpots(allpols)
+
+input('about to end')
+
+######################################3
+
+## what to do here? For some reason, our small spots are
+## being assing holes from another polygon, far away. 
+
+interact
+
+for i in spots: i.is_valid
+
+for i in spots: sv.explain_validity(i)
+
+from makeFlowerPolygons.geojsonIO import plotOne, addOne
+
+
+plt.close('all')
+
+for i in done:
+    plotOne(i.poly, col= 'r', bkgcol='w')
+
+plotOne(done[1].poly, col= 'r', bkgcol='w')
+
+## done 5 is one of the two problem spots:
+plotOne(done[5].poly, col= 'r', bkgcol='w')
+xx, yy = done[5].poly.interiors[0].xy
+plt.plot(xx,yy, c='blue')
+plt.gca().set_xlim(-3,15)
+plt.gca().set_ylim(-3,15)
+addOne(done[5].parentPoly, col='pink', a=0.5)
+
+done[5]
+
+len(done[5].poly.interiors)
+
+vars(done[5])
+
+vars(done[5])
+
+done[5].poly.interiors
+
+[ j.parentPoly for j in done ]
+
+[ j for j in done if j.parentPoly.equals(done[5].poly) ]

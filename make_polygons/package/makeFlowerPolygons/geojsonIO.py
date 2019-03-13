@@ -83,7 +83,11 @@ def writeGeoJ(petal, spots, center, edge, throat, spotEstimates, photoBB, scalin
     return(featC)
 
 
-def plotOne(poly, l=2, a=1.0, col='yellow', pick=None):
+def plotOne(poly,
+            l=2, a=1.0,
+            col='yellow',
+            bkgcol='yellow',
+            pick=None):
     fig = plt.figure()
     ax1 = plt.axes()
     ax1.set_xlim(min(poly.exterior.xy[0]), max(poly.exterior.xy[0]))
@@ -93,10 +97,19 @@ def plotOne(poly, l=2, a=1.0, col='yellow', pick=None):
                   fc=col, ec='black',
                   picker=pick,
                   linewidth=l, alpha=a))
-    return(art)
+    if poly.interiors:
+        for i in poly.interiors:
+            intPoly=sg.Polygon(i)
+            ax1.add_patch(PolygonPatch(intPoly,
+                          fc=bkgcol, ec='black',
+                          picker=pick,
+                  linewidth=l, alpha=a))
 
-
-def addOne(poly, l=2, a=1.0, col='red', pick=None):
+def addOne(poly,
+            l=2, a=1.0,
+            col='red',
+            bkgcol='yellow',
+            pick=None):
     ax1 = plt.gca()
     if poly.is_empty:
         print('Empty polgyon?')
@@ -109,12 +122,26 @@ def addOne(poly, l=2, a=1.0, col='red', pick=None):
                               fc=col, ec='black',
                               picker=pick,
                               linewidth=l, alpha=a))
+                if i.interiors:
+                    for j in i.interiors:
+                        intPoly=sg.Polygon(j)
+                        ax1.add_patch(PolygonPatch(intPoly,
+                                      fc=bkgcol, ec='black',
+                                      picker=pick,
+                              linewidth=l, alpha=a))
         except TypeError:
             art = ax1.add_patch(PolygonPatch(poly,
                           fc=col, ec='black',
                           picker=pick,
                           linewidth=l, alpha=a))
-    return(art)
+            if poly.interiors:
+                for i in poly.interiors:
+                    intPoly=sg.Polygon(i)
+                    ax1.add_patch(PolygonPatch(intPoly,
+                                  fc=bkgcol, ec='black',
+                                  picker=pick,
+                          linewidth=l, alpha=a))
+
 
 
 def clearOne():

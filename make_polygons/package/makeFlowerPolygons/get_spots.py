@@ -181,15 +181,17 @@ class SpotHole():
                 poly=None,
                 level=None,
                 parentPoly=None,
-                holez=[]):
+                holez=None):
         self.poly=poly
         self.level=level
         self.isSpot=None
         self.isHole=None
         self.parentPoly=parentPoly
-        self.holez=holez
+        if holez is None:
+            holez=[]
+        self.holez=[]
 
-    def update(self):
+    def callSpotOrHole(self):
         if self.level is not None and self.level % 2 == 0:
             self.isSpot=True
             self.isHole=False
@@ -198,7 +200,7 @@ class SpotHole():
             self.isHole=True
         return
 
-    def __call__(self):
+    def makeHolesInPoly(self):
         listHoleCoords=[]
         outsideCoords=list(self.poly.exterior.coords)
         if self.holez:
@@ -218,12 +220,7 @@ def findBiggest(l):
 
 def dig2bottom(startPol=None,l=[],level=0,parentSpotHole=None):
     print(level)
-    if not l:
-        print("found the bottom?")
-        bottom = parentSpotHole
-        bottom.update()
-        return(bottom)
-    else:
+    if l:
         bottom=SpotHole()
         bottom.poly=startPol
         if parentSpotHole:
@@ -234,6 +231,11 @@ def dig2bottom(startPol=None,l=[],level=0,parentSpotHole=None):
         level+=1
         nextSpotHole=dig2bottom(nextPoly,nextl,level,bottom)
         return(nextSpotHole)
+    elif not l:
+        print("found the bottom?")
+        bottom = parentSpotHole
+        bottom.callSpotOrHole()
+        return(bottom)
 
 def tickOff(l, pol):
     newl = [ i for i in l if not i.equals(pol.poly) ]
@@ -253,13 +255,15 @@ def organizeSpots(multipol):
                         parentPoly=None,
                         holez=[])
 
-        bigSpot.update()
+        bigSpot.callSpotOrHole()
         ## knock this original spot off the list
         todo = tickOff(todo, bigSpot)
         ## add it to our done pile:
         done.append(bigSpot)
         ## find out what polygons are in it:
         subTodo = [ i for i in todo if bigSpot.poly.contains(i) ]
+    ## I think we need to clear the holes out of this,
+    ## so they are aren't passed on?
         ## start classifying these polygons:
 
         while subTodo:
@@ -270,14 +274,14 @@ def organizeSpots(multipol):
             ## add to done:
             done.append(bottom)
 
-        import pdb; pdb.set_trace()
-        for i in done:
-            if i.isHole:
-                parent, = [ j for j in done if j.poly.equals(i.parentPoly) ]
-                parent.holez.append(i.poly)
+        #import pdb; pdb.set_trace()
+        for nu,hs in enumerate(done):
+            if hs.isHole:
+                parent, = [ j for j in done if j.poly.equals(hs.parentPoly) ]
+                parent.holez.append(hs.poly)
 
     for i in done:
-        if i.isSpot: i()
+        if i.isSpot: i.makeHolesInPoly()
     spotz = [ i.poly for i in done if i.isSpot ]
     spots=sg.MultiPolygon(spotz)
     return(spots)

@@ -12353,8 +12353,8 @@ aa[0].intersects(aa[1])
 
 ## debug_spotdigger.py
 ########################################
-#!/usr/bin/env python3
 
+python3
 import sys
 sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/")
 import matplotlib.pyplot as plt
@@ -12378,47 +12378,92 @@ allpols = sg.MultiPolygon( [Rect, large, medium, small, offLarge, offLargeHole1,
 #import pdb; pdb.set_trace()
 aa=get_spots.organizeSpots(allpols)
 
-input('about to end')
-
 ######################################3
 
 ## what to do here? For some reason, our small spots are
-## being assing holes from another polygon, far away. 
+## being assigned holes from another polygon, far away. 
 
-interact
+## might simplify if we get rid of spots having parents?
 
-for i in spots: i.is_valid
+fig, ax = plt.subplots(1,1)
+plt.gca().set_xlim(-5,17)
+plt.gca().set_ylim(-5,17)
+addOne(aa)
 
-for i in spots: sv.explain_validity(i)
 
 from makeFlowerPolygons.geojsonIO import plotOne, addOne
 
+plotOne(done[0].poly, col='red')
+plt.gca().set_xlim(-5,17)
+plt.gca().set_ylim(-5,17)
+## pile images here
+addOne(done[4].poly, col='red')
+addOne(done[3].poly, col='yellow')
+addOne(done[2].poly, col='red')
+addOne(done[1].poly, col='yellow')
 
-plt.close('all')
+addOne(done[nu].poly, col='green')
 
-for i in done:
-    plotOne(i.poly, col= 'r', bkgcol='w')
+addOne(hs.poly, col='blue')
 
-plotOne(done[1].poly, col= 'r', bkgcol='w')
+## so what is our parent?
 
-## done 5 is one of the two problem spots:
-plotOne(done[5].poly, col= 'r', bkgcol='w')
-xx, yy = done[5].poly.interiors[0].xy
-plt.plot(xx,yy, c='blue')
-plt.gca().set_xlim(-3,15)
-plt.gca().set_ylim(-3,15)
-addOne(done[5].parentPoly, col='pink', a=0.5)
+interact
 
-done[5]
+p,=[ j for j in done if j.poly.equals(hs.parentPoly) ]
 
-len(done[5].poly.interiors)
+p is parent
 
-vars(done[5])
+addOne(hs.holez[0], col='purple')
 
-vars(done[5])
+## somehow we assigned a hole for that:
 
-done[5].poly.interiors
+addOne(done[4].holez[0], col='purple')
 
-[ j.parentPoly for j in done ]
+done[4].holez[0].equals(done[1].poly) ## yup
+## why is this assign done[1] as a hole for done[4]?
 
-[ j for j in done if j.parentPoly.equals(done[5].poly) ]
+## same for done[5]
+done[5].holez[0].equals(done[1].poly) ## yup
+
+done[6].holez[0].equals(done[1].poly) ## yup
+
+for i in range(7):
+    print(i)
+    try:
+        done[i].holez[0]
+    except IndexError:
+        print('no holez')
+
+for i in range(7):
+    done[i].holez[0].equals(done[1].poly) ## every polygon but the first, largest. 
+
+## at the point of adding the first hole to it's parent polygon,
+## all polygons get this hole added to their list. Why?
+
+## is the holez object somehow the same object for all spothole objects?
+
+done[1].holez is done[2].holez
+
+done[1].holez.append('zoop')
+
+done[1].holez 
+
+done[2].holez
+
+## yup. How did that happen?
+
+aa = SpotHole()
+bb = SpotHole()
+
+aa.holez = ['noop','ImissRealLife']
+
+done[1].holez
+
+done[0].holez = ['wellp', 'somehow this is our problem']
+
+## ugh, three days of debugging to find out that I had
+## a scoping problem in my object. Fuck. 
+
+## git commit, and try this out on some real petals. 
+

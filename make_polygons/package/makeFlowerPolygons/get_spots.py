@@ -17,6 +17,11 @@ import shapely.geometry as sg
 import shapely.affinity as sa
 import shapely.errors
 from skimage import measure
+## while developing:
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/")
+
+
 from makeFlowerPolygons import geojsonIO
 
 def parseDougMatrix(file):
@@ -219,7 +224,6 @@ def findBiggest(l):
     return bigspot
 
 def dig2bottom(startPol=None,l=[],level=0,parentSpotHole=None):
-    print(level)
     if l:
         bottom=SpotHole()
         bottom.poly=startPol
@@ -232,7 +236,6 @@ def dig2bottom(startPol=None,l=[],level=0,parentSpotHole=None):
         nextSpotHole=dig2bottom(nextPoly,nextl,level,bottom)
         return(nextSpotHole)
     elif not l:
-        print("found the bottom?")
         bottom = parentSpotHole
         bottom.callSpotOrHole()
         return(bottom)
@@ -242,10 +245,14 @@ def tickOff(l, pol):
     return(newl)
 
 def organizeSpots(multipol):
+    print('started Orgspots')
+    print("multipolygon has this many: {}".format(len(multipol)))
     todo = list(multipol)
-    done = []
+    print("todo started with this many: {}".format(len(todo)))
+    spotList=[]
 
     while todo:
+        done = []
         ## find biggest polygon
         big = findBiggest(todo)
         ## make a SpotHole object for it:
@@ -257,7 +264,14 @@ def organizeSpots(multipol):
 
         bigSpot.callSpotOrHole()
         ## knock this original spot off the list
+        print("todo has this many: {}".format(len(todo)))
+        print("done has this many: {}".format(len(done)))
+        print("kicking one off")
         todo = tickOff(todo, bigSpot)
+        print("todo now has this many: {}".format(len(todo)))
+        print("done now has this many: {}".format(len(done)))
+        print("###################################")
+        print("")
         ## add it to our done pile:
         done.append(bigSpot)
         ## find out what polygons are in it:
@@ -280,10 +294,13 @@ def organizeSpots(multipol):
                 parent, = [ j for j in done if j.poly.equals(hs.parentPoly) ]
                 parent.holez.append(hs.poly)
 
-    for i in done:
-        if i.isSpot: i.makeHolesInPoly()
-    spotz = [ i.poly for i in done if i.isSpot ]
-    spots=sg.MultiPolygon(spotz)
+        for i in done:
+            if i.isSpot: i.makeHolesInPoly()
+        LocalSpotz = [ i.poly for i in done if i.isSpot ]
+        spotList.extend(LocalSpotz)
+
+    spots=sg.MultiPolygon(spotList)
+    print('finishing Orgspots')
     return(spots)
 
 ################## holes in spots #########################
@@ -300,7 +317,7 @@ def main(pdir, gjName, meltName, outFileName):
     _, petalMat, spotsMat = parseDougMatrix(meltName)
     petPolRaw = digitizePols(petalMat) 
     petPol = cleanPetal(petPolRaw, gjName)
-    photoBB = list(petPetal.bounds)
+    photoBB = list(petPol.bounds)
     spotPolRaw = digitizePols(spotsMat)
     spotPol = cleanSpots(spotPolRaw, gjName)
 
@@ -311,12 +328,17 @@ def main(pdir, gjName, meltName, outFileName):
     elif isinstance(spotPol, sg.Polygon): 
         standSpot = [stand(spotPol, scale, cent)]
     standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
+    spotsWithHoles = organizeSpots(standSpots)
     ## deal with the zones elsewhere
     center, edge, throat, spotEstimates = None, None, None, None
     ## write it out
-    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, 
+    geoDict = geojsonIO.writeGeoJ(standPet, spotsWithHoles, 
                                     center, edge, throat, 
                                     spotEstimates, photoBB, scale)
+
+    #geoDict = geojsonIO.writeGeoJ(standPet, standSpots, 
+    #                                center, edge, throat, 
+    #                                spotEstimates, photoBB, scale)
 
     with open(outFileName, 'w') as fp:
         json.dump(geoDict, fp)

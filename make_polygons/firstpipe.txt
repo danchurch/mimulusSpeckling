@@ -12467,3 +12467,80 @@ done[0].holez = ['wellp', 'somehow this is our problem']
 
 ## git commit, and try this out on some real petals. 
 
+## okay, now what...
+
+## we need to add this function in as part of our digitizing pipeline, 
+## namely the spot calling process.
+
+## in there.. how to test this...
+
+
+get_spots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py'
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+
+cd $toy
+
+find . -name "*melted.csv"
+
+$get_spots ./P771F1/left/P771F1_left_melted.csv -d $toy
+
+mv P771F1_left_polys.geojson P771F1_left_polys_NEW.geojson
+
+
+## that looks promising. Compare to one that using the old code:
+## (undo some changes in code)
+#$get_spots ./P771F1/left/P771F1_left_melted.csv -d $toy 
+#mv P771F1_left_polys.geojson P771F1_left_polys_OLD.geojson
+
+## definitely better. But I think we are still exporting invalid polygons:
+
+geoj=('/home/daniel/Documents/cooley_lab/'
+        'mimulusSpeckling/make_polygons/'
+        'toy/P771F1_left_polys_NEW.geojson')
+
+aa = geojsonIO.parseGeoJson(geoj)
+
+aa[1].is_valid
+
+sv.explain_validity(aa[1])
+
+fig, ax = plt.subplots(1,1)
+plt.gca().set_xlim(-1,1)
+plt.gca().set_ylim(-1,1)
+addOne(aa[1])
+
+for i in aa[1]: i.is_valid
+
+probPolys=[ i for i in aa[1] if not i.is_valid ]
+
+for i,j in enumerate(aa[1]): 
+    print(i); sv.explain_validity(j)
+
+sv.explain_validity(aa[1][43])
+
+
+plotOne(aa[1][43])
+
+bb = aa[1][43]
+
+cc = bb.buffer(0)
+
+cc.is_empty
+
+## okay, lots of small fires to put out here. 
+
+buffedPPs = [ i.buffer(0) for i in probPolys ]
+
+for i in buffedPPs: i.is_valid
+
+for i in buffedPPs: i.is_empty
+
+plotOne(buffedPPs[1][1], col='red', bkgcol='yellow')
+
+buffedPPs[0].is_valid
+
+
+## did introducing holes into these polygons cause some of these
+## issues?
+
+

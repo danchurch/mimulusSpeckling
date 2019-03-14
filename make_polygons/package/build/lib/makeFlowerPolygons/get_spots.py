@@ -17,6 +17,11 @@ import shapely.geometry as sg
 import shapely.affinity as sa
 import shapely.errors
 from skimage import measure
+## while developing:
+#import sys
+#sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/")
+
+
 from makeFlowerPolygons import geojsonIO
 
 def parseDougMatrix(file):
@@ -91,6 +96,8 @@ def stand(pol, scale, cent):
     scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
     return(scaled)
 
+################# shapely object cleaning ##################################
+
 def testAndFixPoly(pol,gjName=None,objtype=None):
     """
     an attempt to fix invalid polygons.
@@ -161,8 +168,14 @@ def cleanPetal(geo, gjName=None):
         return(Geo)
     return(newGeo)
 
-def cleanSpots(SpotsMultiPoly, gjName=None):
-    """Tries to clean up spot collections, leaving them as a multipolygon"""
+def cleanIndividualSpotPolys(SpotsMultiPoly, gjName=None):
+    """Tries to clean up spots collections, leaving them as a multipolygon.
+        Note that cleaning the spots individually does not necessarily
+        mean that the outputted multipolygon is valid. After spots and
+        holes have been called from these polygons, the resulting multipolygon
+        also often has to be buffered again, as a single object, in the 
+        function 'cleanFinalSpotsMultpoly()'.
+    """
     objtype="spots"
     if isinstance(SpotsMultiPoly, sg.Polygon):
         cleanPoly = testAndFixPoly(SpotsMultiPoly, gjName, objtype)
@@ -175,6 +188,129 @@ def cleanSpots(SpotsMultiPoly, gjName=None):
     return(cleanMultPoly)
 
 
+def cleanFinalSpotsMultpoly(SpotsMultiPoly):
+    if not SpotsMultiPoly.is_valid:
+        print('Buffering spot multipolygon.')
+        cleanMultPoly = SpotsMultiPoly.buffer(0)
+        return(cleanMultPoly)
+    elif SpotsMultiPoly.is_valid:
+        print('This spot multipolygon seems okay without buffering.')
+        return(SpotsMultiPoly)
+
+################# shapely object cleaning ##################################
+################## holes in spots #########################
+
+class SpotHole():
+    def __init__(self,
+                poly=None,
+                level=None,
+                parentPoly=None,
+                holez=None):
+        self.poly=poly
+        self.level=level
+        self.isSpot=None
+        self.isHole=None
+        self.parentPoly=parentPoly
+        if holez is None:
+            holez=[]
+        self.holez=[]
+
+    def callSpotOrHole(self):
+        if self.level is not None and self.level % 2 == 0:
+            self.isSpot=True
+            self.isHole=False
+        elif self.level is not None and self.level % 2 == 1:
+            self.isSpot=False
+            self.isHole=True
+        return
+
+    def makeHolesInPoly(self):
+        listHoleCoords=[]
+        outsideCoords=list(self.poly.exterior.coords)
+        if self.holez:
+            for i in self.holez:
+                listHoleCoords.append(list(i.exterior.coords))
+        finalDonut=sg.Polygon(outsideCoords, listHoleCoords)
+        self.poly=finalDonut
+
+def findBiggest(l):
+    aa = [ i.area for i in l ]
+    try:
+        bb = max(aa)
+        bigspot = [ i for i in l if i.area == bb ][0]
+    except (ValueError, IndexError):
+        bigspot = None
+    return bigspot
+
+def dig2bottom(startPol=None,l=[],level=0,parentSpotHole=None):
+    if l:
+        bottom=SpotHole()
+        bottom.poly=startPol
+        if parentSpotHole:
+            bottom.parentPoly = parentSpotHole.poly
+        bottom.level = level
+        nextl = [ i for i in l if not i.equals(bottom.poly) and i.within(bottom.poly) ]
+        nextPoly = findBiggest(nextl)
+        level+=1
+        nextSpotHole=dig2bottom(nextPoly,nextl,level,bottom)
+        return(nextSpotHole)
+    elif not l:
+        bottom = parentSpotHole
+        bottom.callSpotOrHole()
+        return(bottom)
+
+def tickOff(l, pol):
+    newl = [ i for i in l if i is not pol.poly ]
+    return(newl)
+
+def organizeSpots(multipol):
+    #import pdb; pdb.set_trace()
+    todo = list(multipol)
+    spotList=[]
+
+    while todo:
+        done = []
+        ## find biggest polygon
+        big = findBiggest(todo)
+        ## make a SpotHole object for it:
+        bigSpot=SpotHole(
+                        poly=big,
+                        level=0,
+                        parentPoly=None,
+                        holez=[])
+
+        bigSpot.callSpotOrHole()
+        todo = tickOff(todo, bigSpot)
+        done.append(bigSpot)
+        ## find out what polygons are in it:
+        subTodo = [ i for i in todo if bigSpot.poly.contains(i) ]
+        ## start classifying these polygons:
+        while subTodo:
+            bottom = dig2bottom(startPol=big,l=subTodo,level=0,parentSpotHole=None)
+            ## knock off this bottom polygon
+            todo = tickOff(todo, bottom)
+            subTodo = tickOff(subTodo, bottom)
+            ## add to done:
+            done.append(bottom)
+
+        for nu,hs in enumerate(done):
+            if hs.isHole:
+                parent, = [ j for j in done if j.poly is hs.parentPoly ]
+                parent.holez.append(hs.poly)
+
+        for i in done:
+            if i.isSpot: i.makeHolesInPoly()
+        localSpotz = [ i.poly for i in done if i.isSpot ]
+        spotList.extend(localSpotz)
+
+    spots=sg.MultiPolygon(spotList)
+    return(spots)
+
+################## holes in spots #########################
+
+################ main ##########################################
+
+
 def main(pdir, gjName, meltName, outFileName):
     ## run through digitizing, standardizing
     os.chdir(pdir)
@@ -184,9 +320,9 @@ def main(pdir, gjName, meltName, outFileName):
     _, petalMat, spotsMat = parseDougMatrix(meltName)
     petPolRaw = digitizePols(petalMat) 
     petPol = cleanPetal(petPolRaw, gjName)
-    photoBB = list(petPetal.bounds)
+    photoBB = list(petPol.bounds)
     spotPolRaw = digitizePols(spotsMat)
-    spotPol = cleanSpots(spotPolRaw, gjName)
+    spotPol = cleanIndividualSpotPolys(spotPolRaw, gjName)
 
     scale, cent = getPetGeoInfo(petPol)
     standPet = stand(petPol, scale, cent)
@@ -195,12 +331,15 @@ def main(pdir, gjName, meltName, outFileName):
     elif isinstance(spotPol, sg.Polygon): 
         standSpot = [stand(spotPol, scale, cent)]
     standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
+    spotsWithHoles = organizeSpots(standSpots)
+    finalSpotsMultiPoly=cleanFinalSpotsMultpoly(spotsWithHoles)
     ## deal with the zones elsewhere
     center, edge, throat, spotEstimates = None, None, None, None
     ## write it out
-    geoDict = geojsonIO.writeGeoJ(standPet, standSpots, 
+    geoDict = geojsonIO.writeGeoJ(standPet, finalSpotsMultiPoly, 
                                     center, edge, throat, 
                                     spotEstimates, photoBB, scale)
+
 
     with open(outFileName, 'w') as fp:
         json.dump(geoDict, fp)

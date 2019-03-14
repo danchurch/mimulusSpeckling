@@ -18,8 +18,8 @@ import shapely.affinity as sa
 import shapely.errors
 from skimage import measure
 ## while developing:
-import sys
-sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/")
+#import sys
+#sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/")
 
 
 from makeFlowerPolygons import geojsonIO
@@ -96,6 +96,8 @@ def stand(pol, scale, cent):
     scaled = sa.scale(trans, xfact=scale, yfact=scale, origin = (0,0))
     return(scaled)
 
+################# shapely object cleaning ##################################
+
 def testAndFixPoly(pol,gjName=None,objtype=None):
     """
     an attempt to fix invalid polygons.
@@ -166,8 +168,14 @@ def cleanPetal(geo, gjName=None):
         return(Geo)
     return(newGeo)
 
-def cleanSpots(SpotsMultiPoly, gjName=None):
-    """Tries to clean up spot collections, leaving them as a multipolygon"""
+def cleanIndividualSpotPolys(SpotsMultiPoly, gjName=None):
+    """Tries to clean up spots collections, leaving them as a multipolygon.
+        Note that cleaning the spots individually does not necessarily
+        mean that the outputted multipolygon is valid. After spots and
+        holes have been called from these polygons, the resulting multipolygon
+        also often has to be buffered again, as a single object, in the 
+        function 'cleanFinalSpotsMultpoly()'.
+    """
     objtype="spots"
     if isinstance(SpotsMultiPoly, sg.Polygon):
         cleanPoly = testAndFixPoly(SpotsMultiPoly, gjName, objtype)
@@ -179,6 +187,17 @@ def cleanSpots(SpotsMultiPoly, gjName=None):
         raise TypeError('Are you sure you have a [multi]polygon?')
     return(cleanMultPoly)
 
+
+def cleanFinalSpotsMultpoly(SpotsMultiPoly):
+    if not SpotsMultiPoly.is_valid:
+        print('Buffering spot multipolygon.')
+        cleanMultPoly = SpotsMultiPoly.buffer(0)
+        return(cleanMultPoly)
+    elif SpotsMultiPoly.is_valid:
+        print('This spot multipolygon seems okay without buffering.')
+        return(SpotsMultiPoly)
+
+################# shapely object cleaning ##################################
 ################## holes in spots #########################
 
 class SpotHole():
@@ -241,14 +260,12 @@ def dig2bottom(startPol=None,l=[],level=0,parentSpotHole=None):
         return(bottom)
 
 def tickOff(l, pol):
-    newl = [ i for i in l if not i.equals(pol.poly) ]
+    newl = [ i for i in l if i is not pol.poly ]
     return(newl)
 
 def organizeSpots(multipol):
-    print('started Orgspots')
-    print("multipolygon has this many: {}".format(len(multipol)))
+    #import pdb; pdb.set_trace()
     todo = list(multipol)
-    print("todo started with this many: {}".format(len(todo)))
     spotList=[]
 
     while todo:
@@ -263,23 +280,11 @@ def organizeSpots(multipol):
                         holez=[])
 
         bigSpot.callSpotOrHole()
-        ## knock this original spot off the list
-        print("todo has this many: {}".format(len(todo)))
-        print("done has this many: {}".format(len(done)))
-        print("kicking one off")
         todo = tickOff(todo, bigSpot)
-        print("todo now has this many: {}".format(len(todo)))
-        print("done now has this many: {}".format(len(done)))
-        print("###################################")
-        print("")
-        ## add it to our done pile:
         done.append(bigSpot)
         ## find out what polygons are in it:
         subTodo = [ i for i in todo if bigSpot.poly.contains(i) ]
-    ## I think we need to clear the holes out of this,
-    ## so they are aren't passed on?
         ## start classifying these polygons:
-
         while subTodo:
             bottom = dig2bottom(startPol=big,l=subTodo,level=0,parentSpotHole=None)
             ## knock off this bottom polygon
@@ -288,19 +293,17 @@ def organizeSpots(multipol):
             ## add to done:
             done.append(bottom)
 
-        #import pdb; pdb.set_trace()
         for nu,hs in enumerate(done):
             if hs.isHole:
-                parent, = [ j for j in done if j.poly.equals(hs.parentPoly) ]
+                parent, = [ j for j in done if j.poly is hs.parentPoly ]
                 parent.holez.append(hs.poly)
 
         for i in done:
             if i.isSpot: i.makeHolesInPoly()
-        LocalSpotz = [ i.poly for i in done if i.isSpot ]
-        spotList.extend(LocalSpotz)
+        localSpotz = [ i.poly for i in done if i.isSpot ]
+        spotList.extend(localSpotz)
 
     spots=sg.MultiPolygon(spotList)
-    print('finishing Orgspots')
     return(spots)
 
 ################## holes in spots #########################
@@ -319,7 +322,7 @@ def main(pdir, gjName, meltName, outFileName):
     petPol = cleanPetal(petPolRaw, gjName)
     photoBB = list(petPol.bounds)
     spotPolRaw = digitizePols(spotsMat)
-    spotPol = cleanSpots(spotPolRaw, gjName)
+    spotPol = cleanIndividualSpotPolys(spotPolRaw, gjName)
 
     scale, cent = getPetGeoInfo(petPol)
     standPet = stand(petPol, scale, cent)
@@ -329,16 +332,14 @@ def main(pdir, gjName, meltName, outFileName):
         standSpot = [stand(spotPol, scale, cent)]
     standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
     spotsWithHoles = organizeSpots(standSpots)
+    finalSpotsMultiPoly=cleanFinalSpotsMultpoly(spotsWithHoles)
     ## deal with the zones elsewhere
     center, edge, throat, spotEstimates = None, None, None, None
     ## write it out
-    geoDict = geojsonIO.writeGeoJ(standPet, spotsWithHoles, 
+    geoDict = geojsonIO.writeGeoJ(standPet, finalSpotsMultiPoly, 
                                     center, edge, throat, 
                                     spotEstimates, photoBB, scale)
 
-    #geoDict = geojsonIO.writeGeoJ(standPet, standSpots, 
-    #                                center, edge, throat, 
-    #                                spotEstimates, photoBB, scale)
 
     with open(outFileName, 'w') as fp:
         json.dump(geoDict, fp)

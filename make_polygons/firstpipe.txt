@@ -12543,4 +12543,250 @@ buffedPPs[0].is_valid
 ## did introducing holes into these polygons cause some of these
 ## issues?
 
+## okay, let's go back to our hypothetical petal, and work on three 
+## scenarios:
+
+## 1 - polygon overlap: the larger petal sits halfway over a smaller spot
+## 2 - invalid hole: a spot sits on a bowtie polygon 
+## 3 - shared boundaries: two holes share a boundary, or a spot shares a boundary with it's hole
+
+
+python3
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/")
+import matplotlib.pyplot as plt
+import shapely.validation as sv
+import shapely.geometry as sg
+from makeFlowerPolygons import geojsonIO
+from makeFlowerPolygons import get_spots
+from makeFlowerPolygons.geojsonIO import plotOne, addOne
+plt.ion()
+Rect=sg.box(-3.5, -3.5, 15.0, 15.0)
+center=sg.Point(0, 0)
+small = center.buffer(1)
+medium = center.buffer(2)
+large = center.buffer(3)
+offCenter=sg.Point(10, 10)
+offLarge = offCenter.buffer(3)
+offLargeHole1 = sg.Point(9.5, 10).buffer(0.5)
+offLargeHole2 = sg.Point(11.5, 10).buffer(0.5)
+bowtie = sg.Polygon([(5,5),(6,6),(5,6),(6,5)])
+allpols = sg.MultiPolygon( [Rect, large, medium, small, offLarge, offLargeHole1, offLargeHole2, bowtie] )
+addOne(allpols)
+plt.gca().set_xlim(-5,17)
+plt.gca().set_ylim(-5,17)
+aa=get_spots.organizeSpots(allpols)
+
+
+## 1 - hole is halfway outside of a spot. Hmm, don't think this will actually happen. Let's 
+## wait for it to happen to deal with it. 
+
+## 2 - invalid hole: a spot sits on a bowtie polygon hole
+
+## how to make an invalid polygon...
+
+bowtie = sg.Polygon([(5,5),(6,6),(5,6),(6,5)])
+bowtie.is_valid
+sv.explain_validity(bowtie)
+## added above
+
+## ok, what happens if we put this into our geometry collection?
+
+aa=get_spots.organizeSpots(allpols)
+
+from makeFlowerPolygons.geojsonIO import plotOne, addOne
+
+plt.close('all')
+addOne(multipol)
+plt.gca().set_xlim(-5,17)
+plt.gca().set_ylim(-5,17)
+
+addOne(bottom.poly, col='purple')
+
+addOne(bottom.poly, col='green')
+
+addOne(parent.poly, col='green')
+addOne(done[nu].poly, col='purple')
+
+addOne(pol.poly, col='green')
+
+zz =[ i.poly for i in done ]
+
+addOne(zz[0])
+addOne(zz[3])
+addOne(zz[2])
+addOne(zz[1])
+addOne(zz[6])
+addOne(zz[4])
+addOne(zz[5])
+addOne(zz[7])
+
+addOne(i, col='blue')
+
+addOne(newl[0], col='green')
+
+addOne(newl[0], col='purple')
+
+pol.poly.equals(newl[0])
+
+pol.poly 
+
+newl[0]
+
+pol.poly is newl[0]
+
+bb=spots.buffer(0)
+bb.is_valid ## in this case, this works. 
+
+
+## well, it seems like our function let's invalid, bowtie style 
+## polygons through. I guess this is what we want, but this will
+## render the parent polygons unusable for binary "predicates"
+## (any sort of 2-polygon test):
+
+
+rect2=sg.box(7.5,0,20,2.5)
+
+rect2=sg.box(3,3,16,6.8)
+
+addOne(rect2)
+
+plt.close('all')
+addOne(aa)
+plt.gca().set_xlim(-5,17)
+plt.gca().set_ylim(-5,17)
+
+addOne(rect2, col='purple', a=0.5)
+
+rect2.intersects(aa)
+
+bb = rect2.difference(aa)
+
+## yup, 
+
+
+bb = rect2.difference(aa)
+
+## ugh, what am I doing?
+
+## let's parse this a little. We had the task of creating spots with holes. That appears to be done. 
+## The real test is to run the digitizations with this new code. 
+
+## the debugging is a separate issue. It seems like we can create spot multipolygons with 
+## invalidities in holes and edges. So let's rerun the digitizations, incorporating this. 
+
+## then dive back into the invalidities that are causing spotbreaker to fail. 
+
+## should we clean spots before or after this step of creating holes?
+
+## try both ways on a sample petal, see if matters. 
+
+
+get_spots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py'
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+
+cd $toy
+
+find . -name "*melted.csv"
+
+$get_spots ./P771F1/left/P771F1_left_melted.csv -d $toy
+
+#mv P771F1_left_polys.geojson P771F1_left_holesAfterClean.geojson
+
+#mv P771F1_left_polys.geojson P771F1_left_holesBeforeClean.geojson
+
+## are either of these valid polygons?
+
+## for holing before cleaning:
+## 78 raw polygons, 44 final
+## same for holing after cleaning, doesn't matter. That's good. 
+
+python3
+
+hbcf=('/home/daniel/Documents/cooley_lab/'
+        'mimulusSpeckling/make_polygons/'
+        'toy/P771F1_left_holesBeforeClean.geojson')
+hacf=('/home/daniel/Documents/cooley_lab/'
+        'mimulusSpeckling/make_polygons/'
+        'toy/P771F1_left_holesAfterClean.geojson')
+hbc = geojsonIO.parseGeoJson(hbcf)
+hac = geojsonIO.parseGeoJson(hacf)
+
+hbc[1].is_valid
+hac[1].is_valid
+
+sv.explain_validity(hbc[1])
+sv.explain_validity(hac[1])
+
+
+[ i.is_valid for i in hbc[1] ]
+
+len([ i.is_valid for i in hbc[1] ])
+sum([ i.is_valid for i in hbc[1] ])
+
+[ i.is_valid for i in hac[1] ]
+
+len([ i.is_valid for i in hac[1] ])
+sum([ i.is_valid for i in hac[1] ])
+
+## holing after cleaning produces more invalid polygons, in this case
+
+## can we clean these?
+
+
+hbc[1].buffer(0).is_valid
+
+hac[1].buffer(0).is_valid
+
+## both are valid... how do they look?
+
+plotOne(hbc[0])
+addOne(hbc[1])
+
+plotOne(hac[0])
+addOne(hac[1])
+
+plotOne(hac[0])
+addOne(hac[1].buffer(0))
+## looks like the best option
+
+zz=hac[1].buffer(0)
+all([ i.is_valid for i in zz ])
+
+## so, the best method in this petal is to clean all individual polygons,
+## then call spots and holes
+## then buffer the entire multipolygon. 
+## does our cleanSpots function also do this?
+
+yy = get_spots.cleanSpots(hac[1])
+
+## nope. I wonder if I could have skipped all this and 
+## just buffered the multipolygons to begin with. 
+## oh well. 
+
+## so try again...
+
+get_spots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py'
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+
+cd $toy
+
+find . -name "*melted.csv"
+
+$get_spots ./P771F1/left/P771F1_left_melted.csv -d $toy
+
+## let's see...
+
+f=('/home/daniel/Documents/cooley_lab/'
+        'mimulusSpeckling/make_polygons/'
+        'toy/P771F1_left_polys.geojson')
+aa = geojsonIO.parseGeoJson(f)
+aa[1].is_valid
+
+plotOne(aa[0])
+addOne(aa[1])
+
+## seems okay. Can we run the digitizations for plate3 again with this?
+## update packages, pypi and github
+## switch over to mac...
 

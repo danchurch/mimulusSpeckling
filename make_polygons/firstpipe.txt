@@ -12835,4 +12835,132 @@ $digPlate3 2>&1 | tee -a digitizeLogPlate3.txt
 ## then figure out the complicated merger. 
 
 
+## let's compare:
 
+ls /home/daniel/Documents/cooley_lab/bigPDF | wc -l
+ls /home/daniel/Documents/cooley_lab/bigPDF2 | wc -l
+
+## same. 
+
+## how about and automated test of validity?
+
+
+## checkSpot.py
+########################################################
+#! /usr/bin/env python3 
+
+import argparse, json
+import shapely.validation as sv
+from makeFlowerPolygons import geojsonIO
+from makeFlowerPolygons.geojsonIO import parseGeoJson, writeGeoJ
+
+## arguments:
+parser = argparse.ArgumentParser()
+parser.add_argument('geojson')
+parser.add_argument('-l', '--log', default=None)
+args = parser.parse_args()
+
+## for dev:
+#geojson="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3/P810F2/right/P810F2_right_polys.geojson"
+#log="geojson_validity_log.txt"
+
+geojson=args.geojson
+if not args.outFileName:
+    log="geojson_validity_log.txt"
+else:
+    log=args.log
+
+aa = parseGeoJson(geojson)
+
+## check validity:
+print(sv.explain_validity(aa[1]))
+
+############################################################################
+
+
+
+VE
+
+plate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3'
+
+for i in $(find $plate3 -name "*geojson"); do
+    echo $i
+done
+
+## $digPlate3 2>&1 | tee -a digitizeLogPlate3.txt
+
+
+touch plate3validity.txt
+
+checkSpot="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/checkSpot.py"
+plate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3'
+for i in $(find $plate3 -name "*geojson"); do
+    echo $i |& tee -a plate3validity.txt
+    $checkSpot $i |& tee -a plate3validity.txt
+done
+
+## all spot polygons are valid? 
+
+## okay, step3, check on some of the problem polygons that Melia reported
+
+aa=(P773F1 \
+P773F2 \
+P774F2 \
+P775F2 \
+P775F3 \
+P776F2 \
+P777F3 \
+P783F1 \
+P783F2 \
+P784F1 \
+P784F2 \
+P785F2 \
+P786F1 \
+P805F1 \
+P805F3 \
+P807F1 \
+P807F2 \
+P811F2 \
+P814F2 \
+P817F1 \
+P817F2 \
+P820F1 \
+P820F2 \
+P821F1 \
+P825F1 \
+P526F2 \
+P829F1 \
+P834F1 \
+P839F1 \
+P841F1 \
+P841F2 \
+P844F1 \
+P846F2 \
+P848F2 \
+P852F1 \
+P852F2 \
+P875F1)
+
+
+P818F1 ##didn;t call zones, even when it said that it did.
+
+plate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3'
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+dougPlate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3'
+
+for i in ${aa[@]}; do 
+    find $plate3 -name $i*"geojson" -exec cp {} $toy \;
+done
+
+## now try out our manual curation pipeline on these:
+
+
+$runCuration $toy $dougPlate3
+
+## seems okay. 
+## but the spot estimator is a little fucked, why can't 
+## I back up?
+
+## shit. debug this...
+## if there is still time, get plate4 going. 

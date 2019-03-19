@@ -12790,3 +12790,49 @@ addOne(aa[1])
 ## update packages, pypi and github
 ## switch over to mac...
 
+
+
+plate3="/Users/danthomas/Documents/speckling/make_polygons/polygons/plate3"
+
+## clear geojs
+
+find $plate3 -name "*geojson" 
+
+find $plate3 -name "*geojson" -exec rm {} \;
+
+digPlate3="/Users/danthomas/Documents/speckling/make_polygons/scripts/digitize28.02.2019.sh"
+
+VE ## start virtual environment 
+
+$digPlate3 2>&1 | tee -a digitizeLogPlate3.txt
+
+## okay, did that work?
+
+## what's the best strategy here? Right now we have melia's manual edits, that we
+## don't want to lose, and a set of new plate 3 images...
+
+## should we just try a merge on our spotsWithHoles branch and the main branch?
+
+## theoretically, we should be able to update spotsWithHoles branch with these 
+## new plate3 geojsons, then merge with melia's manual edits, keeping the successful
+## hand edits... 
+
+## but how do track which files to save (=how do we know which files 
+## melia edited?)
+
+## how do we test that these new digitizations are actually better?: 
+
+## 1 make the pdf, see if more petals succed to that point
+## 2 do an automated test of validity of the spot polygons
+## 3 spot check melia's problem petals.
+
+## should we run plate4 first? 
+## No, set that up for tonight
+
+## so first step here... push my changes to plate3, just to this branch. 
+## then pull, sanity check them on my own machine
+## if they seem okay/better, start plate 4 on the mac. 
+## then figure out the complicated merger. 
+
+
+

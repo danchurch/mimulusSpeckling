@@ -13006,3 +13006,66 @@ for file = files';
 end;
 
 ## ' ## just because it's screwing up my syntax
+
+## plate4 is underway. Other to do:
+
+## debug the spotEstimator
+
+## figure out how to incorporate edits from Melia's curations, with the new 
+## plate3 geojsons. 
+
+## so back to the debug....
+
+## what we're missing is code that can handle the export of interiors
+## and exteriors from our plotting functions. We need to be able to 
+## delete these artists from our plot
+
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+
+cd $toy
+
+python3
+import json
+import matplotlib.pyplot as plt
+import shapely.validation as sv
+import shapely.geometry as sg
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+#import breakSpots
+#import manZoneCaller
+#import spotMarker
+import geojsonIO
+plt.ion()
+
+aa = geojsonIO.parseGeoJson('P852F1_right_polys.geojson')
+
+geojsonIO.plotOne(aa[0])
+geojsonIO.addOne(aa[1])
+
+isinstance(aa[1], sg.MultiPolygon)
+
+isinstance(aa[0], sg.MultiPolygon)
+
+## seems okay, but did we houseofcards anything?
+
+## also, modify spotMarker, anything else to accept these new 
+## outputs from the addOne function. 
+
+## run the curation pipeline
+## also the pdf maker? 
+
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+dougPlate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3'
+
+## now try out our manual curation pipeline on these:
+
+cd $toy
+
+$runCuration $toy $dougPlate3
+
+## seems to be behaving.
+
+## if that is well, what's next?
+
+## figure out how to incorporate melia's manual edits. These are saved on the main branch...

@@ -7,8 +7,8 @@ packages=$repo"make_polygons/package/makeFlowerPolygons/"
 get_spots=$packages"get_spots.py"
 get_zones=$packages"get_zones.py"
 makePDFs=$packages"makePDFs.py"
-outDir='/Users/danthomas/Documents/bigPDF'
-jpgDirectory=$repo"dougRaster/Rotated_and_Cropped/plate3"
+outDir='/Users/danthomas/Documents/bigPDF' ## mac
+jpgDirectory=$repo"dougRaster/Rotated_and_Cropped/plate4"
 cd $wd
 
 #echo "########################################"
@@ -38,7 +38,7 @@ cd $wd
 #    $get_zones $i 0.5
 #done
 #
-echo ""
+#echo ""
 echo "########################################"
 echo "Creating PDFs"
 echo ""

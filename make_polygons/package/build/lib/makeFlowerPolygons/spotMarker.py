@@ -10,8 +10,16 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import makeFlowerPolygons.flowerPetal
 from descartes import PolygonPatch
-from makeFlowerPolygons import geojsonIO
+#from makeFlowerPolygons import geojsonIO
 from scipy.spatial import distance
+
+## while tweaking packages locally:
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+#import breakSpots
+#import manZoneCaller
+#import  spotMarker
+import  geojsonIO
 
 
 class SpotMarker:
@@ -54,8 +62,8 @@ class SpotMarker:
                 assert(circleRad > 0)
                 circle = sg.Point(self.centerx, self.centery).buffer(circleRad)
                 self.circs.append(circle)
-                circArt = geojsonIO.addOne(self.circs[-1], col = 'blue', a=0.3)
-                self.circArts.append(circArt)
+                circArt,_ = geojsonIO.addOne(self.circs[-1], col = 'blue', a=0.3)
+                self.circArts.append(circArt[0])
             except (AssertionError, TypeError, AttributeError):
                 ## if button released too quickly, cleanup
                 print("zero radius spot")

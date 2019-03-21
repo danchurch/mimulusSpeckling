@@ -10,16 +10,16 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import makeFlowerPolygons.flowerPetal
 from descartes import PolygonPatch
-#from makeFlowerPolygons import geojsonIO
+from makeFlowerPolygons import geojsonIO
 from scipy.spatial import distance
 
 ## while tweaking packages locally:
-import sys
-sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+#import sys
+#sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
 #import breakSpots
 #import manZoneCaller
 #import  spotMarker
-import  geojsonIO
+#import  geojsonIO
 
 
 class SpotMarker:

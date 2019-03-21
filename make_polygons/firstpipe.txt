@@ -13069,3 +13069,167 @@ $runCuration $toy $dougPlate3
 ## if that is well, what's next?
 
 ## figure out how to incorporate melia's manual edits. These are saved on the main branch...
+
+## this would mean a merge. we're still working on the digitizations of plate4, on this branch. 
+
+## head is starting to spin. 
+
+## to start, is there a way to tell Melia's edited files apart from the non?
+
+## all of her successful petals with spots should have spot estimates
+
+## after talking to Melia, it looks like the goal here is to keep the petal outlines, spot estimates, and zones
+## from all petals in plate 3. But to sub in new spot multipolygons, and let Melia rerun spotBreaker. 
+
+## this would look something like:
+
+## 1) recover the old plate3 geojsons
+## 2) place the new ones outside the repo
+## 3) right a script to grab the spot multipoly 
+## from the new ones, and write this over 
+## the spotmultipoly from the oldones.
+
+## first, make some outside directories for this:
+
+plate3Melia="/home/daniel/Documents/cooley_lab/plate3Melia/"
+plate3Dan="/home/daniel/Documents/cooley_lab/plate3Dan/"
+plate3Merged="/home/daniel/Documents/cooley_lab/plate3Merged/"
+
+## copy my recently redigitized plate3 geojsons into 
+## one of these:
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3
+
+git checkout spotsWithHoles
+
+cp -r * $plate3Dan
+
+## do the same for melia's:
+
+git checkout master
+
+cp -r * $plate3Melia
+
+## go back to spotswithholes
+
+git checkout spotsWithHoles
+
+## now we need to read in both files, merge and write out to our directory
+
+## saveMeliaEditstoSpotswithHoles.py
+##################################################
+#!/usr/bin/env python3
+
+import json, args, pathlib
+import shapely.geometry as sg
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+from geojsonIO import parseGeoJson, writeGeoJ
+
+## arguments:
+parser = argparse.ArgumentParser()
+parser.add_argument('geojson')
+parser.add_argument('directory1')
+parser.add_argument('directory2')
+parser.add_argument('directoryOut')
+args = parser.parse_args()
+geojson=args.geojson
+directory1=pathlib.Path(args.directory1)
+directory2=pathlib.Path(args.directory2)
+directoryOut=pathlib.Path(args.directoryOut)
+
+## get file and items from each:
+
+(_, newSpots, _, _, _, _, _, _) = parseGeoJson(directory1 / geojson)
+
+(petal, _, center, 
+edge, throat, spotEstimates, 
+photoBB, scalingFactor) = geoj2=parseGeoJson(directory2 / geojson)
+
+## write out a new geojson:
+
+geoDict=writeGeoJ(petal, newSpots, center, 
+                    edge, throat, spotEstimates, 
+                    photoBB, scalingFactor)
+
+with open(str(directoryOut / geojson), 'w') as f:
+    json.dump(geoDict, f)
+
+######################################
+
+## try this out:
+
+
+plate3Melia="/home/daniel/Documents/cooley_lab/plate3Melia/"
+plate3Dan="/home/daniel/Documents/cooley_lab/plate3Dan/"
+plate3Merged="/home/daniel/Documents/cooley_lab/plate3Merged/"
+saveMeliaEditstoSpotswithHoles='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/saveMeliaEditstoSpotswithHoles.py'
+
+## one example:
+exGeoj="P773F1_left_polys.geojson"
+danGeoJ=$(find $plate3Dan -name $exGeoj -exec dirname {} \;)
+meliaGeoJ=$(find $plate3Melia -name $exGeoj -exec dirname {} \;)
+
+$saveMeliaEditstoSpotswithHoles $exGeoj $danGeoJ $meliaGeoJ $plate3Merged
+## does this one look okay?
+
+## yup, seems okay in qgis. Run the whole plate:
+
+allgeojs=$(find $plate3Dan -name "*geojson" -exec basename {} \;)
+
+for i in ${allgeojs[@]}; do 
+    echo $i
+    danGeoJ=$(find $plate3Dan -name $i -exec dirname {} \;)
+    #echo $danGeoJ
+    meliaGeoJ=$(find $plate3Melia -name $i -exec dirname {} \;)
+    #echo $meliaGeoJ
+    $saveMeliaEditstoSpotswithHoles $i $danGeoJ $meliaGeoJ $plate3Merged
+done
+
+
+
+
+cd $plate3Merged
+
+## I think this worked. 
+
+## So now, update the spotswithholes branch
+## Then merge with master? 
+## nope, probably easier to add plate4 from mac
+## then merge.
+
+## first move these new merged geojs into our repo:
+
+repoPlate3="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3"
+
+for i in $plate3Merged*; do 
+    echo "                                                       "
+    geoj=$(basename $i)
+    echo $i
+    echo $geoj
+    dirn=$(find $repoPlate3 -name $geoj -exec dirname {} \;)
+    echo $dirn
+    cp $i $dirn
+done
+
+## did that work?
+
+## seems okay. 
+
+## what next? update repo from mac to include plate 4? 
+
+## update the package with pypi etc
+
+## okay done. Just for kicks, let's check validity:
+
+VE
+
+checkSpot="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/checkSpot.py"
+plate4='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4'
+
+for i in $(find $plate4 -name "*geojson"); do
+    echo $i |& tee -a plate4validity.txt
+    $checkSpot $i |& tee -a plate4validity.txt
+done
+
+##

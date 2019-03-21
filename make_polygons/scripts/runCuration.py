@@ -2,16 +2,15 @@
 
 import os, argparse, pathlib, json, re, copy
 import pandas as pd
-#from makeFlowerPolygons import breakSpots, manZoneCaller, spotMarker
-from makeFlowerPolygons import breakSpots, manZoneCaller#, spotMarker
+from makeFlowerPolygons import breakSpots, manZoneCaller, spotMarker
 import shapely.errors
 
 ## while working without internet, for updating packages
-import sys
-sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+#import sys
+#sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
 #import breakSpots
 #import manZoneCaller 
-import  spotMarker
+#import  spotMarker
 
 ## debug variables:
 

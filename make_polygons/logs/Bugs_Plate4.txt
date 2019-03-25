@@ -1,0 +1,5 @@
+Lots of spots missing, usually ~1 spot per petal
+
+spotMarker is giving zero spot radius error, also can't back up when mistake spot made
+
+Zones not always showing - 

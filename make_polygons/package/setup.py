@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="makeFlowerPolygons-dcthom",
-    version="0.0.22",
+    version="0.0.23",
     author="Daniel Thomas",
     author_email="thomasdc@whitman.edu",
     description="Cooley lab tools for digitizing and analyzing Mimulus spotting patterns",

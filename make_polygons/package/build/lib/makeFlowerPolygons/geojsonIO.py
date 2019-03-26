@@ -110,37 +110,65 @@ def addOne(poly,
             col='red',
             bkgcol='yellow',
             pick=None):
+    """This is our function for plotting multipolygons.
+    It's complicated, to deal with polygons with holes.
+    Handles for artists are returned, in the form of a 
+    list of exteriors and list of lists of interiors.
+    This function can also handle single polygons.
+    The benefit of plotting single polygons with this 
+    function is that it doesn't open a new figure or axis
+    if one is active. 
+    No support yet for multi-axis figures.
+    """
+    #import pdb; pdb.set_trace()
     ax1 = plt.gca()
     if poly.is_empty:
         print('Empty polgyon?')
         return
     elif not poly.is_empty:
-        try:
-            art = None
-            for i in poly:
-                ax1.add_patch(PolygonPatch(i,
+        artExt = []
+        if isinstance(poly, sg.MultiPolygon):
+            artInt = [None] * len(poly)
+            for nui,i in enumerate(poly):
+                ext=ax1.add_patch(PolygonPatch(i,
                               fc=col, ec='black',
                               picker=pick,
                               linewidth=l, alpha=a))
+                artExt.append(ext)
                 if i.interiors:
+                    iInteriors=[]
                     for j in i.interiors:
                         intPoly=sg.Polygon(j)
-                        ax1.add_patch(PolygonPatch(intPoly,
+                        iIntArt = ax1.add_patch(PolygonPatch(intPoly,
                                       fc=bkgcol, ec='black',
                                       picker=pick,
                               linewidth=l, alpha=a))
-        except TypeError:
-            art = ax1.add_patch(PolygonPatch(poly,
+                        iInteriors.append(iIntArt)
+                    artInt[nui]=iInteriors
+                elif not i.interiors:
+                    artInt[nui]=None
+        elif isinstance(poly, sg.Polygon):
+            ext = ax1.add_patch(PolygonPatch(poly,
                           fc=col, ec='black',
                           picker=pick,
                           linewidth=l, alpha=a))
+            artExt=[ext]
             if poly.interiors:
-                for i in poly.interiors:
-                    intPoly=sg.Polygon(i)
-                    ax1.add_patch(PolygonPatch(intPoly,
-                                  fc=bkgcol, ec='black',
-                                  picker=pick,
-                          linewidth=l, alpha=a))
+                    iInteriors=[]
+                    for j in i.interiors:
+                        intPoly=sg.Polygon(j)
+                        iIntArt = ax1.add_patch(PolygonPatch(intPoly,
+                                      fc=bkgcol, ec='black',
+                                      picker=pick,
+                              linewidth=l, alpha=a))
+                        iInteriors.append(iIntArt)
+                    artInt=[iInteriors]
+            if not poly.interiors:
+                artInt=None
+        else:
+            print('Is this a shapely polygon or multipolygon?')
+            artExt,artInt = None, None
+    return(artExt,artInt)
 
 
 

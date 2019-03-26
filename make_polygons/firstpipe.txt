@@ -13232,4 +13232,58 @@ for i in $(find $plate4 -name "*geojson"); do
     $checkSpot $i |& tee -a plate4validity.txt
 done
 
-##
+## okay, dump that on Melia (and hopefully find her some help!)
+
+## let's work on the statistical side of things now...
+######################################################
+
+## point patterns
+
+## can we get our data into a format that R/spatstat likes?
+
+R
+
+install.packages('spatstat')
+
+library('spatstat')
+
+## how do we get on our spotestimates into a form that 
+## spatstat will like?
+
+## I'm not sure that we need - I think we'll need the center of each spot estimate 
+## circle and the radius 
+
+## this might best be done in python before coming here. 
+
+## we need a csv with X, Y of centroid, and diameter of the circle,  that should be 
+## pretty easy to do.
+
+## we'll also need a quick way to generate the observational window boundaries. 
+
+## as for the point pattern of spots, back out to python3, make a CSV of centroids 
+## with a "mark" indicating the size of the circle:
+
+python3
+
+########################################
+#!/usr/bin/env python3
+
+import json, argparse
+import pandas as pd
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+from makeFlowerPolygons.geojsonIO import parseGeoJson
+
+## arguments
+
+## for dev:
+
+geoj=('/home/daniel/Documents/cooley_lab/'
+            'mimulusSpeckling/make_polygons/'
+            'toy/P773F1_left_polys.geojson')
+
+## get our circles:
+
+_,aa,_,_,_,_,_,_ = parseGeoJson(geoj)
+
+

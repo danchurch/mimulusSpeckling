@@ -13275,15 +13275,241 @@ import shapely.geometry as sg
 from makeFlowerPolygons.geojsonIO import parseGeoJson
 
 ## arguments
+parser = argparse.ArgumentParser()
+
+parser.add_argument('geojson',
+            help=("""Name of the geojson file from which to 
+                extract spotEstimates."""))
+parser.add_argument('out',
+            help=("Name for outfile."))
+
+args = parser.parse_args()
+
+if args.out is not None:
+    outFileName = args.out
+else:
+    outFileName = args.geojson
 
 ## for dev:
+#geoj=('/home/daniel/Documents/cooley_lab/'
+#            'mimulusSpeckling/make_polygons/'
+#            'toy/P773F1_left_polys.geojson')
+
+## get our circles:
+
+_,_,_,_,_,aa,_,_ = parseGeoJson(argparse.geojson)
+
+## we need a dataframe of x,y,area
+
+## get info
+xx = [ i.centroid.x for i in aa ]
+yy = [ i.centroid.y for i in aa ]
+areas = [ i.area for i in aa ]
+
+## make dataframe
+da = np.array([xx,yy,areas])
+dat = np.transpose(da)
+df = pd.DataFrame(dat, columns=['x','y','area'])
+
+## export as csv:
+df.to_csv(args.out, index=False)
+
+
+##############################################
+
+## try it out:
+
+getSpatStatcsv="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/getSpatStatcsv.py"
+
+geoj='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/P773F1_left_polys.geojson'
+out='zoop.csv'
+
+$getSpatStatcsv $geoj $out
+
+## let's put that on hold. WTF is going on with our spotMarker? works with current 
+## version (0.0.21),
+
+## but is buggy for MElia on version 0.0.22
+
+## don't know why it's not working for her, or why my version isn't current. 
+
+## update:
+
+
+VE
+pip3 install -U -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
+
+## try out this version
+
+
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+dougPlate4='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate4'
+
+## now try out our manual curation pipeline on these:
+
+cd $toy
+
+$runCuration $toy $dougPlate4
+
+## yup, this newer version sucks...
+
+## for some reason, the packages didn't update correctly, some wires got crossed
+## in there. The correct version of the modules is in the repo.
+
+## So try updateing the modules?
+
+
+deactivate ## get rid of VE
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
+
+vim setup.py ## change version
+
+python3 setup.py sdist bdist_wheel
+
+python3 -m twine upload  dist/*
+
+python3 -m twine upload --repository-url https://test.pypi.org/legacy/ --skip-existing dist/*
+
+git status ##etc
+
+## reinstall modules
+
+VE
+
+pip3 install -U makeFlowerPolygons-dcthom
+
+## does this worK?
+
+## seems to work. That was weird.
+
+## take a break, then get back to spatstat
+
+####################################
+
+## make a window in spatstat...
+
+## so we have a method for making a csv with
+## our points with a "mark" of spot size
+## but how do we make a "window" using our 
+## petal outlines?
+
+## we need a list of x and y values representing our
+## vertices. Can't repeat the 1rst/last vertex,
+## and has to be listed anticlockwise...
+
+## do our petal vectors match this description?
+
+## try one:
+
+ 
+import json, argparse
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+from makeFlowerPolygons.geojsonIO import parseGeoJson
 
 geoj=('/home/daniel/Documents/cooley_lab/'
             'mimulusSpeckling/make_polygons/'
             'toy/P773F1_left_polys.geojson')
 
-## get our circles:
 
-_,aa,_,_,_,_,_,_ = parseGeoJson(geoj)
+## get our petal:
 
+petal,_,_,_,_,_,_,_ = parseGeoJson(geoj)
+
+## we need a dataframe of x,y of the petal
+x,y = petal.exterior.xy
+da = np.array([x,y])
+dat = np.transpose(da)
+df = pd.DataFrame(dat, columns=['x','y'])
+
+## export as csv:
+df.to_csv("testPetalWindow.csv", index=False)
+
+## does this work in R?
+
+R
+
+library('spatstat')
+
+polyXY = read.csv("testPetalWindow.csv")
+
+## will spatstat read this as a window?:
+
+wind = owin(xrange=c(-1,1),
+            yrange=c(-1,1),
+            pol=polyXY 
+            )
+
+wind = owin(poly=polyXY)
+
+xx=rev(polyXY$x)
+yy=rev(polyXY$y)
+
+aa=cbind(xx,yy)
+
+wind = owin(poly=aa)
+
+owin(poly=polyXY)
+
+owin(poly=aa)
+
+## not a peep. Worked?
+
+## read in our spots:
+
+inkspots=read.csv(paste0("/home/daniel/Documents/",
+                "cooley_lab/mimulusSpeckling/",
+                "make_polygons/toy/testInkSpot.csv"))
+
+petalppp = ppp(x=inkspots$x, 
+            y=inkspots$y, 
+            window=wind,
+            marks=inkspots$area)
+
+plot(petalppp, show.window=TRUE)
+
+fit <- ppm(petalppp, ~1, Strauss(r=0.1))
+
+
+plot(petalppp, show.window=TRUE)
+
+plot(density(petalppp)) ## cool, but useful?
+
+
+## seems like it won't let us do much with marked points. 
+## weird, I kind of thought that was one of the main 
+## reasons for doing a point pattern analysis...
+
+## anyway, just for kicks, try a model without marks:
+
+bb=unmark(petalppp)
+
+fit <- ppm(bb, ~1, Strauss(r=0.1))
+
+coef(summary(fit))
+
+ppm(longadult ~ x, Poisson())
+
+## I guess for our data, we predict dependencies between
+## our points
+
+## this is because we expect some interactions among our points. 
+## As in, we often expect our spots to be clustered, because 
+## a spotting event, once activated, is hypothesized to release
+## activators to the surrounding cells, making more likely that 
+## other spots will occur. 
+
+## so some level of clustering should occur. 
+
+## so something like a thomas or matern process, some sort of 
+## 2nd degree spotting, with mother patches of clustered spots
+## seems most likely. 
+
+## for this, I think we need kppm for this 
+
+cc = kppm(bb, trend = ~1, clusters = 'Thomas')
 

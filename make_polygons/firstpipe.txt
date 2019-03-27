@@ -13439,23 +13439,16 @@ polyXY = read.csv("testPetalWindow.csv")
 
 ## will spatstat read this as a window?:
 
-wind = owin(xrange=c(-1,1),
-            yrange=c(-1,1),
-            pol=polyXY 
-            )
+wind = owin(poly=polyXY) ## reversed
 
-wind = owin(poly=polyXY)
+## so...
 
 xx=rev(polyXY$x)
 yy=rev(polyXY$y)
-
 aa=cbind(xx,yy)
 
 wind = owin(poly=aa)
 
-owin(poly=polyXY)
-
-owin(poly=aa)
 
 ## not a peep. Worked?
 
@@ -13473,9 +13466,8 @@ petalppp = ppp(x=inkspots$x,
 plot(petalppp, show.window=TRUE)
 
 fit <- ppm(petalppp, ~1, Strauss(r=0.1))
+## but to get at the clustering, we need kppm modeling function
 
-
-plot(petalppp, show.window=TRUE)
 
 plot(density(petalppp)) ## cool, but useful?
 
@@ -13510,6 +13502,128 @@ ppm(longadult ~ x, Poisson())
 ## seems most likely. 
 
 ## for this, I think we need kppm for this 
-
 cc = kppm(bb, trend = ~1, clusters = 'Thomas')
+
+png(file='kfunk.png')
+
+plot(cc)
+
+dev.off()
+
+dd = kppm(bb, trend = ~x+y, clusters = 'Thomas')
+
+
+## so, 
+ 
+m <- ppm(cells ~ 1, Strauss(0.05))
+mpic <- plot(m)
+plot(mpic,how="persp", theta=-30,phi=40,d=4)
+
+## why doesn't this work for my model?
+
+plot(dd, what='intensity')
+
+plot(dd, what='statistic')
+
+plot(dd, what='cluster') 
+## last one doesn't easily work, but this points to the fact that this 
+## model fitting is still just centering one mother point of 
+## our clusters in the middle of the petal, and looking for 
+## one cluster, explaining our weird results. 
+
+##anyway three graphics - inkspots over realspots, kfunk model estimates, heatmap
+
+## just as an example of what spatstat can do. 
+
+
+## inkspots over realspots: back to python:
+
+cd $toy
+
+VE
+python3 
+
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+from makeFlowerPolygons.geojsonIO import parseGeoJson, addOne, plotOne
+
+plt.ion()
+
+P773F1=parseGeoJson('P773F1_left_polys.geojson')
+plotOne(P773F1[0])
+addOne(P773F1[1], col='r')
+addOne(P773F1[5], col='b',a=0.5)
+
+## and done.. back to R...
+## kfunk model estimates:
+
+R
+
+
+## heatmap
+
+
+R
+library('spatstat')
+
+polyXY = read.csv("testPetalWindow.csv")
+xx=rev(polyXY$x)
+yy=rev(polyXY$y)
+aa=cbind(xx,yy)
+wind = owin(poly=aa)
+inkspots=read.csv(paste0("/home/daniel/Documents/",
+                "cooley_lab/mimulusSpeckling/",
+                "make_polygons/toy/testInkSpot.csv"))
+petalppp = ppp(x=inkspots$x, 
+            y=inkspots$y, 
+            window=wind,
+            marks=inkspots$area)
+
+bb=unmark(petalppp)
+
+## I think what I'm doing here is just fitting to a single gaussian 
+## central mother patch:
+cc <- kppm(bb, trend = ~1, clusters = 'Thomas')
+
+png(file='kfunk.png')
+
+plot(cc)
+
+dev.off()
+
+## this should allow the intensity of the patch to vary with a spatial trend?
+dd <- kppm(bb, trend = ~x+y, clusters = 'Thomas')
+## but some problems there...
+
+## so for our presentation - does our petal seem more clustered than CSR?
+
+## get the raw kfunk estimate, no accounting for clusters
+kf <- Kest(bb, correction='border') 
+
+plot(kf)
+
+kf.env <- envelope(bb,Kest,correction="border")
+
+png(file="kfunk.png")
+plot(kf.env)
+dev.off()
+
+## this shows overdispersion - because we probably 
+## a second order patter
+
+plot(cc, what='intensity')
+
+plot(cc, what='statistic')
+
+plot(cc, what='cluster') 
+
+plot(dd)
+plot(dd, what='intensity')
+
+## tomorrow, work on presentation, 
+
+## if time, try this tutorial:
+
+https://www-ljk.imag.fr/membres/Jean-Francois.Coeurjolly/documents/lecture3.pdf
+
 

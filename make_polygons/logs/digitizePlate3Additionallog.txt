@@ -1,0 +1,1118 @@
+########################################
+Making petals and spots
+
+
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F1/mid/P862F1_mid_melted.csv
+P862F1_mid_polys
+P862F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P862F1_mid_polys petal seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F1/left/P862F1_left_melted.csv
+P862F1_left_polys
+P862F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P862F1_left_polys petal seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F1/right/P862F1_right_melted.csv
+P862F1_right_polys
+P862F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P862F1_right_polys petal seems better.
+P862F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P862F1_right_polys spots seems better.
+P862F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P862F1_right_polys spots object is invalid because:
+Self-intersection[1130 537]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F2/mid/P855F2_mid_melted.csv
+P855F2_mid_polys
+P855F2_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_mid_polys petal seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F2_mid_polys spots object is invalid because:
+Self-intersection[950 329]
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_mid_polys spots seems better.
+P855F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_mid_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F2/left/P855F2_left_melted.csv
+P855F2_left_polys
+P855F2_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_left_polys petal seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F2_left_polys spots object is invalid because:
+Self-intersection[172 539]
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F2_left_polys spots object is invalid because:
+Self-intersection[192 384]
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_left_polys spots seems better.
+P855F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_left_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F2/right/P855F2_right_melted.csv
+P855F2_right_polys
+P855F2_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_right_polys petal seems better.
+P855F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F2_right_polys spots seems better.
+P855F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_right_polys spots seems better.
+P855F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_right_polys spots seems better.
+P855F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F2_right_polys spots seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P856F1/mid/P856F1_mid_melted.csv
+P856F1_mid_polys
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P856F1/left/P856F1_left_melted.csv
+P856F1_left_polys
+P856F1_left_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P856F1/right/P856F1_right_melted.csv
+P856F1_right_polys
+P856F1_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F1/mid/P864F1_mid_melted.csv
+P864F1_mid_polys
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 383, in <module>
+    main(meltParentDir, gjName, meltBaseName, outFileName)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 324, in main
+    spotPolRaw = digitizePols(spotsMat)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 82, in digitizePols
+    return(shapelyPoly)
+UnboundLocalError: local variable 'shapelyPoly' referenced before assignment
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F1/left/P864F1_left_melted.csv
+P864F1_left_polys
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F1/right/P864F1_right_melted.csv
+P864F1_right_polys
+P864F1_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F1/mid/P855F1_mid_melted.csv
+P855F1_mid_polys
+P855F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys petal seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F1_mid_polys spots object is invalid because:
+Self-intersection[782 273]
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F1_mid_polys spots object is invalid because:
+Self-intersection[854 328]
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F1_mid_polys spots object is invalid because:
+Self-intersection[856 327]
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+P855F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_mid_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F1/left/P855F1_left_melted.csv
+P855F1_left_polys
+P855F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_left_polys petal seems better.
+P855F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_left_polys spots seems better.
+P855F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_left_polys spots seems better.
+P855F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_left_polys spots seems better.
+P855F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_left_polys spots seems better.
+P855F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_left_polys spots seems better.
+P855F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F1_left_polys spots object is invalid because:
+Self-intersection[310 187]
+P855F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_left_polys spots seems better.
+P855F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F1_left_polys spots object is invalid because:
+Self-intersection[414 213]
+P855F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F1_left_polys spots object is invalid because:
+Self-intersection[425 483]
+P855F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_left_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F1/right/P855F1_right_melted.csv
+P855F1_right_polys
+P855F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_right_polys petal seems better.
+P855F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_right_polys spots seems better.
+P855F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_right_polys spots seems better.
+P855F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_right_polys spots seems better.
+P855F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P855F1_right_polys spots seems better.
+P855F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_right_polys spots seems better.
+P855F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P855F1_right_polys spots seems better.
+P855F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F1_right_polys spots object is invalid because:
+Self-intersection[1810 425]
+P855F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P855F1_right_polys spots object is invalid because:
+Self-intersection[1813 423]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P874F1/mid/P874F1_mid_melted.csv
+P874F1_mid_polys
+P874F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P874F1_mid_polys petal seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P874F1/left/P874F1_left_melted.csv
+P874F1_left_polys
+P874F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P874F1_left_polys petal seems better.
+P874F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P874F1_left_polys spots seems better.
+P874F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P874F1_left_polys spots object is invalid because:
+Self-intersection[650 580]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P874F1/right/P874F1_right_melted.csv
+P874F1_right_polys
+P874F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P874F1_right_polys petal seems better.
+P874F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P874F1_right_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F2/mid/P864F2_mid_melted.csv
+P864F2_mid_polys
+P864F2_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P864F2_mid_polys petal seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F2/left/P864F2_left_melted.csv
+P864F2_left_polys
+P864F2_left_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F2/right/P864F2_right_melted.csv
+P864F2_right_polys
+P864F2_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F2/mid/P872F2_mid_melted.csv
+P872F2_mid_polys
+P872F2_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F2_mid_polys petal seems better.
+P872F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P872F2_mid_polys spots object is invalid because:
+Self-intersection[966 723]
+P872F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P872F2_mid_polys spots seems better.
+P872F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P872F2_mid_polys spots seems better.
+P872F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P872F2_mid_polys spots object is invalid because:
+Self-intersection[1275 844]
+P872F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P872F2_mid_polys spots object is invalid because:
+Self-intersection[1323 815]
+P872F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F2_mid_polys spots seems better.
+P872F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P872F2_mid_polys spots object is invalid because:
+Self-intersection[1409 624]
+P872F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F2_mid_polys spots seems better.
+P872F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F2_mid_polys spots seems better.
+P872F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P872F2_mid_polys spots object is invalid because:
+Self-intersection[1418 608]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F2/left/P872F2_left_melted.csv
+P872F2_left_polys
+P872F2_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F2_left_polys petal seems better.
+P872F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P872F2_left_polys spots object is invalid because:
+Self-intersection[102 247]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F2/right/P872F2_right_melted.csv
+P872F2_right_polys
+P872F2_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F2_right_polys petal seems better.
+P872F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P872F2_right_polys spots seems better.
+P872F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F2_right_polys spots seems better.
+P872F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P872F2_right_polys spots object is invalid because:
+Self-intersection[2201 760]
+P872F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P872F2_right_polys spots seems better.
+P872F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F2_right_polys spots seems better.
+P872F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F2_right_polys spots seems better.
+P872F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F2_right_polys spots seems better.
+P872F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P872F2_right_polys spots object is invalid because:
+Self-intersection[2322 431]
+P872F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P872F2_right_polys spots object is invalid because:
+Self-intersection[2325 535]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F2/mid/P876F2_mid_melted.csv
+P876F2_mid_polys
+P876F2_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P876F2_mid_polys petal object is invalid because:
+Self-intersection[810 179]
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F2/left/P876F2_left_melted.csv
+P876F2_left_polys
+P876F2_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P876F2_left_polys petal seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F2/right/P876F2_right_melted.csv
+P876F2_right_polys
+P876F2_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P876F2_right_polys petal seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F3/mid/P876F3_mid_melted.csv
+P876F3_mid_polys
+P876F3_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P876F3_mid_polys petal seems better.
+P876F3_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P876F3_mid_polys spots object is invalid because:
+Self-intersection[722 513]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F3/left/P876F3_left_melted.csv
+P876F3_left_polys
+P876F3_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P876F3_left_polys petal seems better.
+P876F3_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P876F3_left_polys spots object is invalid because:
+Self-intersection[98 440]
+P876F3_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P876F3_left_polys spots seems better.
+P876F3_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P876F3_left_polys spots object is invalid because:
+Self-intersection[224 120]
+P876F3_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P876F3_left_polys spots object is invalid because:
+Self-intersection[355 691]
+P876F3_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P876F3_left_polys spots object is invalid because:
+Self-intersection[570 259]
+P876F3_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P876F3_left_polys spots object is invalid because:
+Self-intersection[574 259]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F3/right/P876F3_right_melted.csv
+P876F3_right_polys
+P876F3_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P876F3_right_polys petal seems better.
+P876F3_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P876F3_right_polys spots seems better.
+P876F3_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P876F3_right_polys spots seems better.
+P876F3_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P876F3_right_polys spots seems better.
+P876F3_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P876F3_right_polys spots object is invalid because:
+Self-intersection[1717 652]
+P876F3_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P876F3_right_polys spots seems better.
+P876F3_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P876F3_right_polys spots seems better.
+P876F3_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P876F3_right_polys spots seems better.
+P876F3_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P876F3_right_polys spots seems better.
+P876F3_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P876F3_right_polys spots object is invalid because:
+Self-intersection[2124 349]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P857F1/mid/P857F1_mid_melted.csv
+P857F1_mid_polys
+P857F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P857F1_mid_polys spots object is invalid because:
+Self-intersection[1234 671]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P857F1/left/P857F1_left_melted.csv
+P857F1_left_polys
+P857F1_left_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P857F1/right/P857F1_right_melted.csv
+P857F1_right_polys
+P857F1_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F2/mid/P862F2_mid_melted.csv
+P862F2_mid_polys
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F2/left/P862F2_left_melted.csv
+P862F2_left_polys
+P862F2_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P862F2_left_polys petal seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F2/right/P862F2_right_melted.csv
+P862F2_right_polys
+P862F2_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P862F2_right_polys petal seems better.
+P862F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P862F2_right_polys spots seems better.
+P862F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P862F2_right_polys spots seems better.
+P862F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P862F2_right_polys spots seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F1/mid/P872F1_mid_melted.csv
+P872F1_mid_polys
+P872F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F1_mid_polys petal seems better.
+P872F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F1_mid_polys spots seems better.
+P872F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P872F1_mid_polys spots seems better.
+P872F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F1_mid_polys spots seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F1/left/P872F1_left_melted.csv
+P872F1_left_polys
+P872F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P872F1_left_polys petal seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F1/right/P872F1_right_melted.csv
+P872F1_right_polys
+P872F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P872F1_right_polys petal seems better.
+P872F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P872F1_right_polys spots seems better.
+Buffering spot multipolygon.
+
+########################################
+Calling zones
+
+
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F1/mid/P862F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F1/left/P862F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F1/right/P862F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F2/mid/P855F2_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F2/left/P855F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F2/right/P855F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P856F1/mid/P856F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P856F1/left/P856F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P856F1/right/P856F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F1/left/P864F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F1/right/P864F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F1/mid/P855F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F1/left/P855F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P855F1/right/P855F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P874F1/mid/P874F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P874F1/left/P874F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P874F1/right/P874F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F2/mid/P864F2_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F2/left/P864F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P864F2/right/P864F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F2/mid/P872F2_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F2/left/P872F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F2/right/P872F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F2/mid/P876F2_mid_polys.geojson
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 151, in <module>
+    main(geojson, centerSize, outFileName)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 102, in main
+    center = findCenter(petal, centerSize)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 22, in findCenter
+    cent = sg.polygon.Polygon(center.exterior.coords)
+AttributeError: 'NoneType' object has no attribute 'coords'
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F2/left/P876F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F2/right/P876F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F3/mid/P876F3_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F3/left/P876F3_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P876F3/right/P876F3_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P857F1/mid/P857F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P857F1/left/P857F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P857F1/right/P857F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F2/mid/P862F2_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F2/left/P862F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P862F2/right/P862F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F1/mid/P872F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F1/left/P872F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P872F1/right/P872F1_right_polys.geojson
+
+########################################
+Creating PDFs
+
+
+digitizePlate3Additionallog.txt
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 129, in main
+    plotRow1(jpgs, flower)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 68, in plotRow1
+    jpg = [ i for i in os.listdir(pJpgs) if flower in i and ".JPG" in i][0]
+IndexError: list index out of range
+digitizePlate3Additional.sh
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 129, in main
+    plotRow1(jpgs, flower)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 68, in plotRow1
+    jpg = [ i for i in os.listdir(pJpgs) if flower in i and ".JPG" in i][0]
+IndexError: list index out of range
+P855F1
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P855F1.pdf'
+P855F2
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P855F2.pdf'
+P856F1
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P856F1.pdf'
+P857F1
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P857F1.pdf'
+P862F1
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P862F1.pdf'
+P862F2
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P862F2.pdf'
+P864F1
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 131, in main
+    plotRow3(wd, flower)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 107, in plotRow3
+    geoJ = [ i for i in os.listdir(pWD / petal) if "geojson" in i ][0]
+IndexError: list index out of range
+P864F2
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P864F2.pdf'
+P872F1
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P872F1.pdf'
+P872F2
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P872F2.pdf'
+P874F1
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P874F1.pdf'
+P876F2
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P876F2.pdf'
+P876F3
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 134, in main
+    plt.savefig(outPDF)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/pyplot.py", line 689, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/figure.py", line 2094, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2075, in print_figure
+    **kwargs)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 2558, in print_pdf
+    file = PdfFile(filename, metadata=metadata)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/backends/backend_pdf.py", line 433, in __init__
+    fh, opened = cbook.to_filehandle(filename, "wb", return_opened=True)
+  File "/home/daniel/Documents/learn/python/venv/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 392, in to_filehandle
+    fh = open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/danthomas/Documents/bigPDF/P876F3.pdf'

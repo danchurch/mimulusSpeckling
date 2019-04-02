@@ -12945,8 +12945,10 @@ P875F1)
 P818F1 ##didn;t call zones, even when it said that it did.
 
 plate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3'
+plate4='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4'
 toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
 runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+dougPlate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3'
 dougPlate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3'
 
 for i in ${aa[@]}; do 
@@ -12957,6 +12959,10 @@ done
 
 
 $runCuration $toy $dougPlate3
+
+$runCuration $toy $dougPlate4
+
+echo $dougPlate4
 
 ## seems okay. 
 ## but the spot estimator is a little fucked, why can't 
@@ -13344,15 +13350,16 @@ pip3 install -U -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom
 
 toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
 runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
-dougPlate4='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate4'
+dougPlate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3/'
 
 ## now try out our manual curation pipeline on these:
 
 cd $toy
 
-$runCuration $toy $dougPlate4
+$runCuration $toy $dougPlate3
 
 ## yup, this newer version sucks...
+
 
 ## for some reason, the packages didn't update correctly, some wires got crossed
 ## in there. The correct version of the modules is in the repo.
@@ -13512,7 +13519,6 @@ dev.off()
 
 dd = kppm(bb, trend = ~x+y, clusters = 'Thomas')
 
-
 ## so, 
  
 m <- ppm(cells ~ 1, Strauss(0.05))
@@ -13603,17 +13609,28 @@ kf <- Kest(bb, correction='border')
 plot(kf)
 
 kf.env <- envelope(bb,Kest,correction="border")
-
 png(file="kfunk.png")
-plot(kf.env)
+plot(kf.env, main="local intensity of spots vs. overall intensity")
 dev.off()
 
 ## this shows overdispersion - because we probably 
-## a second order patter
+## have a second order pattern. This is shown when we 
+## ask the computer to examine a thomas or matern process:
 
-plot(cc, what='intensity')
+thomasP773F1L <- kppm(bb, trend = ~1, clusters = 'Thomas')
+maternP773F1L <- kppm(bb, trend = ~1, clusters = 'MatClust')
 
-plot(cc, what='statistic')
+maternP773F1L
+
+png('thomasKfuncP773F1left')
+plot(thomasP773F1L, what='statistic', main='local spot intensity, accounting for clustering')
+dev.off()
+
+plot(maternP773F1L, what='statistic')
+
+plot(thomasP773F1L, what='cluster')
+dev.new()
+plot(maternP773F1L, what='cluster')
 
 plot(cc, what='cluster') 
 
@@ -13625,5 +13642,200 @@ plot(dd, what='intensity')
 ## if time, try this tutorial:
 
 https://www-ljk.imag.fr/membres/Jean-Francois.Coeurjolly/documents/lecture3.pdf
+
+## looking at this pdf...
+
+data(redwood)
+plot(redwood)
+fit <- kppm(redwood, ~1, "Thomas")
+plot(fit)
+
+## yeah, pretty much what I'm doing. I don't really understand why
+## my model predicts basically one cluster. 
+
+## can we attach zone to our point patters, then 
+## analyze by zone?
+
+###
+
+## whatever, stop mucking around with this until the pp is done.
+
+find . -name "P773F1*"
+
+P773F1jpeg="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3/P773F1.JPG"
+
+########## added images ########
+
+## there are a few random images that need to run 
+## so that we have all photos processed. 
+
+## we need to add them to 
+## we also need to rerun plates 1 and 2 with the new spot
+## detection algorithms?
+
+## start with the new images - download them, 
+## run the pipeline on them.
+
+## just a few files each. Can we run this on my comp with getting too 
+## bogged down?
+
+## first, get them out of the matlab objects:
+
+octave --no-gui
+
+#wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional'
+wd='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional'
+
+#dougRasterDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3Additional'
+dougRasterDir='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate4Additional'
+
+cd(dougRasterDir)
+
+files = dir('P*.mat');
+
+for file = files';
+    im = file.name;
+    imName = regexprep(im,'\.mat', ''); 
+    %% go get our file, come back
+    cd(dougRasterDir);
+    rast=load(im);
+    cd(wd);
+    %% make a spot for our image, go to it:
+    mkdir(imName);
+    cd (imName);
+    %% get our petal names (left, right mid)
+    petNames = fieldnames(rast.Petals.Clusters);
+    %% split images into petal and spot, export, for each of the three petals:
+    for i = 1:length(petNames);
+        pet = rast.Petals.(petNames{i}).data; %petal at hand
+        mkdir(petNames{i});
+        cd(petNames{i});
+        %% for octave
+        fileNamePetal = [imName "_" char(petNames(i)) "_" 'melted.csv'];
+        %% for matlab, this may work better?
+        %%fileNamePetal = imName + "_" +  petNames(i) + "_" + 'melted.csv';
+        csvwrite(fileNamePetal,pet);
+        cd ..;
+    end;
+    cd(wd);
+end;
+
+## ' ## just because it's screwing up my syntax
+
+
+vim $digPlate3Additional
+
+repo="/home/daniel/Documents/cooley_lab/mimulusSpeckling/" ## my comp
+#repo="/Users/danthomas/Documents/speckling/" ## mac
+wd=$repo"make_polygons/polygons/plate3Additional"
+packages=$repo"make_polygons/package/makeFlowerPolygons/"
+get_spots=$packages"get_spots.py"
+get_zones=$packages"get_zones.py"
+makePDFs=$packages"makePDFs.py"
+#outDir='/Users/danthomas/Documents/bigPDF' ##mac
+outDir='/home/daniel/Documents/cooley_lab/bigPDF' ## my comp
+jpgDirectory=$repo"dougRaster/Rotated_and_Cropped/plate3Additional"
+cd $wd
+
+
+
+for flower in *; do
+    echo $flower
+    $makePDFs $flower $wd $jpgDirectory -o $outDir
+done
+
+find $jpgDirectory -name "P855F2*"
+
+## fix up a script for each:
+ 
+plate3Additional="/Users/danthomas/Documents/speckling/make_polygons/polygons/plate3Additional"
+digPlate3Additional="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/digitizePlate3Additional.sh"
+
+$digPlate3Additional 2>&1 | tee -a digitizePlate3Additionallog.txt
+
+
+plate4Additional="/Users/danthomas/Documents/speckling/make_polygons/polygons/plate4Additional"
+digPlate4Additional="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/digitizePlate4Additional.sh"
+
+VE ## start virtual environment 
+
+$digPlate4Additional 2>&1 | tee -a digitizePlate4Additionallog.txt
+## let's wait a minute for that, we need to be able to work on this computer, too...
+
+########################
+
+## back to powerpoint. 
+
+## how do we get an image of a petal with its petal polygon outline imposed?
+
+## these functions are in our spotMarker.py module...
+
+VE
+python3
+
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+from makeFlowerPolygons.geojsonIO import parseGeoJson, addOne, plotOne
+from makeFlowerPolygons.spotMarker import plotOutline, photoAndPetal
+
+plt.ion()
+
+## looking at one of our petals:
+
+photoAndPetal("P773F1_left_polys.geojson","P773F1.JPG")
+
+
+aa = parseGeoJson("P773F1_left_polys.geojson")
+
+plotOne(aa[0])
+addOne(aa[2], col='b', a=0.5)
+
+
+plotOne(aa[0])
+addOne(aa[2], col='yellow', a=1.0)
+addOne(aa[3], col='b', a=0.5)
+
+## can we clean up our zones a little for a graphic?
+
+
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+dougPlate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3/'
+
+## now try out our manual curation pipeline on these:
+cd $toy
+
+$runCuration $toy $dougPlate3
+
+## back to plotter
+
+## we want P856F1 petals
+
+VE
+python3
+
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+from makeFlowerPolygons.geojsonIO import parseGeoJson, addOne, plotOne
+from makeFlowerPolygons.spotMarker import plotOutline, photoAndPetal
+
+plt.ion()
+
+## 
+
+mid="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P856F1/mid/P856F1_mid_polys.geojson"
+left="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P856F1/left/P856F1_left_polys.geojson"
+right="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional/P856F1/right/P856F1_right_polys.geojson"
+
+
+aa = parseGeoJson(left)
+aa = parseGeoJson(mid)
+aa = parseGeoJson(right)
+
+plotOne(aa[0])
+addOne(aa[2], col='yellow')
+addOne(aa[4], col='yellow')
+
+## need a screenshot of spotbreaker:
 
 

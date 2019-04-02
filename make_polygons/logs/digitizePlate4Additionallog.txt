@@ -1,0 +1,1793 @@
+########################################
+Making petals and spots
+
+
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F1/mid/P880F1_mid_melted.csv
+P880F1_mid_polys
+P880F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys petal seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[820 279]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[822 273]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[834 185]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[868 421]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[1242 151]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[1423 617]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[1412 359]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[1412 403]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[1418 404]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[1419 624]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_mid_polys spots object is invalid because:
+Self-intersection[1429 595]
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys spots seems better.
+P880F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_mid_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F1/left/P880F1_left_melted.csv
+P880F1_left_polys
+P880F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_left_polys petal seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[82 521]
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[100 669]
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[131 727]
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[448 910]
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[450 903]
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[460 831]
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[464 808]
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[471 787]
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[476 489]
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_left_polys spots seems better.
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[579 643]
+P880F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_left_polys spots object is invalid because:
+Self-intersection[599 622]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F1/right/P880F1_right_melted.csv
+P880F1_right_polys
+P880F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_right_polys petal seems better.
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_right_polys spots object is invalid because:
+Self-intersection[1664 695]
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_right_polys spots seems better.
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_right_polys spots seems better.
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_right_polys spots seems better.
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F1_right_polys spots seems better.
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_right_polys spots object is invalid because:
+Self-intersection[1966 809]
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_right_polys spots seems better.
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_right_polys spots seems better.
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_right_polys spots object is invalid because:
+Self-intersection[2034 208]
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_right_polys spots seems better.
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_right_polys spots object is invalid because:
+Self-intersection[2168 558]
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_right_polys spots seems better.
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_right_polys spots object is invalid because:
+Self-intersection[2196 303]
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F1_right_polys spots seems better.
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_right_polys spots object is invalid because:
+Self-intersection[2234 417]
+P880F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F1_right_polys spots object is invalid because:
+Self-intersection[2238 389]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F2/mid/P882F2_mid_melted.csv
+P882F2_mid_polys
+P882F2_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F2_mid_polys petal seems better.
+P882F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F2_mid_polys spots seems better.
+P882F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P882F2_mid_polys spots object is invalid because:
+Self-intersection[1046 653]
+P882F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F2_mid_polys spots seems better.
+P882F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F2_mid_polys spots seems better.
+P882F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F2_mid_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F2/left/P882F2_left_melted.csv
+P882F2_left_polys
+P882F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F2_left_polys spots seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F2/right/P882F2_right_melted.csv
+P882F2_right_polys
+P882F2_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F2_right_polys petal seems better.
+P882F2_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F1/mid/P884F1_mid_melted.csv
+P884F1_mid_polys
+P884F1_mid_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F1/left/P884F1_left_melted.csv
+P884F1_left_polys
+P884F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P884F1_left_polys petal seems better.
+P884F1_left_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F1/right/P884F1_right_melted.csv
+P884F1_right_polys
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F1/mid/P885F1_mid_melted.csv
+P885F1_mid_polys
+P885F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F1_mid_polys petal seems better.
+P885F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F1_mid_polys spots seems better.
+P885F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F1_mid_polys spots seems better.
+P885F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F1_mid_polys spots seems better.
+P885F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F1_mid_polys spots seems better.
+P885F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F1_mid_polys spots object is invalid because:
+Self-intersection[1440 260]
+P885F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F1_mid_polys spots object is invalid because:
+Self-intersection[1484 330]
+P885F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F1_mid_polys spots seems better.
+P885F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F1_mid_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F1/left/P885F1_left_melted.csv
+P885F1_left_polys
+P885F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F1_left_polys petal seems better.
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F1_left_polys spots seems better.
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F1_left_polys spots object is invalid because:
+Self-intersection[164 392]
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F1_left_polys spots object is invalid because:
+Self-intersection[178 519]
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F1_left_polys spots seems better.
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F1_left_polys spots object is invalid because:
+Self-intersection[355 128]
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F1_left_polys spots object is invalid because:
+Self-intersection[620 207]
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F1_left_polys spots object is invalid because:
+Self-intersection[675 291]
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F1_left_polys spots seems better.
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F1_left_polys spots object is invalid because:
+Self-intersection[678 486]
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F1_left_polys spots seems better.
+P885F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F1_left_polys spots object is invalid because:
+Self-intersection[686 462]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F1/right/P885F1_right_melted.csv
+P885F1_right_polys
+P885F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F1_right_polys petal seems better.
+P885F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F1_right_polys spots seems better.
+P885F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F1_right_polys spots seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F2/mid/P880F2_mid_melted.csv
+P880F2_mid_polys
+P880F2_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_mid_polys petal object is invalid because:
+Self-intersection[1066 563]
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_mid_polys spots object is invalid because:
+Self-intersection[1230 638]
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_mid_polys spots object is invalid because:
+Self-intersection[1240 571]
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_mid_polys spots object is invalid because:
+Self-intersection[1569 796]
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_mid_polys spots object is invalid because:
+Self-intersection[1620 719]
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_mid_polys spots object is invalid because:
+Self-intersection[1655 505]
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_mid_polys spots object is invalid because:
+Self-intersection[1657 565]
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_mid_polys spots seems better.
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_mid_polys spots object is invalid because:
+Self-intersection[1704 453]
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_mid_polys spots object is invalid because:
+Self-intersection[1705 452]
+P880F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_mid_polys spots object is invalid because:
+Self-intersection[1706 455]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F2/left/P880F2_left_melted.csv
+P880F2_left_polys
+P880F2_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys petal seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_left_polys spots object is invalid because:
+Self-intersection[424 928]
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_left_polys spots object is invalid because:
+Self-intersection[430 922]
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_left_polys spots object is invalid because:
+Self-intersection[472 833]
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_left_polys spots seems better.
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_left_polys spots object is invalid because:
+Self-intersection[560 451]
+P880F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_left_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F2/right/P880F2_right_melted.csv
+P880F2_right_polys
+P880F2_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_right_polys petal seems better.
+P880F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_right_polys spots seems better.
+P880F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_right_polys spots seems better.
+P880F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_right_polys spots seems better.
+P880F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_right_polys spots seems better.
+P880F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_right_polys spots object is invalid because:
+Self-intersection[2256 181]
+P880F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P880F2_right_polys spots object is invalid because:
+Self-intersection[2280 193]
+P880F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_right_polys spots seems better.
+P880F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_right_polys spots seems better.
+P880F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P880F2_right_polys spots seems better.
+P880F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P880F2_right_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F1/mid/P881F1_mid_melted.csv
+P881F1_mid_polys
+P881F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_mid_polys petal seems better.
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F1_mid_polys spots object is invalid because:
+Self-intersection[812 365]
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F1_mid_polys spots object is invalid because:
+Self-intersection[816 332]
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_mid_polys spots seems better.
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F1_mid_polys spots object is invalid because:
+Self-intersection[860 206]
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_mid_polys spots seems better.
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_mid_polys spots seems better.
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_mid_polys spots seems better.
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_mid_polys spots seems better.
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F1_mid_polys spots object is invalid because:
+Self-intersection[954 596]
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F1_mid_polys spots object is invalid because:
+Self-intersection[1010 677]
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_mid_polys spots seems better.
+P881F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_mid_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F1/left/P881F1_left_melted.csv
+P881F1_left_polys
+P881F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_left_polys petal seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F1_left_polys spots object is invalid because:
+Self-intersection[398 721]
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_left_polys spots seems better.
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F1_left_polys spots object is invalid because:
+Self-intersection[486 550]
+P881F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F1_left_polys spots object is invalid because:
+Self-intersection[504 455]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F1/right/P881F1_right_melted.csv
+P881F1_right_polys
+P881F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F1_right_polys petal seems better.
+P881F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_right_polys spots seems better.
+P881F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_right_polys spots seems better.
+P881F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F1_right_polys spots seems better.
+P881F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F1_right_polys spots object is invalid because:
+Self-intersection[2088 444]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F2/mid/P883F2_mid_melted.csv
+P883F2_mid_polys
+P883F2_mid_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F2/left/P883F2_left_melted.csv
+P883F2_left_polys
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F2/right/P883F2_right_melted.csv
+P883F2_right_polys
+P883F2_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P905F1/mid/P905F1_mid_melted.csv
+P905F1_mid_polys
+P905F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P905F1_mid_polys petal seems better.
+P905F1_mid_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P905F1/left/P905F1_left_melted.csv
+P905F1_left_polys
+P905F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P905F1_left_polys petal seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P905F1/right/P905F1_right_melted.csv
+P905F1_right_polys
+P905F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P905F1_right_polys petal seems better.
+P905F1_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P904F1/mid/P904F1_mid_melted.csv
+P904F1_mid_polys
+P904F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P904F1_mid_polys petal object is invalid because:
+Self-intersection[776 458]
+P904F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P904F1_mid_polys spots seems better.
+P904F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P904F1_mid_polys spots seems better.
+P904F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P904F1_mid_polys spots seems better.
+P904F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P904F1_mid_polys spots seems better.
+P904F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P904F1_mid_polys spots seems better.
+P904F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P904F1_mid_polys spots seems better.
+P904F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P904F1_mid_polys spots seems better.
+P904F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P904F1_mid_polys spots seems better.
+P904F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P904F1_mid_polys spots object is invalid because:
+Self-intersection[1056 445]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P904F1/left/P904F1_left_melted.csv
+P904F1_left_polys
+P904F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P904F1_left_polys petal seems better.
+P904F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P904F1_left_polys spots seems better.
+P904F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P904F1_left_polys spots seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P904F1/right/P904F1_right_melted.csv
+P904F1_right_polys
+P904F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P904F1_right_polys petal seems better.
+P904F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P904F1_right_polys spots seems better.
+P904F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P904F1_right_polys spots seems better.
+P904F1_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P904F1_right_polys spots seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P888F1/mid/P888F1_mid_melted.csv
+P888F1_mid_polys
+P888F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_mid_polys petal seems better.
+P888F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_mid_polys spots seems better.
+P888F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_mid_polys spots seems better.
+P888F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_mid_polys spots seems better.
+P888F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_mid_polys spots seems better.
+P888F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P888F1_mid_polys spots object is invalid because:
+Self-intersection[1092 785]
+P888F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_mid_polys spots seems better.
+P888F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P888F1_mid_polys spots seems better.
+P888F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P888F1_mid_polys spots object is invalid because:
+Self-intersection[1228 844]
+P888F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P888F1_mid_polys spots object is invalid because:
+Self-intersection[1233 839]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P888F1/left/P888F1_left_melted.csv
+P888F1_left_polys
+P888F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_left_polys petal seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_left_polys spots seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_left_polys spots seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P888F1_left_polys spots seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_left_polys spots seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P888F1_left_polys spots object is invalid because:
+Self-intersection[388 738]
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_left_polys spots seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P888F1_left_polys spots seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P888F1_left_polys spots seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P888F1_left_polys spots object is invalid because:
+Self-intersection[436 520]
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_left_polys spots seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_left_polys spots seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P888F1_left_polys spots seems better.
+P888F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_left_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P888F1/right/P888F1_right_melted.csv
+P888F1_right_polys
+P888F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P888F1_right_polys petal seems better.
+P888F1_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P907F1/mid/P907F1_mid_melted.csv
+P907F1_mid_polys
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P907F1/left/P907F1_left_melted.csv
+P907F1_left_polys
+P907F1_left_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P907F1/right/P907F1_right_melted.csv
+P907F1_right_polys
+P907F1_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F1/mid/P882F1_mid_melted.csv
+P882F1_mid_polys
+P882F1_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F1_mid_polys petal seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F1_mid_polys spots seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_mid_polys spots seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_mid_polys spots seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_mid_polys spots seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_mid_polys spots seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_mid_polys spots seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F1_mid_polys spots seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F1_mid_polys spots seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_mid_polys spots seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F1_mid_polys spots seems better.
+P882F1_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_mid_polys spots seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F1/left/P882F1_left_melted.csv
+P882F1_left_polys
+P882F1_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P882F1_left_polys petal object is invalid because:
+Self-intersection[260 743]
+P882F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P882F1_left_polys spots object is invalid because:
+Self-intersection[248 498]
+P882F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_left_polys spots seems better.
+P882F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_left_polys spots seems better.
+P882F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F1_left_polys spots seems better.
+P882F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_left_polys spots seems better.
+P882F1_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P882F1_left_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F1/right/P882F1_right_melted.csv
+P882F1_right_polys
+P882F1_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P882F1_right_polys petal seems better.
+P882F1_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F2/mid/P885F2_mid_melted.csv
+P885F2_mid_polys
+P885F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F2_mid_polys spots seems better.
+P885F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F2_mid_polys spots seems better.
+P885F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F2_mid_polys spots seems better.
+P885F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F2_mid_polys spots seems better.
+P885F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F2_mid_polys spots seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F2/left/P885F2_left_melted.csv
+P885F2_left_polys
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F2_left_polys spots seems better.
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F2_left_polys spots object is invalid because:
+Self-intersection[578 430]
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F2_left_polys spots object is invalid because:
+Self-intersection[583 521]
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F2_left_polys spots seems better.
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F2_left_polys spots object is invalid because:
+Self-intersection[613 509]
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F2_left_polys spots seems better.
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F2_left_polys spots seems better.
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F2_left_polys spots seems better.
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P885F2_left_polys spots object is invalid because:
+Self-intersection[631 430]
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F2_left_polys spots seems better.
+P885F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P885F2_left_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F2/right/P885F2_right_melted.csv
+P885F2_right_polys
+P885F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F2_right_polys spots seems better.
+P885F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F2_right_polys spots seems better.
+P885F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P885F2_right_polys spots seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F1/mid/P883F1_mid_melted.csv
+P883F1_mid_polys
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 383, in <module>
+    main(meltParentDir, gjName, meltBaseName, outFileName)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 324, in main
+    spotPolRaw = digitizePols(spotsMat)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py", line 82, in digitizePols
+    return(shapelyPoly)
+UnboundLocalError: local variable 'shapelyPoly' referenced before assignment
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F1/left/P883F1_left_melted.csv
+P883F1_left_polys
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F1/right/P883F1_right_melted.csv
+P883F1_right_polys
+P883F1_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P906F1/mid/P906F1_mid_melted.csv
+P906F1_mid_polys
+P906F1_mid_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P906F1/left/P906F1_left_melted.csv
+P906F1_left_polys
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P906F1/right/P906F1_right_melted.csv
+P906F1_right_polys
+P906F1_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F2/mid/P881F2_mid_melted.csv
+P881F2_mid_polys
+P881F2_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_mid_polys petal seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_mid_polys spots seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_mid_polys spots seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_mid_polys spots seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_mid_polys spots seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F2_mid_polys spots object is invalid because:
+Self-intersection[1054 562]
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_mid_polys spots seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F2_mid_polys spots object is invalid because:
+Self-intersection[1128 589]
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_mid_polys spots seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_mid_polys spots seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F2_mid_polys spots object is invalid because:
+Self-intersection[1188 705]
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_mid_polys spots seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_mid_polys spots seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_mid_polys spots seems better.
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F2_mid_polys spots object is invalid because:
+Self-intersection[1310 825]
+P881F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_mid_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F2/left/P881F2_left_melted.csv
+P881F2_left_polys
+P881F2_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_left_polys petal seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F2_left_polys spots object is invalid because:
+Self-intersection[554 799]
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_left_polys spots seems better.
+P881F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F2_left_polys spots object is invalid because:
+Self-intersection[746 583]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F2/right/P881F2_right_melted.csv
+P881F2_right_polys
+P881F2_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_right_polys petal seems better.
+P881F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P881F2_right_polys spots seems better.
+P881F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P881F2_right_polys spots object is invalid because:
+Self-intersection[2310 678]
+P881F2_right_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P881F2_right_polys spots seems better.
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F2/mid/P884F2_mid_melted.csv
+P884F2_mid_polys
+P884F2_mid_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P884F2_mid_polys petal seems better.
+P884F2_mid_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F2/left/P884F2_left_melted.csv
+P884F2_left_polys
+P884F2_left_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P884F2_left_polys petal seems better.
+P884F2_left_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F2/right/P884F2_right_melted.csv
+P884F2_right_polys
+P884F2_right_polys petal is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P884F2_right_polys petal seems better.
+This spot multipolygon seems okay without buffering.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P912F2/mid/P912F2_mid_melted.csv
+P912F2_mid_polys
+P912F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+multiple polygons detected where there should only be one
+Buffering complete. P912F2_mid_polys spots seems better.
+P912F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering complete. P912F2_mid_polys spots seems better.
+P912F2_mid_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P912F2_mid_polys spots object is invalid because:
+Self-intersection[1210 611]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P912F2/left/P912F2_left_melted.csv
+P912F2_left_polys
+P912F2_left_polys spots is invalid! Opening bag of tricks
+Trying buffering
+Buffering doesn't help.
+Trying simplification.
+Simplifying polygon doesn't help either. Returning original.
+Careful. P912F2_left_polys spots object is invalid because:
+Self-intersection[487 452]
+Buffering spot multipolygon.
+Now making petal and spots for: /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P912F2/right/P912F2_right_melted.csv
+P912F2_right_polys
+P912F2_right_polys spots is empty!
+This spot multipolygon seems okay without buffering.
+
+########################################
+Calling zones
+
+
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F1/mid/P880F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F1/left/P880F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F1/right/P880F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F2/mid/P882F2_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F2/left/P882F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F2/right/P882F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F1/mid/P884F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F1/left/P884F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F1/right/P884F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F1/mid/P885F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F1/left/P885F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F1/right/P885F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F2/mid/P880F2_mid_polys.geojson
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 151, in <module>
+    main(geojson, centerSize, outFileName)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 102, in main
+    center = findCenter(petal, centerSize)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 22, in findCenter
+    cent = sg.polygon.Polygon(center.exterior.coords)
+AttributeError: 'NoneType' object has no attribute 'coords'
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F2/left/P880F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F2/right/P880F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F1/mid/P881F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F1/left/P881F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F1/right/P881F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F2/mid/P883F2_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F2/left/P883F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F2/right/P883F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P905F1/mid/P905F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P905F1/left/P905F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P905F1/right/P905F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P904F1/mid/P904F1_mid_polys.geojson
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 151, in <module>
+    main(geojson, centerSize, outFileName)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 102, in main
+    center = findCenter(petal, centerSize)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 22, in findCenter
+    cent = sg.polygon.Polygon(center.exterior.coords)
+AttributeError: 'NoneType' object has no attribute 'coords'
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P904F1/left/P904F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P904F1/right/P904F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P888F1/mid/P888F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P888F1/left/P888F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P888F1/right/P888F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P907F1/mid/P907F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P907F1/left/P907F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P907F1/right/P907F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F1/mid/P882F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F1/left/P882F1_left_polys.geojson
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 151, in <module>
+    main(geojson, centerSize, outFileName)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 102, in main
+    center = findCenter(petal, centerSize)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_zones.py", line 22, in findCenter
+    cent = sg.polygon.Polygon(center.exterior.coords)
+AttributeError: 'NoneType' object has no attribute 'coords'
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P882F1/right/P882F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F2/mid/P885F2_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F2/left/P885F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P885F2/right/P885F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F1/left/P883F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P883F1/right/P883F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P906F1/mid/P906F1_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P906F1/left/P906F1_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P906F1/right/P906F1_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F2/mid/P881F2_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F2/left/P881F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P881F2/right/P881F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F2/mid/P884F2_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F2/left/P884F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P884F2/right/P884F2_right_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P912F2/mid/P912F2_mid_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P912F2/left/P912F2_left_polys.geojson
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P912F2/right/P912F2_right_polys.geojson
+
+########################################
+Creating PDFs
+
+
+P880F1
+P880F2
+P881F1
+P881F2
+P882F1
+P882F2
+P883F1
+Traceback (most recent call last):
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 166, in <module>
+    main(flower, wd, jpgs, outDir)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 131, in main
+    plotRow3(wd, flower)
+  File "/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py", line 107, in plotRow3
+    geoJ = [ i for i in os.listdir(pWD / petal) if "geojson" in i ][0]
+IndexError: list index out of range
+P883F2
+P884F1
+P884F2
+P885F1
+P885F2
+P888F1
+P904F1
+P905F1
+P906F1
+P907F1
+P912F2

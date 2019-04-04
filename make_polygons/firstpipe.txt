@@ -13572,6 +13572,10 @@ R
 R
 library('spatstat')
 
+install.packages('GISTools')
+
+library('GISTools')
+
 polyXY = read.csv("testPetalWindow.csv")
 xx=rev(polyXY$x)
 yy=rev(polyXY$y)
@@ -13628,8 +13632,14 @@ dev.off()
 
 plot(maternP773F1L, what='statistic')
 
+
 plot(thomasP773F1L, what='cluster')
-dev.new()
+
+png("clusterIntensity.png")
+plot(thomasP773F1L, what='cluster', main='')
+dev.off()
+
+
 plot(maternP773F1L, what='cluster')
 
 plot(cc, what='cluster') 
@@ -13805,6 +13815,7 @@ dougPlate3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotate
 ## now try out our manual curation pipeline on these:
 cd $toy
 
+VE
 $runCuration $toy $dougPlate3
 
 ## back to plotter
@@ -13836,6 +13847,148 @@ plotOne(aa[0])
 addOne(aa[2], col='yellow')
 addOne(aa[4], col='yellow')
 
-## need a screenshot of spotbreaker:
+## we need a bad spot... to show on our power point...
+
+## how can we find this?
+
+VE
+
+checkSpot="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/checkSpot.py"
+plate4add='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional'
+
+for i in $(find $plate4add -name "*geojson"); do
+    echo $i 
+    $checkSpot $i 
+done
+
+## not gonna work, my pipeline is too good now. 
+
+## so, let's make one:
+
+VE
+python3
+
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+from makeFlowerPolygons.geojsonIO import parseGeoJson, addOne, plotOne
+from makeFlowerPolygons.get_spots import parseDougMatrix, digitizePols
+
+
+## for example P880F1?
+
+csv="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F1/left/P880F1_left_melted.csv"
+
+
+_, petalMat, spotsMat = parseDougMatrix(csv)
+
+petPolRaw = digitizePols(petalMat)
+
+spotPolRaw = digitizePols(spotsMat)
+
+plotOne(petPolRaw[0])
+
+plotOne(spotPolRaw[87], col='r')
+
+addOne(spotPolRaw)
+
+plt.ion()
+
+plt.show()
+
+for i,j in enumerate(spotPolRaw):
+    i
+    j.area
+    j.is_valid
+
+## so our first is invalid, plot it, find invalidity
+
+## 
+
+
+kde.points(aa)
+
+## needs a SpaialPoints object. 
+
+## melia's job:
+5421402                    TasselTest       dthomas01
+
+
+###### ugh, accidentally deleted all of my work with 
+## spat stat and kdes...
+
+## can we rebuild this?
+
+
+
+
+R
+library('spatstat')
+library('rgl')
+library('GISTools')
+
+polyXY = read.csv("testPetalWindow.csv")
+xx=rev(polyXY$x)
+yy=rev(polyXY$y)
+aa=cbind(xx,yy)
+wind = owin(poly=aa)
+inkspots=read.csv(paste0("/home/daniel/Documents/",
+                "cooley_lab/mimulusSpeckling/",
+                "make_polygons/toy/testInkSpot.csv"))
+petalppp = ppp(x=inkspots$x, 
+            y=inkspots$y, 
+            window=wind,
+            marks=inkspots$area)
+
+k025 <- density.ppp(petalppp, sigma = 0.25)
+SG <- as(k025, "SpatialGridDataFrame")
+
+par(mfrow=c(2,2))
+
+
+plot(k025)
+
+
+
+k010 <- density.ppp(petalppp, sigma = 0.10)
+SG <- as(k010, "SpatialGridDataFrame")
+k025 <- density.ppp(petalppp, sigma = 0.25)
+SG <- cbind(SG, as(k025, "SpatialGridDataFrame"))
+k050 <- density.ppp(petalppp, sigma = 0.5)
+SG <- cbind(SG, as(k050, "SpatialGridDataFrame"))
+k075 <- density.ppp(petalppp, sigma = 0.75)
+SG <- cbind(SG, as(k075, "SpatialGridDataFrame"))
+k100 <- density.ppp(petalppp, sigma = 1)
+SG <- cbind(SG, as(k100, "SpatialGridDataFrame"))
+names(SG) <- c("k010","k025", "k050", "k075", "k100")
+
+
+par(mfrow=c(2,2))
+
+plot(SG$k025)
+
+plot(k025)
+
+library(rgl)
+
+z <- as(SG["k010"], "matrix")
+
+z <- as(SG["k025"], "matrix")
+
+z <- as(SG["k050"], "matrix")
+
+z <- as(SG["k075"], "matrix")
+
+z[is.na(z)] <- 0
+x <- 1:nrow(z)
+y <- 1:ncol(z)
+rgl.bg(color = "white")
+rgl.clear()
+rgl.viewpoint(theta = 180, phi = 35)
+rgl.surface(x, y, z)
+
+
+rgl.clear()
+rgl.viewpoint(theta = 50, phi = 35)
+rgl.surface(x, y, z)
 
 

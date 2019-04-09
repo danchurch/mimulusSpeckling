@@ -200,6 +200,7 @@ class FlowerPetal():
         except:
             print('unable to calulate propSpotsInCenter and centerCoveredbySpots')
             propSpotsInCenter = None
+            centerCoveredbySpots = None
         try:
             spotOnCentroid = any([ i.intersects(self.petal.centroid) for i in self.spots ])
         except:
@@ -370,6 +371,9 @@ class FlowerPetal():
             quadICoveredbySpots = spottedSurfaceQuadI.area / petalQuadI.area
         except:
             print('unable to calulate QuadIStats')
+            (nuQuadISpots,
+            propSpotsInQuadI,
+            quadICoveredbySpots) = None, None, None
         return(
             nuQuadISpots,
             propSpotsInQuadI,
@@ -385,6 +389,9 @@ class FlowerPetal():
             quadIICoveredbySpots = spottedSurfaceQuadII.area / petalQuadII.area
         except:
             print('unable to calulate QuadIIStats')
+            (nuQuadIISpots,
+            propSpotsInQuadII,
+            quadIICoveredbySpots) = None, None, None
         return(
             nuQuadIISpots,
             propSpotsInQuadII,
@@ -400,6 +407,9 @@ class FlowerPetal():
             quadIIICoveredbySpots = spottedSurfaceQuadIII.area / petalQuadIII.area
         except:
             print('unable to calulate QuadIIIStats')
+            (nuQuadIIISpots,
+            propSpotsInQuadIII,
+            quadIIICoveredbySpots) = None, None, None
         return(
             nuQuadIIISpots,
             propSpotsInQuadIII,
@@ -415,6 +425,9 @@ class FlowerPetal():
             quadIVCoveredbySpots = spottedSurfaceQuadIV.area / petalQuadIV.area
         except:
             print('unable to calulate QuadIVStats')
+            (nuQuadIVSpots,
+            propSpotsInQuadIV,
+            quadIVCoveredbySpots) = None, None, None
         return(
             nuQuadIVSpots,
             propSpotsInQuadIV,
@@ -559,6 +572,7 @@ if __name__ == '__main__':
     petals.sort()
     flowerpetalList = []
     for i,plantFlowerPetal in enumerate(petals):
+        print("file is {}.".format(plantFlowerPetal))
         fl = FlowerPetal()
         fl.plantName = re.sub(r"(P.*)F.*",r"\1",plantFlowerPetal)
         fl.flowerName = re.sub(r"P.*(F\d).*",r"\1",plantFlowerPetal)

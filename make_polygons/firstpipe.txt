@@ -13872,7 +13872,7 @@ import matplotlib.pyplot as plt
 import shapely.geometry as sg
 from makeFlowerPolygons.geojsonIO import parseGeoJson, addOne, plotOne
 from makeFlowerPolygons.get_spots import parseDougMatrix, digitizePols
-
+plt.ion()
 
 ## for example P880F1?
 
@@ -13886,24 +13886,25 @@ petPolRaw = digitizePols(petalMat)
 spotPolRaw = digitizePols(spotsMat)
 
 plotOne(petPolRaw[0])
-
-plotOne(spotPolRaw[87], col='r')
-
 addOne(spotPolRaw)
 
-plt.ion()
-
-plt.show()
+plotOne(spotPolRaw[87], col='r')
 
 for i,j in enumerate(spotPolRaw):
     i
     j.area
     j.is_valid
-
 ## so our first is invalid, plot it, find invalidity
 
-## 
 
+## compare it to our final, valid polygon:
+
+geoj="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4Additional/P880F1/left/P880F1_left_polys.geojson"
+
+aa = parseGeoJson(geoj)
+
+plotOne(aa[0])
+addOne(aa[1])
 
 kde.points(aa)
 
@@ -13922,6 +13923,7 @@ kde.points(aa)
 
 
 R
+
 library('spatstat')
 library('rgl')
 library('GISTools')
@@ -13939,18 +13941,32 @@ petalppp = ppp(x=inkspots$x,
             window=wind,
             marks=inkspots$area)
 
+bb=unmark(petalppp)
+
+plot(petalppp, main='')
+plot(bb, main='')
+
 k025 <- density.ppp(petalppp, sigma = 0.25)
 SG <- as(k025, "SpatialGridDataFrame")
 
 par(mfrow=c(2,2))
 
 
-plot(k025)
+png('petalppp.png')
+plot(petalppp, main='')
+dev.off()
+png('petalpppUnmark.png')
+plot(bb, main='')
+dev.off()
+png('petalpppKDE.png')
+plot(k010, main='')
+dev.off()
 
 
-
+k005 <- density.ppp(petalppp, sigma = 0.05)
+SG <- as(k005, "SpatialGridDataFrame")
 k010 <- density.ppp(petalppp, sigma = 0.10)
-SG <- as(k010, "SpatialGridDataFrame")
+SG <- cbind(SG, as(k010, "SpatialGridDataFrame"))
 k025 <- density.ppp(petalppp, sigma = 0.25)
 SG <- cbind(SG, as(k025, "SpatialGridDataFrame"))
 k050 <- density.ppp(petalppp, sigma = 0.5)

@@ -155,7 +155,7 @@ def addOne(poly,
             artExt=[ext]
             if poly.interiors:
                     iInteriors=[]
-                    for j in i.interiors:
+                    for j in poly.interiors:
                         intPoly=sg.Polygon(j)
                         iIntArt = ax1.add_patch(PolygonPatch(intPoly,
                                       fc=bkgcol, ec='black',

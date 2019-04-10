@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 
-import os, argparse, pathlib, json, re, copy
-import pandas as pd
-from makeFlowerPolygons import breakSpots, manZoneCaller, spotMarker
-import shapely.errors
-
-## while working without internet, for updating packages
+########################################################
+## for local development, use this:                   ##
+########################################################
 #import sys
 #sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
 #import breakSpots
 #import manZoneCaller 
 #import  spotMarker
+########################################################
 
-## debug variables:
+import os, argparse, pathlib, json, re, copy
+import pandas as pd
+from makeFlowerPolygons import breakSpots, manZoneCaller, spotMarker
+import shapely.errors
+
 
 def choice():
     ch=input('(y/n)')

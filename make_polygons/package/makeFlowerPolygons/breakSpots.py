@@ -4,6 +4,15 @@
 but simply introduces yellow space into the petal, clipping polygons
 where necessary.
 """
+
+########################################################
+## for local development, use this:                   ##
+########################################################
+#import sys
+#sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons")
+#import geojsonIO
+########################################################
+
 import matplotlib as mp
 mp.use("TkAgg")
 import matplotlib.image as mpimg

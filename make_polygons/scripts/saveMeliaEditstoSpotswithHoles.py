@@ -9,22 +9,23 @@ from geojsonIO import parseGeoJson, writeGeoJ
 ## arguments:
 parser = argparse.ArgumentParser()
 parser.add_argument('geojson')
-parser.add_argument('directory1')
-parser.add_argument('directory2')
+parser.add_argument('spotsDir')
+parser.add_argument('otherFeaturesDir')
 parser.add_argument('directoryOut')
+
 args = parser.parse_args()
 geojson=args.geojson
-directory1=pathlib.Path(args.directory1)
-directory2=pathlib.Path(args.directory2)
+spotsDir=pathlib.Path(args.spotsDir)
+otherFeaturesDir=pathlib.Path(args.otherFeaturesDir)
 directoryOut=pathlib.Path(args.directoryOut)
 
 ## get file and items from each:
 
-(_, newSpots, _, _, _, _, _, _) = parseGeoJson(directory1 / geojson)
+(_, newSpots, _, _, _, _, _, _) = parseGeoJson(spotsDir / geojson)
 
 (petal, _, center, 
 edge, throat, spotEstimates, 
-photoBB, scalingFactor) = geoj2=parseGeoJson(directory2 / geojson)
+photoBB, scalingFactor) = geoj2=parseGeoJson(otherFeaturesDir / geojson)
 
 ## write out a new geojson:
 

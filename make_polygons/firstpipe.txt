@@ -14007,4 +14007,746 @@ rgl.clear()
 rgl.viewpoint(theta = 50, phi = 35)
 rgl.surface(x, y, z)
 
+###############################################
+
+## how do run our automated phenotypes again?
+
+VE
+flowerPetal='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/flowerPetal.py'
+## needs a directory. Looks like it needs a flat directory of our geojsons. let's copy plate3 into toy:
+plate3="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3"
+plate4="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4"
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+toyPlate4="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toyPlate4"
+#find $plate3 -name "*geojson" -exec cp {} $toy \; 
+#find $plate4 -name "*geojson" -exec cp {} $toyPlate4 \; 
+$flowerPetal $toy plate3 &> plate3autopheno.log &
+$flowerPetal $toyPlate4 plate4 &> plate4autopheno.log &
+
+## some bug is killing this before it can finish. 
+## hmm, we need to improve our logging here...cuz I have no idea what file is doing this....
+
+## worked... update our modules?
+
+#####################################
+
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package
+
+## update version name
+
+python3 setup.py sdist bdist_wheel
+
+python3 -m twine upload --skip-existing dist/*
+
+## seems to have worked... now can we update in our venv?
+
+## my comp
+#source /home/daniel/Documents/learn/python/venv/bin/activate
+
+cd /home/daniel/Documents/learn/python/venv/bin/activate
+
+pip install -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom==0.0.2
+
+VE
+
+sudo pip3 install --upgrade pip
+
+pip3 install -U makeFlowerPolygons-dcthom
+
+##########################################
+
+## check on these new csvs of the phenotypes:
+
+find . -name "*.p"
+
+cd $toy
+
+## trying to remember how to convert this to a 
+## format that Melia needs... 
+
+## updated script here:
+
+flowerPetal2tassel='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/flowerPetal2tassel.py'
+
+plate3panda='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/plate3.p'
+
+plate4panda='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toyPlate4/plate4.p'
+
+$flowerPetal2tassel -h
+
+$flowerPetal2tassel $plate3panda "plate3forTassel.csv"
+
+$flowerPetal2tassel $plate4panda "plate4forTassel.csv"
+
+## seems to work...
+
+#############################################
+
+## I forget, do we need to fix the holes in plates 1 and 2?
+
+## check plate1
+
+aa=parseGeoJson("/home/daniel/Documents/cooley_lab/"
+                "curatedPetals/plate1/P339F1/"
+                "mid/P339F1_mid_polys.geojson")
+
+plotOne(aa[0])
+
+addOne(aa[1])
+
+## okay, how did we patch plate3?
+
+## the directories we have on hand has nice hand curations
+## but we also need to rerun these spots digitizations with 
+## our new spot calling methods, to incorporate holes
+
+## the first would be to rerun the spots digitizations, from the
+## the matlab CSVs...
+
+## for plate3, the one we have on file has hand curations but 
+## no corrections for spots in holes:
+
+
+#cd $plate1oldSpotsYesCuration
+## for plate3, the one we need to create from the csv.
+## we need to run all csvs for plate 1 through the get_spots module:
+
+get_spots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py'
+plate1oldSpotsYesCuration="/home/daniel/Documents/cooley_lab/curatedPetals/plate1/"
+plate1newSpots='/home/daniel/Documents/cooley_lab/plate1newSpots'
+csvs=$(find $plate1oldSpotsYesCuration -name "*_melted.csv") 
+
+VE
+
+for i in ${csvs[@]}; do
+    echo $i
+    $get_spots $i -d $plate1newSpots |& tee -a plateNewSpots.log
+done
+
+## we'll put the spots from the newspots folder and all other features from our curated plate1 into:
+plate1Merged="/home/daniel/Documents/cooley_lab/plate1Merged/"
+
+## our script to combine the two
+saveMeliaEditstoSpotswithHoles='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/saveMeliaEditstoSpotswithHoles.py'
+
+
+## this script goes file by file with the name of a geojson, searching two folders
+
+
+allgeojs=$(find $plate1oldSpotsYesCuration -name "*geojson" -exec basename {} \;)
+
+for i in ${allgeojs[@]}; do 
+    echo $i
+    newspotGeoJ=$(find $plate1newSpots -name $i -exec dirname {} \;)
+    echo $newspotGeoJ
+    allOtherGeoJ=$(find $plate1oldSpotsYesCuration -name $i -exec dirname {} \;)
+    echo $allOtherGeoJ
+    $saveMeliaEditstoSpotswithHoles $i $newspotGeoJ $allOtherGeoJ $plate1Merged
+done
+
+
+## looks okay. Can we do this plate2 also?
+
+###############################################################
+
+VE
+get_spots='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py'
+plate2oldSpotsYesCuration="/home/daniel/Documents/cooley_lab/curatedPetals/plate2/"
+plate2newSpots='/home/daniel/Documents/cooley_lab/plate2newSpots'
+csvs=$(find $plate2oldSpotsYesCuration -name "*_melted.csv") 
+saveMeliaEditstoSpotswithHoles='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/saveMeliaEditstoSpotswithHoles.py'
+
+for i in ${csvs[@]}; do
+    echo $i
+    $get_spots $i -d $plate2newSpots |& tee -a plate2NewSpots.log
+done
+
+## finish subbing in the spots for plate2, then get to the gui issues
+
+## we'll put the spots from the newspots folder and all other features from our curated plate1 into:
+plate2Merged="/home/daniel/Documents/cooley_lab/plate2Merged/"
+
+## this script goes file by file with the name of a geojson, searching two folders
+
+####### 
+allgeojs=$(find $plate2oldSpotsYesCuration -name "*geojson" -exec basename {} \;)
+
+for i in ${allgeojs[@]}; do 
+    echo $i
+    newspotGeoJ=$(find $plate2newSpots -name $i -exec dirname {} \;)
+    echo $newspotGeoJ
+    allOtherGeoJ=$(find $plate2oldSpotsYesCuration -name $i -exec dirname {} \;)
+    echo $allOtherGeoJ
+    $saveMeliaEditstoSpotswithHoles $i $newspotGeoJ $allOtherGeoJ $plate2Merged
+done
+
+## now look at some of these, make sure everything looks okay:
+
+## looks okay. Just curious, what happened with P500F1_right? An entire spot disappears, a big one...
+
+## let's run just the spot marker for that one...
+
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+
+find $plate2oldSpotsYesCuration -name "P500F1_right*csv" -exec cp {} $toy \;
+
+cd $toy
+
+## set pdb trace in our get_spots main function:
+
+$get_spots P500F1_right_melted.csv -d $toy 
+
+## is the spot present inour spotPolRaw object?
+
+from makeFlowerPolygons.geojsonIO import parseGeoJson, addOne, plotOne
+from shapely.validation import explain_validity
+from shapely import geometry as sg
+plt.ion()
+
+plotOne(petPolRaw)
+
+addOne(spotPolRaw)
+
+## yup.
+
+spotPolRaw.is_valid ## false
+explain_validity(spotPolRaw) ## Self-intersection[1176 392]
+
+## our buffering etc doesn't help this?
+
+plotOne(petPol)
+
+addOne(spotPol)
+
+spotPol.is_valid 
+
+
+explain_validity(spotPol) 
+
+[ i.is_valid for i in spotPol ] ## the first poly
+
+[ i.area for i in spotPol ]  ## this is the big one
+
+spotPol[0].buffer(0).is_valid
+
+bb = spotPol[0].buffer(0)
+
+cc = spotPol[0].buffer(1)
+
+dd = spotPol[0].simplify(0)
+
+bb.is_empty
+
+bb.is_valid
+
+plotOne(petPol)
+
+addOne(bb)
+
+addOne(dd)
+
+
+## huh. Looks like we could fix this with break spot. 
+
+## anyway, where do we lose the polygon?
+
+## and can we track these kinds of errors?
+## it looks like they actually happen after we try to clean up, maybe when 
+## the affine transformations are done on them?
+
+plotOne(standPet)
+addOne(standSpots)
+
+## nope. still there. 
+
+## okay, when does this spot disappear?
+
+
+plt.close('all')
+
+plotOne(standPet)
+addOne(spotsWithHoles)
+## not our holefinder algorthms....
+
+
+plotOne(standPet)
+addOne(finalSpotsMultiPoly)
+## there it is....our final cleaning of the multipoly as a group
+
+## set our trace there...
+
+plotOne(SpotsMultiPoly[0])
+addOne(SpotsMultiPoly)
+
+plotOne(cleanMultPoly[0])
+addOne(cleanMultPoly) ## yup, that's where we lose it. 
+## line 195/196
+
+plotOne(standPet)
+addOne(finalSpotsMultiPoly)
+
+## okay, well, that looks like some that could be fixed. 
+## but let's work on debugging melia's issues 
+
+###############################################3
+
+## guis are broken again. If I can fix them quickly,
+## considered cutting out the rotten part of the 
+## polygons that don't digitize before running the
+## phenotyping...
+
+## try GUIs on my machine:
+
+## get a few from plate3additionals:
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional
+
+cp -r * $toy
+
+cd $toy
+
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+runCuration="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/runCuration.py"
+dougRaster="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3Additional"
+
+$runCuration $toy $dougRaster
+
+## just a variable name typo,
+
+## update everything, get to Melia
+
+## where does that leave things...
+
+## seems like we need the phenotypes out...
+
+## today, what can we do?
+
+## maybe march on with the plate1 and plate2 phenotyping...
+
+## get new pdfs for all the plates,
+
+## from this generate a list of problem petals that either
+## need to be excluded or fixed, 
+
+## fix them in qgis and rerun
+
+## but for now everyone is in a hurry, so spit out some phenotypes
+
+## ugh, this project has been so production-oriented. Some serious, deep work
+## is needed but there is no time. 
+
+## so we need all-petal pdfs of plates 1,2,3,4
+
+## for plates 1 and 2, we need all-petal pdfs as they are in the
+## repo, and also from the recently redigitized spot versions on
+## my computer. 
+
+## okay, so fire up the pdf maker -- how does that thing work again?
+
+## think we need that repo architecture, not a flat directory...
+
+## so we need to recreate our repo architecture in our new spots geojson 
+## directories...
+
+makePDFs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py"
+jpgDirPl3Additional="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3Additional"
+
+## try out in the toy directory:
+
+cd $toy
+$makePDFs P876F3 $toy $jpgdirPl3Additional
+
+## okay, so for plate 1, preSpotsWithHoles debug:
+makePDFs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py"
+jpgDirPl1="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate1"
+geojDirPl1PreSpotsdebug="/home/daniel/Documents/cooley_lab/curatedPetals/plate1"
+pdfDirPl1PreSpotsdebug="/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl1PreSpotsdebug"
+
+cd $geojDirPl1PreSpotsdebug
+
+for flower in *; do
+    echo $flower
+    $makePDFs $flower $geojDirPl1PreSpotsdebug $jpgDirPl1 -o $pdfDirPl1PreSpotsdebug
+done
+
+#######
+## for plate 1, with new spots but spotbreaks lost:
+
+## this directory isn't in the form of the repo, it's flat. So we need to copy our old 
+## curated photo, and sub in our newspots geojson:
+
+pl1newSpotsRS="/home/daniel/Documents/cooley_lab/plate1RepoStyle"
+plate1Merged="/home/daniel/Documents/cooley_lab/plate1Merged"
+
+cp -r $geojDirPl1PreSpotsdebug/* $pl1newSpotsRS
+
+cd $pl1newSpotsRS
+
+speck
+
+aa=$(find $pl1newSpotsRS -name "*geojson")
+for i in ${aa[@]}; do 
+    geoj=$(basename $i)
+    echo $geoj
+    echo $i
+    diri=$(dirname $i)
+    echo $diri
+    #find $plate1Merged -name $geoj 
+    find $plate1Merged -name $geoj -exec cp {} $diri \;
+done
+
+## did that work?
+
+## looks okay...man, this is complicated. 
+## anyway, now we should be able to run our pdfs as above:
+
+makePDFs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py"
+jpgDirPl1="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate1"
+geojDirPl1PostSpotsdebug="/home/daniel/Documents/cooley_lab/plate1RepoStyle"
+pdfDirPl1PostSpotsdebug="/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl1PostSpotsdebug"
+
+VE
+
+cd $geojDirPl1PostSpotsdebug
+
+for flower in *; do
+    echo $flower
+    $makePDFs $flower $geojDirPl1PostSpotsdebug $jpgDirPl1 -o $pdfDirPl1PostSpotsdebug
+done
+
+#####################################
+
+## repeat the above with plate2 
+
+## for our older plate2, with spots not allowed to have holes, 
+## but spots are broken... 
+
+## okay, so for plate 1, preSpotsWithHoles debug:
+makePDFs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py"
+jpgDirPl2="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2"
+geojDirPl2PreSpotsdebug="/home/daniel/Documents/cooley_lab/curatedPetals/plate2"
+pdfDirPl2PreSpotsdebug="/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl2PreSpotsdebug"
+
+VE
+
+cd $geojDirPl2PreSpotsdebug
+
+for flower in *; do
+    echo $flower
+    $makePDFs $flower $geojDirPl2PreSpotsdebug $jpgDirPl2 -o $pdfDirPl2PreSpotsdebug
+done
+
+####### plate2 post debug but spotbreaks lost
+ 
+plate2RepoStyle="/home/daniel/Documents/cooley_lab/plate2RepoStyle"
+plate2Merged="/home/daniel/Documents/cooley_lab/plate2Merged"
+
+#cp -r $geojDirPl2PreSpotsdebug/* $pl2newSpotsRS
+
+speck
+
+aa=$(find $plate2RepoStyle -name "*geojson")
+
+for i in ${aa[@]}; do 
+    geoj=$(basename $i)
+    echo $geoj
+    echo $i
+    diri=$(dirname $i)
+    echo $diri
+    #find $plate2Merged -name $geoj 
+    find $plate2Merged -name $geoj -exec cp {} $diri \;
+done
+
+## spot check ...
+
+## seems okay...make pdfs
+
+makePDFs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py"
+jpgDirPl2="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate2"
+geojDirPl2PostSpotsdebug="/home/daniel/Documents/cooley_lab/plate2RepoStyle"
+pdfDirPl2PostSpotsdebug="/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl2PostSpotsdebug"
+
+VE
+
+cd $geojDirPl2PostSpotsdebug
+
+for flower in *; do
+    echo $flower
+    $makePDFs $flower $geojDirPl2PostSpotsdebug $jpgDirPl2 -o $pdfDirPl2PostSpotsdebug
+done
+
+########
+
+## what remains? we need pdfs of?
+
+## looks like we pre and post pdfs for hole debug
+
+## we also need a pdf of plate3 and plate4
+
+## we also need to track what pdfs failed, and add them to the documents
+
+##########
+## plate3
+
+pdfDirPl3="/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl3"
+
+cd $pdfDirPl3
+
+makePDFs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py"
+geojDirPl3="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3"
+jpgDirPl3="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate3"
+pdfDirPl3='/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl3'
+
+VE
+
+cd $geojDirPl3
+
+for flower in *; do
+    echo $flower
+    $makePDFs $flower $geojDirPl3 $jpgDirPl3 -o $pdfDirPl3
+done
+
+##############
+## plate4
+
+makePDFs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/makePDFs.py"
+geojDirPl4="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4"
+jpgDirPl4="/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped/plate4"
+pdfDirPl4='/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl4'
+
+VE
+
+cd $geojDirPl4
+
+for flower in *; do
+    echo $flower
+    $makePDFs $flower $geojDirPl4 $jpgDirPl4 -o $pdfDirPl4
+done
+
+###############
+
+## how to track the pdfs that failed?
+## I didn't build in good error logging into
+## the scripts...
+
+## to compare, we need to look that all flower names present in a geojson 
+## directory are also present in the pdf directory:
+
+
+## to focus on plate1, pre hole debug:
+
+pdfDirPl1PreSpotsdebug='/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl1PreSpotsdebug'
+geojDirPl1PreSpotsdebug='/home/daniel/Documents/cooley_lab/curatedPetals/plate1'
+
+ls $pdfDirPl1PreSpotsdebug | wc -l
+ls $geojDirPl1PreSpotsdebug | wc -l
+## three are missing
+## three were not made into pdfs... how to find these?
+
+## go to geojsons:
+cd $geojDirPl1PreSpotsdebug 
+
+## search pdf folder:
+for i in *; do 
+    #[ -e $pdfDirPl1PreSpotsdebug/$i.pdf ] || echo "$i doesn't exist"
+    [ -e $pdfDirPl1PreSpotsdebug/$i.pdf ] || echo $i
+done
+
+## P373F1 P399F1 P424F2 failed
+P373F1
+P399F1
+P424F2
+
+###########
+## repeat for plate1, after hole-debug
+
+
+pdfDirPl1PostSpotsdebug='/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl1PostSpotsdebug'
+geojDirPl1PostSpotsdebug='/home/daniel/Documents/cooley_lab/plate1RepoStyle'
+
+ls $pdfDirPl1PostSpotsdebug | wc -l
+ls $geojDirPl1PostSpotsdebug | wc -l
+## same, three are missing
+## three were not made into pdfs... how to find these?
+
+## go to geojsons:
+cd $geojDirPl1PostSpotsdebug 
+## search pdf folder:
+for i in *; do 
+    #[ -e $pdfDirPl1PostSpotsdebug/$i.pdf ] || echo "$i doesn't exist"
+    [ -e $pdfDirPl1PostSpotsdebug/$i.pdf ] || echo $i
+done
+
+## same three as above.
+
+###########
+
+## repeat for plate2, before hole-debug
+
+pdfDirPl2PreSpotsdebug='/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl2PreSpotsdebug'
+geojDirPl2PreSpotsdebug='/home/daniel/Documents/cooley_lab/curatedPetals/plate2'
+
+ls $pdfDirPl2PreSpotsdebug | wc -l
+ls $geojDirPl2PreSpotsdebug | wc -l
+## four are missing
+
+## go to geojsons:
+cd $geojDirPl2PreSpotsdebug 
+
+## search pdf folder:
+for i in *; do 
+    [ -e $pdfDirPl2PreSpotsdebug/$i.pdf ] || echo $i
+done
+
+## missing:
+P738F1
+P749F1
+P756F4
+P766F4
+
+##########
+
+## repeat for plate2, after hole-debug
+
+pdfDirPl2PostSpotsdebug='/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl2PostSpotsdebug'
+geojDirPl2PostSpotsdebug='/home/daniel/Documents/cooley_lab/plate2RepoStyle'
+
+ls $pdfDirPl2PostSpotsdebug | wc -l
+ls $geojDirPl2PostSpotsdebug | wc -l
+## four are missing
+
+## go to geojsons:
+cd $geojDirPl2PostSpotsdebug 
+
+## search pdf folder:
+for i in *; do 
+    [ -e $pdfDirPl2PostSpotsdebug/$i.pdf ] || echo $i
+done
+
+## missing:
+P738F1
+P749F1
+P756F4
+P766F4
+
+## same as pre hole debug
+
+###########################################
+
+## repeat for plate3
+
+pdfDirPl3='/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl3'
+geojDirPl3='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3'
+
+ls $pdfDirPl3 | wc -l
+ls $geojDirPl3 | wc -l
+## two are missing
+
+## go to geojsons:
+cd $geojDirPl3 
+
+## search pdf folder:
+for i in *; do 
+    [ -e $pdfDirPl2P/$i.pdf ] || echo $i
+done
+
+## missing:
+P788F2
+P836F1
+
+#########################################
+## repeat for plate4
+
+pdfDirPl4='/home/daniel/Documents/cooley_lab/bigPDF/pdfDirPl4'
+geojDirPl4='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate4'
+
+ls $pdfDirPl4 | wc -l
+ls $geojDirPl4 | wc -l
+## two are missing
+
+## go to geojsons:
+cd $geojDirPl4 
+
+## search pdf folder:
+for i in *; do 
+    [ -e $pdfDirPl4/$i.pdf ] || echo $i
+done
+
+## missing:
+P245F1
+P277F1
+P324F1
+P914F1
+
+#####################
+
+## flower geojsons that did not digitize:
+P373F1
+P399F1
+P424F2
+P738F1
+P749F1
+P756F4
+P766F4
+P788F2
+P836F1
+P245F1
+P277F1
+P324F1
+P914F1
+
+## by plate:
+
+plate1:
+P373F1
+P399F1
+P424F2
+
+plate2:
+P738F1
+P749F1
+P756F4
+P766F4
+
+plate3
+P788F2
+P836F1
+
+plate4
+P245F1
+P277F1
+P324F1
+P914F1
+
+make pdfs:
+
+## plate1, both:
+cd /home/daniel/Documents/cooley_lab/bigPDF
+cd pdfDirPl1PreSpotsdebug
+pdftk * output pl1PreSpotHoledebug.pdf
+
+cd /home/daniel/Documents/cooley_lab/bigPDF
+cd pdfDirPl1PostSpotsdebug
+pdftk * output pl1PostSpotHoledebug.pdf
+
+## plate2, both:
+cd /home/daniel/Documents/cooley_lab/bigPDF
+cd pdfDirPl2PreSpotsdebug
+pdftk * output pl2PreSpotHoledebug.pdf
+
+cd /home/daniel/Documents/cooley_lab/bigPDF
+cd pdfDirPl2PostSpotsdebug
+pdftk * output pl2PostSpotHoledebug.pdf
+
+## plate3
+cd /home/daniel/Documents/cooley_lab/bigPDF
+cd pdfDirPl3
+pdftk * output pl3.pdf
+
+## plate4
+cd /home/daniel/Documents/cooley_lab/bigPDF
+cd pdfDirPl4
+pdftk * output pl4.pdf
+
 

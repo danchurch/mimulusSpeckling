@@ -14750,3 +14750,110 @@ cd pdfDirPl4
 pdftk * output pl4.pdf
 
 
+## okay, so now what? we now need to review the pdfs for:
+
+## 1 - plates 1 and 2, to see how the hole debug affected our 
+## two plates, to see if any significant examples show up that 
+## we need to fix.
+
+## 2 - catalogue where spots were noticeably lost. we can fix
+## these manually or remove them from the analysis
+
+## when this is done, pool the geojsons and run a phenotype 
+## matrix
+
+## #1 do any plates look particularly bad due to holes being missed?
+
+## 331F2 has holes, but not bad
+## 344F2 has holes, but not bad
+## P348F1 seems like holes might make a difference
+## P348F2_mid seems like holes might make a difference
+## P363F1_mid has significant holes
+## P363F2 same
+## P376F2 has holes, but not bad
+## P379F1 has a hole, sorta bad
+## P380F2 has a hole, but not bad
+
+
+## #2 Plate1 with lost spots:
+
+P339F1_mid
+P370F1_left
+P375F2_mid and right. Small, but distinct central spot loss
+P400F2_mid total spot loss
+P405F3_right total spot loss
+## melia found:
+P339F1
+P348F2
+P370F1
+P371F1
+P385F2
+P400F2
+P405F3
+
+## #3 Plate2 lost spots:
+P804F2_mid
+
+
+## I might go back in a break these:
+P782F2_mid
+P804F1
+P804F2_right
+P811F2
+P813F1_mid
+P813F2_left
+P817F2_right
+P819F2_right
+P822F1_right
+P826F1_mid
+P829F1_right
+P835F1_right
+P840F1_mid, _right
+P841F1
+
+## can we clean the petal on P792F4_right
+
+P782F2
+
+
+
+
+
+
+
+
+
+################################
+## checking pdfmaker 
+P363F2_left
+
+VE
+python3
+
+from makeFlowerPolygons.geojsonIO import parseGeoJson, addOne, plotOne
+from shapely.validation import explain_validity
+from shapely import geometry as sg
+import matplotlib.pyplot as plt
+
+plt.ion()
+
+geoj="/home/daniel/Documents/cooley_lab/plate1RepoStyle/P363F2/left/P363F2_left_polys.geojson"
+
+## P804F2_mid
+geoj="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3/P841F1/left/P841F1_left_polys.geojson"
+
+aa=parseGeoJson(geoj)
+
+plotOne(aa[0])
+
+addOne(aa[1])
+
+## huh, there is a plotting error in our pdfmaker...
+## something to fix...
+
+## we don't use our addOne plotting function, because 
+## I don't think it works in a subplot matrix...
+
+## maybe fix later...
+
+

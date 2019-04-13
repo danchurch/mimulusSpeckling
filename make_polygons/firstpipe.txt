@@ -14775,14 +14775,14 @@ pdftk * output pl4.pdf
 ## P380F2 has a hole, but not bad
 
 
-## #2 Plate1 with lost spots:
+## Plate1 with lost spots:
 
 P339F1_mid
 P370F1_left
 P375F2_mid and right. Small, but distinct central spot loss
 P400F2_mid total spot loss
 P405F3_right total spot loss
-## melia found:
+## melia found on plate1:
 P339F1
 P348F2
 P370F1
@@ -14791,11 +14791,25 @@ P385F2
 P400F2
 P405F3
 
-## #3 Plate2 lost spots:
+## Plate2 lost spots:
 P804F2_mid
+## Melia took over found:
+P500F1
+P513F1
+P517F1
+P519F1
+P710F1
+P748F1/2
+P750F3/4 red spot within spots
+P753F2 not a petal
+P755F1
+P759F1 rebreaking
+P765F2 red spot within spots
+P769F4 not a petal
+P771F1
 
 
-## I might go back in a break these:
+## I might go back in to rebreak these, still plate3:
 P782F2_mid
 P804F1
 P804F2_right
@@ -14809,11 +14823,13 @@ P826F1_mid
 P829F1_right
 P835F1_right
 P840F1_mid, _right
-P841F1
+P841F1_right
+P841F2_right
+P846F2_right
+P852F2_right
+P859F1_right
 
-## can we clean the petal on P792F4_right
-
-P782F2
+## can we clean the petal on P792F4_right?
 
 
 
@@ -14852,8 +14868,128 @@ addOne(aa[1])
 ## something to fix...
 
 ## we don't use our addOne plotting function, because 
-## I don't think it works in a subplot matrix...
+## I don't think it works in a subplot matrix of axes
 
 ## maybe fix later...
 
+## getting lost... need to compile a todo list:
+## 1-which spots need to be rebroken
+## 2-which dissapearing spots have invalidities that might be addressed with QGIS.
+## 3-also need to go through plates 1 and 2 and get rid of blushes with spotbreaker, at the same time as #1
 
+## 2 is new and probably more entertaining, let's do that first. When we fix those spots, 
+## what's next? 
+
+## these will require a special pipeline, because we need to do them before or without 
+## the cleaning of the polygons built into our standard pipeline. 
+
+## for plate one, petals with lost spots reported are:
+
+P339F1_mid
+P348F2_left
+P370F1_left
+P371F1_mid
+P375F2_mid
+P375F2_right 
+P385F2_mid
+P400F2_mid
+P405F3_right 
+
+## what we need is a geojson for qgis. I think if we skip the 
+## polygon cleaning step, do we retain our spots in all of these?
+
+## how do we figure this out?
+
+## we can make a modified digitization script for these petals 
+## with spots that fail. Or maybe an additional function
+
+## actually, best idea, modify get_spots with an optional 
+## argument to skip the final cleanup
+
+
+aa=$(find $curP1 -name "P370F1_left_melted.csv")
+cp $aa $toy
+
+curP1="/home/daniel/Documents/cooley_lab/curatedPetals/plate1"
+get_spots="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/get_spots.py"
+toy="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy"
+#csv=$toy/P339F1_mid_melted.csv
+#csv=$toy/P348F2_left_melted.csv
+csv=$toy/P370F1_left_melted.csv
+aa=$(find $curP1 -name "P370F1_left_melted.csv")
+cp $aa $toy
+
+
+$get_spots -h
+
+$get_spots $csv -d $toy -s 
+
+
+
+VE
+python3
+
+from makeFlowerPolygons.geojsonIO import parseGeoJson, addOne, plotOne
+from shapely.validation import explain_validity
+from shapely import geometry as sg
+import matplotlib.pyplot as plt
+plt.ion()
+
+geoj="make_polygons_toy_polys.geojson"
+aa=parseGeoJson(geoj)
+
+plotOne(aa[0])
+addOne(aa[1])
+
+
+bb=aa[1].buffer(0)
+plotOne(aa[0])
+addOne(bb)
+
+for i,j in enumerate(aa[1]):
+    print(i); print(j.is_valid)
+    explain_validity(j)
+
+for i,j in enumerate(aa[1]):
+    k=j.buffer(0)
+    if k.is_empty:
+        print(i)
+        print(j.area)
+
+explain_validity(aa[1][0])
+
+##### 
+
+plotOne(aa[0])
+addOne(aa[1][0])
+
+addOne(aa[1][12])
+plotOne(aa[1][15])
+plotOne(aa[1][22])
+plotOne(aa[1][25])
+plotOne(aa[1][29])
+plotOne(aa[1][32])
+plotOne(aa[1][34])
+plotOne(aa[1][35])
+plotOne(aa[1][36])
+plotOne(aa[1][37])
+
+## wow, so to keep this petal, I need to fix 11 polys
+
+## is this normal?
+
+## look at a few others...
+
+## the general pattern seems to be, fix the first big polygon, ditch the rest.
+
+## gotta go, but the general idea would be to try to fix those invalidities in Qgis
+
+## then test their validity (maybe just spotcheck), 
+
+## save these as the current version in the plates
+
+## then pass these onto the phenotyping 
+
+## do this next time. 
+
+## also, update modules with the new make_spots code.

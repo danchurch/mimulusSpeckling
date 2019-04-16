@@ -14993,3 +14993,21 @@ plotOne(aa[1][37])
 ## do this next time. 
 
 ## also, update modules with the new make_spots code.
+
+############
+
+## today - make an all plant phenotype matrix
+
+## if there is any time after that:
+## try debugging images with QGIS
+## make PCoA from this matrix
+
+## okay, maybe it's time to start working on sciclone, 
+## ugh, brain not working here...
+
+## update packages and github, then try to install on sciclone
+
+##  we want to get a directory with all 
+## geojsons. This will be big, so let's do this on sciclone?
+
+

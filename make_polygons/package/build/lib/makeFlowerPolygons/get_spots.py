@@ -17,10 +17,11 @@ import shapely.geometry as sg
 import shapely.affinity as sa
 import shapely.errors
 from skimage import measure
-## while developing:
-#import sys
-#sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/")
 
+##### while developing: #####
+import sys
+sys.path.append("/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/")
+#############################
 
 from makeFlowerPolygons import geojsonIO
 
@@ -311,7 +312,7 @@ def organizeSpots(multipol):
 ################ main ##########################################
 
 
-def main(pdir, gjName, meltName, outFileName):
+def main(pdir, gjName, meltName, outFileName, finalClean):
     ## run through digitizing, standardizing
     os.chdir(pdir)
     print(gjName)
@@ -332,7 +333,10 @@ def main(pdir, gjName, meltName, outFileName):
         standSpot = [stand(spotPol, scale, cent)]
     standSpots = shapely.geometry.multipolygon.MultiPolygon(standSpot)
     spotsWithHoles = organizeSpots(standSpots)
-    finalSpotsMultiPoly=cleanFinalSpotsMultpoly(spotsWithHoles)
+    if finalClean:
+        finalSpotsMultiPoly=cleanFinalSpotsMultpoly(spotsWithHoles)
+    elif not finalClean:
+        finalSpotsMultiPoly=spotsWithHoles
     ## deal with the zones elsewhere
     center, edge, throat, spotEstimates = None, None, None, None
     ## write it out
@@ -356,9 +360,16 @@ if __name__ == "__main__":
                          matlab color-categorization scripts.
                        """))
     parser.add_argument('--destination', "-d",
-                help=("""Folder where you would like this file. Default
-                        is same directory."""),
+                help=("""Folder where you would like the outputted geojson. 
+                        Default is same directory."""),
                 default=None)
+    parser.add_argument('--skipFinalClean', "-s", 
+                dest='finalClean', 
+                help=("""Use this flag to skip the clean step that 
+                occasionally disappears polygons, if it can't fix
+                them any other way."""),
+                action='store_false')
+    parser.set_defaults(finalClean=True)
 
     args = parser.parse_args()
 
@@ -380,4 +391,4 @@ if __name__ == "__main__":
                         + gjName
                         + ".geojson")
 
-    main(meltParentDir, gjName, meltBaseName, outFileName)
+    main(meltParentDir, gjName, meltBaseName, outFileName, finalClean=args.finalClean)

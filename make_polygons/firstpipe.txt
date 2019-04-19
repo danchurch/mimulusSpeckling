@@ -14041,13 +14041,6 @@ python3 -m twine upload --skip-existing dist/*
 
 ## seems to have worked... now can we update in our venv?
 
-## my comp
-#source /home/daniel/Documents/learn/python/venv/bin/activate
-
-cd /home/daniel/Documents/learn/python/venv/bin/activate
-
-pip install -i https://test.pypi.org/simple/ makeFlowerPolygons-dcthom==0.0.2
-
 VE
 
 sudo pip3 install --upgrade pip
@@ -14808,6 +14801,7 @@ P765F2 red spot within spots
 P769F4 not a petal
 P771F1
 
+## not seeing spot loss with plate3?
 
 ## I might go back in to rebreak these, still plate3:
 P782F2_mid
@@ -14829,11 +14823,56 @@ P846F2_right
 P852F2_right
 P859F1_right
 
-## can we clean the petal on P792F4_right?
 
 
+## plate4 missing spots:
+P293F1
+P310F3
+P323F2
 
 
+## so, just spot loss, total list:
+
+P339F1_mid
+P370F1_left
+P375F2_mid and right. Small, but distinct central spot loss
+P400F2_mid total spot loss
+P405F3_right total spot loss
+P339F1
+P348F2
+P370F1
+P371F1
+P385F2
+P400F2
+P405F3
+P804F2_mid
+P500F1
+P513F1
+P517F1
+P519F1
+P710F1
+P748F1
+P748F2
+P750F3
+P750F4
+P753F2 not a petal
+P755F1
+P759F1 rebreaking
+P765F2 red spot within spots
+P769F4 not a petal
+P771F1
+P293F1
+P310F3
+P323F2
+
+removeFlowers=(P339F1 P370F1 P375F2 P400F2 P405F3 P339F1 P348F2 P370F1 P371F1 \
+P385F2 P400F2 P405F3 P804F2 P500F1 P513F1 P517F1 P519F1 P710F1 \
+P748F1 P748F2 P750F3 P750F4 P753F2 P755F1 P759F1 P765F2 P769F4 \
+P771F1 P293F1 P310F3 P323F2)
+
+for i in ${removeFlowers[@]}; do
+    echo $i
+done
 
 
 
@@ -15011,3 +15050,754 @@ plotOne(aa[1][37])
 ## geojsons. This will be big, so let's do this on sciclone?
 
 
+## I think these are the dependencies:
+
+pip3 install numpy pandas matplotlib shapely descartes Pillow scipy scikit-image
+
+## and our package:
+
+pip3 install -U makeFlowerPolygons-dcthom
+
+## seems okay. Now what? 
+## we want all our flower geojsons in one folder...
+## let's put them into the data folder:
+
+## it seems like we're keeping the original plate1 and 2, 
+## plus rolling the additionals into plates 3 and 4:
+
+plate1="/home/daniel/Documents/cooley_lab/curatedPetals/plate1"
+plate2="/home/daniel/Documents/cooley_lab/curatedPetals/plate2"
+## the other plates are here:
+allOtherPlates="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons"
+
+allPlates="/home/daniel/allplates/"
+
+mkdir=allPlates="/home/daniel/allplates/"
+
+cp -r $plate1 $allPlates
+cp -r $plate2 $allPlates
+cp -r $allOtherPlates $allPlates
+tar -zcvf allPlates.tar.gz $allPlates
+
+scp -r allPlates.tar.gz dthomas01@stat.wm.edu:/home/dthomas01
+
+## from the wmstat computer
+scp -r allPlates.tar.gz dthomas01@hurricane.sciclone.wm.edu:/sciclone/data10/dthomas01 
+
+tar -xcvf allPlates.tar.gz $allPlates
+## works.
+
+## on hurricane:
+
+## clean off wmStat when that is done...
+
+## meantime, what will it take to get melia's script working on a 22 gig vcf file?
+
+## start with 40gig, this will probably fail. I'm really not sure that 
+## tassel is meant for population level genomic work
+
+qstat 5471864
+
+## something's fucked. Install vcftools, check this vcf
+
+setenv PERL5LIB /sciclone/home20/dthomas01/vcftools/src/perl
+
+bash
+
+export PERL5LIB="/sciclone/home20/dthomas01/vcftools/src/perl"
+
+cd /sciclone/home20/dthomas01/vcftools/bin
+ 
+vcfvalidator="/sciclone/home20/dthomas01/vcftools/bin/vcf-validator"
+allVCF="/sciclone/data10/dthomas01/speckGWAS/vcfs/cutoff25_AllPlates.vcf"
+
+sampleVCF="/sciclone/home20/dthomas01/data10/speckGWAS/vcfs/minfreqfiltered_Plate41.vcf"
+
+$vcfvalidator $allVCF
+
+$vcfvalidator $sampleVCF
+
+## broken header, no column names...?
+
+sed -n 2,4p $allVCF
+
+sed -n 1,40p $allVCF
+
+head -100 $allVCF 
+
+grep #CHROM $allVCF
+
+grep -n "CHROM" $allVCF ## 1543
+
+sed -n 1543p $allVCF
+
+sed -n 1543,1544p $allVCF | less
+
+grep "##INFO=<ID" $allVCF 
+
+grep "##FORMAT" $allVCF 
+
+## what if we start deleting items from the header?
+
+## what do we absolutely need?
+
+## our header is ends on line 1542...
+sed -n 1542,1543p $allVCF
+
+## so we want the first 1542 lines in one file:
+head -1542 $allVCF > allVCFheader.txt
+
+## and put the rest aside for the moment:
+
+wc -l $allVCF ## 5977728 lines
+
+sed -n 1543,5977728p $allVCF > allVCFbody.txt 
+
+## while we're at it, protect the original:
+chmod 444 $allVCF
+
+## can we run this without metainfo?
+allVCFbody="/sciclone/home20/dthomas01/data10/allVCFbody.vcf"
+
+$vcfvalidator $allVCFbody
+## that at least reads
+
+## we need:
+
+## "fileformat version string"
+## fileformat (same as above?)
+## reference
+## INFO tag [AN][DP][MQ0][set] not listed
+## so we should try to save all info tags
+## and all format tags?
+
+## so, let's rebuild the metadata that is needed:
+grep "##fileformat=" $allVCF > allVCFrebuildMeta.txt
+grep "##INFO=<ID" $allVCF >> allVCFrebuildMeta.txt
+grep "##FORMAT" $allVCF >> allVCFrebuildMeta.txt
+grep "##reference" $allVCF >> allVCFrebuildMeta.txt
+grep "contig" $allVCF >> allVCFrebuildMeta.txt
+
+## also some weird double quotes in there... clean it in vim
+vim allVCFrebuildMeta.txt
+
+vim -M allVCFrebuildMeta.txt
+
+## we need a toy set of snps:
+
+head -10 $allVCFbody > toybody.txt
+
+cat allVCFrebuildMeta.txt toybody.txt > toy.vcf
+
+## does this work?
+
+$vcfvalidator toy.vcf
+
+## our last sample has an invalid name, due to trailing spaces?
+## meh, can't find it. seems like a non-issue.
+
+vim toy.vcf
+
+## I think we have metadata that works...
+## can we do something similar with our whole file?
+
+cd /sciclone/home20/dthomas01/data10
+
+export PERL5LIB=/sciclone/home20/dthomas01/vcftools/src/perl
+
+vcfvalidator="/sciclone/home20/dthomas01/vcftools/bin/vcf-validator"
+
+rebuildAll="/sciclone/home20/dthomas01/data10/rebuildAll.vcf"
+
+$vcfvalidator $rebuildAll &> fulllog
+
+
+cat allVCFrebuildMeta.txt $allVCFbody > rebuildAll.vcf
+
+$vcfvalidator rebuildAll.vcf &> fulllog
+
+head -2000 rebuildAll.vcf > test.vcf
+
+$vcfvalidator test.vcf
+
+## still lotsa problems... oh well...
+
+## we need a script for this, to run a real job:
+
+#!/usr/bin/env bash
+#PBS -l walltime=03:00:00
+
+cd /sciclone/home20/dthomas01/data10
+
+export PERL5LIB=/sciclone/home20/dthomas01/vcftools/src/perl
+vcfvalidator="/sciclone/home20/dthomas01/vcftools/bin/vcf-validator"
+rebuildAll="/sciclone/home20/dthomas01/data10/rebuildAll.vcf"
+$vcfvalidator $rebuildAll &> fulllog
+
+## doesn't work, creates problems with dependencies
+
+## this one seems to be causing most of the problems:
+## sample_916.fq.gz.bam.variant8.variant4
+
+## things to work on:
+
+## get all phenotype matrix
+## get all vcf working
+## when vcf seems okay, rerun tassel filter
+## manually clean up spots, rebreak and qgis invalidities
+## remake phenotype matrix with corrected spots
+
+## first, all phenotype matrix:
+
+
+
+cd /sciclone/data10/dthomas01/speckGWAS/plates
+
+
+allplates="/sciclone/data10/dthomas01/speckGWAS/plates/allplates"
+allGeoj="/sciclone/data10/dthomas01/speckGWAS/plates/allGeoj"
+excludeGeoj="/sciclone/data10/dthomas01/speckGWAS/plates/excludeGeoj"
+
+mkdir $allplates
+mkdir $allGeoj
+mkdir $excludeGeoj
+
+tar -zxvf allPlates.tar.gz $allplates
+
+## ugh, accidentally tarballed my whole repo there... cleanup...
+
+find $allplates -name "P???F?" -type d -exec cp {} $allGeoj \;
+
+
+## get rid of the csvs, don't think we need these?
+
+find $allGeoj -name "*_melted.csv" -exec rm {} \;
+
+echo $allGeoj
+
+find $allGeoj -name "*_melted.csv" -exec rm {} \;
+
+## we have a list of geojsons we need to remove:
+removeFlowers=(P339F1 P370F1 P375F2 P400F2 P405F3 P339F1 P348F2 P370F1 P371F1 \
+P385F2 P400F2 P405F3 P804F2 P500F1 P513F1 P517F1 P519F1 P710F1 \
+P748F1 P748F2 P750F3 P750F4 P753F2 P755F1 P759F1 P765F2 P769F4 \
+P771F1 P293F1 P310F3 P323F2)
+
+## hopefully we can fix these and put them back in the pile. But for the moment:
+
+allGeoj="/sciclone/data10/dthomas01/speckGWAS/plates/allGeoj"
+
+
+for i in ${removeFlowers[@]}; do
+    echo $i
+    echo zoop
+    find $allGeoj -name $i -type d
+done
+
+## can we run our scripts on this folder
+
+
+
+## the cluster just died on me. 
+
+## wtf.
+
+## can we do this phenotype matrix locally?
+
+## we need all geojsons, in their respective folders.
+
+geojs="/home/daniel/Documents/cooley_lab/allGeojsons"
+
+## put all geojsons from plate1 2 into here:
+find /home/daniel/Documents/cooley_lab/curatedPetals -name "P???F?" -type d -exec cp -r {} $geojs \;
+## plates3 and 4, including additionals:
+find /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons -name "P???F?" -type d -exec cp -r {} $geojs \;
+
+## remove the petals without info
+removeFlowers=(P339F1 P370F1 P375F2 P400F2 P405F3 P339F1 P348F2 P370F1 P371F1 \
+P385F2 P400F2 P405F3 P804F2 P500F1 P513F1 P517F1 P519F1 P710F1 \
+P748F1 P748F2 P750F3 P750F4 P753F2 P755F1 P759F1 P765F2 P769F4 \
+P771F1 P293F1 P310F3 P323F2)
+
+for i in ${removeFlowers[@]}; do
+    echo $i
+    find $geojs -name $i -type d
+    #find $geojs -name $i -type d -exec rm -r {} \;
+done
+
+## looks good. Will our script run on this directory?
+
+## first pass, maybe we'll get lucky?
+
+VE
+flowerPetal='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/flowerPetal.py'
+
+$flowerPetal -h
+
+cd $geojs 
+
+$flowerPetal . "allflowerstest1"
+
+## oops, we need the geojsons without their folders?
+
+## put all geojsons from plate1 2 into here:
+find /home/daniel/Documents/cooley_lab/curatedPetals -name "*geojson" -exec cp {} $geojs \;
+
+## plates3 and 4, including additionals:
+find /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons -name "*geojson" -exec cp {} $geojs \;
+
+for i in ${removeFlowers[@]}; do
+    echo $i
+    find $geojs -name "$i*" -exec rm -r {} \;
+done
+
+## now, try our script?
+
+VE
+flowerPetal='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/flowerPetal.py'
+cd $geojs 
+$flowerPetal . "allflowerstest1"
+
+########
+
+cd $geojs 
+
+## supposing that works, we need to fit our results into a matrix that works with melia's formatting...
+
+## our script for this:
+
+flowerPetal2tassel="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/scripts/flowerPetal2tassel.py"
+
+$flowerPetal2tassel -h
+
+$flowerPetal2tassel allflowerstest1.p allflowerstest1.csv
+
+## we had a mapping script to reconcile the weird names of plate 1. 
+
+sortJoshCSVs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/Melia_Josh_rearrange/sortJoshCSVs.py"
+mapSample2plant="/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/Melia_Josh_rearrange/mapSample2plant.csv"
+
+$sortJoshCSVs --map $mapSample2plant allflowerstest1.csv
+
+## that sorta worked, but threw out the none-plate1 samples. 
+
+## we can just stack these, I think? 
+
+## wait, but something's fucked... in the new vcf, I'm not seeing the names that 
+## melia gave me for correcting plate one sample names:
+
+#########
+## side note, get the header line for the modified vcf:
+sed -n 1539p test.vcf > headers.txt
+scp -r allPlates.tar.gz dthomas01@hurricane.sciclone.wm.edu:/sciclone/data10/dthomas01 
+scp dthomas01@hurricane.sciclone.wm.edu:/sciclone/data10/dthomas01/headers.txt . 
+scp dthomas01@stat.wm.edu:/home/dthomas01/headers.txt . 
+##########
+
+## looks like Caroline corrected those names 
+
+## so what do we need? I need to back-correct Melia's names 
+
+## where is my auto phenotype matrix?
+
+## moved them to 
+
+allPlantPhen="/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/allPlantPheno190419"
+
+## and where is melia's byeye?
+
+## a version is in the folder...
+
+## we need the Taxa column to tell us what plant names 
+## in Melia's byeye matrix 
+
+## have our old script for doing the opposite:
+
+sortJoshCSVs="/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/Melia_Josh_rearrange/sortJoshCSVs.py"
+oldMap="/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/Melia_Josh_rearrange/mapSample2plant.csv"
+
+## okay, time to just get a damn phenotype matrix. 
+## first, update melia's samplenames to plant names
+
+## okay, now merge with our all plant autopheno matrix
+
+## our two csvs of interest are:
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/allPlantPheno190419/allflowertest1.csv
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/allPlantPheno190419/allplatesbyeye.csv
+
+
+## we're gonna need pandas for this, me thinks, to catch any 
+## missing rows...
+
+python3
+
+import pandas as pd
+import numpy
+import pathlib
+
+## our two csvs of interest are:
+autoCSV=pathlib.Path("/home/daniel/Documents/"
+        "cooley_lab/mimulusSpeckling/polygon_traits/"
+        "allPlantPheno190419/allflowerstest1.csv")
+byeyeCSV=pathlib.Path("/home/daniel/Documents/"
+        "cooley_lab/mimulusSpeckling/polygon_traits/"
+        "allPlantPheno190419/allplatesbyeye.csv")
+
+
+autoCSV.is_file()
+byeyeCSV.is_file()
+
+aa=pd.read_csv(autoCSV)
+bb=pd.read_csv(byeyeCSV)
+
+aa.plantName ## goes to 352
+
+bb.plantName ## goes to 367
+
+## so to merge these?
+
+## does concat
+
+all(aa.plantName.isin(bb.plantName))
+
+aa.plantName.isin(bb.plantName)
+
+sum(aa.plantName.isin(bb.plantName))
+
+
+[ i for i in aa.plantName if i not in list(bb.plantName) ]
+
+## P245 not in byeye phenotypes
+## Melia says there is some doubt about 
+## the images from that, so throw it out
+
+
+[ i for i in bb.plantName if i not in list(aa.plantName) ]
+
+## 'P544', 'P548', 'P748', 'P750' not in  autophenotypes
+## wait, only four? then what are the other rows
+## that are making the byeye matrix larger?
+
+## are there duplicate plants?
+
+## don't think my stuff should have dups:
+
+aa.plantName.unique
+
+sum(aa.plantName.duplicated())
+
+cc=bb.plantName.unique
+
+
+len(cc)
+
+## yup. What are they?
+
+## a little vim/uniq -d work:
+
+261
+389
+409
+420
+423
+431
+436
+
+## oops, there's more:
+247
+248
+253
+257
+258
+
+dups=['P261', 'P389', 'P409', 'P420', 'P423', 'P431', 'P436']
+
+## are these all plate one?
+
+## yup, looks like it. 
+
+## we'll want to remove these duplicates:
+
+bb.set_index('plantName', inplace=True)
+bbNoDups=bb.drop(dups)
+
+## nope, doesn't work, just want the first incidence... let's remove them manually
+## we'll remove the second incidence of each, except when there is a large difference
+## and then we inspect the photos. 
+
+## so all rows with dupes:
+
+247
+248
+253
+257
+258
+261
+389
+409
+420
+423
+431
+436
+
+## P247 looks like the lower/upper petals got switched on the second instance, retained first
+
+## P389 pretty drastic, again looks like the first got copied from P388
+
+## P409 large difference in red percentages. Retain second instance, which has a lower
+## more realistic %red
+
+## P420 retaining second instance, upper petal %red seems more realistic
+
+## P433 retaining second instance. Looks like this %red difference is due to whther or 
+## not the blush was interpreted as red.  
+
+## P436 first dup seems to be a duplicate of P435 above it. Deleting this. 
+
+## test for dups on the command line:
+
+allplatesbyeye_nodups='/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/allPlantPheno190419/allplatesbyeye_nodups.csv'
+cut -f 1 $allplatesbyeye_nodups -d "," | uniq -d
+
+## oops, more of them
+## corrected, notes added above about these
+
+## load this as our new byeye df:
+
+python3
+import pandas as pd
+import numpy
+import pathlib
+
+autoCSV=pathlib.Path("/home/daniel/Documents/"
+        "cooley_lab/mimulusSpeckling/polygon_traits/"
+        "allPlantPheno190419/allflowerstest1.csv")
+byeyeCSVnoDups=pathlib.Path("/home/daniel/Documents/"
+        "cooley_lab/mimulusSpeckling/polygon_traits/"
+        "allPlantPheno190419/allplatesbyeye_nodups.csv")
+
+autoCSV.is_file()
+byeyeCSVnoDups.is_file()
+
+aa=pd.read_csv(autoCSV)
+bb=pd.read_csv(byeyeCSVnoDups)
+
+## remove these from our matrices:
+
+aa2=aa.set_index('plantName')
+aa3=aa2.drop([ i for i in aa.plantName if i not in list(bb.plantName) ])
+
+bb2=bb.set_index('plantName')
+bb3=bb2.drop([ i for i in bb.plantName if i not in list(aa.plantName) ])
+
+aa.shape
+aa2.shape
+aa3.shape
+
+len(aa.columns)
+len(aa2.columns)
+len(aa3.columns)
+
+aa.head(2)
+
+aa3.head(2)
+
+bb.shape
+bb2.shape
+bb3.shape
+
+aa3.reset_index(inplace=True)
+bb3.reset_index(inplace=True)
+
+all(aa3.plantName == bb3.plantName)
+
+pd.testing.assert_series_equal(aa3.plantName, bb3.plantName)
+## no error raised, looks okay
+
+## can we concatenate these now?
+
+cc = pd.concat([aa3,bb3],axis=1, sort=False)
+
+## huh, based on the documentation, we could have skipped
+## the above code for unshared rows by using:
+
+aa.set_index('plantName',inplace=True)
+bb.set_index('plantName',inplace=True)
+dd = pd.concat([aa, bb], axis=1, join='inner')
+
+dd.plantName
+
+dd.index
+
+[ i for i in aa.index if i not in list(dd.index) ]
+[ i for i in bb.index if i not in list(dd.index) ]
+
+'index' in cc.columns
+
+'index' in dd.columns
+
+dd.plantName
+
+## the latter solution (dd) is cleaner, use this
+
+## looks okay. We want to export these to csv for vegan
+
+dd.to_csv('comboByEyeAuto.csv', na_rep='NA',index=True)
+
+## okay, how to best ordinate this? 
+
+## we know R best, to get the coordinates. We can come back to matplotlib
+## to hand graphics, if this makes sense:
+
+
+R
+library('vegan')
+
+comboByEyeAuto <- read.csv('comboByEyeAuto.csv')
+
+comboByEyeAuto$plantName
+
+comboByEyeAuto[1:2,1:5]
+
+
+## name rows
+rownames(comboByEyeAuto) <- comboByEyeAuto$'plantName'
+comboByEyeAuto$'plantName' <- NULL
+
+## oops, scaling factor made out of there somehow...
+comboByEyeAuto$scalingFactor_upper
+comboByEyeAuto$scalingFactor_lower
+
+## remove these:
+comboByEyeAuto$scalingFactor_upper <- NULL
+comboByEyeAuto$scalingFactor_lower <- NULL
+
+## drop NAs:
+comboByEyeAutoNoNA <- comboByEyeAuto[complete.cases(comboByEyeAuto),]
+
+
+dim(comboByEyeAuto)
+
+dim(comboByEyeAutoNoNA)
+
+
+phenoNMS=metaMDS(comboByEyeAutoNoNA, distance = 'bray')
+
+plot(phenoNMS, display='sites')
+
+phenoNMS$points
+
+str(phenoNMS$points)
+class(phenoNMS$points)
+
+
+## how about a PCoA?
+
+## make our distance matrix:
+
+bdm=vegdist(comboByEyeAutoNoNA, method='bray')
+phenoMDS=cmdscale(bdm)
+
+dev.new()
+
+plot(phenoMDS)
+
+## little bit of a horseshoe there...but maybe cleaner 
+## than the NMS. In either case, can we color these in,
+## try to find some important traits?
+
+## can we color these based on their %red? I'm betting this is 
+## still our most important variable:
+
+## for PCoA:
+
+## get our %red for all points:
+
+## for NMS
+
+head(phenoNMS$points)
+
+phenoNMS$points
+
+## rownames line up, right?
+all(rownames(phenoNMS$points) == rownames(comboByEyeAutoNoNA))
+
+colnames(comboByEyeAutoNoNA)
+
+## this dataframe seems to be working, let's hold onto it
+save(comboByEyeAutoNoNA, file='comboByEyeAutoNoNA.rda')
+write.csv(comboByEyeAutoNoNA, file='comboByEyeAutoNoNA.csv')
+
+
+R
+library('vegan')
+load(file='comboByEyeAutoNoNA.rda')
+
+phenoNMS=metaMDS(comboByEyeAutoNoNA, distance = 'bray')
+bdm=vegdist(comboByEyeAutoNoNA, method='bray')
+phenoMDS=cmdscale(bdm)
+
+
+
+## now, can we plot %red on these?
+## nms
+
+colnames(comboByEyeAutoNoNA)
+
+dev.new()
+
+head(comboByEyeAutoNoNA, n=1)
+
+
+trait <- comboByEyeAutoNoNA$propSpotsInDist_lower
+trait <- comboByEyeAutoNoNA$avgSpotSize_lower
+## huh, that's an interesting one
+trait <- comboByEyeAutoNoNA$avgSpotSize_upper
+trait <- comboByEyeAutoNoNA$avgDist2CenterAllSpots_lower
+trait <- comboByEyeAutoNoNA$GlobularSpray
+trait <- comboByEyeAutoNoNA$EditedUPR
+
+trait <- comboByEyeAutoNoNA$EditedLPR
+
+graphics.off()
+
+pdf('/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/allPlantPheno190419/percentRedNMS.pdf')
+colmap=as.data.frame(cbind(phenoNMS$points, trait))
+colmap$rank <- rank(colmap$trait)
+colnames(colmap)=c('X','Y','trait','rank')
+colfunc <- colorRampPalette(c("white", "red"))
+colors <- colfunc(max(colmap$rank)-min(colmap$rank))
+colmap$cols <- colors[colmap$rank]
+#dev.new()
+plot(x=colmap$X,
+    y=colmap$Y,
+    bg=colmap$cols,
+    col="black",
+    pch=21,
+    cex=1,
+    main='NMS, percent Red, dist=BC',
+)
+dev.off()
+## pcoA:
+pdf('/home/daniel/Documents/cooley_lab/mimulusSpeckling/polygon_traits/allPlantPheno190419/percentRedPCoA.pdf')
+colmap=as.data.frame(cbind(phenoMDS, trait))
+colmap$rank <- rank(colmap$trait)
+colnames(colmap)=c('X','Y','trait','rank')
+colfunc <- colorRampPalette(c("white", "red"))
+colors <- colfunc(max(colmap$rank)-min(colmap$rank))
+colmap$cols <- colors[colmap$rank]
+#dev.new()
+plot(x=colmap$X,
+    y=colmap$Y,
+    bg=colmap$cols,
+    col="black",
+    pch=21,
+    cex=1,
+    main='PCoA, percent Red, dist=BC',
+)
+dev.off()
+
+## so, update git 
+## put the two interesting traits online:
+## average spot size and %red
+## and phenotype matrix

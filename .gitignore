@@ -14,3 +14,5 @@ trait*.txt
 make_polygons/ex/
 toy/
 messedUpSpots.pickle
+.RData
+.Rhistory

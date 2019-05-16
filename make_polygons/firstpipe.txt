@@ -15801,3 +15801,107 @@ dev.off()
 ## put the two interesting traits online:
 ## average spot size and %red
 ## and phenotype matrix
+
+#################
+
+## let's check to see if vcf tools can parse caroline's 
+## new vcf
+
+cd /sciclone/data10/dthomas01/speckGWAS/scripts 
+
+## we want three scripts. First for 
+
+## sortAll.4.29.sh
+#########################################
+#!/usr/bin/env bash
+#PBS -N tasselSort
+#PBS -l nodes=1:ha37:ppn=8
+#PBS -l walltime=4:00:00
+#PBS -l pmem=40g
+
+export JAVA_HOME=/sciclone/data10/dthomas01/jdk-12
+export PATH="$JAVA_HOME/bin:$PATH"
+cd /sciclone/data10/dthomas01/speckGWAS
+
+allVCF="/sciclone/home20/dthomas01/data10/speckGWAS/vcfs/cutoff25_v3_all.vcf"
+
+## sort
+/sciclone/home20/dthomas01/tassel-5-standalone/run_pipeline.pl \
+        -SortGenotypeFilePlugin \
+        -Xmx40g \
+        -inputFile $allVCF \
+        -outputFile sortedfiltered_allPlate.vcf \
+        -fileType VCF &>tasselSortlog.txt
+
+
+###################################
+
+qsub sortAll.4.29.sh
+
+5510418
+5511074 ## .2
+5511083 ## .3
+
+qstat 5510418
+
+
+## can't seem to get a node. Just to be sure, can we check this on an interacive node?
+
+qsub -I -l walltime=1:00:00 -l nodes=1:ppn=8
+bash
+
+zip allvcf.zip cutoff25_v3_all.vcf
+
+
+## filterAll_0.4.sh
+#########################################
+#!/usr/bin/env bash
+#PBS -N tasselSort
+#PBS -l nodes=1:c10:ppn=8
+#PBS -l walltime=4:00:00
+#PBS -l pmem=40g
+
+export JAVA_HOME=/sciclone/data10/dthomas01/jdk-12
+export PATH="$JAVA_HOME/bin:$PATH"
+cd /sciclone/home20/dthomas01/data10/
+
+
+## After you sort the file, filter on the command line and produce a much smaller VCF
+/sciclone/home20/dthomas01/tassel-5-standalone/run_pipeline.pl \
+        -vcf sortedfiltered_allPlate.vcf \
+        -Xmx40g \
+        -filterAlign \
+        -filterAlignMinFreq 0.4 \
+        -export minfreqfiltered_allPlate.vcf \
+        -exportType VCF &>tasselFilterlog.txt
+
+## filterAll_0.2.sh
+#########################################
+#!/usr/bin/env bash
+#PBS -N tasselSort
+#PBS -l nodes=8:c11a:ppn=1
+#PBS -l walltime=4:00:00
+#PBS -l pmem=40g
+
+
+export JAVA_HOME=/sciclone/data10/dthomas01/jdk-12
+export PATH="$JAVA_HOME/bin:$PATH"
+cd /sciclone/home20/dthomas01/data10/
+
+
+## After you sort the file, filter on the command line and produce a much smaller VCF
+/sciclone/home20/dthomas01/tassel-5-standalone/run_pipeline.pl \
+        -vcf sortedfiltered_allPlate.vcf \
+        -Xmx40g \
+        -filterAlign \
+        -filterAlignMinFreq 0.2 \
+        -export minfreqfiltered_allPlate.vcf \
+        -exportType VCF &>tasselFilterlog.txt
+
+
+scp dthomas01@hurricane.sciclone.wm.edu:/sciclone/data10/dthomas01/speckGWAS/vcfs/allvcf.zip .
+
+scp dthomas01@stat.wm.edu:/home/dthomas01/allvcf.zip .
+
+
+

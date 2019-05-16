@@ -2,6 +2,8 @@ wd = '/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons'
 dougRasterDir = '/home/daniel/Documents/cooley_lab/mimulusSpeckling/dougRaster/Rotated_and_Cropped';
 cd(dougRasterDir)
 
+cd(dougRasterDir)
+
 files = dir('P*.mat');
 
 for file = files';
@@ -31,4 +33,4 @@ for file = files';
     cd(wd);
 end;
 
-## ' ## just because it's screwing up my syntax
+

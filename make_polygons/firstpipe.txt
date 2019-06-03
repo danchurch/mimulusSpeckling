@@ -15943,7 +15943,42 @@ from scipy.spatial import distance
 
 exFlowerImage="./dougRaster/Rotated_and_Cropped/plate3/P774F2.JPG"
 plt.rcParams['figure.figsize'] = [15, 5]
+
+
 img=mpimg.imread(exFlowerImage)
 
 plt.imshow(img)
 
+get_zones = "./make_polygons/package/makeFlowerPolygons/get_zones.py"
+
+for inF in ./make_polygons/toy/newSpots/*; do
+    echo $inF
+    $get_zones $inF 0.5
+done
+ 
+python3
+
+plt.ion()
+
+(petal,spots,
+center, edge,throat,
+ _,_,_) = geojsonIO.parseGeoJson("make_polygons/toy/"
+                                    "newSpots/P774F3_mid_polys.geojson")
+(petal,spots,
+center, edge,throat,
+ _,_,_) = geojsonIO.parseGeoJson("make_polygons/toy/"
+                                    "/newSpots/P774F3_left_polys.geojson")
+                                  
+(petal,spots,
+center, edge,throat,
+ _,_,_) = geojsonIO.parseGeoJson("make_polygons/toy/"
+                                    "/newSpots/P774F2_left_polys.geojson")
+color='white'
+alpha=0.3
+geojsonIO.plotOne(petal)
+geojsonIO.addOne(spots)
+geojsonIO.addOne(center, col=color, a=alpha)
+geojsonIO.addOne(edge, col=color, a=alpha)
+geojsonIO.addOne(throat, col=color, a=alpha)
+
+plt.close('all')

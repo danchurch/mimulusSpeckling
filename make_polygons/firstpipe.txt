@@ -15904,4 +15904,46 @@ scp dthomas01@hurricane.sciclone.wm.edu:/sciclone/data10/dthomas01/speckGWAS/vcf
 scp dthomas01@stat.wm.edu:/home/dthomas01/allvcf.zip .
 
 
+########################
+
+## updating notebook 
+
+get_spots='make_polygons/package/makeFlowerPolygons/get_spots.py'
+toy=$PWD"/make_polygons/toy"
+#mkdir $toy
+newSpots=$toy"/newSpots"
+#mkdir $newSpots
+
+cp -r /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3/P77{3,4}* $toy
+
+csvs=$(find $toy -name "*_melted.csv") 
+
+for i in ${csvs[@]}; do
+    echo $i
+    #$get_spots $i -d $newSpots 
+done
+
+$get_spots $i -d $newSpots
+
+## back in python
+
+import os, pickle, sys
+## have to do makeFlower import before our matplotlib import, 
+## because makeFlowerPolygons sets the proper backend for matplotlib
+from makeFlowerPolygons import flowerPetal, geojsonIO
+import numpy as np
+import matplotlib.pyplot as plt
+import shapely.geometry as sg
+import shapely.affinity as sa
+import matplotlib.image as mpimg
+from skimage import measure
+from descartes import PolygonPatch
+from scipy.spatial import distance
+
+
+exFlowerImage="./dougRaster/Rotated_and_Cropped/plate3/P774F2.JPG"
+plt.rcParams['figure.figsize'] = [15, 5]
+img=mpimg.imread(exFlowerImage)
+
+plt.imshow(img)
 

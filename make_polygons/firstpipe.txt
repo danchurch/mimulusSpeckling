@@ -15982,3 +15982,63 @@ geojsonIO.addOne(edge, col=color, a=alpha)
 geojsonIO.addOne(throat, col=color, a=alpha)
 
 plt.close('all')
+
+
+## is our code for manual correction up to date?
+
+## spotbreaker:
+
+breakSpots="./make_polygons/package/makeFlowerPolygons/breakSpots.py"
+$breakSpots -h
+
+
+
+breakSpots="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/breakSpots.py"
+toy="./make_polygons/toy/newSpots"
+
+for geoj in $(find $toy -name "*geojson"); do
+    echo $geoj
+    bn=$(basename $geoj)
+    flower=${bn%%_*}
+    jpeg=$(find $dougdir -name $flower".JPG")
+    echo $jpeg
+    $breakSpots $geoj $jpeg
+done
+
+geoj="./make_polygons/toy/newSpots/P773F2_right_polys.geojson"
+jpeg="./dougRaster/Rotated_and_Cropped/plate3/P773F2.JPG"
+$breakSpots $geoj $jpeg
+
+## okay, and the zone caller?
+manZoneCaller="./make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
+$manZoneCaller -h
+
+breakSpots="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/breakSpots.py"
+manZoneCaller="/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
+spotMarker='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/spotMarker.py'
+
+cd $toy
+
+for geoj in $(find $toy -name "*geojson"); do
+    echo $geoj
+    bn=$(basename $geoj)
+    flower=${bn%%_*}
+    jpeg=$(find $dougdir -name $flower".JPG")
+    #$breakSpots $geoj $jpeg
+    #$manZoneCaller $geoj -j $jpeg 
+    #$spotMarker $geoj $jpeg
+done
+
+manZoneCaller="./make_polygons/package/makeFlowerPolygons/manZoneCaller.py"
+geoj="./make_polygons/toy/newSpots/P773F2_right_polys.geojson"
+jpeg="./dougRaster/Rotated_and_Cropped/plate3/P773F2.JPG"
+
+$manZoneCaller $geoj -j $jpeg 
+
+spotMarker.py
+
+spotMarker="./make_polygons/package/makeFlowerPolygons/spotMarker.py"
+geoj="./make_polygons/toy/newSpots/P773F2_right_polys.geojson"
+jpeg="./dougRaster/Rotated_and_Cropped/plate3/P773F2.JPG"
+
+$spotMarker $geoj $jpeg

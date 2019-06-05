@@ -16042,3 +16042,50 @@ geoj="./make_polygons/toy/newSpots/P773F2_right_polys.geojson"
 jpeg="./dougRaster/Rotated_and_Cropped/plate3/P773F2.JPG"
 
 $spotMarker $geoj $jpeg
+
+### where is our program for running all curations?
+
+
+
+cd /home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/polygons/plate3Additional
+
+cp -r * $toy
+
+
+jpegs="./dougRaster/Rotated_and_Cropped"
+geojsons="make_polygons/toy/newSpots"
+newJpegFolder="make_polygons/toy/newJpegFolder"
+
+#mkdir $newJpegFolder
+
+for i in $geojsons/*; do
+    echo $i
+    aa=$(basename $i)
+    bb=${aa%%_*}
+    echo $bb
+    jpeg=$(find $jpegs -name $bb*.JPG)
+    echo $jpeg
+    cp $jpeg $newJpegFolder/
+    echo "---------------------------------"
+done
+
+aa=$(basename $i)
+
+echo ${aa%%.geojson}
+
+
+echo ${aa%_*}
+
+
+runCuration="./make_polygons/scripts/runCuration.py"
+geojsons="./make_polygons/toy/newSpots"
+newJpegFolder="./make_polygons/toy/newJpegFolder"
+
+$runCuration $PWD/$geojsons $PWD/$newJpegFolder
+
+$runCuration $geojsons $newJpegFolder
+
+$runCuration /home/daniel/Documents/cooley_lab/allGeojsons $newJpegFolder
+
+
+

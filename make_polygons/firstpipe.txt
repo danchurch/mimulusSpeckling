@@ -15568,6 +15568,7 @@ python3
 import pandas as pd
 import numpy
 import pathlib
+import pickle
 
 autoCSV=pathlib.Path("/home/daniel/Documents/"
         "cooley_lab/mimulusSpeckling/polygon_traits/"
@@ -15579,7 +15580,7 @@ byeyeCSVnoDups=pathlib.Path("/home/daniel/Documents/"
 autoCSV.is_file()
 byeyeCSVnoDups.is_file()
 
-aa=pd.read_csv(autoCSV)
+aa=pd.
 bb=pd.read_csv(byeyeCSVnoDups)
 
 ## remove these from our matrices:
@@ -16086,6 +16087,57 @@ $runCuration $PWD/$geojsons $PWD/$newJpegFolder
 $runCuration $geojsons $newJpegFolder
 
 $runCuration /home/daniel/Documents/cooley_lab/allGeojsons $newJpegFolder
+
+## has our flower petal module changed?
+
+https://github.com/danchurch/mimulusSpeckling/blob/master/make_polygons/package/makeFlowerPolygons/flowerPetal.py
+
+flowerPetal='/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/flowerPetal.py'
+
+flowerPetal='./make_polygons/package/makeFlowerPolygons/flowerPetal.py'
+
+$flowerPetal -h
+
+
+$flowerPetal $toy "allflowerstest1"
+
+## if we want to look at our results in python?
+
+/home/daniel/Documents/cooley_lab/mimulusSpeckling/make_polygons/toy/newSpots
+
+allflowerstest1.p
+
+import pandas as pd
+import numpy
+import pathlib
+import pickle
+import os
+
+allFlowerTestP=pathlib.Path("./make_polygons/toy/newSpots/allflowerstest1.p")
+
+with open(allFlowerTestP, 'rb') as f:
+    allFlowerTest=pickle.load(f)
+
+
+allFlowerTest.head
+
+## let's get rid of anything that could be a geometry collection:
+
+
+
+allFlowerTest.columns
+
+## we want to get rid of the follow columns:
+trash=['geojson', 'spotEstimates', 'photoBB', 'scalingFactor']
+for i in trash:
+    allFlowerTest.drop(i, 1, inplace=True)
+
+## can we look at one of these?
+
+## I'd like to use P297F1 right. Where is this?
+## meh, that one's a little fucked. 
+
+## find another, tomorrow. 
 
 
 

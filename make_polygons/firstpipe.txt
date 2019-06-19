@@ -16107,11 +16107,13 @@ $flowerPetal $toy "allflowerstest1"
 
 allflowerstest1.p
 
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy
 import pathlib
 import pickle
 import os
+from makeFlowerPolygons import flowerPetal, geojsonIO
 
 allFlowerTestP=pathlib.Path("./make_polygons/toy/newSpots/allflowerstest1.p")
 
@@ -16134,10 +16136,18 @@ for i in trash:
 
 ## can we look at one of these?
 
-## I'd like to use P297F1 right. Where is this?
-## meh, that one's a little fucked. 
+## I'd like to use P297F2 right, put a copy of that in our notebook folder
 
 ## find another, tomorrow. 
 
+## so how to look at this in python?
 
+
+
+(petal,spots,
+center, edge,throat,
+ _,_,_) = geojsonIO.parseGeoJson("./make_polygons/toy/"
+                                    "/newSpots/P297F2_right_polys.geojson")
+geojsonIO.plotOne(petal)
+geojsonIO.addOne(spots)
 

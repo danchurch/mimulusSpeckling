@@ -16151,3 +16151,24 @@ center, edge,throat,
 geojsonIO.plotOne(petal)
 geojsonIO.addOne(spots)
 
+
+######################################################################
+
+## here we are a year or two later. Let's see if this jalopy still runs...
+
+## we have a directory full of geojsons. On the cooley mac, they are here:
+
+geojs='/Users/danthomas/Documents/speck/allGeojsons'
+
+## we want to turn this into a spreadsheet/dataframe of the raw values
+## of each spreadsheets 
+
+flowerPetal="/Users/danthomas/Documents/speck/mimulusSpeckling/make_polygons/package/makeFlowerPolygons/flowerPetal.py"
+
+$flowerPetal -h
+
+
+$flowerPetal $geojs "flowerPetalDF_26.06.2020" |& tee flowerPetalDF_27.11.2018.log
+
+
+

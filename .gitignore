@@ -16,3 +16,4 @@ toy/
 messedUpSpots.pickle
 .RData
 .Rhistory
+.~lock*#

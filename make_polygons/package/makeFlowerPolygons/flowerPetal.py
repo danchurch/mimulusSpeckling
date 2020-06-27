@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+#######################################################################
+## for dev:
+import sys
+sys.path.append('/Users/danthomas/Documents/speck/mimulusSpeckling/make_polygons/package/')
+#######################################################################
+
+
 import matplotlib
 matplotlib.use('TkAgg')
 import os, json, argparse, re, pickle

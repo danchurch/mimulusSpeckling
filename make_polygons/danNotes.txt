@@ -16167,8 +16167,20 @@ flowerPetal="/Users/danthomas/Documents/speck/mimulusSpeckling/make_polygons/pac
 
 $flowerPetal -h
 
+cd $geojs 
 
-$flowerPetal $geojs "flowerPetalDF_26.06.2020" |& tee flowerPetalDF_27.11.2018.log
+$flowerPetal . "flowerPetalDF_27.06.2020" 
 
+## okay, looks alright. Some of the results are slightly different from the 
+## one surviving example of raw data, but that looks to me to due 
+## to the differences from hand-curation of the data. Ditto for the 
+## example output in the tutorial - the hand-curated flower 297 matches 
+## our results well, but the other, non-curated flowers in the example
+## show small differences. This fits my memory - the geojsons that I have
+## all together in the folder were the final versions from my time on the
+## project. 
+
+## let's place this result into the repo and get it out to Arielle 
+## and Josh
 
 
